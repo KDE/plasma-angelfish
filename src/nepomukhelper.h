@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2012 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,75 +18,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef VIEW_H
-#define VIEW_H
-#include <QDeclarativeView>
+#ifndef NEPOMUKHELPER_H
+#define NEPOMUKHELPER_H
 
-#include <KUrl>
-#include <KIO/MetaData>
+#include <QObject>
+#include <Nepomuk2/Resource>
+class KJob;
 
-class QDeclarativeItem;
-class QProgressBar;
-class QSignalMapper;
-class Page;
-class ScriptApi;
-class QNetworkRequest;
+class NepomukHelperPrivate;
 
-/** Per-website data */
-struct WebsiteOptions
-{
-    QString title;
-    QString url;
-    QString mimetype;
-    QString comment;
-    int rating;
-};
-
-namespace Plasma
-{
-    class Package;
-}
-class CompletionModel;
-
-class View : public QDeclarativeView
+class NepomukHelper : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit View(const QString &url, QWidget *parent = 0 );
-    ~View();
-
-    WebsiteOptions* options() const;
-    QString name() const;
-
-    void setUseGL(const bool on);
-    bool useGL() const;
+    NepomukHelper(QObject *parent);
+    //NepomukHelper(Nepomuk2::Resource resource, QObject *parent = 0);
+    ~NepomukHelper();
 
 public Q_SLOTS:
-    void setBookmarks();
+    void storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &localUrl);
+    void storeResourcesFinished(KJob* job);
 
-Q_SIGNALS:
-    void titleChanged(const QString&);
-    void newWindow(const QString &url);
 
 private:
-    WebsiteOptions *m_options;
-    QDeclarativeItem* m_webBrowser;
-    QDeclarativeItem* m_urlInput;
+    NepomukHelperPrivate* d;
 
-private Q_SLOTS:
-    void onStatusChanged(QDeclarativeView::Status status);
-    void urlChanged();
-    void urlFilterChanged();
-    void onTitleChanged();
-    void onUrlEntered(const QString&);
-
-private:
-    QString filterUrl(const QString &url);
-
-    Plasma::Package *m_package;
-    bool m_useGL;
-    CompletionModel* m_completionModel;
 };
 
-#endif // VIEW_H
+#endif // COMPLETIONITEM_H
