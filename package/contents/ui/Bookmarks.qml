@@ -16,33 +16,39 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+import QtQuick 2.3
+//import QtQuick.Controls 1.0
 
-#include <QQuickView>
+//import QtWebEngine 1.0
 
-#include <Plasma/Package>
+import QtQuick.Layouts 1.0
 
-namespace AngelFish {
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-class View : public QQuickView
-{
-    Q_OBJECT
 
-public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+Item {
+//    id: options
 
-Q_SIGNALS:
-    void titleChanged(const QString&);
+    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    anchors.fill: parent
 
-private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
-};
+    ListView {
+
+        anchors.fill: parent
+
+        spacing: units.smallSpacing
+        interactive: height < contentHeight
+
+        model: browserManager.bookmarks
+
+        delegate: UrlDelegate {
+            onRemoved: browserManager.removeBookmark(url);
+        }
+    }
+    Component.onCompleted: print("Bookmarks.qml complete.");
 
 }
-
-#endif // BROWSERVIEW_H

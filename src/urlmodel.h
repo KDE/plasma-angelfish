@@ -16,33 +16,62 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#ifndef URLMODEL_H
+#define URLMODEL_H
 
-#include <QQuickView>
-
-#include <Plasma/Package>
+#include <QAbstractListModel>
+#include <QJsonArray>
+#include <QJsonObject>
 
 namespace AngelFish {
 
-class View : public QQuickView
+
+class UrlModel : public QAbstractListModel
 {
     Q_OBJECT
-
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+    enum Roles {
+        url = Qt::UserRole + 1,
+        title,
+        icon,
+        preview,
+        lastVisited,
+        bookmarked
+    };
 
-Q_SIGNALS:
-    void titleChanged(const QString&);
+    explicit UrlModel(const QString &filename, QObject *parent = 0);
+
+    void setSourceData(QJsonArray &data);
+    QJsonArray sourceData() const;
+    QString key(int role) const;
+
+    bool load();
+    bool save();
+
+    void add(const QJsonObject &data);
+    void remove(const QString &url);
+
+    virtual QHash<int, QByteArray> roleNames() const;
+    virtual int rowCount(const QModelIndex &parent) const;
+    virtual QVariant data(const QModelIndex &index, int role) const;
+
+    void update();
+
+    QJsonArray fakeData();
+
+    QString filePath() const;
 
 private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
+    QJsonArray m_data;
+    QHash<int, QByteArray> m_roleNames;
+
+
+    QString m_fileName;
 };
 
-}
+} // namespace
 
-#endif // BROWSERVIEW_H
+#endif // URLMODEL_H

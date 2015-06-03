@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,33 +16,63 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#ifndef BOOKMARKSMANAGER_H
+#define BOOKMARKSMANAGER_H
 
-#include <QQuickView>
+#include <QObject>
+#include <QQmlPropertyMap>
 
-#include <Plasma/Package>
+#include "urlmodel.h"
 
 namespace AngelFish {
-
-class View : public QQuickView
+/**
+ * @class BookmarksManager
+ * @short Access to Bookmarks and History. This is a singleton for
+ * administration and access to the various models and browser-internal
+ * data.
+ */
+class BrowserManager : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
+    Q_PROPERTY(QAbstractListModel* history READ history NOTIFY historyChanged)
+
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+
+    BrowserManager(QObject *parent = 0);
+    ~BrowserManager();
+
+    UrlModel* bookmarks();
+    UrlModel* history();
+
+    Q_INVOKABLE static QString urlFromUserInput(const QString &input);
+
 
 Q_SIGNALS:
-    void titleChanged(const QString&);
+    void updated();
+    void bookmarksChanged();
+    void historyChanged();
+
+public Q_SLOTS:
+    void reload();
+
+    void addBookmark(const QVariantMap &bookmarkdata);
+    void removeBookmark(const QString &url);
+
+    void addToHistory(const QVariantMap &pagedata);
+    void removeFromHistory(const QString &url);
 
 private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
+
+    UrlModel* m_bookmarks;
+    UrlModel* m_history;
 };
 
-}
+} // namespace
 
-#endif // BROWSERVIEW_H
+#endif //BOOKMARKSMANAGER_H
+

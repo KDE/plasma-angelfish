@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,33 +16,31 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#ifndef URL_H
+#define URL_H
 
-#include <QQuickView>
-
-#include <Plasma/Package>
+#include <QJsonObject>
+#include <QDateTime>
 
 namespace AngelFish {
 
-class View : public QQuickView
+class Url : public QJsonObject
 {
-    Q_OBJECT
-
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
-
-Q_SIGNALS:
-    void titleChanged(const QString&);
-
-private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
+//     QUrl url;
+//     QString title;
+//     QImage icon;
+//     QImage preview;
+//     QDateTime lastVisited;
+//     bool bookmarked;
 };
 
-}
+//typedef QHash<QString, Url> UrlData;
+typedef QList<Url> UrlData;
 
-#endif // BROWSERVIEW_H
+} // namespace
+
+#endif // URL_H

@@ -16,33 +16,55 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+import QtQuick 2.3
+import QtQuick.Controls 1.0
+import QtQuick.Controls.Styles 1.0
+import QtQml.Models 2.1
 
-#include <QQuickView>
+import QtWebEngine 1.0
+import QtWebEngine.experimental 1.0
 
-#include <Plasma/Package>
 
-namespace AngelFish {
+ListView {
+    id: tabs
 
-class View : public QQuickView
-{
-    Q_OBJECT
+    // Make sure we don't delete and re-create tabs "randomly"
+    cacheBuffer: 10000
+    // Don't animate tab switching, this just feels slow
+    highlightMoveDuration: 0
+    // No horizontal swiping between tabs, disturbs page interaction
+    interactive: false
 
-public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+    property int pageHeight: parent.height
+    property int pageWidth: parent.width
 
-Q_SIGNALS:
-    void titleChanged(const QString&);
+    property alias count: tabsModel.count
 
-private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
-};
+    orientation: Qt.Horizontal
+
+    model: ListModel {
+        id: tabsModel
+        ListElement { pageurl: "http://duckduckgo.com" }
+//         ListElement { pageurl: "http://tagesschau.de" }
+//         ListElement { pageurl: "http://bbc.co.uk" }
+    }
+
+    delegate: WebView {
+        url: pageurl;
+    }
+
+    function createEmptyTab() {
+        var t = newTab("");
+        tabs.currentIndex = tabs.count - 1
+        return t;
+    }
+
+    function newTab(url) {
+
+        tabsModel.append({pageurl: url});
+    }
 
 }
-
-#endif // BROWSERVIEW_H
