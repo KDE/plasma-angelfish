@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 2.8.12)
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "plasma-mobile requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma-mobile [options]' there.")
+   message(FATAL_ERROR "angelfish requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma-mobile [options]' there.")
 endif()
 
 include(CPack)
@@ -42,7 +42,7 @@ set_package_properties(Qt5WebEngine PROPERTIES
 add_feature_info("Qt5WebEngine" Qt5WebEngine_FOUND "Required for building the Angelfish webbrowser")
 
 find_package(KF5 REQUIRED COMPONENTS
-                KIO Plasma Declarative I18n)
+                KIO Plasma Declarative I18n Kirigami2)
 #########################################################################
 
 
