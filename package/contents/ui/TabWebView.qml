@@ -20,10 +20,10 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.0
 
-import QtWebEngine 1.0
+import QtWebEngine 1.6
 
 
 TabView {

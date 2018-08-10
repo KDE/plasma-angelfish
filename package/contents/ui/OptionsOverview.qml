@@ -28,20 +28,21 @@ import QtQuick.Layouts 1.0
 //import QtQuick.Controls.Private 1.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.0 as Kirigami
 
 
 ColumnLayout {
     id: optionsOverview
 
-    property int buttonSize: units.gridUnit * 2
+    property int buttonSize: Kirigami.Units.gridUnit * 2
 
     RowLayout {
         id: layout
         anchors.fill: parent
         height: buttonSize
         spacing: 0
-//         anchors.leftMargin: units.gridUnit / 2
-//         anchors.rightMargin: units.gridUnit / 2
+//         anchors.leftMargin: Kirigami.Units.gridUnit / 2
+//         anchors.rightMargin: Kirigami.Units.gridUnit / 2
         //visible: navigationShown
 
         //spacing: units.smallSpacing
@@ -51,7 +52,7 @@ ColumnLayout {
 
 
             enabled: currentWebView.canGoBack
-            icon: "go-previous"
+            iconSource: "go-previous"
 
             onClicked: currentWebView.goBack()
             onTriggered: {
@@ -68,7 +69,7 @@ ColumnLayout {
 //             Layout.preferredHeight: buttonSize
 
             enabled: currentWebView.canGoForward
-            icon: "go-next"
+            iconSource: "go-next"
 
             onTriggered: {
                 options.state = "hidden";
@@ -83,7 +84,7 @@ ColumnLayout {
 //             Layout.fillWidth: true
 //             Layout.preferredHeight: buttonSize
 
-            icon: currentWebView.loading ? "process-stop" : "view-refresh"
+            iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
 
             onTriggered: {
                 options.state = "hidden";
@@ -98,14 +99,14 @@ ColumnLayout {
 //             Layout.fillWidth: true
 //             Layout.preferredHeight: buttonSize
 
-            icon: "bookmarks"
+            iconSource: "bookmarks"
 
             onTriggered: {
                 print("Adding bookmark");
                 var request = new Object;// FIXME
                 request.url = currentWebView.url;
                 request.title = currentWebView.title;
-                request.icon = currentWebView.icon;
+                request.iconSource = currentWebView.iconSource;
                 request.bookmarked = true;
                 browserManager.addBookmark(request);
                 options.state = "hidden"
@@ -127,7 +128,7 @@ ColumnLayout {
     }
 
     OptionButton {
-        icon: "tab-duplicate"
+        iconSource: "tab-duplicate"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onTriggered: {
@@ -139,7 +140,7 @@ ColumnLayout {
     }
 
     OptionButton {
-        icon: "bookmarks"
+        iconSource: "bookmarks"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onTriggered: {
@@ -151,7 +152,7 @@ ColumnLayout {
     }
 
     OptionButton {
-        icon: "view-history"
+        iconSource: "view-history"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onTriggered: {
@@ -163,7 +164,7 @@ ColumnLayout {
     }
 
     OptionButton {
-        icon: "configure"
+        iconSource: "configure"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         text: i18n("Settings")

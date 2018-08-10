@@ -20,12 +20,13 @@
  ***************************************************************************/
 
 import QtQuick 2.1
-import QtWebEngine 1.0
+import QtWebEngine 1.6
 // import QtQuick.Controls 1.0
 // import QtQuick.Controls.Styles 1.0
 // import QtQuick.Layouts 1.0
 import QtQuick.Window 2.1
 
+import org.kde.kirigami 2.0 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
@@ -43,7 +44,7 @@ Item {
     onCurrentWebViewChanged: {
         print("Current WebView is now : " + tabs.currentIndex);
     }
-    property int borderWidth: Math.round(units.gridUnit / 18);
+    property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
     property var borderColor: theme.highlightColor;
 
     /**
@@ -55,8 +56,8 @@ Item {
         //tabs.newTab(url)
     }
 
-    width: units.gridUnit * 15
-    height: units.gridUnit * 26
+    width: Kirigami.Units.gridUnit * 15
+    height: Kirigami.Units.gridUnit * 26
 
     function addHistoryEntry() {
         //print("Adding history");
@@ -100,7 +101,7 @@ Item {
     Item {
         id: progressItem
 
-        height: Math.round(units.gridUnit / 6)
+        height: Math.round(Kirigami.Units.gridUnit / 6)
         z: navigation.z + 1
         anchors {
             top: tabs.top
@@ -145,7 +146,7 @@ Item {
     Navigation {
         id: navigation
 
-        height: units.gridUnit * 3
+        height: Kirigami.Units.gridUnit * 3
 
         anchors {
             top: parent.top

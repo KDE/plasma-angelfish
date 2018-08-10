@@ -20,57 +20,52 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-
-
-import QtWebEngine 1.0
-import QtWebEngine.experimental 1.0
 
 
 GridLayout {
     id: settingsPage
     columns: 2
 
-    PlasmaComponents.Label {
+    Controls.Label {
         text: "Enable javascript"
         Layout.fillWidth: true
-        Layout.preferredHeight: units.gridUnit * 2
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 2
     }
 
-    CheckBox {
-        Layout.preferredHeight: units.gridUnit * 2
-        Layout.preferredWidth: units.gridUnit * 2
+    Controls.CheckBox {
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 2
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 2
         onCheckedChanged: {
-            var settings = currentWebView.experimental.settings;
+            var settings = currentWebView.settings;
             settings.javascriptEnabled = checked;
             // FIXME: save to config
         }
         Component.onCompleted: {
-            checked = currentWebView.experimental.settings.javascriptEnabled;
+            checked = currentWebView.settings.javascriptEnabled;
         }
 
     }
 
-    PlasmaComponents.Label {
+    Controls.Label {
         text: "Load images"
         Layout.fillWidth: true
-        Layout.preferredHeight: units.gridUnit * 2
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 2
     }
 
-    CheckBox {
-        Layout.preferredHeight: units.gridUnit * 2
-        Layout.preferredWidth: units.gridUnit * 2
+    Controls.CheckBox {
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 2
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 2
         onCheckedChanged: {
-            var settings = currentWebView.experimental.settings;
+            var settings = currentWebView.settings;
             settings.autoLoadImages = checked;
             // FIXME: save to config
         }
         Component.onCompleted: {
-            checked = currentWebView.experimental.settings.autoLoadImages;
+            checked = currentWebView.settings.autoLoadImages;
         }
     }
 

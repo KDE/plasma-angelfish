@@ -20,7 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as Controls
 
 //import QtWebEngine 1.0
 
@@ -30,11 +30,12 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
+import org.kde.kirigami 2.0 as Kirigami
 
-MouseArea {
+Controls.ItemDelegate {
     id: urlDelegate
 
-    height: units.gridUnit * 3
+    height: Kirigami.Units.gridUnit * 3
     width: parent.width
 
     //Rectangle { anchors.fill: parent; color: "white"; opacity: 0.5; }
@@ -47,16 +48,6 @@ MouseArea {
 
     signal removed
 
-    onPressed: highlight.opacity = 1
-    onReleased: highlight.opacity = 0
-
-    PlasmaComponents.Highlight {
-        id: highlight
-        opacity: 0
-        anchors.fill: parent
-
-    }
-
     PlasmaCore.IconItem {
         id: urlIcon
 
@@ -65,8 +56,8 @@ MouseArea {
         anchors {
             left: parent.left
             top: parent.top
-            topMargin: units.gridUnit / 2
-            bottomMargin: units.gridUnit / 2
+            topMargin: Kirigami.Units.gridUnit / 2
+            bottomMargin: Kirigami.Units.gridUnit / 2
             bottom: parent.bottom
             margins: units.smallSpacing
         }
@@ -79,7 +70,7 @@ MouseArea {
         source: preview == undefined ? "" : preview
     }
 
-    PlasmaComponents.Label {
+    Controls.Label {
         id: urlTitle
         text: title
         anchors {
@@ -92,7 +83,7 @@ MouseArea {
         }
     }
 
-    PlasmaComponents.Label {
+    Controls.Label {
         id: urlUrl
         text: url
         opacity: 0.6
@@ -117,8 +108,8 @@ MouseArea {
         anchors {
             right: parent.right
             top: parent.top
-            topMargin: units.gridUnit
-            bottomMargin: units.gridUnit
+            topMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.gridUnit
             bottom: parent.bottom
             margins: units.smallSpacing
         }

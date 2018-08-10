@@ -20,12 +20,11 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.0
 import QtQml.Models 2.1
 
-import QtWebEngine 1.0
-import QtWebEngine.experimental 1.0
+import QtWebEngine 1.6
 
 
 ListView {
@@ -47,7 +46,7 @@ ListView {
 
     model: ListModel {
         id: tabsModel
-        ListElement { pageurl: "http://duckduckgo.com" }
+        ListElement { pageurl: "https://duckduckgo.com" }
 //         ListElement { pageurl: "http://tagesschau.de" }
 //         ListElement { pageurl: "http://bbc.co.uk" }
     }

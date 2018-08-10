@@ -29,7 +29,6 @@ import QtQuick.Layouts 1.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-
 Item {
 //    id: options
 

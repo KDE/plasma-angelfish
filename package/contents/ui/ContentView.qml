@@ -29,6 +29,7 @@ import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.0 as Kirigami
 
 
 Rectangle {
@@ -71,7 +72,7 @@ Rectangle {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            margins: units.gridUnit / 2
+            margins: Kirigami.Units.gridUnit / 2
         }
     }
 
@@ -85,7 +86,7 @@ Rectangle {
             right: closeButton.left
             top: parent.top
             left: parent.left
-            margins: units.gridUnit / 2
+            margins: Kirigami.Units.gridUnit / 2
         }
         MouseArea {
             anchors.fill: parent
@@ -96,14 +97,14 @@ Rectangle {
     PlasmaCore.IconItem {
         id: closeButton
 
-        width: units.gridUnit
+        width: Kirigami.Units.gridUnit
         height: width
         source: "dialog-close"
 
         anchors {
             right: parent.right
             top: parent.top
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         MouseArea {
             anchors.fill: parent

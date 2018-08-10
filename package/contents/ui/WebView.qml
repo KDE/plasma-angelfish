@@ -20,11 +20,10 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.0
 
-import QtWebEngine 1.0
-import QtWebEngine.experimental 1.0
+import QtWebEngine 1.4
 
 
 WebEngineView {
@@ -32,10 +31,12 @@ WebEngineView {
 
     property string errorCode: ""
     property string errorString: ""
+    property string userAgent: "Mozilla/5.0 (Linux; Plasma Mobile; like Android 7.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36"
 
     width: pageWidth
     height: pageHeight
 
+    profile.httpUserAgent: userAgent
 
     //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
@@ -86,7 +87,7 @@ WebEngineView {
 //             }
     Component.onCompleted: {
         print("WebView completed.");
-        var settings = webEngineView.experimental.settings;
+        var settings = webEngineView.settings;
         print("Settings: " + settings);
     }
 }

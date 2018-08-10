@@ -20,13 +20,14 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as Controls
 
 //import QtWebEngine 1.0
 
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.0 as Kirigami
 // import org.kde.plasma.components 2.0 as PlasmaComponents
 // import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -36,7 +37,7 @@ Item {
     id: tabsRoot
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
-    property int itemWidth: (width / 2) - units.gridUnit
+    property int itemWidth: (width / 2) - Kirigami.Units.gridUnit
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
@@ -58,7 +59,7 @@ Item {
 
                 //live: true
                 anchors.fill: parent
-                anchors.margins: units.gridUnit / 2
+                anchors.margins: Kirigami.Units.gridUnit / 2
 
                 sourceRect: Qt.rect(0, 0, width * 2, height * 2)
 
@@ -95,12 +96,11 @@ Item {
             }
             Rectangle {
                 anchors.fill: parent;
-                anchors.margins: units.gridUnit / 4;
+                anchors.margins: Kirigami.Units.gridUnit / 4;
                 border.color: theme.textColor;
                 border.width: webBrowser.borderWidth
                 color: "transparent"
                 opacity: 0.3;
-
             }
             MouseArea {
                 anchors.fill: parent
@@ -129,7 +129,7 @@ Item {
             color: "white"
             width: itemWidth
             height: itemHeight
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 anchors.fill: parent
                 anchors.margins: Math.round(itemHeight / 4)
                 source: "list-add"
@@ -137,11 +137,10 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    tabs.newTab("")
+                    tabs.newTab("https://duckduckgo.com")
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
                     tabs.currentIndex = tabs.count - 1;
-                    contentView.state = "bookmarks"
                 }
 
             }

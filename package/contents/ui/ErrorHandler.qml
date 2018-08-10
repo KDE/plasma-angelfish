@@ -28,6 +28,7 @@ import QtQuick.Layouts 1.0
 //import QtQuick.Controls.Private 1.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.0 as Kirigami
 
 
 Item {
@@ -36,7 +37,7 @@ Item {
     property string errorCode: ""
     property alias errorString: errorDescription.text
 
-    property int expandedHeight: units.gridUnit * 8
+    property int expandedHeight: Kirigami.Units.gridUnit * 8
 
     Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
 
@@ -45,10 +46,10 @@ Item {
     ColumnLayout {
 
         visible: parent.height > 0
-        spacing: units.gridUnit
+        spacing: Kirigami.Units.gridUnit
         anchors {
             fill: parent
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         PlasmaExtras.Heading {
             level: 3
@@ -70,7 +71,7 @@ Item {
         anchors {
             right: parent.right
             bottom: parent.bottom
-            margins: units.gridUnit
+            margins: Kirigami.Units.gridUnit
         }
         text: errorCode
     }

@@ -21,10 +21,12 @@
 
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
-//import QtWebEngine 1.0
+import QtWebEngine 1.4
+import QtQuick.Controls 2.0 as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 2.0 as Kirigami
+//import org.kde.plasma.components 2.0 as PlasmaComponents
 //import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
@@ -35,8 +37,8 @@ Item {
 
     property bool navigationShown: errorCode != "" || webBrowser.url == "" || true
 
-    property int expandedHeight: units.gridUnit * 2.5
-    property int buttonSize: units.gridUnit * 2
+    property int expandedHeight: Kirigami.Units.gridUnit * 2.5
+    property int buttonSize: Kirigami.Units.gridUnit * 2
 
     Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
 
@@ -45,11 +47,12 @@ Item {
     RowLayout {
         id: layout
         anchors.fill: parent
-        anchors.leftMargin: units.gridUnit / 2
-        anchors.rightMargin: units.gridUnit / 2
+        anchors.leftMargin: Kirigami.Units.gridUnit / 2
+        anchors.rightMargin: Kirigami.Units.gridUnit / 2
         visible: navigationShown
 
         spacing: units.smallSpacing
+
         /*
         PlasmaComponents.ToolButton {
             id: backButton
@@ -87,12 +90,15 @@ Item {
 
         }
         */
-        PlasmaComponents.TextField {
+
+        Controls.TextField {
             id: urlInput
 
             Layout.fillWidth: true
 
             text: currentWebView.url
+
+            selectByMouse: true
 
             Keys.onReturnPressed: load(browserManager.urlFromUserInput(text))
         }
@@ -103,8 +109,8 @@ Item {
 
             visible: currentWebView.loading
 
-            PlasmaComponents.BusyIndicator {
-                width: buttonSize / 2
+            Controls.BusyIndicator {
+                width: buttonSize
                 height: width
                 anchors.centerIn: parent
                 running: currentWebView.loading
@@ -129,7 +135,7 @@ Item {
                 }
                 elementId: iconSvg.hasElement("menu") ? "menu" : "configure"
                 anchors.fill: parent
-                anchors.margins: (units.gridUnit / 2)
+                anchors.margins: (Kirigami.Units.gridUnit / 2)
             }
             checked: options.state != "hidden"
             //onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)

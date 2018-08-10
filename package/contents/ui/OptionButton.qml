@@ -21,19 +21,18 @@
 
 import QtQuick 2.3
 //import QtWebEngine 1.0
-import QtQuick.Controls 1.0
-import QtQuick.Controls.Styles 1.0
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.0
 //import QtQuick.Window 2.1
 //import QtQuick.Controls.Private 1.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 2.4 as Kirigami
 
 
-Button {
+
+Controls.ToolButton {
     id: button
 
-    property alias icon: iconItem.source
+    property alias iconSource: iconItem.source
 
     signal released
     signal pressed
@@ -76,7 +75,7 @@ Button {
         }
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: iconItem
         anchors.fill: parent
         visible: text == ""
@@ -85,42 +84,12 @@ Button {
     RowLayout {
         id: layoutRow
         anchors.fill: parent
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: rowIcon
             Layout.preferredWidth: parent.width / 4
             Layout.fillWidth: false
             source: iconItem.source
         }
-        PlasmaComponents.Label {
-            id: rowLabel
-            //Layout.preferredWidth: parent.height
-            Layout.fillWidth: true
-            //visible: text == ""
-            text: button.text
-        }
         visible: text != ""
-
-    }
-
-    style: ButtonStyle {
-
-        label: Item {}
-        background: Rectangle {
-            color: theme.highlightColor
-            opacity: {
-                if (button.isPressed) {
-                    return 1
-                } else if (isActive) {
-                    return 0.3
-                } else {
-                    0
-                }
-            }
-
-            //border.color: "black"
-            //border.width: 1
-//             //opacity: isActive ? 0.8 : 0
-            Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
-        }
     }
 }

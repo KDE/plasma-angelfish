@@ -29,6 +29,7 @@ import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.0 as Kirigami
 
 
 Rectangle {
@@ -40,16 +41,16 @@ Rectangle {
 
     property string title: ""
 
-    property int expandedHeight: units.gridUnit * 12
-    property int expandedWidth: units.gridUnit * 14
+    property int expandedHeight: Kirigami.Units.gridUnit * 12
+    property int expandedWidth: Kirigami.Units.gridUnit * 14
 
     Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on x { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
 
     height: expandedHeight
     width: expandedWidth
-    //height: childrenRect.height + units.gridUnit
-    //width: childrenRect.width +  units.gridUnit/2
+    //height: childrenRect.height + Kirigami.Units.gridUnit
+    //width: childrenRect.width +  Kirigami.Units.gridUnit/2
 
     //width: expandedWidth
     //anchors.rightMargin: -options.margins.right
@@ -78,18 +79,18 @@ Rectangle {
     ColumnLayout {
 
         //visible: parent.height > 0
-        //spacing: units.gridUnit
+        //spacing: Kirigami.Units.gridUnit
         spacing: 0
-        //x: units.gridUnit / 2
-        //y: - (units.gridUnit + webBrowser.borderWidth)
-        //width: units.gridUnit * 14
+        //x: Kirigami.Units.gridUnit / 2
+        //y: - (Kirigami.Units.gridUnit + webBrowser.borderWidth)
+        //width: Kirigami.Units.gridUnit * 14
         anchors {
             //fill: parent
             top: parent.top
-            //topMargin: units.gridUnit
+            //topMargin: Kirigami.Units.gridUnit
             left: parent.left
             right: parent.right
-            //margins: units.gridUnit / 2
+            //margins: Kirigami.Units.gridUnit / 2
         }
         MouseArea {
             anchors.fill: parent
@@ -119,7 +120,7 @@ Rectangle {
         State {
             name: "overview"
             PropertyChanges { target: options; title: ""}
-            //PropertyChanges { target: options; height: units.gridUnit * 3}
+            //PropertyChanges { target: options; height: Kirigami.Units.gridUnit * 3}
             PropertyChanges { target: options; opacity: 1.0}
             PropertyChanges { target: options; x: webBrowser.width - options.width }
 
