@@ -37,7 +37,7 @@ Rectangle {
 
     state: "hidden"
     //state: "bookmarks"
-    color: theme.backgroundColor
+    color: Kirigami.Theme.backgroundColor
 
     property string title: ""
 

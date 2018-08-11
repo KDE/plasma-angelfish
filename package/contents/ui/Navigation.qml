@@ -99,6 +99,7 @@ Item {
             text: currentWebView.url
 
             selectByMouse: true
+            focus: false
 
             Keys.onReturnPressed: load(browserManager.urlFromUserInput(text))
         }

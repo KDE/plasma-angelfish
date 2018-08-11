@@ -48,7 +48,7 @@ Controls.ItemDelegate {
 
     signal removed
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: urlIcon
 
         width: height
@@ -98,7 +98,7 @@ Controls.ItemDelegate {
         }
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: removeIcon
 
         width: height
@@ -118,6 +118,4 @@ Controls.ItemDelegate {
             onClicked: urlDelegate.removed();
         }
     }
-
-
 }
