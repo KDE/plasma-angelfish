@@ -101,7 +101,15 @@ Item {
             selectByMouse: true
             focus: false
 
-            Keys.onReturnPressed: load(browserManager.urlFromUserInput(text))
+            Keys.onReturnPressed: {
+                var urlRegExp = new RegExp("^(?:(?:http(?:s)?|ftp)://)(?:\\S+(?::(?:\\S)*)?@)?(?:(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)(?:\\.(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)*(?:\\.(?:[a-z0-9\u00a1-\uffff]){2,})(?::(?:\\d){2,5})?(?:/(?:\\S)*)?$")
+
+                if (urlRegExp.test(text)) {
+                    load(browserManager.urlFromUserInput(text))
+                } else {
+                    load(browserManager.urlFromUserInput("https://duckduckgo.com/" + text))
+                }
+            }
         }
 
         Item {
