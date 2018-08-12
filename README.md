@@ -16,7 +16,7 @@ Preliminary TODO:
 - in-window navigation: tabs vs. top bar
 - SSL error handler
 - Touch actions (pinch?)
-- user-agent to request mobile site
+- user-agent to request mobile site (done)
 - adblock
 - kwallet integration
 
