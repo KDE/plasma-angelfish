@@ -26,8 +26,6 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.0
 //import QtQuick.Window 2.1
 //import QtQuick.Controls.Private 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.0 as Kirigami
 
 

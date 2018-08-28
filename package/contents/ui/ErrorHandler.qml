@@ -21,13 +21,12 @@
 
 import QtQuick 2.3
 //import QtWebEngine 1.0
-//import QtQuick.Controls 1.0
+import QtQuick.Controls 2.0 as Controls
 //import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
 //import QtQuick.Window 2.1
 //import QtQuick.Controls.Private 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+
 import org.kde.kirigami 2.0 as Kirigami
 
 
@@ -51,12 +50,12 @@ Item {
             fill: parent
             margins: Kirigami.Units.gridUnit
         }
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             level: 3
             Layout.fillHeight: false
             text: i18n("Error loading the page")
         }
-        PlasmaComponents.Label {
+        Controls.Label {
             id: errorDescription
             Layout.fillHeight: false
         }
@@ -65,7 +64,7 @@ Item {
         }
     }
 
-    PlasmaComponents.Label {
+    Controls.Label {
         font.pixelSize: Math.round(parent.height / 3)
         opacity: 0.3
         anchors {

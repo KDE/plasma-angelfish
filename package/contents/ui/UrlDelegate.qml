@@ -26,11 +26,8 @@ import QtQuick.Controls 2.0 as Controls
 
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-
 import org.kde.kirigami 2.0 as Kirigami
+
 
 Controls.ItemDelegate {
     id: urlDelegate
