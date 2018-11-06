@@ -37,7 +37,7 @@ Item {
 
         anchors.fill: parent
 
-        spacing: units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
         interactive: height < contentHeight
 
         model: browserManager.history

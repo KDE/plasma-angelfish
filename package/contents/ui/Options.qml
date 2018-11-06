@@ -41,8 +41,8 @@ Rectangle {
     property int expandedHeight: Kirigami.Units.gridUnit * 12
     property int expandedWidth: Kirigami.Units.gridUnit * 14
 
-    Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
-    Behavior on x { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
+    Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration/2; easing.type: Easing.InOutQuad} }
+    Behavior on x { NumberAnimation { duration: Kirigami.Units.longDuration/2; easing.type: Easing.InOutQuad} }
 
     height: expandedHeight
     width: expandedWidth

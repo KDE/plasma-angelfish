@@ -43,7 +43,7 @@ ColumnLayout {
 //         anchors.rightMargin: Kirigami.Units.gridUnit / 2
         //visible: navigationShown
 
-        //spacing: units.smallSpacing
+        //spacing: Kirigami.Units.smallSpacing
 
         OptionButton {
             id: backButton
@@ -121,7 +121,7 @@ ColumnLayout {
 //         Layout.preferredWidth: parent.width
 
     Item {
-        Layout.preferredHeight: units.smallSpacing
+        Layout.preferredHeight: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
     }
 

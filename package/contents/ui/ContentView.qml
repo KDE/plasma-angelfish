@@ -37,7 +37,7 @@ Rectangle {
 
     property string title: ""
 
-    color: theme.backgroundColor
+    color: Kirigami.Theme.backgroundColor
     Rectangle {
         color: "white"
         opacity: 0.6
@@ -47,7 +47,7 @@ Rectangle {
     opacity: state == "hidden" ? 0.0 : 1.0
     Behavior on opacity {
         NumberAnimation {
-            duration: units.longDuration/2;
+            duration: Kirigami.Units.longDuration/2;
             easing.type: Easing.InOutQuad
         }
     }

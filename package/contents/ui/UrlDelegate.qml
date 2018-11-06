@@ -56,7 +56,7 @@ Controls.ItemDelegate {
             topMargin: Kirigami.Units.gridUnit / 2
             bottomMargin: Kirigami.Units.gridUnit / 2
             bottom: parent.bottom
-            margins: units.smallSpacing
+            margins: Kirigami.Units.smallSpacing
         }
         source: icon
 
@@ -72,11 +72,11 @@ Controls.ItemDelegate {
         text: title
         anchors {
             left: urlIcon.right
-            leftMargin: units.largeSpacing / 2
+            leftMargin: Kirigami.Units.largeSpacing / 2
             right: parent.right
             bottom: parent.verticalCenter
             top: urlIcon.top
-            //margins: units.smallSpacing
+            //margins: Kirigami.Units.smallSpacing
         }
     }
 
@@ -87,11 +87,11 @@ Controls.ItemDelegate {
         font.pointSize: theme.smallestFont.pointSize
         anchors {
             left: urlIcon.right
-            leftMargin: units.largeSpacing / 2
+            leftMargin: Kirigami.Units.largeSpacing / 2
             right: removeIcon.left
             top: urlIcon.verticalCenter
             bottom: parent.bottom
-            //margins: units.smallSpacing
+            //margins: Kirigami.Units.smallSpacing
         }
     }
 
@@ -108,7 +108,7 @@ Controls.ItemDelegate {
             topMargin: Kirigami.Units.gridUnit
             bottomMargin: Kirigami.Units.gridUnit
             bottom: parent.bottom
-            margins: units.smallSpacing
+            margins: Kirigami.Units.smallSpacing
         }
         MouseArea {
             anchors.fill: parent

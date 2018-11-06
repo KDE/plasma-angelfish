@@ -111,7 +111,7 @@ Item {
         }
 
         opacity: currentWebView.loading ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; } }
+        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; } }
 
         Rectangle {
             color: theme.highlightColor

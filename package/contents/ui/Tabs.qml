@@ -76,8 +76,8 @@ Item {
                                 // switch to tabs
                             }
                         }
-                        NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
-                        NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
+                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
                         ScriptAction {
                             script: {
                                 print("Animation done");
@@ -88,7 +88,7 @@ Item {
                 }
 
                 Behavior on width {
-                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
+                    NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
 
                 }
 

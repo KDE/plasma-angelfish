@@ -38,7 +38,7 @@ Item {
 
     property int expandedHeight: Kirigami.Units.gridUnit * 8
 
-    Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
+    Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
     Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
 

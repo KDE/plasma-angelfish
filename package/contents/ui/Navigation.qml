@@ -24,7 +24,6 @@ import QtQuick.Layouts 1.0
 import QtWebEngine 1.4
 import QtQuick.Controls 2.0 as Controls
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.0 as Kirigami
 //import org.kde.plasma.components 2.0 as PlasmaComponents
 //import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -40,7 +39,7 @@ Item {
     property int expandedHeight: Kirigami.Units.gridUnit * 2.5
     property int buttonSize: Kirigami.Units.gridUnit * 2
 
-    Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
+    Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
     Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
 
@@ -51,7 +50,7 @@ Item {
         anchors.rightMargin: Kirigami.Units.gridUnit / 2
         visible: navigationShown
 
-        spacing: units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
 
         /*
         PlasmaComponents.ToolButton {
@@ -135,17 +134,12 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            PlasmaCore.SvgItem {
+            Kirigami.Icon {
                 id: menuIcon
-                svg: PlasmaCore.Svg {
-                    id: iconSvg
-                    imagePath: "widgets/configuration-icons"
-                    //onRepaintNeeded: toolBoxIcon.elementId = iconSvg.hasElement("menu") ? "menu" : "configure"
-                }
-                elementId: iconSvg.hasElement("menu") ? "menu" : "configure"
+                source: "open-menu-symbolic"
                 anchors.fill: parent
-                anchors.margins: (Kirigami.Units.gridUnit / 2)
             }
+
             checked: options.state != "hidden"
             //onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
             onPressed: options.state = (options.state != "hidden" ? "hidden" : targetState)

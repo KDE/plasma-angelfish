@@ -20,11 +20,9 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtQuick.Controls 1.0
-
-//import QtWebEngine 1.0
-
 import QtQuick.Layouts 1.0
+
+import org.kde.kirigami 2.0 as Kirigami
 
 
 Item {
@@ -37,7 +35,7 @@ Item {
 
         anchors.fill: parent
 
-        spacing: units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
         interactive: height < contentHeight
 
         model: browserManager.bookmarks
