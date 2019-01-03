@@ -42,7 +42,7 @@ public:
         bookmarked
     };
 
-    explicit UrlModel(QString filename, QObject *parent = nullptr);
+    explicit UrlModel(const QString &filename, QObject *parent = 0);
 
     void setSourceData(QJsonArray &data);
     QJsonArray sourceData() const;
