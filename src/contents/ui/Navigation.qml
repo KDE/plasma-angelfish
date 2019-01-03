@@ -26,9 +26,13 @@ import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.0 as Kirigami
 
+import "regex-weburl.js" as RegexWebUrl
+
 
 Item {
     id: errorHandler
+
+    property string searchUrl: "https://duckduckgo.com/?q="
 
     property string errorCode: ""
 
@@ -98,13 +102,11 @@ Item {
             selectByMouse: true
             focus: false
 
-            Keys.onReturnPressed: {
-                var urlRegExp = new RegExp("^(?:(?:http(?:s)?|ftp)://)(?:\\S+(?::(?:\\S)*)?@)?(?:(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)(?:\\.(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)*(?:\\.(?:[a-z0-9\u00a1-\uffff]){2,})(?::(?:\\d){2,5})?(?:/(?:\\S)*)?$")
-
-                if (urlRegExp.test(text)) {
+            onAccepted: {
+                if (text.match(RegexWebUrl.re_weburl)) {
                     load(browserManager.urlFromUserInput(text))
                 } else {
-                    load(browserManager.urlFromUserInput("https://duckduckgo.com/" + text))
+                    load(browserManager.urlFromUserInput(searchUrl + text))
                 }
             }
         }

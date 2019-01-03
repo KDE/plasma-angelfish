@@ -15,5 +15,6 @@
         <file alias="UrlDelegate.qml">contents/ui/UrlDelegate.qml</file>
         <file alias="webbrowser.qml">contents/ui/webbrowser.qml</file>
         <file alias="WebView.qml">contents/ui/WebView.qml</file>
+        <file alias="regex-weburl.js">regex-weburl/regex-weburl.js</file>
     </qresource>
 </RCC>
