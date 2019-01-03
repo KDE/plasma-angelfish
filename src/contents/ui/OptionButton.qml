@@ -20,32 +20,35 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtQuick.Controls 1.0
-
-//import QtWebEngine 1.0
-
+import QtQuick.Controls 2.2 as Controls
 import QtQuick.Layouts 1.0
 
+import org.kde.kirigami 2.4 as Kirigami
 
-Item {
-//    id: options
 
-    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
-    anchors.fill: parent
+Controls.ToolButton {
+    id: button
 
-    ListView {
+    property alias iconSource: iconItem.source
 
+    Layout.fillWidth: true
+    Layout.preferredHeight: buttonSize
+
+    Kirigami.Icon {
+        id: iconItem
         anchors.fill: parent
-
-        spacing: Kirigami.Units.smallSpacing
-        interactive: height < contentHeight
-
-        model: browserManager.history
-
-        delegate: UrlDelegate {
-            onRemoved: browserManager.removeFromHistory(url);
-        }
+        visible: text == ""
     }
-    Component.onCompleted: print("History.qml complete.");
 
+    RowLayout {
+        id: layoutRow
+        anchors.fill: parent
+        Kirigami.Icon {
+            id: rowIcon
+            Layout.preferredWidth: parent.width * 0.25
+            Layout.fillWidth: false
+            source: iconItem.source
+        }
+        visible: text != ""
+    }
 }

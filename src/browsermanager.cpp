@@ -22,14 +22,12 @@
 #include <QDebug>
 #include <QUrl>
 
-#include <KDirWatch>
-
 using namespace AngelFish;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent),
-      m_bookmarks(0),
-      m_history(0)
+      m_bookmarks(nullptr),
+      m_history(nullptr)
 {
 }
 

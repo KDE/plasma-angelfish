@@ -20,72 +20,31 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtWebEngine 1.0
-import QtQuick.Controls 2.0 as Controls
-//import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
-//import QtQuick.Window 2.1
-//import QtQuick.Controls.Private 1.0
 
 import org.kde.kirigami 2.0 as Kirigami
 
 
 Item {
-    id: errorHandler
+//    id: options
 
-    property string errorCode: ""
-    property alias errorString: errorDescription.text
+    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    anchors.fill: parent
 
-    property int expandedHeight: Kirigami.Units.gridUnit * 8
+    ListView {
 
-    Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
+        anchors.fill: parent
 
-    Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
+        spacing: Kirigami.Units.smallSpacing
+        interactive: height < contentHeight
+        clip: false
 
-    ColumnLayout {
+        model: browserManager.bookmarks
 
-        visible: parent.height > 0
-        spacing: Kirigami.Units.gridUnit
-        anchors {
-            fill: parent
-            margins: Kirigami.Units.gridUnit
-        }
-        Kirigami.Heading {
-            level: 3
-            Layout.fillHeight: false
-            text: i18n("Error loading the page")
-        }
-        Controls.Label {
-            id: errorDescription
-            Layout.fillHeight: false
-        }
-        Item {
-            Layout.fillHeight: true
+        delegate: UrlDelegate {
+            onRemoved: browserManager.removeBookmark(url);
         }
     }
-
-    Controls.Label {
-        font.pixelSize: Math.round(parent.height / 3)
-        opacity: 0.3
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            margins: Kirigami.Units.gridUnit
-        }
-        text: errorCode
-    }
-
-    states: [
-        State {
-            name: "error"
-            when: errorCode != ""
-            PropertyChanges { target: errorHandler; height: expandedHeight}
-        },
-        State {
-            name: "normal"
-            when: errorCode == ""
-            PropertyChanges { target: errorHandler; height: 0}
-        }
-    ]
+    Component.onCompleted: print("Bookmarks.qml complete.");
 
 }

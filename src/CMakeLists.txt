@@ -1,23 +1,12 @@
-
-# These are only needed here, consider porting away from both!
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Gui WebEngine)
-
 set(angelfish_SRCS
     main.cpp
     browsermanager.cpp
     urlmodel.cpp
-    view.cpp
-)
+    )
 
-add_executable(angelfish ${angelfish_SRCS})
+qt5_add_resources(RESOURCES resources.qrc)
 
-target_link_libraries(angelfish
-    Qt5::Quick
-    Qt5::Gui
-    Qt5::WebEngine
-    KF5::Plasma
-    KF5::Declarative
-    KF5::I18n
-)
+add_executable(angelfish ${angelfish_SRCS} ${RESOURCES})
+target_link_libraries(angelfish Qt5::Core  Qt5::Qml Qt5::Quick Qt5::Svg Qt5::WebEngine)
 
-install( TARGETS angelfish ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS angelfish ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

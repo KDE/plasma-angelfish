@@ -21,9 +21,6 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.0 as Controls
-
-//import QtWebEngine 1.0
-
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.0 as Kirigami

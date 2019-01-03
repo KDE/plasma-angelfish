@@ -25,8 +25,6 @@ import QtWebEngine 1.4
 import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.0 as Kirigami
-//import org.kde.plasma.components 2.0 as PlasmaComponents
-//import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
@@ -34,14 +32,14 @@ Item {
 
     property string errorCode: ""
 
-    property bool navigationShown: errorCode != "" || webBrowser.url == "" || true
+    property bool navigationShown: errorCode != "" || webBrowser.url === "" || true
 
     property int expandedHeight: Kirigami.Units.gridUnit * 2.5
     property int buttonSize: Kirigami.Units.gridUnit * 2
 
     Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
+    Rectangle { anchors.fill: parent; color: Kirigami.Theme.backgroundColor; }
 
     RowLayout {
         id: layout
@@ -134,15 +132,9 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            Kirigami.Icon {
-                id: menuIcon
-                source: "open-menu-symbolic"
-                anchors.fill: parent
-            }
+            iconSource: "open-menu-symbolic"
 
-            checked: options.state != "hidden"
-            //onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
-            onPressed: options.state = (options.state != "hidden" ? "hidden" : targetState)
+            onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
         }
     }
 

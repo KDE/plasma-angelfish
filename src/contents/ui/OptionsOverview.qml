@@ -20,12 +20,8 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtWebEngine 1.0
-//import QtQuick.Controls 1.0
-//import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
-//import QtQuick.Window 2.1
-//import QtQuick.Controls.Private 1.0
+
 import org.kde.kirigami 2.0 as Kirigami
 
 
@@ -52,9 +48,7 @@ ColumnLayout {
             enabled: currentWebView.canGoBack
             iconSource: "go-previous"
 
-            onClicked: currentWebView.goBack()
-            onTriggered: {
-                print("Booh")
+            onClicked: {
                 options.state = "hidden";
                 currentWebView.goBack()
             }
@@ -63,13 +57,10 @@ ColumnLayout {
         OptionButton {
             id: forwardButton
 
-//             Layout.fillWidth: true
-//             Layout.preferredHeight: buttonSize
-
             enabled: currentWebView.canGoForward
             iconSource: "go-next"
 
-            onTriggered: {
+            onClicked: {
                 options.state = "hidden";
                 currentWebView.goForward()
             }
@@ -79,12 +70,9 @@ ColumnLayout {
         OptionButton {
             id: reloadButton
 
-//             Layout.fillWidth: true
-//             Layout.preferredHeight: buttonSize
-
             iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
 
-            onTriggered: {
+            onClicked: {
                 options.state = "hidden";
                 currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
             }
@@ -94,12 +82,9 @@ ColumnLayout {
         OptionButton {
             id: bookmarkButton
 
-//             Layout.fillWidth: true
-//             Layout.preferredHeight: buttonSize
-
             iconSource: "bookmarks"
 
-            onTriggered: {
+            onClicked: {
                 print("Adding bookmark");
                 var request = new Object;// FIXME
                 request.url = currentWebView.url;
@@ -115,11 +100,6 @@ ColumnLayout {
 
     }
 
-//     RowLayout {
-//
-//         Layout.fillHeight: false
-//         Layout.preferredWidth: parent.width
-
     Item {
         Layout.preferredHeight: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
@@ -129,7 +109,7 @@ ColumnLayout {
         iconSource: "tab-duplicate"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onTriggered: {
+        onClicked: {
             contentView.state = "tabs"
             options.state = "hidden"
         }
@@ -141,7 +121,7 @@ ColumnLayout {
         iconSource: "bookmarks"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onTriggered: {
+        onClicked: {
             contentView.state = "bookmarks"
             options.state = "hidden"
         }
@@ -153,7 +133,7 @@ ColumnLayout {
         iconSource: "view-history"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onTriggered: {
+        onClicked: {
             contentView.state = "history"
             options.state = "hidden"
         }
@@ -167,7 +147,7 @@ ColumnLayout {
         Layout.preferredHeight: buttonSize
         text: i18n("Settings")
         checked: contentView.state == "settings"
-        onTriggered: {
+        onClicked: {
             contentView.state = "settings"
             options.state = "hidden"
         }

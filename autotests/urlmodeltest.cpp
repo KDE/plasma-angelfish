@@ -52,7 +52,7 @@ class UrlModelTest : public QObject
 
 
             foreach (int k, model->roleNames().keys()) {
-                UrlModel *urlmodel = static_cast<UrlModel*>(model);
+                auto *urlmodel = static_cast<UrlModel*>(model);
                 const QString ks = urlmodel->key(k);
 
                 QVariant ori = vm[ks];

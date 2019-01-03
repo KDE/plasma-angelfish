@@ -20,76 +20,42 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtWebEngine 1.0
-import QtQuick.Controls 2.0 as Controls
-import QtQuick.Layouts 1.0
-//import QtQuick.Window 2.1
-//import QtQuick.Controls.Private 1.0
-import org.kde.kirigami 2.4 as Kirigami
+import QtQuick.Controls 2.4 as Controls
+import QtQuick.Layouts 1.11
+
+import org.kde.kirigami 2.2 as Kirigami
 
 
+ColumnLayout {
+    id: settingsPage
 
-Controls.ToolButton {
-    id: button
-
-    property alias iconSource: iconItem.source
-
-    signal released
-    signal pressed
-    signal triggered
-
-    Layout.fillWidth: true
-    Layout.preferredHeight: buttonSize
-
-    property bool isActive: false
-    property bool isPressed: false
-
-    MouseArea {
-        id: buttonMouse
-        hoverEnabled: true
-        anchors.fill: parent
-        onPressed: {
-            //print("Pressed " + icon)
-            isActive = true;
-            isPressed = true;
-            button.pressed(mouse);
+    Controls.CheckDelegate {
+        text: "Enable javascript"
+        Layout.fillWidth: true
+        onCheckedChanged: {
+            var settings = currentWebView.settings;
+            settings.javascriptEnabled = checked;
+            // FIXME: save to config
         }
-        onReleased: {
-            //print("Released TRIGGER!")
-            isActive = false;
-            isPressed = false;
-            //button.clicked(mouse);
-            button.triggered(mouse);
-        }
-        onEntered: {
-            //print("Enter")
-            //if (buttonMouse.pressed) {
-                isActive = true
-            //}
-        }
-        onExited: {
-            //print("Enter")
-            //if (buttonMouse.pressed) {
-                isActive = false
-            //}
+        Component.onCompleted: {
+            checked = currentWebView.settings.javascriptEnabled;
         }
     }
 
-    Kirigami.Icon {
-        id: iconItem
-        anchors.fill: parent
-        visible: text == ""
+    Controls.CheckDelegate {
+        text: "Load images"
+        Layout.fillWidth: true
+        onCheckedChanged: {
+            var settings = currentWebView.settings;
+            settings.autoLoadImages = checked;
+            // FIXME: save to config
+        }
+        Component.onCompleted: {
+            checked = currentWebView.settings.autoLoadImages;
+        }
     }
 
-    RowLayout {
-        id: layoutRow
-        anchors.fill: parent
-        Kirigami.Icon {
-            id: rowIcon
-            Layout.preferredWidth: parent.width / 4
-            Layout.fillWidth: false
-            source: iconItem.source
-        }
-        visible: text != ""
+    Item {
+        Layout.fillHeight: true
     }
 }

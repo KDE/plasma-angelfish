@@ -1,0 +1,28 @@
+{
+    "id": "org.kde.mobile.angelfish",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "5.11",
+    "sdk": "org.kde.Sdk",
+    "command": "angelfish",
+    "tags": ["nightly"],
+    "desktop-file-name-suffix": " (Nightly)",
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--socket=x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--filesystem=home",
+        "--talk-name=org.freedesktop.Notifications"
+    ],
+    "separate-locales": false,
+
+    "modules": [
+        {
+            "name": "angelfish",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "sources": [ { "type": "dir", "path": ".", "skip": [".git"] } ]
+        }
+    ]
+}

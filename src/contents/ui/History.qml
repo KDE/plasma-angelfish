@@ -16,33 +16,33 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+import QtQuick 2.3
+import QtQuick.Layouts 1.0
 
-#include <QQuickView>
+import org.kde.kirigami 2.2 as Kirigami
 
-#include <Plasma/Package>
+Item {
+//    id: options
 
-namespace AngelFish {
+    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    anchors.fill: parent
 
-class View : public QQuickView
-{
-    Q_OBJECT
+    ListView {
 
-public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+        anchors.fill: parent
 
-Q_SIGNALS:
-    void titleChanged(const QString&);
+        spacing: Kirigami.Units.smallSpacing
+        interactive: height < contentHeight
+        clip: true
 
-private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
-};
+        model: browserManager.history
 
+        delegate: UrlDelegate {
+            onRemoved: browserManager.removeFromHistory(url);
+        }
+    }
+    Component.onCompleted: print("History.qml complete.");
 }
-
-#endif // BROWSERVIEW_H

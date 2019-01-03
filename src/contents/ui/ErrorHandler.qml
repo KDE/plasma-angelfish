@@ -20,30 +20,68 @@
  ***************************************************************************/
 
 import QtQuick 2.3
+import QtQuick.Controls 2.0 as Controls
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.0 as Kirigami
 
 
 Item {
-//    id: options
+    id: errorHandler
 
-    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
-    anchors.fill: parent
+    property string errorCode: ""
+    property alias errorString: errorDescription.text
 
-    ListView {
+    property int expandedHeight: Kirigami.Units.gridUnit * 8
 
-        anchors.fill: parent
+    Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
-        spacing: Kirigami.Units.smallSpacing
-        interactive: height < contentHeight
+    Rectangle { anchors.fill: parent; color: Kirigami.Theme.backgroundColor; }
 
-        model: browserManager.bookmarks
+    ColumnLayout {
 
-        delegate: UrlDelegate {
-            onRemoved: browserManager.removeBookmark(url);
+        visible: parent.height > 0
+        spacing: Kirigami.Units.gridUnit
+        anchors {
+            fill: parent
+            margins: Kirigami.Units.gridUnit
+        }
+        Kirigami.Heading {
+            level: 3
+            Layout.fillHeight: false
+            text: i18n("Error loading the page")
+        }
+        Controls.Label {
+            id: errorDescription
+            Layout.fillHeight: false
+        }
+        Item {
+            Layout.fillHeight: true
         }
     }
-    Component.onCompleted: print("Bookmarks.qml complete.");
+
+    Controls.Label {
+        font.pixelSize: Math.round(parent.height / 3)
+        opacity: 0.3
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: Kirigami.Units.gridUnit
+        }
+        text: errorCode
+    }
+
+    states: [
+        State {
+            name: "error"
+            when: errorCode != ""
+            PropertyChanges { target: errorHandler; height: expandedHeight}
+        },
+        State {
+            name: "normal"
+            when: errorCode == ""
+            PropertyChanges { target: errorHandler; height: 0}
+        }
+    ]
 
 }

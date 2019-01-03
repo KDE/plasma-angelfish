@@ -21,18 +21,14 @@
 
 import QtQuick 2.1
 import QtWebEngine 1.6
-// import QtQuick.Controls 1.0
-// import QtQuick.Controls.Styles 1.0
-// import QtQuick.Layouts 1.0
 import QtQuick.Window 2.1
 
 import org.kde.kirigami 2.0 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-Item {
+Kirigami.ApplicationWindow {
     id: webBrowser
-    objectName: "webBrowser"
+    title: "Angelfish Webbrowser"
 
     /** Pointer to the currently active view.
      *
@@ -45,7 +41,7 @@ Item {
         print("Current WebView is now : " + tabs.currentIndex);
     }
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
-    property var borderColor: theme.highlightColor;
+    property var borderColor: Kirigami.Theme.highlightColor;
 
     /**
      * Load a url in the current tab
@@ -56,8 +52,8 @@ Item {
         //tabs.newTab(url)
     }
 
-    width: Kirigami.Units.gridUnit * 15
-    height: Kirigami.Units.gridUnit * 26
+    width: Kirigami.Units.gridUnit * 20
+    height: Kirigami.Units.gridUnit * 30
 
     function addHistoryEntry() {
         //print("Adding history");
@@ -114,7 +110,7 @@ Item {
         Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; } }
 
         Rectangle {
-            color: theme.highlightColor
+            color: Kirigami.Theme.highlightColor
 
             width: Math.round((currentWebView.loadProgress / 100) * parent.width)
             anchors {
@@ -154,6 +150,7 @@ Item {
             right: parent.right
         }
     }
+
     // Thin line underneath navigation
     Rectangle {
         height: webBrowser.borderWidth

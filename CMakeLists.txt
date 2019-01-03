@@ -1,16 +1,16 @@
-project(plasma-angelfish)
+project(angelfish)
 
 cmake_minimum_required(VERSION 2.8.12)
+set(KF5_MIN_VERSION "5.18.0")
+set(QT_MIN_VERSION "5.5.0")
 
 ################# Disallow in-source build #################
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "angelfish requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma-mobile [options]' there.")
+   message(FATAL_ERROR "This application requires an out of source build. Please create a separate build directory.")
 endif()
 
-include(CPack)
 include(FeatureSummary)
-find_package(PkgConfig)
 
 ################# set KDE specific information #################
 
@@ -19,11 +19,17 @@ find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(ECMPoQmTools)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui)
+################# Find dependencies #################
+
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui Svg QuickControls2 WebEngine)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 CoreAddons)
 
 ################# Enable C++11 features for clang and gcc #################
 
@@ -31,27 +37,11 @@ if(UNIX)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x")
 endif()
 
-################# now find all used packages #################
+################# build and install #################
+add_subdirectory(src)
+add_subdirectory(autotests)
 
-set (QT_MIN_VERSION "5.4.0")
+install(PROGRAMS org.kde.mobile.angelfish.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(FILES org.kde.mobile.angelfish.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
-find_package(Qt5WebEngine CONFIG)
-set_package_properties(Qt5WebEngine PROPERTIES
-                       TYPE OPTIONAL
-                      )
-add_feature_info("Qt5WebEngine" Qt5WebEngine_FOUND "Required for building the Angelfish webbrowser")
-
-find_package(KF5 REQUIRED COMPONENTS
-                KIO Plasma Declarative I18n Kirigami2)
-#########################################################################
-
-
-
-if(Qt5WebEngine_FOUND)
-    add_subdirectory(src)
-    add_subdirectory(autotests)
-
-    install(PROGRAMS org.kde.mobile.angelfish.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-
-    plasma_install_package(package org.kde.mobile.angelfish packages package)
-endif()
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
