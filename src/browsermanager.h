@@ -43,7 +43,7 @@ class BrowserManager : public QObject
 
 public:
 
-    BrowserManager(QObject *parent = 0);
+    BrowserManager(QObject *parent = nullptr);
     ~BrowserManager();
 
     UrlModel* bookmarks();

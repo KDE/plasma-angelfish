@@ -20,7 +20,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
-    AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
+    auto *browserManager = new AngelFish::BrowserManager(engine.rootContext());
     engine.rootContext()->setContextProperty("browserManager", browserManager);
 
     qmlRegisterUncreatableType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", "");
