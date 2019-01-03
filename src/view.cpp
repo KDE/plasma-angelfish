@@ -53,15 +53,15 @@ View::View(const QString &url, QWindow *parent)
 
     BrowserManager *browserManager = new BrowserManager(rootContext());
     rootContext()->setContextProperty("browserManager", browserManager);
-    qmlRegisterUncreatableType<BrowserManager>("org.kde.plasma.satellite.angelfish", 1, 0, "BrowserManager", "");
+    qmlRegisterUncreatableType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", "");
 
     qmlRegisterType<QAbstractListModel>();
 
     m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
-    m_package.setPath("org.kde.plasma.satellite.angelfish");
+    m_package.setPath("org.kde.mobile.angelfish");
 
     if (!m_package.isValid() || !m_package.metadata().isValid()) {
-        qWarning() << "Could not load package org.kde.plasma.satellite.angelfish:" << m_package.path();
+        qWarning() << "Could not load package org.kde.mobile.angelfish:" << m_package.path();
         return;
     }
 

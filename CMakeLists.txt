@@ -48,13 +48,10 @@ find_package(KF5 REQUIRED COMPONENTS
 
 
 if(Qt5WebEngine_FOUND)
-
     add_subdirectory(src)
     add_subdirectory(autotests)
 
-    install( PROGRAMS angelfish.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+    install(PROGRAMS org.kde.mobile.angelfish.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 
-    plasma_install_package(package org.kde.plasma.satellite.angelfish packages package)
-    #install(FILES plasma-mobile-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-
+    plasma_install_package(package org.kde.mobile.angelfish packages package)
 endif()
