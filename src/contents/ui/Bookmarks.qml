@@ -37,7 +37,7 @@ Item {
 
         spacing: Kirigami.Units.smallSpacing
         interactive: height < contentHeight
-        clip: false
+        clip: true
 
         model: browserManager.bookmarks
 
