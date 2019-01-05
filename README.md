@@ -15,7 +15,7 @@ Preliminary TODO:
 - Error handler in UI (done)
 - in-window navigation: tabs vs. top bar
 - SSL error handler
-- Touch actions (pinch?)
+- Touch actions (pinch?) (done in QtWebEngine)
 - user-agent to request mobile site (done)
 - adblock
 - kwallet integration
