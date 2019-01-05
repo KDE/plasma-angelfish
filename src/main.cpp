@@ -4,6 +4,7 @@
 #include <QUrl>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QtWebEngine>
 
 #include "browsermanager.h"
 
@@ -17,7 +18,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("angelfish");
 
     QQmlApplicationEngine engine;
-
+    QtWebEngine::initialize();
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
