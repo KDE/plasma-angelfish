@@ -113,7 +113,7 @@ ColumnLayout {
             contentView.state = "tabs"
             options.state = "hidden"
         }
-        checked: contentView.state == "tabs"
+        //checked: contentView.state == "tabs"
         text: i18n("Tabs")
     }
 
@@ -146,7 +146,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         text: i18n("Settings")
-        checked: contentView.state == "settings"
+        //checked: contentView.state == "settings"
         onClicked: {
             contentView.state = "settings"
             options.state = "hidden"
