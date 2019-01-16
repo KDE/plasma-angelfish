@@ -49,7 +49,6 @@ Kirigami.ApplicationWindow {
     function load(url) {
         print("Loading url: " + url);
         currentWebView.url = url;
-        //tabs.newTab(url)
     }
 
     width: Kirigami.Units.gridUnit * 20
@@ -163,6 +162,7 @@ Kirigami.ApplicationWindow {
     }
 
     Component.onCompleted: {
-        //contentView.state = "settings"; // For testing
+        if (!initialUrl.isEmpty)
+            load(initialUrl)
     }
 }

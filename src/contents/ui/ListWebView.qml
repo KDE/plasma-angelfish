@@ -62,8 +62,6 @@ ListView {
     }
 
     function newTab(url) {
-
         tabsModel.append({pageurl: url});
     }
-
 }
