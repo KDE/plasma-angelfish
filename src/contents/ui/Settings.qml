@@ -30,7 +30,7 @@ ColumnLayout {
     id: settingsPage
 
     Controls.CheckDelegate {
-        text: "Enable javascript"
+        text: i18n("Enable javascript")
         Layout.fillWidth: true
         onCheckedChanged: {
             var settings = currentWebView.settings;
@@ -43,7 +43,7 @@ ColumnLayout {
     }
 
     Controls.CheckDelegate {
-        text: "Load images"
+        text: i18n("Load images")
         Layout.fillWidth: true
         onCheckedChanged: {
             var settings = currentWebView.settings;
