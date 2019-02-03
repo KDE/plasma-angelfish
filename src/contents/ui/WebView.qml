@@ -54,12 +54,8 @@ WebEngineView {
         var ec = "";
         var es = "";
         //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
-        if (loadRequest.status == WebEngineView.LoadStartedStatus) {
-            if (contentView.state != "settings") { // Kludge!
-
-                contentView.state = "hidden";
-            }
-        }
+        //if (loadRequest.status == WebEngineView.LoadStartedStatus) {
+        //}
         if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
             // record history, set current page info
             //contentView.state = "hidden"
@@ -73,7 +69,6 @@ WebEngineView {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
             ec = loadRequest.errorCode;
             es = loadRequest.errorString;
-            contentView.state = "hidden"
         }
         errorCode = ec;
         errorString = es;

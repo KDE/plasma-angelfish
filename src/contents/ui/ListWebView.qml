@@ -37,8 +37,8 @@ ListView {
     // No horizontal swiping between tabs, disturbs page interaction
     interactive: false
 
-    property int pageHeight: parent.height
-    property int pageWidth: parent.width
+    property int pageHeight: height
+    property int pageWidth: width
 
     property alias count: tabsModel.count
 

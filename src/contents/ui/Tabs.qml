@@ -31,9 +31,11 @@ import org.kde.kirigami 2.0 as Kirigami
 // import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
-Item {
+Kirigami.ScrollablePage {
 
     id: tabsRoot
+
+    title: i18n("Tabs")
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
     property int itemWidth: (width / 2) - Kirigami.Units.gridUnit
@@ -109,7 +111,7 @@ Item {
                     tabs.currentIndex = index;
                     tabs.positionViewAtIndex(index, ListView.Beginning);
                     //tabs.positionViewAtEnd();
-                    contentView.state = "hidden"
+                    pageStack.layers.pop()
                     return;
 
                     if (tabItem.width < tabsRoot.width) {
@@ -140,6 +142,7 @@ Item {
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
                     tabs.currentIndex = tabs.count - 1;
+                    pageStack.layers.pop()
                 }
 
             }

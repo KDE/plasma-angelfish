@@ -89,9 +89,6 @@ Rectangle {
             right: parent.right
             //margins: Kirigami.Units.gridUnit / 2
         }
-        MouseArea {
-            anchors.fill: parent
-        }
 
         OptionsOverview {
             Layout.fillWidth: true;

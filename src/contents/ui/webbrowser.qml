@@ -23,7 +23,7 @@ import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.1
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.4 as Kirigami
 
 
 Kirigami.ApplicationWindow {
@@ -41,7 +41,7 @@ Kirigami.ApplicationWindow {
         print("Current WebView is now : " + tabs.currentIndex);
     }
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
-    property var borderColor: Kirigami.Theme.highlightColor;
+    property color borderColor: Kirigami.Theme.highlightColor;
 
     /**
      * Load a url in the current tab
@@ -64,102 +64,112 @@ Kirigami.ApplicationWindow {
 
     }
 
-    ListWebView {
-        id: tabs
-        anchors {
-            top: navigation.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-    }
+    property bool layerShown : pageStack.layers.depth > 1
 
-    ErrorHandler {
-        id: errorHandler
+    pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
 
-        errorString: currentWebView.errorString
-        errorCode: currentWebView.errorCode
 
-        anchors {
-            top: navigation.bottom
-            left: parent.left
-            right: parent.right
-        }
-    }
+    pageStack.initialPage: Kirigami.Page {
 
-    ContentView {
-        id: contentView
-        anchors.fill: tabs
-    }
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
 
-    // Container for the progress bar
-    Item {
-        id: progressItem
-
-        height: Math.round(Kirigami.Units.gridUnit / 6)
-        z: navigation.z + 1
-        anchors {
-            top: tabs.top
-            topMargin: -Math.round(height / 2)
-            left: tabs.left
-            right: tabs.right
+        ListWebView {
+            id: tabs
+            anchors {
+                top: navigation.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
         }
 
-        opacity: currentWebView.loading ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; } }
+        ErrorHandler {
+            id: errorHandler
 
-        Rectangle {
-            color: Kirigami.Theme.highlightColor
+            errorString: currentWebView.errorString
+            errorCode: currentWebView.errorCode
 
-            width: Math.round((currentWebView.loadProgress / 100) * parent.width)
+            anchors {
+                top: navigation.bottom
+                left: parent.left
+                right: parent.right
+            }
+        }
+
+        // Container for the progress bar
+        Item {
+            id: progressItem
+
+            height: Math.round(Kirigami.Units.gridUnit / 6)
+            z: navigation.z + 1
+            anchors {
+                top: tabs.top
+                topMargin: -Math.round(height / 2)
+                left: tabs.left
+                right: tabs.right
+            }
+
+            opacity: currentWebView.loading ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; } }
+
+            Rectangle {
+                color: Kirigami.Theme.highlightColor
+
+                width: Math.round((currentWebView.loadProgress / 100) * parent.width)
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+            }
+
+        }
+
+        // When clicked outside the menu, hide it
+        MouseArea {
+            id: optionsDismisser
+            visible: options.state != "hidden"
+            onClicked: options.state = "hidden"
+            anchors.fill: parent
+        }
+
+        // The menu at the top right
+        Options {
+            id: options
+
+            anchors {
+                top: navigation.bottom
+            }
+        }
+
+        Navigation {
+            id: navigation
+
+            height: Kirigami.Units.gridUnit * 3
+
             anchors {
                 top: parent.top
                 left: parent.left
-                bottom: parent.bottom
+                right: parent.right
+            }
+        }
+
+        // Thin line underneath navigation
+        Rectangle {
+            height: webBrowser.borderWidth
+            color: webBrowser.borderColor
+            anchors {
+                left: parent.left
+                bottom: navigation.bottom
+                right: options.left
             }
         }
 
     }
 
-    // When clicked outside the menu, hide it
-    MouseArea {
-        id: optionsDismisser
-        visible: options.state != "hidden"
-        onClicked: options.state = "hidden"
-        anchors.fill: parent
-    }
-
-    // The menu at the top right
-    Options {
-        id: options
-
-        anchors {
-            top: navigation.bottom
-        }
-    }
-
-    Navigation {
-        id: navigation
-
-        height: Kirigami.Units.gridUnit * 3
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-    }
-
-    // Thin line underneath navigation
-    Rectangle {
-        height: webBrowser.borderWidth
-        color: webBrowser.borderColor
-        anchors {
-            left: parent.left
-            bottom: navigation.bottom
-            right: options.left
-        }
-    }
 
     Component.onCompleted: {
         if (!initialUrl.isEmpty)
