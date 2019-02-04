@@ -38,6 +38,9 @@ Item {
 
     property bool navigationShown: errorCode != "" || webBrowser.url === "" || true
 
+    property alias textFocus: urlInput.activeFocus
+    property alias text: urlInput.text
+
     property int expandedHeight: Kirigami.Units.gridUnit * 2.5
     property int buttonSize: Kirigami.Units.gridUnit * 2
 

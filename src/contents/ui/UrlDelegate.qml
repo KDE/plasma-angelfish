@@ -29,6 +29,12 @@ import org.kde.kirigami 2.0 as Kirigami
 Controls.ItemDelegate {
     id: urlDelegate
 
+    property bool showRemove: true
+
+    property string highlightText
+    property var regex: new RegExp(highlightText, 'i')
+    property string highlightedText: "<b><font color=\""+Kirigami.Theme.highlightColor+"\">$&</font></b>"
+
     height: Kirigami.Units.gridUnit * 3
     width: parent.width
 
@@ -66,7 +72,7 @@ Controls.ItemDelegate {
 
     Controls.Label {
         id: urlTitle
-        text: title
+        text: title ? title.replace(regex, highlightedText) : ""
         anchors {
             left: urlIcon.right
             leftMargin: Kirigami.Units.largeSpacing / 2
@@ -75,11 +81,12 @@ Controls.ItemDelegate {
             top: urlIcon.top
             //margins: Kirigami.Units.smallSpacing
         }
+        elide: Qt.ElideRight
     }
 
     Controls.Label {
         id: urlUrl
-        text: url
+        text: url ? url.replace(regex, highlightedText) : ""
         opacity: 0.6
         font.pointSize: theme.smallestFont.pointSize
         anchors {
@@ -90,6 +97,7 @@ Controls.ItemDelegate {
             bottom: parent.bottom
             //margins: Kirigami.Units.smallSpacing
         }
+        elide: Qt.ElideRight
     }
 
     Kirigami.Icon {
@@ -97,7 +105,7 @@ Controls.ItemDelegate {
 
         width: height
         source: "list-remove"
-        //visible: bookmarked
+        visible: parent.showRemove
 
         anchors {
             right: parent.right

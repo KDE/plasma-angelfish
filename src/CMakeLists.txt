@@ -2,6 +2,7 @@ set(angelfish_SRCS
     main.cpp
     browsermanager.cpp
     urlmodel.cpp
+    urlfilterproxymodel.cpp
     )
 
 qt5_add_resources(RESOURCES resources.qrc)

@@ -49,6 +49,7 @@ Kirigami.ApplicationWindow {
     function load(url) {
         print("Loading url: " + url);
         currentWebView.url = url;
+        currentWebView.forceActiveFocus()
     }
 
     width: Kirigami.Units.gridUnit * 20
@@ -97,6 +98,7 @@ Kirigami.ApplicationWindow {
                 left: parent.left
                 right: parent.right
             }
+            visible: !navigation.textFocus
         }
 
         // Container for the progress bar
@@ -155,6 +157,27 @@ Kirigami.ApplicationWindow {
                 left: parent.left
                 right: parent.right
             }
+        
+
+            onTextChanged: urlFilter.setFilterFixedString(text)
+        }
+
+        ListView {
+            id: completion
+            property string searchText: navigation.text
+            anchors.top: navigation.bottom
+            anchors.horizontalCenter: navigation.horizontalCenter
+            width: 0.9* navigation.width
+            height: 0.5*parent.height
+            z: 10
+            visible: navigation.textFocus
+            model: urlFilter
+            delegate: UrlDelegate {
+                showRemove: false
+                onClicked: tabs.forceActiveFocus()
+                highlightText: completion.searchText
+            }
+            clip: true
         }
 
         // Thin line underneath navigation

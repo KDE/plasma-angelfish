@@ -7,6 +7,7 @@
 #include <QtWebEngine>
 
 #include "browsermanager.h"
+#include "urlfilterproxymodel.h"
 
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -36,6 +37,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Browser managger
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
     engine.rootContext()->setContextProperty("browserManager", browserManager);
+
+    UrlFilterProxyModel *proxy = new UrlFilterProxyModel(browserManager);
+    proxy->setSourceModel(browserManager->history());
+    proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    engine.rootContext()->setContextProperty("urlFilter", proxy);
 
     qmlRegisterUncreatableType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", "");
     qmlRegisterType<QAbstractListModel>();
