@@ -59,6 +59,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const;
 
     void update();
+    Q_INVOKABLE bool updateIcon(const QString &url, const QString &iconSource);
 
     QJsonArray fakeData();
 

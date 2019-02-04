@@ -79,9 +79,15 @@ WebEngineView {
 //                     contentView.state = "hidden";
 //                 }
 //             }
+
     Component.onCompleted: {
         print("WebView completed.");
         var settings = webEngineView.settings;
         print("Settings: " + settings);
+    }
+
+    onIconChanged: {
+        if (icon)
+            browserManager.history.updateIcon(url, icon)
     }
 }

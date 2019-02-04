@@ -89,7 +89,7 @@ ColumnLayout {
                 var request = new Object;// FIXME
                 request.url = currentWebView.url;
                 request.title = currentWebView.title;
-                request.iconSource = currentWebView.iconSource;
+                request.icon = currentWebView.icon;
                 request.bookmarked = true;
                 browserManager.addBookmark(request);
                 options.state = "hidden"
