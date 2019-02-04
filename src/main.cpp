@@ -32,8 +32,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (!parser.positionalArguments().isEmpty())
         engine.rootContext()->setContextProperty("initialUrl", QUrl::fromUserInput(parser.positionalArguments()[0].toUtf8()));
 
-    engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
-
     // Browser managger
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
     engine.rootContext()->setContextProperty("browserManager", browserManager);
@@ -45,6 +43,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", "");
     qmlRegisterType<QAbstractListModel>();
+
+    engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
     // Error handling
     if (engine.rootObjects().isEmpty()) {

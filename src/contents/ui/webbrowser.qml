@@ -195,7 +195,7 @@ Kirigami.ApplicationWindow {
 
 
     Component.onCompleted: {
-        if (!initialUrl.isEmpty)
+        if (initialUrl && !initialUrl.isEmpty())
             load(initialUrl)
     }
 }
