@@ -108,7 +108,24 @@ void UrlModel::update()
     //emit QAbstractItemModel::modelReset();
 //     auto topleft = index(0);
 //     auto bottomright = index(rowCount(topleft));
-//     emit dataChanged(topleft, bottomright);
+    //     emit dataChanged(topleft, bottomright);
+}
+
+bool UrlModel::updateIcon(const QString &url, const QString &iconSource)
+{
+    qDebug() << "updateIcon: " << url << " " << iconSource;
+    bool found = false;
+    for (int i = 0; i < m_data.count(); i++) {
+        const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
+        if (u == url) {
+            auto obj = m_data[i].toObject();
+            obj[key(UrlModel::icon)] = iconSource;
+            m_data[i] = obj;
+            emit dataChanged(index(i), index(i), {UrlModel::Roles::icon});
+            found = true;
+        }
+    }
+    return found;
 }
 
 QString UrlModel::filePath() const
@@ -155,7 +172,7 @@ bool UrlModel::save()
 
     QJsonArray urls;
 
-    Q_FOREACH (auto url, m_data) {
+    Q_FOREACH (const auto &url, m_data) {
         urls << url;
     }
 
@@ -194,13 +211,14 @@ QString UrlModel::key(int role) const
 
 void UrlModel::add(const QJsonObject &data)
 {
-    foreach (auto urldata, m_data) {
+    foreach (const auto &urldata, m_data) {
         if (urldata == data) {
             return;
         }
     }
+    beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
     m_data.append(data);
-    update();
+    endInsertRows();
 }
 
 void UrlModel::remove(const QString& url)
@@ -208,10 +226,11 @@ void UrlModel::remove(const QString& url)
     for (int i = 0; i < m_data.count(); i++) {
         const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
         if (u == url) {
+            beginRemoveRows(QModelIndex(), i, i);
             m_data.removeAt(i);
+            endRemoveRows();
             //int n = m_data.count();
             //qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
-            update();
             return;
         }
     }

@@ -42,10 +42,11 @@ Controls.ItemDelegate {
 
     signal removed
 
-    Kirigami.Icon {
+    Image {
         id: urlIcon
 
         width: height
+        fillMode: Image.PreserveAspectFit
 
         anchors {
             left: parent.left
@@ -55,7 +56,7 @@ Controls.ItemDelegate {
             bottom: parent.bottom
             margins: Kirigami.Units.smallSpacing
         }
-        source: icon
+        source: model.icon ? model.icon : ""
 
     }
 
