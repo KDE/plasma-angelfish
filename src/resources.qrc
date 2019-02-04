@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="Bookmarks.qml">contents/ui/Bookmarks.qml</file>
-        <file alias="ContentView.qml">contents/ui/ContentView.qml</file>
         <file alias="ErrorHandler.qml">contents/ui/ErrorHandler.qml</file>
         <file alias="History.qml">contents/ui/History.qml</file>
         <file alias="ListWebView.qml">contents/ui/ListWebView.qml</file>

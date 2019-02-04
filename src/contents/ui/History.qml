@@ -24,11 +24,10 @@ import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.2 as Kirigami
 
-Item {
-//    id: options
+Kirigami.ScrollablePage {
+//    id: history
 
-    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
-    anchors.fill: parent
+    title: i18n("History")
 
     ListView {
 
@@ -41,6 +40,7 @@ Item {
         model: browserManager.history
 
         delegate: UrlDelegate {
+            onClicked: pageStack.layers.pop()
             onRemoved: browserManager.removeFromHistory(url);
         }
     }

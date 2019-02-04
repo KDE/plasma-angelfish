@@ -32,7 +32,7 @@ ColumnLayout {
 
     RowLayout {
         id: layout
-        anchors.fill: parent
+
         height: buttonSize
         spacing: 0
 //         anchors.leftMargin: Kirigami.Units.gridUnit / 2
@@ -110,10 +110,9 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onClicked: {
-            contentView.state = "tabs"
+            pageStack.layers.push("Tabs.qml")
             options.state = "hidden"
         }
-        //checked: contentView.state == "tabs"
         text: i18n("Tabs")
     }
 
@@ -122,10 +121,9 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onClicked: {
-            contentView.state = "bookmarks"
+            pageStack.layers.push("Bookmarks.qml")
             options.state = "hidden"
         }
-        //checked: contentView.state == "bookmarks"
         text: i18n("Bookmarks")
     }
 
@@ -134,10 +132,9 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         onClicked: {
-            contentView.state = "history"
+            pageStack.layers.push("History.qml")
             options.state = "hidden"
         }
-        //checked: contentView.state == "bookmarks"
         text: i18n("History")
     }
 
@@ -146,9 +143,8 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         text: i18n("Settings")
-        //checked: contentView.state == "settings"
         onClicked: {
-            contentView.state = "settings"
+            pageStack.layers.push("Settings.qml")
             options.state = "hidden"
         }
 

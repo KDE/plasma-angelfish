@@ -26,36 +26,42 @@ import QtQuick.Layouts 1.11
 import org.kde.kirigami 2.2 as Kirigami
 
 
-ColumnLayout {
-    id: settingsPage
+Kirigami.ScrollablePage {
+    title: i18n("Settings")
 
-    Controls.CheckDelegate {
-        text: i18n("Enable javascript")
-        Layout.fillWidth: true
-        onCheckedChanged: {
-            var settings = currentWebView.settings;
-            settings.javascriptEnabled = checked;
-            // FIXME: save to config
+    ColumnLayout {
+        id: settingsPage
+
+        Controls.CheckDelegate {
+            text: i18n("Enable javascript")
+            Layout.fillWidth: true
+            onCheckedChanged: {
+                var settings = currentWebView.settings;
+                settings.javascriptEnabled = checked;
+                // FIXME: save to config
+            }
+            Component.onCompleted: {
+                checked = currentWebView.settings.javascriptEnabled;
+            }
         }
-        Component.onCompleted: {
-            checked = currentWebView.settings.javascriptEnabled;
+
+        Controls.CheckDelegate {
+            text: i18n("Load images")
+            Layout.fillWidth: true
+            onCheckedChanged: {
+                var settings = currentWebView.settings;
+                settings.autoLoadImages = checked;
+                // FIXME: save to config
+            }
+            Component.onCompleted: {
+                checked = currentWebView.settings.autoLoadImages;
+            }
+        }
+
+        Item {
+            Layout.fillHeight: true
         }
     }
 
-    Controls.CheckDelegate {
-        text: i18n("Load images")
-        Layout.fillWidth: true
-        onCheckedChanged: {
-            var settings = currentWebView.settings;
-            settings.autoLoadImages = checked;
-            // FIXME: save to config
-        }
-        Component.onCompleted: {
-            checked = currentWebView.settings.autoLoadImages;
-        }
-    }
-
-    Item {
-        Layout.fillHeight: true
-    }
 }
+

@@ -25,11 +25,9 @@ import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.0 as Kirigami
 
 
-Item {
+Kirigami.ScrollablePage {
 //    id: options
-
-    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
-    anchors.fill: parent
+    title: i18n("Bookmarks")
 
     ListView {
 
@@ -42,6 +40,7 @@ Item {
         model: browserManager.bookmarks
 
         delegate: UrlDelegate {
+            onClicked: pageStack.layers.pop()
             onRemoved: browserManager.removeBookmark(url);
         }
     }
