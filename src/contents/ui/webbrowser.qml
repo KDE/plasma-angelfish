@@ -49,6 +49,7 @@ Kirigami.ApplicationWindow {
     function load(url) {
         print("Loading url: " + url);
         currentWebView.url = url;
+        currentWebView.forceActiveFocus()
     }
 
     width: Kirigami.Units.gridUnit * 20
