@@ -58,7 +58,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        InputDialog {
+        InputSheet {
             id: homePagePopup
             title: i18n("Homepage")
             description: i18n("website that should be loaded on startup")
@@ -69,7 +69,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        InputDialog {
+        InputSheet {
             id: searchEnginePopup
             title: i18n("Search Engine")
             description: i18n("Base url of your preferred search engine")
