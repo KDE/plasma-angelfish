@@ -33,7 +33,7 @@ Controls.ItemDelegate {
 
     property string highlightText
     property var regex: new RegExp(highlightText, 'i')
-    property string highlightedText: "<b><font color=\""+Kirigami.Theme.highlightColor+"\">$&</font></b>"
+    property string highlightedText: "<b><font color=\"" + Kirigami.Theme.highlightColor + "\">$&</font></b>"
 
     height: Kirigami.Units.gridUnit * 3
     width: parent.width

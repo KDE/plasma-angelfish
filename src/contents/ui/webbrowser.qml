@@ -167,8 +167,8 @@ Kirigami.ApplicationWindow {
             property string searchText: navigation.text
             anchors.top: navigation.bottom
             anchors.horizontalCenter: navigation.horizontalCenter
-            width: 0.9* navigation.width
-            height: 0.5*parent.height
+            width: 0.9 * navigation.width
+            height: 0.5 * parent.height
             z: 10
             visible: navigation.textFocus
             model: urlFilter
