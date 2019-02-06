@@ -277,7 +277,7 @@ private Q_SLOTS:
     void testDataChanged()
     {
         //QSignalSpy spy(m_bookmarksModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &, const QVector<int> &)));
-        QSignalSpy spy(m_bookmarksModel, SIGNAL(modelReset()));
+        QSignalSpy spy(m_bookmarksModel, &UrlModel::rowsInserted);
         {
             QJsonObject u;
             u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://kde.org"));
@@ -291,7 +291,7 @@ private Q_SLOTS:
         }
         QCOMPARE(spy.count(), 1);
 
-        QSignalSpy spy2(m_bookmarksModel, SIGNAL(modelReset()));
+        QSignalSpy spy2(m_bookmarksModel, &UrlModel::rowsRemoved);
         m_bookmarksModel->remove("http://kde.org");
 
         QCOMPARE(spy2.count(), 1);
