@@ -58,10 +58,47 @@ Kirigami.ScrollablePage {
             }
         }
 
+        InputDialog {
+            id: homePagePopup
+            title: i18n("Homepage")
+            description: i18n("website that should be loaded on startup")
+            placeholderText: browserManager.homepage
+            onAccepted: {
+                if (homePagePopup.text !== "")
+                    browserManager.homepage = homePagePopup.text
+            }
+        }
+
+        InputDialog {
+            id: searchEnginePopup
+            title: i18n("Search Engine")
+            description: i18n("Base url of your preferred search engine")
+            placeholderText: browserManager.searchBaseUrl
+            onAccepted: {
+                if (searchEnginePopup.text !== "")
+                    browserManager.searchBaseUrl = searchEnginePopup.text;
+            }
+        }
+
+        Controls.ItemDelegate {
+            text: i18n("Homepage")
+            Layout.fillWidth: true
+            onClicked: {
+                homePagePopup.open()
+            }
+        }
+
+        Controls.ItemDelegate {
+            text: i18n("Search Engine")
+            Layout.fillWidth: true
+            onClicked: {
+                searchEnginePopup.open()
+            }
+        }
+
         Item {
             Layout.fillHeight: true
         }
     }
-
 }
 

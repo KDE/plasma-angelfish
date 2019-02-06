@@ -21,13 +21,16 @@
 
 #include <QDebug>
 #include <QUrl>
+#include <QSettings>
+
 
 using namespace AngelFish;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent),
       m_bookmarks(nullptr),
-      m_history(nullptr)
+      m_history(nullptr),
+      m_settings(new QSettings)
 {
 }
 
@@ -35,6 +38,7 @@ BrowserManager::~BrowserManager()
 {
     history()->save();
     bookmarks()->save();
+    delete m_settings;
 }
 
 void BrowserManager::reload()
@@ -94,3 +98,24 @@ QString BrowserManager::urlFromUserInput(const QString& input)
     return url.toString();
 }
 
+void BrowserManager::setHomepage(const QString homepage)
+{
+    m_settings->setValue("browser/homepage", homepage);
+    emit homepageChanged();
+}
+
+QString BrowserManager::homepage()
+{
+    return m_settings->value("browser/homepage", "https://searx.me").toString();
+}
+
+void BrowserManager::setSearchBaseUrl(const QString searchBaseUrl)
+{
+    m_settings->setValue("browser/searchBaseUrl", searchBaseUrl);
+    emit searchBaseUrlChanged();
+}
+
+QString BrowserManager::searchBaseUrl()
+{
+    return m_settings->value("browser/searchBaseUrl", "https://searx.me/?q=").toString();
+}

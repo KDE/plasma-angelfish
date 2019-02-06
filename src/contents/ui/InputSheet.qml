@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2019 Jonah Brüchert                                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,56 +19,46 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.3
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.0
-import QtQml.Models 2.1
+import QtQuick.Controls 2.1 as Controls
+import QtQuick.Layouts 1.7
+import QtQuick 2.7
 
-import QtWebEngine 1.6
+import org.kde.kirigami 2.5 as Kirigami
 
+Kirigami.OverlaySheet {
+    id: inputSheet
+    property string placeholderText
+    property string description
+    property string title
+    property string text
 
-ListView {
-    id: tabs
+    signal accepted
 
-    // Make sure we don't delete and re-create tabs "randomly"
-    cacheBuffer: 10000
-    // Don't animate tab switching, this just feels slow
-    highlightMoveDuration: 0
-    // No horizontal swiping between tabs, disturbs page interaction
-    interactive: false
+    ColumnLayout {
+        Kirigami.Heading {
+            text: title
+        }
 
-    property int pageHeight: height
-    property int pageWidth: width
+        Controls.Label {
+            Layout.fillWidth: true
+            text: inputSheet.description
+            wrapMode: Text.WordWrap
+        }
 
-    property alias count: tabsModel.count
+        Controls.TextField {
+            id: sheetTextField
+            Layout.fillWidth: true
+            placeholderText: inputSheet.placeholderText
+        }
 
-    orientation: Qt.Horizontal
-
-    model: ListModel {
-        id: tabsModel
-        ListElement { pageurl: "https://plasma-mobile.org" }
-    }
-
-    delegate: WebView {
-        url: pageurl;
-    }
-
-    function createEmptyTab() {
-        var t = newTab("");
-        tabs.currentIndex = tabs.count - 1
-        return t;
-    }
-
-    function newTab(url) {
-        tabsModel.append({pageurl: url});
-    }
-
-    Component.onCompleted: {
-        if (initialUrl !== "") {
-            load(initialUrl)
-        } else {
-            console.log("Using homepage")
-            load(browserManager.homepage)
+        Controls.Button {
+            text: "Ok"
+            Layout.alignment: Qt.AlignRight
+            onClicked: {
+                inputSheet.text = sheetTextField.text
+                inputSheet.close()
+                accepted()
+            }
         }
     }
 }
