@@ -98,7 +98,7 @@ QString BrowserManager::urlFromUserInput(const QString& input)
     return url.toString();
 }
 
-void BrowserManager::setHomepage(const QString homepage)
+void BrowserManager::setHomepage(const QString& homepage)
 {
     m_settings->setValue("browser/homepage", homepage);
     emit homepageChanged();
@@ -109,7 +109,7 @@ QString BrowserManager::homepage()
     return m_settings->value("browser/homepage", "https://searx.me").toString();
 }
 
-void BrowserManager::setSearchBaseUrl(const QString searchBaseUrl)
+void BrowserManager::setSearchBaseUrl(const QString& searchBaseUrl)
 {
     m_settings->setValue("browser/searchBaseUrl", searchBaseUrl);
     emit searchBaseUrlChanged();

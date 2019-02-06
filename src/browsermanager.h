@@ -76,8 +76,8 @@ public slots:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void setHomepage(const QString homepage);
-    void setSearchBaseUrl(const QString searchBaseUrl);
+    void setHomepage(const QString& homepage);
+    void setSearchBaseUrl(const QString& searchBaseUrl);
 
 private:
 
