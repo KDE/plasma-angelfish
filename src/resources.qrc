@@ -15,5 +15,6 @@
         <file alias="webbrowser.qml">contents/ui/webbrowser.qml</file>
         <file alias="WebView.qml">contents/ui/WebView.qml</file>
         <file alias="regex-weburl.js">regex-weburl/regex-weburl.js</file>
+        <file alias="InputSheet.qml">contents/ui/InputSheet.qml</file>
     </qresource>
 </RCC>

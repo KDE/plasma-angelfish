@@ -192,10 +192,4 @@ Kirigami.ApplicationWindow {
         }
 
     }
-
-
-    Component.onCompleted: {
-        if (initialUrl && !initialUrl.isEmpty())
-            load(initialUrl)
-    }
 }

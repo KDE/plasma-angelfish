@@ -29,8 +29,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QtWebEngine::initialize();
 
     // initial url command line parameter
+    QString initialUrl;
     if (!parser.positionalArguments().isEmpty())
-        engine.rootContext()->setContextProperty("initialUrl", QUrl::fromUserInput(parser.positionalArguments()[0].toUtf8()));
+        initialUrl = QUrl::fromUserInput(parser.positionalArguments()[0].toUtf8()).toEncoded();
+    engine.rootContext()->setContextProperty("initialUrl", initialUrl);
 
     // Browser managger
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());

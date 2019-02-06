@@ -27,6 +27,8 @@
 
 #include "urlmodel.h"
 
+class QSettings;
+
 namespace AngelFish {
 /**
  * @class BookmarksManager
@@ -41,23 +43,31 @@ class BrowserManager : public QObject
     Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
     Q_PROPERTY(QAbstractListModel* history READ history NOTIFY historyChanged)
 
+    Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
+    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY searchBaseUrlChanged)
+
 public:
 
-    BrowserManager(QObject *parent = 0);
+    BrowserManager(QObject *parent = nullptr);
     ~BrowserManager();
 
     UrlModel* bookmarks();
     UrlModel* history();
 
+    QString homepage();
+    QString searchBaseUrl();
+
     Q_INVOKABLE static QString urlFromUserInput(const QString &input);
 
-
-Q_SIGNALS:
+signals:
     void updated();
     void bookmarksChanged();
     void historyChanged();
 
-public Q_SLOTS:
+    void homepageChanged();
+    void searchBaseUrlChanged();
+
+public slots:
     void reload();
 
     void addBookmark(const QVariantMap &bookmarkdata);
@@ -66,13 +76,16 @@ public Q_SLOTS:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
+    void setHomepage(const QString homepage);
+    void setSearchBaseUrl(const QString searchBaseUrl);
+
 private:
 
     UrlModel* m_bookmarks;
     UrlModel* m_history;
+    QSettings* m_settings;
 };
 
 } // namespace
 
 #endif //BOOKMARKSMANAGER_H
-

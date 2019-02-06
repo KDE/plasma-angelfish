@@ -32,8 +32,6 @@ import "regex-weburl.js" as RegexWebUrl
 Item {
     id: errorHandler
 
-    property string searchUrl: "https://duckduckgo.com/?q="
-
     property string errorCode: ""
 
     property bool navigationShown: errorCode != "" || webBrowser.url === "" || true
@@ -109,7 +107,7 @@ Item {
                 if (text.match(RegexWebUrl.re_weburl)) {
                     load(browserManager.urlFromUserInput(text))
                 } else {
-                    load(browserManager.urlFromUserInput(searchUrl + text))
+                    load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
                 }
             }
         }
