@@ -78,10 +78,10 @@ Kirigami.ApplicationWindow {
         ListWebView {
             id: tabs
             anchors {
-                top: navigation.bottom
+                top: parent.top
                 left: parent.left
                 right: parent.right
-                bottom: parent.bottom
+                bottom: navigation.top
             }
         }
 
@@ -92,9 +92,10 @@ Kirigami.ApplicationWindow {
             errorCode: currentWebView.errorCode
 
             anchors {
-                top: navigation.bottom
+                top: parent.top
                 left: parent.left
                 right: parent.right
+                //bottom: navigation.top
             }
             visible: !navigation.textFocus
         }
@@ -165,7 +166,7 @@ Kirigami.ApplicationWindow {
             id: options
 
             anchors {
-                top: navigation.bottom
+                bottom: navigation.top
             }
         }
 
@@ -181,11 +182,11 @@ Kirigami.ApplicationWindow {
             }
 
             anchors {
-                top: parent.top
+                bottom: parent.bottom
                 left: parent.left
                 right: parent.right
             }
-        
+
 
             onTextChanged: urlFilter.setFilterFixedString(text)
         }
@@ -194,7 +195,7 @@ Kirigami.ApplicationWindow {
         ListView {
             id: completion
             property string searchText: navigation.text
-            anchors.top: navigation.bottom
+            anchors.bottom: navigation.top
             anchors.horizontalCenter: navigation.horizontalCenter
             width: 0.9 * navigation.width
             height: 0.5 * parent.height
@@ -215,7 +216,7 @@ Kirigami.ApplicationWindow {
             color: webBrowser.borderColor
             anchors {
                 left: parent.left
-                bottom: navigation.bottom
+                bottom: navigation.top
                 right: options.left
             }
         }

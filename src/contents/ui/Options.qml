@@ -61,7 +61,7 @@ Rectangle {
         color: webBrowser.borderColor
         anchors {
             left: parent.left
-            bottom: parent.bottom
+            top: parent.top
             right: parent.right
         }
     }
