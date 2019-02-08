@@ -61,7 +61,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoBack
+            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile
             icon.name: "go-previous"
 
             onClicked: currentWebView.goBack()
@@ -73,7 +73,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward && !Kirigami.isMobile
+            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile
             icon.name: "go-next"
 
             onClicked: currentWebView.goForward()
@@ -104,7 +104,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: !Kirigami.isMobile
+            visible: !Kirigami.Settings.isMobile
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
 
             onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
