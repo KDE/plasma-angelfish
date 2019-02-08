@@ -24,7 +24,7 @@ import QtQuick.Layouts 1.0
 import QtWebEngine 1.4
 import QtQuick.Controls 2.0 as Controls
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.5 as Kirigami
 
 import "regex-weburl.js" as RegexWebUrl
 
@@ -55,43 +55,29 @@ Item {
 
         spacing: Kirigami.Units.smallSpacing
 
-        /*
-        PlasmaComponents.ToolButton {
+        Controls.ToolButton {
             id: backButton
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
             visible: currentWebView.canGoBack
-            iconSource: "go-previous"
+            icon.name: "go-previous"
 
             onClicked: currentWebView.goBack()
         }
 
-        PlasmaComponents.ToolButton {
+        Controls.ToolButton {
             id: forwardButton
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward
-            iconSource: "go-next"
+            visible: currentWebView.canGoForward && !Kirigami.isMobile
+            icon.name: "go-next"
 
             onClicked: currentWebView.goForward()
         }
-
-        PlasmaComponents.ToolButton {
-            id: reloadButton
-
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
-
-            iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
-
-            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
-
-        }
-        */
 
         Controls.TextField {
             id: urlInput
@@ -110,6 +96,19 @@ Item {
                     load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
                 }
             }
+        }
+
+        Controls.ToolButton {
+            id: reloadButton
+
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            visible: !Kirigami.isMobile
+            icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
+
+            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+
         }
 
         Item {
