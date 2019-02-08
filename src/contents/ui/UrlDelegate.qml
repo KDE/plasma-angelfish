@@ -38,7 +38,11 @@ Controls.ItemDelegate {
     height: Kirigami.Units.gridUnit * 3
     width: parent.width
 
-    //Rectangle { anchors.fill: parent; color: "white"; opacity: 0.5; }
+    Rectangle {
+        anchors.fill: parent
+        color: Kirigami.Theme.viewBackgroundColor
+        opacity: 0.9
+    }
 
     onClicked: {
         load(url)
