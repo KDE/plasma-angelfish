@@ -60,7 +60,7 @@ Kirigami.OverlaySheet {
         }
 
         Controls.Button {
-            text: "Ok"
+            text: i18("Ok")
             Layout.alignment: Qt.AlignRight
             onClicked: accept()
         }
