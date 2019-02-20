@@ -161,7 +161,7 @@ Kirigami.ApplicationWindow {
             height: Math.round(Kirigami.Units.gridUnit / 6)
             z: navigation.z + 1
             anchors {
-                top: tabs.top
+                top: tabs.bottom
                 topMargin: -Math.round(height / 2)
                 left: tabs.left
                 right: tabs.right
