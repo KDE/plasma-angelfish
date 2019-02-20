@@ -95,9 +95,9 @@ Kirigami.ApplicationWindow {
                 top: parent.top
                 left: parent.left
                 right: parent.right
-                //bottom: navigation.top
+                bottom: navigation.top
             }
-            visible: !navigation.textFocus
+            visible: currentWebView.errorCode !== ""
         }
 
         Kirigami.InlineMessage {
