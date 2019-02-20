@@ -32,19 +32,19 @@ Item {
     property string errorCode: ""
     property alias errorString: errorDescription.text
 
-    property int expandedHeight: Kirigami.Units.gridUnit * 8
-
     Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: Kirigami.Theme.backgroundColor; }
+    Rectangle { anchors.fill: parent; color: Kirigami.Theme.viewBackgroundColor; }
 
     ColumnLayout {
-
-        visible: parent.height > 0
         spacing: Kirigami.Units.gridUnit
         anchors {
             fill: parent
             margins: Kirigami.Units.gridUnit
+        }
+        Kirigami.Heading {
+            opacity: 0.3
+            text: errorCode
         }
         Kirigami.Heading {
             level: 3
@@ -59,29 +59,4 @@ Item {
             Layout.fillHeight: true
         }
     }
-
-    Controls.Label {
-        font.pixelSize: Math.round(parent.height / 3)
-        opacity: 0.3
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            margins: Kirigami.Units.gridUnit
-        }
-        text: errorCode
-    }
-
-    states: [
-        State {
-            name: "error"
-            when: errorCode != ""
-            PropertyChanges { target: errorHandler; height: expandedHeight}
-        },
-        State {
-            name: "normal"
-            when: errorCode == ""
-            PropertyChanges { target: errorHandler; height: 0}
-        }
-    ]
-
 }
