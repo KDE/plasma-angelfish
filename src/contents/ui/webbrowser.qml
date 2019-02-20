@@ -213,23 +213,16 @@ Kirigami.ApplicationWindow {
             onTextChanged: urlFilter.setFilterFixedString(text)
         }
 
-
-        ListView {
+        Completion {
             id: completion
-            property string searchText: navigation.text
+            model: urlFilter
             anchors.bottom: navigation.top
             anchors.horizontalCenter: navigation.horizontalCenter
             width: 0.9 * navigation.width
             height: 0.5 * parent.height
             z: 10
             visible: navigation.textFocus
-            model: urlFilter
-            delegate: UrlDelegate {
-                showRemove: false
-                onClicked: tabs.forceActiveFocus()
-                highlightText: completion.searchText
-            }
-            clip: true
+            searchText: navigation.text
         }
 
         // Thin line underneath navigation
