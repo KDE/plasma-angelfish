@@ -22,6 +22,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCommandLineParser parser;
     QCommandLineOption helpOption = parser.addHelpOption();
     parser.addPositionalArgument("url", "An url to open", "[url]");
+    parser.addOption({"webapp-container", "Start without ui"});
     parser.parse(QGuiApplication::arguments());
 
     // QML loading
@@ -33,6 +34,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (!parser.positionalArguments().isEmpty())
         initialUrl = QUrl::fromUserInput(parser.positionalArguments()[0].toUtf8()).toEncoded();
     engine.rootContext()->setContextProperty("initialUrl", initialUrl);
+
+    engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
     // Browser managger
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());

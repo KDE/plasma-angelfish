@@ -147,8 +147,14 @@ Kirigami.ApplicationWindow {
 
         Navigation {
             id: navigation
+            visible: !webappcontainer
 
-            height: Kirigami.Units.gridUnit * 3
+            height: {
+                if (!webappcontainer)
+                    return Kirigami.Units.gridUnit * 3
+                else
+                    return 0
+            }
 
             anchors {
                 top: parent.top
