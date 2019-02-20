@@ -30,6 +30,11 @@ ColumnLayout {
 
     property int buttonSize: Kirigami.Units.gridUnit * 2
 
+    Item {
+        Layout.preferredHeight: Kirigami.Units.smallSpacing
+        Layout.fillWidth: true
+    }
+
     RowLayout {
         id: layout
 
