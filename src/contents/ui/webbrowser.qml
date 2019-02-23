@@ -69,9 +69,7 @@ Kirigami.ApplicationWindow {
 
     pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
 
-
     pageStack.initialPage: Kirigami.Page {
-
         leftPadding: 0
         rightPadding: 0
         topPadding: 0
@@ -190,6 +188,5 @@ Kirigami.ApplicationWindow {
                 right: options.left
             }
         }
-
     }
 }

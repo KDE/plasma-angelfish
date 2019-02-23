@@ -20,9 +20,9 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.4 as Controls
 
-import QtWebEngine 1.4
+import QtWebEngine 1.7
 
 
 WebEngineView {
@@ -30,12 +30,62 @@ WebEngineView {
 
     property string errorCode: ""
     property string errorString: ""
-    property string userAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 7.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36"
+    property string userAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/60.0.3112.107 Mobile Safari/537.36"
 
     width: pageWidth
     height: pageHeight
 
-    profile.httpUserAgent: userAgent
+    profile {
+        httpUserAgent: userAgent
+        onDownloadRequested: {
+            showPassiveNotification(i18n("Do you want to download this file?"), "long", "Download", function() {
+                download.accept
+            })
+        }
+        onDownloadFinished: showPassiveNotification(i18n("Download finished"))
+    }
+    settings {
+        errorPageEnabled: false
+    }
+
+    Controls.Menu {
+        property var request
+        id: contextMenu
+
+        Controls.MenuItem {
+            text: i18n("Copy")
+            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Copy)
+        }
+        Controls.MenuItem {
+            text: i18n("Cut")
+            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Cut)
+        }
+        Controls.MenuItem {
+            text: i18n("Paste")
+            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request.linkUrl !== ""
+            text: i18n("Copy Url")
+            onTriggered:  webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
+        }
+        Controls.MenuItem {
+            text: i18n("View source")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.ViewSource)
+        }
+        Controls.MenuItem {
+            text: i18n("Download")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.DownloadLinkToDisk)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request.linkUrl !== ""
+            text: i18n("Open in new Tab")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
+        }
+    }
 
     //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
@@ -74,12 +124,6 @@ WebEngineView {
         errorString = es;
     }
 
-//             onLoadProgressChanged: {
-//                 if (loadProgress > 50) {
-//                     contentView.state = "hidden";
-//                 }
-//             }
-
     Component.onCompleted: {
         print("WebView completed.");
         var settings = webEngineView.settings;
@@ -89,5 +133,18 @@ WebEngineView {
     onIconChanged: {
         if (icon)
             browserManager.history.updateIcon(url, icon)
+    }
+
+    onNewViewRequested: {
+        newTab(request.requestedUrl.toString())
+        showPassiveNotification("Website was opened in a new tab")
+    }
+
+    onContextMenuRequested: {
+        request.accepted = true;
+        contextMenu.request = request
+        contextMenu.x = request.x
+        contextMenu.y = request.y
+        contextMenu.open()
     }
 }
