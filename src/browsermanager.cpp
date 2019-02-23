@@ -106,7 +106,7 @@ void BrowserManager::setHomepage(const QString& homepage)
 
 QString BrowserManager::homepage()
 {
-    return m_settings->value("browser/homepage", "https://searx.me").toString();
+    return m_settings->value("browser/homepage", "https://start.duckduckgo.com").toString();
 }
 
 void BrowserManager::setSearchBaseUrl(const QString& searchBaseUrl)
@@ -117,5 +117,5 @@ void BrowserManager::setSearchBaseUrl(const QString& searchBaseUrl)
 
 QString BrowserManager::searchBaseUrl()
 {
-    return m_settings->value("browser/searchBaseUrl", "https://searx.me/?q=").toString();
+    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=").toString();
 }
