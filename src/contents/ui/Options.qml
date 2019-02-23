@@ -38,20 +38,13 @@ Rectangle {
 
     property string title: ""
 
-    property int expandedHeight: Kirigami.Units.gridUnit * 12
     property int expandedWidth: Kirigami.Units.gridUnit * 14
 
     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on x { NumberAnimation { duration: Kirigami.Units.longDuration/2; easing.type: Easing.InOutQuad} }
 
-    height: expandedHeight
     width: expandedWidth
-    //height: childrenRect.height + Kirigami.Units.gridUnit
-    //width: childrenRect.width +  Kirigami.Units.gridUnit/2
-
-    //width: expandedWidth
-    //anchors.rightMargin: -options.margins.right
-    //Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
+    height: childrenRect.height
 
     Rectangle {
         width: webBrowser.borderWidth
@@ -74,13 +67,7 @@ Rectangle {
     }
 
     ColumnLayout {
-
-        //visible: parent.height > 0
-        //spacing: Kirigami.Units.gridUnit
         spacing: 0
-        //x: Kirigami.Units.gridUnit / 2
-        //y: - (Kirigami.Units.gridUnit + webBrowser.borderWidth)
-        //width: Kirigami.Units.gridUnit * 14
         anchors {
             //fill: parent
             top: parent.top
@@ -100,11 +87,6 @@ Rectangle {
             //Rectangle { anchors.fill: parent; color: "black"; opacity: 0.1; }
         }
     }
-//     NumberAnimation on state {
-//         //loops: Animation.Infinite
-//         from: state == "hidden" ? 0 : 1.0
-//         to: state == "hidden" ? 1.0 : 0.0
-//     }
     states: [
         State {
             name: "hidden"
@@ -118,27 +100,6 @@ Rectangle {
             PropertyChanges { target: options; opacity: 1.0}
             PropertyChanges { target: options; x: webBrowser.width - options.width }
 
-        }/*,
-
-        State {
-            name: "bookmarks"
-            PropertyChanges { target: loader; source: "Bookmarks.qml"}
-            PropertyChanges { target: options; title: i18n("Bookmarks")}
-            PropertyChanges { target: options; height: expandedHeight}
-        },
-        State {
-            name: "tabs"
-            PropertyChanges { target: options; title: i18n("Tabs")}
-            PropertyChanges { target: loader; source: "Tabs.qml"}
-            PropertyChanges { target: options; height: expandedHeight}
-        },
-        State {
-            name: "settings"
-            PropertyChanges { target: options; title: i18n("Settings")}
-            PropertyChanges { target: loader; source: "Settings.qml"}
-            PropertyChanges { target: options; height: expandedHeight}
         }
-        */
     ]
-
 }
