@@ -35,7 +35,12 @@ ListView {
     }
 
     width: 0.9 * navigation.width
-    height: Kirigami.Units.gridUnit * 3 * count
+    height: {
+        if (Kirigami.Units.gridUnit * 3 * count >= parent.height * 0.5)
+            return parent.height * 0.5
+        else
+            Kirigami.Units.gridUnit * 3 * count
+    }
     z: 10
 
     verticalLayoutDirection: ListView.BottomToTop
