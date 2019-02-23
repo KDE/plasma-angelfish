@@ -99,6 +99,30 @@ Kirigami.ApplicationWindow {
             visible: !navigation.textFocus
         }
 
+        Kirigami.InlineMessage {
+            id: newTabQuestion
+            type: Kirigami.MessageType.Warning
+            text: i18n("Site wants to open a new tab: \n%1", url.toString())
+            showCloseButton: true
+            anchors.top: navigation.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            property var url
+
+            actions: [
+                Kirigami.Action {
+                    iconName: "tab-new"
+                    text: i18n("Open")
+                    onTriggered: {
+                        tabs.newTab(newTabQuestion.url.toString())
+                        newTabQuestion.visible = false
+                    }
+                }
+
+            ]
+        }
+
         // Container for the progress bar
         Item {
             id: progressItem
@@ -165,6 +189,7 @@ Kirigami.ApplicationWindow {
 
             onTextChanged: urlFilter.setFilterFixedString(text)
         }
+
 
         ListView {
             id: completion

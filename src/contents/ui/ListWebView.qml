@@ -55,12 +55,12 @@ ListView {
 
     function createEmptyTab() {
         var t = newTab("");
-        tabs.currentIndex = tabs.count - 1
         return t;
     }
 
     function newTab(url) {
         tabsModel.append({pageurl: url});
+        tabs.currentIndex = tabs.count - 1
     }
 
     Component.onCompleted: {

@@ -26,7 +26,6 @@ import QtWebEngine 1.7
 
 import org.kde.kirigami 2.4 as Kirigami
 
-
 WebEngineView {
     id: webEngineView
 
@@ -145,8 +144,13 @@ WebEngineView {
     }
 
     onNewViewRequested: {
-        newTab(request.requestedUrl.toString())
-        showPassiveNotification("Website was opened in a new tab")
+        if (request.userInitiated) {
+            newTab(request.requestedUrl.toString())
+            showPassiveNotification("Website was opened in a new tab")
+        } else {
+            newTabQuestion.url = request.requestedUrl
+            newTabQuestion.visible = true
+        }
     }
 
     onContextMenuRequested: {
