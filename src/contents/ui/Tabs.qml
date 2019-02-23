@@ -124,7 +124,7 @@ Kirigami.ScrollablePage {
         }
 
         footer: Rectangle {
-            color: "white"
+            color: Kirigami.Theme.viewBackgroundColor
             width: itemWidth
             height: itemHeight
             Kirigami.Icon {
@@ -141,11 +141,7 @@ Kirigami.ScrollablePage {
                     tabs.currentIndex = tabs.count - 1;
                     pageStack.layers.pop()
                 }
-
             }
         }
-
-
     }
-
 }
