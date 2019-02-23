@@ -22,6 +22,8 @@
 
 import QtQuick 2.7
 
+import org.kde.kirigami 2.5 as Kirigami
+
 ListView {
     id: completion
 
@@ -33,7 +35,7 @@ ListView {
     }
 
     width: 0.9 * navigation.width
-    height: 0.5 * parent.height
+    height: Kirigami.Units.gridUnit * 3 * count
     z: 10
 
     verticalLayoutDirection: ListView.BottomToTop
