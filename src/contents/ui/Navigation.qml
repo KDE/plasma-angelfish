@@ -56,6 +56,16 @@ Item {
         spacing: Kirigami.Units.smallSpacing
 
         Controls.ToolButton {
+            icon.name: "tab-duplicate"
+            Layout.fillWidth: true
+            Layout.preferredHeight: buttonSize
+            onClicked: {
+                pageStack.layers.push("Tabs.qml")
+                options.state = "hidden"
+            }
+        }
+
+        Controls.ToolButton {
             id: backButton
 
             Layout.preferredWidth: buttonSize
