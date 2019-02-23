@@ -38,16 +38,13 @@ Kirigami.ScrollablePage {
     title: i18n("Tabs")
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
-    property int itemWidth: (width / 2) - Kirigami.Units.gridUnit
+    property int itemWidth: Kirigami.Units.gridUnit * 9
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
     GridView {
-        //columns: 2
         anchors.fill: parent
-        //model: tabs.count +
         model: tabs.model
-        //model: 4
         cellWidth: itemWidth
         cellHeight: itemHeight
 
