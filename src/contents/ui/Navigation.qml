@@ -57,8 +57,10 @@ Item {
 
         Controls.ToolButton {
             icon.name: "tab-duplicate"
-            Layout.fillWidth: true
+
+            Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
+
             onClicked: {
                 pageStack.layers.push("Tabs.qml")
                 options.state = "hidden"
