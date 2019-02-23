@@ -30,13 +30,20 @@ WebEngineView {
 
     property string errorCode: ""
     property string errorString: ""
-    property string userAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.128 Mobile Safari/537.36"
+    property string mobileUserAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.128 Mobile Safari/537.36"
+    property string desktopUserAgent: profile.httpUserAgent
 
     width: pageWidth
     height: pageHeight
 
     profile {
-        httpUserAgent: userAgent
+        httpUserAgent: {
+            if (Kirigami.Settings.isMobile)
+                return mobileUserAgent
+            else
+                return desktopUserAgent
+        }
+
         onDownloadRequested: {
             showPassiveNotification(i18n("Do you want to download this file?"), "long", "Download", function() {
                 download.accept
