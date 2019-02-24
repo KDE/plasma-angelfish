@@ -24,6 +24,8 @@ import QtQuick.Controls 2.4 as Controls
 
 import QtWebEngine 1.7
 
+import org.kde.kirigami 2.4 as Kirigami
+
 
 WebEngineView {
     id: webEngineView
