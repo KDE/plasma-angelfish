@@ -167,4 +167,20 @@ ColumnLayout {
             options.state = "hidden"
         }
     }
+
+    OptionButton {
+        iconSource: "document-share"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        text: i18n("Share page")
+        onClicked: {
+            shareSheet.url = currentWebView.url
+            shareSheet.title = currentWebView.title
+            shareSheet.open()
+        }
+    }
+
+    ShareSheet {
+        id: shareSheet
+    }
 }
