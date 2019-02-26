@@ -37,7 +37,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
-    // Browser managger
+    // Browser manager
     AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
     engine.rootContext()->setContextProperty("browserManager", browserManager);
 
