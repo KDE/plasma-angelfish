@@ -2,16 +2,47 @@
 <component type="desktop-application">
   <id>org.kde.mobile.angelfish</id>
   <name>Angelfish Webbrowser</name>
+  <name xml:lang="gl">Navegador web Angelfish</name>
+  <name xml:lang="nl">Webbrowser Angelfish</name>
+  <name xml:lang="sv">Angelfish webbläsare</name>
+  <name xml:lang="uk">Браузер Angelfish</name>
+  <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
   <summary>Webbrowser optimized for mobile devices</summary>
+  <summary xml:lang="gl">Navegador web optimizado para dispositivos móbiles</summary>
+  <summary xml:lang="nl">Webbrowser geoptimaliseerd voor mobiele apparaten</summary>
+  <summary xml:lang="sv">Webbläsare optimerad för mobila apparater</summary>
+  <summary xml:lang="uk">Браузер, роботу якого оптимізовано для мобільних пристроїв</summary>
+  <summary xml:lang="x-test">xxWebbrowser optimized for mobile devicesxx</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <developer_name>KDE Community</developer_name>
+  <developer_name xml:lang="gl">Comunidade KDE</developer_name>
+  <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
+  <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
+  <developer_name xml:lang="uk">Спільнота KDE</developer_name>
+  <developer_name xml:lang="x-test">xxKDE Communityxx</developer_name>
   <description>
     <p>Angelfish is based on QtWebEngine</p>
+    <p xml:lang="gl">Angelfish está baseado en QtWebEngine</p>
+    <p xml:lang="nl">Angelfish is gebaseerd op QtWebEngine</p>
+    <p xml:lang="sv">Angelfish är baserad på QtWebEngine</p>
+    <p xml:lang="uk">Angelfish засновано на QtWebEngine</p>
+    <p xml:lang="x-test">xxAngelfish is based on QtWebEnginexx</p>
     <p>It supports typical browser features, such as</p>
+    <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
     <ul>
       <li>bookmarks</li>
+      <li xml:lang="gl">marcadores</li>
+      <li xml:lang="nl">bladwijzers</li>
+      <li xml:lang="sv">bokmärken</li>
+      <li xml:lang="uk">закладки</li>
+      <li xml:lang="x-test">xxbookmarksxx</li>
       <li>history</li>
+      <li xml:lang="gl">historial</li>
+      <li xml:lang="nl">geschiedenis</li>
+      <li xml:lang="sv">historik</li>
+      <li xml:lang="uk">журнал</li>
+      <li xml:lang="x-test">xxhistoryxx</li>
     </ul>
   </description>
 </component>
