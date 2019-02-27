@@ -1,7 +1,22 @@
 [Desktop Entry]
 Name=Angelfish Web Browser
+Name[gl]=Navegador web Angelfish
+Name[nl]=Webbrowser Angelfish
+Name[sv]=Angelfish webbläsare
+Name[uk]=Браузер Angelfish
+Name[x-test]=xxAngelfish Web Browserxx
 Comment=Mobile web browser
+Comment[gl]=Navegador web para móbiles
+Comment[nl]=Webbrowser voor mobiel
+Comment[sv]=Mobilwebbläsare
+Comment[uk]=Браузер для мобільних пристроїв
+Comment[x-test]=xxMobile web browserxx
 GenericName=Web Browser
+GenericName[gl]=Navegador web
+GenericName[nl]=Webbrowser
+GenericName[sv]=Webbläsare
+GenericName[uk]=Браузер
+GenericName[x-test]=xxWeb Browserxx
 Encoding=UTF-8
 Icon=org.kde.mobile.angelfish
 Exec=angelfish %u
