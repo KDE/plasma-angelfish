@@ -29,15 +29,21 @@
     <p xml:lang="uk">Angelfish засновано на QtWebEngine</p>
     <p xml:lang="x-test">xxAngelfish is based on QtWebEnginexx</p>
     <p>It supports typical browser features, such as</p>
+    <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
+    <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
+    <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
     <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
+    <p xml:lang="x-test">xxIt supports typical browser features, such asxx</p>
     <ul>
       <li>bookmarks</li>
+      <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="sv">bokmärken</li>
       <li xml:lang="uk">закладки</li>
       <li xml:lang="x-test">xxbookmarksxx</li>
       <li>history</li>
+      <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="sv">historik</li>
