@@ -1,19 +1,25 @@
 [Desktop Entry]
 Name=Angelfish Web Browser
+Name[ca]=Navegador web Angelfish
 Name[gl]=Navegador web Angelfish
 Name[nl]=Webbrowser Angelfish
+Name[sk]=Webový prehliadač Angelfish
 Name[sv]=Angelfish webbläsare
 Name[uk]=Браузер Angelfish
 Name[x-test]=xxAngelfish Web Browserxx
 Comment=Mobile web browser
+Comment[ca]=Navegador web mòbil
 Comment[gl]=Navegador web para móbiles
 Comment[nl]=Webbrowser voor mobiel
+Comment[sk]=Mobilný webový prehliadač
 Comment[sv]=Mobilwebbläsare
 Comment[uk]=Браузер для мобільних пристроїв
 Comment[x-test]=xxMobile web browserxx
 GenericName=Web Browser
+GenericName[ca]=Navegador web
 GenericName[gl]=Navegador web
 GenericName[nl]=Webbrowser
+GenericName[sk]=Webový prehliadač
 GenericName[sv]=Webbläsare
 GenericName[uk]=Браузер
 GenericName[x-test]=xxWeb Browserxx
