@@ -121,6 +121,17 @@ Kirigami.ScrollablePage {
                 }
 
             }
+
+            Controls.ToolButton {
+                icon.name: "window-close"
+                height: 24
+                width: 24
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.top: parent.top
+                anchors.topMargin: 8
+                onClicked: tabs.closeTab(index)
+            }
         }
 
         footer: Rectangle {

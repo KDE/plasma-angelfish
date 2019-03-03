@@ -63,6 +63,12 @@ ListView {
         tabs.currentIndex = tabs.count - 1
     }
 
+    function closeTab(index) {
+        tabsModel.remove(index)
+        if (tabs.count === 0)
+            createEmptyTab()
+    }
+
     Component.onCompleted: {
         if (initialUrl !== "") {
             load(initialUrl)
