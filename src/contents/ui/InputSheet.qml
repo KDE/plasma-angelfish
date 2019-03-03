@@ -34,6 +34,12 @@ Kirigami.OverlaySheet {
 
     signal accepted
 
+    function accept() {
+        inputSheet.text = sheetTextField.text
+        inputSheet.close()
+        accepted()
+    }
+
     ColumnLayout {
         Kirigami.Heading {
             text: title
@@ -49,16 +55,19 @@ Kirigami.OverlaySheet {
             id: sheetTextField
             Layout.fillWidth: true
             placeholderText: inputSheet.placeholderText
+            focus: true
+            onEditingFinished: accept()
         }
 
         Controls.Button {
             text: "Ok"
             Layout.alignment: Qt.AlignRight
-            onClicked: {
-                inputSheet.text = sheetTextField.text
-                inputSheet.close()
-                accepted()
-            }
+            onClicked: accept()
         }
+    }
+
+    onSheetOpenChanged: {
+        if (sheetOpen)
+            sheetTextField.forceActiveFocus()
     }
 }

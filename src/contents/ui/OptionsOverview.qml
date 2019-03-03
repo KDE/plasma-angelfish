@@ -150,7 +150,10 @@ ColumnLayout {
         iconSource: "edit-find"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onClicked: findSheet.open()
+        onClicked: {
+            options.state = "hidden"
+            findSheet.open()
+        }
         text: i18n("Find in page")
     }
 
