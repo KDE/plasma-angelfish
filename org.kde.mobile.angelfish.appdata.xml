@@ -3,6 +3,7 @@
   <id>org.kde.mobile.angelfish</id>
   <name>Angelfish Webbrowser</name>
   <name xml:lang="ca">Navegador web Angelfish</name>
+  <name xml:lang="es">Navegador web Angelfish</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="sk">Prehliadač Angelfish</name>
@@ -11,6 +12,7 @@
   <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
   <summary>Webbrowser optimized for mobile devices</summary>
   <summary xml:lang="ca">Navegador web optimitzat per a dispositius mòbils</summary>
+  <summary xml:lang="es">Navegador web optimizado para dispositivos móviles</summary>
   <summary xml:lang="gl">Navegador web optimizado para dispositivos móbiles</summary>
   <summary xml:lang="nl">Webbrowser geoptimaliseerd voor mobiele apparaten</summary>
   <summary xml:lang="sv">Webbläsare optimerad för mobila apparater</summary>
@@ -20,6 +22,7 @@
   <project_license>GPL-3.0+</project_license>
   <developer_name>KDE Community</developer_name>
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
+  <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="sk">KDE komunita</developer_name>
@@ -29,6 +32,7 @@
   <description>
     <p>Angelfish is based on QtWebEngine</p>
     <p xml:lang="ca">L'Angelfish està basat en el QtWebEngine</p>
+    <p xml:lang="es">Angelfish está basado en QtWebEngine</p>
     <p xml:lang="gl">Angelfish está baseado en QtWebEngine</p>
     <p xml:lang="nl">Angelfish is gebaseerd op QtWebEngine</p>
     <p xml:lang="sv">Angelfish är baserad på QtWebEngine</p>
@@ -36,6 +40,7 @@
     <p xml:lang="x-test">xxAngelfish is based on QtWebEnginexx</p>
     <p>It supports typical browser features, such as</p>
     <p xml:lang="ca">Permet les funcionalitats típiques de navegació, com</p>
+    <p xml:lang="es">Permite las funciones típicas de un navegador, como</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
@@ -44,6 +49,7 @@
     <ul>
       <li>bookmarks</li>
       <li xml:lang="ca">adreces d'interès</li>
+      <li xml:lang="es">marcadores</li>
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
       <li xml:lang="nl">bladwijzers</li>
@@ -53,6 +59,7 @@
       <li xml:lang="x-test">xxbookmarksxx</li>
       <li>history</li>
       <li xml:lang="ca">historial</li>
+      <li xml:lang="es">historial</li>
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
       <li xml:lang="nl">geschiedenis</li>
