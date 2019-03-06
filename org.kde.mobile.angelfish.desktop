@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Angelfish Web Browser
 Name[ca]=Navegador web Angelfish
+Name[ca@valencia]=Navegador web Angelfish
 Name[es]=Navegador web Angelfish
 Name[gl]=Navegador web Angelfish
 Name[nl]=Webbrowser Angelfish
@@ -11,6 +12,7 @@ Name[x-test]=xxAngelfish Web Browserxx
 Name[zh_TW]=Angelfish 網頁瀏覽器
 Comment=Mobile web browser
 Comment[ca]=Navegador web mòbil
+Comment[ca@valencia]=Navegador web mòbil
 Comment[es]=Navegador web para móviles
 Comment[gl]=Navegador web para móbiles
 Comment[nl]=Webbrowser voor mobiel
@@ -21,6 +23,7 @@ Comment[x-test]=xxMobile web browserxx
 Comment[zh_TW]=行動網頁瀏覽器
 GenericName=Web Browser
 GenericName[ca]=Navegador web
+GenericName[ca@valencia]=Navegador web
 GenericName[es]=Navegador web
 GenericName[gl]=Navegador web
 GenericName[nl]=Webbrowser
