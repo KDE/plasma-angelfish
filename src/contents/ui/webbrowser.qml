@@ -223,6 +223,13 @@ Kirigami.ApplicationWindow {
             z: 10
             visible: navigation.textFocus
             searchText: navigation.text
+
+            anchors {
+                bottom: navigation.top
+                horizontalCenter: navigation.horizontalCenter
+            }
+
+            z: 10
         }
 
         // Thin line underneath navigation

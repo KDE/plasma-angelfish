@@ -29,11 +29,6 @@ ListView {
 
     property string searchText
 
-    anchors {
-        bottom: navigation.top
-        horizontalCenter: navigation.horizontalCenter
-    }
-
     width: 0.9 * navigation.width
     height: {
         if (Kirigami.Units.gridUnit * 3 * count >= parent.height * 0.5)
@@ -41,7 +36,6 @@ ListView {
         else
             Kirigami.Units.gridUnit * 3 * count
     }
-    z: 10
 
     verticalLayoutDirection: ListView.BottomToTop
     clip: true
