@@ -29,15 +29,8 @@ ListView {
 
     property string searchText
 
-    width: 0.9 * navigation.width
-    height: {
-        if (Kirigami.Units.gridUnit * 3 * count >= parent.height * 0.5)
-            return parent.height * 0.5
-        else
-            Kirigami.Units.gridUnit * 3 * count
-    }
 
-    verticalLayoutDirection: ListView.BottomToTop
+//    verticalLayoutDirection: ListView.BottomToTop
     clip: true
 
     delegate: UrlDelegate {
@@ -45,4 +38,15 @@ ListView {
         onClicked: tabs.forceActiveFocus()
         highlightText: completion.searchText
     }
+
+    states: [
+        State {
+            name: "hidden"
+            when: visible === false
+            PropertyChanges {
+                target: completion
+                height: 0
+            }
+        }
+    ]
 }

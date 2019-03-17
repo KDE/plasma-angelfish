@@ -205,7 +205,7 @@ Kirigami.ApplicationWindow {
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
             anchors {
-                bottom: parent.bottom
+                bottom: completion.top
                 left: parent.left
                 right: parent.right
             }
@@ -224,8 +224,11 @@ Kirigami.ApplicationWindow {
             visible: navigation.textFocus
             searchText: navigation.text
 
+            width: 0.9 * navigation.width
+            height: parent.height * 0.5
+
             anchors {
-                bottom: navigation.top
+                bottom: parent.bottom
                 horizontalCenter: navigation.horizontalCenter
             }
 
