@@ -35,6 +35,88 @@ ColumnLayout {
         Layout.fillWidth: true
     }
 
+    OptionButton {
+        iconSource: "tab-duplicate"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        onClicked: {
+            pageStack.layers.push("Tabs.qml")
+            options.state = "hidden"
+        }
+        text: i18n("Tabs")
+    }
+
+    OptionButton {
+        iconSource: "bookmarks"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        onClicked: {
+            pageStack.layers.push("Bookmarks.qml")
+            options.state = "hidden"
+        }
+        text: i18n("Bookmarks")
+    }
+
+    OptionButton {
+        iconSource: "view-history"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        onClicked: {
+            pageStack.layers.push("History.qml")
+            options.state = "hidden"
+        }
+        text: i18n("History")
+    }
+
+    InputSheet {
+        id: findSheet
+        title: i18n("Find in page")
+        placeholderText: i18n("Find...")
+        description: i18n("Highlight text on the current website")
+        onAccepted: currentWebView.findText(findSheet.text)
+    }
+
+    OptionButton {
+        iconSource: "edit-find"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        onClicked: findSheet.open()
+        text: i18n("Find in page")
+    }
+
+    OptionButton {
+        iconSource: "configure"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        text: i18n("Settings")
+        onClicked: {
+            pageStack.layers.push("Settings.qml")
+            options.state = "hidden"
+        }
+    }
+
+    OptionButton {
+        iconSource: "document-share"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        text: i18n("Share page")
+        onClicked: {
+            shareSheet.url = currentWebView.url
+            shareSheet.title = currentWebView.title
+            shareSheet.open()
+        }
+    }
+
+    ShareSheet {
+        id: shareSheet
+    }
+
+
+    Item {
+        Layout.preferredHeight: Kirigami.Units.smallSpacing
+        Layout.fillWidth: true
+    }
+
     RowLayout {
         id: layout
 
@@ -103,89 +185,5 @@ ColumnLayout {
 
         }
 
-    }
-
-    Item {
-        Layout.preferredHeight: Kirigami.Units.smallSpacing
-        Layout.fillWidth: true
-    }
-
-    OptionButton {
-        iconSource: "tab-duplicate"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        onClicked: {
-            pageStack.layers.push("Tabs.qml")
-            options.state = "hidden"
-        }
-        text: i18n("Tabs")
-    }
-
-    OptionButton {
-        iconSource: "bookmarks"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        onClicked: {
-            pageStack.layers.push("Bookmarks.qml")
-            options.state = "hidden"
-        }
-        text: i18n("Bookmarks")
-    }
-
-    OptionButton {
-        iconSource: "view-history"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        onClicked: {
-            pageStack.layers.push("History.qml")
-            options.state = "hidden"
-        }
-        text: i18n("History")
-    }
-
-    InputSheet {
-        id: findSheet
-        title: i18n("Find in page")
-        placeholderText: i18n("Find...")
-        description: i18n("Highlight text on the current website")
-        onAccepted: currentWebView.findText(findSheet.text)
-    }
-
-    OptionButton {
-        iconSource: "edit-find"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        onClicked: {
-            options.state = "hidden"
-            findSheet.open()
-        }
-        text: i18n("Find in page")
-    }
-
-    OptionButton {
-        iconSource: "configure"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        text: i18n("Settings")
-        onClicked: {
-            pageStack.layers.push("Settings.qml")
-            options.state = "hidden"
-        }
-    }
-
-    OptionButton {
-        iconSource: "document-share"
-        Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize
-        text: i18n("Share page")
-        onClicked: {
-            shareSheet.url = currentWebView.url
-            shareSheet.title = currentWebView.title
-            shareSheet.open()
-        }
-    }
-
-    ShareSheet {
-        id: shareSheet
     }
 }
