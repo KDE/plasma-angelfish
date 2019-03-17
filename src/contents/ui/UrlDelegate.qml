@@ -21,12 +21,11 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.0 as Controls
-import QtQuick.Layouts 1.0
+import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.5 as Kirigami
 
-
-Controls.ItemDelegate {
+Kirigami.AbstractListItem {
     id: urlDelegate
 
     property bool showRemove: true
@@ -38,91 +37,74 @@ Controls.ItemDelegate {
     height: Kirigami.Units.gridUnit * 3
     width: parent.width
 
-    Rectangle {
-        anchors.fill: parent
-        color: Kirigami.Theme.viewBackgroundColor
-        opacity: 0.9
-    }
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
 
     onClicked: {
         load(url)
-//         tabs.newTab(url)
-//         contentView.state = "hidden"
+        //tabs.newTab(url)
+        //contentView.state = "hidden"
     }
 
     signal removed
 
-    Image {
-        id: urlIcon
-
-        width: height
-        fillMode: Image.PreserveAspectFit
-
-        anchors {
-            left: parent.left
-            top: parent.top
-            topMargin: Kirigami.Units.gridUnit / 2
-            bottomMargin: Kirigami.Units.gridUnit / 2
-            bottom: parent.bottom
-            margins: Kirigami.Units.smallSpacing
-        }
-        source: model.icon ? model.icon : ""
-
+    Rectangle {
+        Kirigami.Theme.inherit: true
+        anchors.fill: parent
+        color: Kirigami.Theme.backgroundColor
     }
 
-    Image {
-        anchors.fill: urlIcon
-        source: preview == undefined ? "" : preview
-    }
+    RowLayout {
+        Kirigami.Theme.inherit: true
 
-    Controls.Label {
-        id: urlTitle
-        text: title ? title.replace(regex, highlightedText) : ""
-        anchors {
-            left: urlIcon.right
-            leftMargin: Kirigami.Units.largeSpacing / 2
-            right: parent.right
-            bottom: parent.verticalCenter
-            top: urlIcon.top
-            //margins: Kirigami.Units.smallSpacing
+        Item {
+            Layout.preferredHeight: parent.height
+            Layout.preferredWidth: parent.height
+
+            Image {
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+
+                source: model.icon ? model.icon : ""
+            }
+
+            Image {
+                source: preview == undefined ? "" : preview
+            }
         }
-        elide: Qt.ElideRight
-    }
 
-    Controls.Label {
-        id: urlUrl
-        text: url ? url.replace(regex, highlightedText) : ""
-        opacity: 0.6
-        font.pointSize: theme.smallestFont.pointSize
-        anchors {
-            left: urlIcon.right
-            leftMargin: Kirigami.Units.largeSpacing / 2
-            right: removeIcon.left
-            top: urlIcon.verticalCenter
-            bottom: parent.bottom
-            //margins: Kirigami.Units.smallSpacing
+        ColumnLayout {
+            Layout.fillWidth: true
+
+            // title
+            Controls.Label {
+                text: title ? title.replace(regex, highlightedText) : ""
+                elide: Qt.ElideRight
+                maximumLineCount: 1
+                Layout.fillWidth: true
+            }
+
+            // url
+            Controls.Label {
+                text: url ? url.replace(regex, highlightedText) : ""
+                opacity: 0.6
+                font.pointSize: theme.smallestFont.pointSize
+                elide: Qt.ElideRight
+                maximumLineCount: 1
+                Layout.fillWidth: true
+            }
         }
-        elide: Qt.ElideRight
-    }
 
-    Kirigami.Icon {
-        id: removeIcon
+        // We can't use SwipeListItem for performance reasons
+        Kirigami.Icon {
+            height: Kirigami.Units.gridUnit * 2
+            width: height
+            source: "list-remove"
+            visible: urlDelegate.showRemove
 
-        width: height
-        source: "list-remove"
-        visible: parent.showRemove
-
-        anchors {
-            right: parent.right
-            top: parent.top
-            topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.gridUnit
-            bottom: parent.bottom
-            margins: Kirigami.Units.smallSpacing
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: urlDelegate.removed();
+            MouseArea {
+                anchors.fill: parent
+                onClicked: urlDelegate.removed();
+            }
         }
     }
 }

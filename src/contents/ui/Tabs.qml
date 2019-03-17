@@ -134,8 +134,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        footer: Rectangle {
-            color: Kirigami.Theme.viewBackgroundColor
+        footer: Item {
             width: itemWidth
             height: itemHeight
             Kirigami.Icon {

@@ -25,15 +25,12 @@ import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.2 as Kirigami
 
 Kirigami.ScrollablePage {
-//    id: history
-
+    id: history
     title: i18n("History")
 
     ListView {
-
         anchors.fill: parent
 
-        spacing: Kirigami.Units.smallSpacing
         interactive: height < contentHeight
         clip: true
 

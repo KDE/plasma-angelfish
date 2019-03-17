@@ -30,10 +30,8 @@ Kirigami.ScrollablePage {
     title: i18n("Bookmarks")
 
     ListView {
-
         anchors.fill: parent
 
-        spacing: Kirigami.Units.smallSpacing
         interactive: height < contentHeight
         clip: true
 
