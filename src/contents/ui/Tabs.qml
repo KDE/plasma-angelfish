@@ -124,12 +124,12 @@ Kirigami.ScrollablePage {
 
             Controls.ToolButton {
                 icon.name: "window-close"
-                height: 24
-                width: 24
+                height: Kirigami.gridUnit
+                width: height
                 anchors.right: parent.right
-                anchors.rightMargin: 8
+                anchors.rightMargin: Kirigami.Units.smallSpacing
                 anchors.top: parent.top
-                anchors.topMargin: 8
+                anchors.topMargin: Kirigami.Units.smallSpacing
                 onClicked: tabs.closeTab(index)
             }
         }
