@@ -49,7 +49,7 @@ class BrowserManager : public QObject
 public:
 
     BrowserManager(QObject *parent = nullptr);
-    ~BrowserManager();
+    ~BrowserManager() override;
 
     UrlModel* bookmarks();
     UrlModel* history();
