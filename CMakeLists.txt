@@ -39,7 +39,9 @@ endif()
 
 ################# build and install #################
 add_subdirectory(src)
-add_subdirectory(autotests)
+if (BUILD_TESTING)
+	add_subdirectory(autotests)
+endif()
 
 install(PROGRAMS org.kde.mobile.angelfish.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.mobile.angelfish.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
