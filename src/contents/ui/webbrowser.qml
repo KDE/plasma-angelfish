@@ -216,23 +216,16 @@ Kirigami.ApplicationWindow {
         Completion {
             id: completion
             model: urlFilter
-            anchors.bottom: navigation.top
-            anchors.horizontalCenter: navigation.horizontalCenter
             width: 0.9 * navigation.width
             height: 0.5 * parent.height
             z: 10
             visible: navigation.textFocus
             searchText: navigation.text
 
-            width: 0.9 * navigation.width
-            height: parent.height * 0.5
-
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: navigation.horizontalCenter
             }
-
-            z: 10
         }
 
         // Thin line underneath navigation
