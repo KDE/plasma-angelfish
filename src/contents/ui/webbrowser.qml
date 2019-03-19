@@ -123,6 +123,36 @@ Kirigami.ApplicationWindow {
             ]
         }
 
+        Kirigami.InlineMessage {
+            id: downloadQuestion
+            text: i18n("Do you want to download this file?")
+            showCloseButton: false
+            anchors.top: navigation.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            property var download
+
+            actions: [
+                Kirigami.Action {
+                    iconName: "download"
+                    text: i18n("Download")
+                    onTriggered: {
+                        downloadQuestion.download.resume()
+                        downloadQuestion.visible = false
+                    }
+                },
+                Kirigami.Action {
+                    iconName: "dialog-cancel"
+                    text: i18n("Cancel")
+                    onTriggered: {
+                        downloadQuestion.download.cancel()
+                        downloadQuestion.visible = false
+                    }
+                }
+            ]
+        }
+
         // Container for the progress bar
         Item {
             id: progressItem

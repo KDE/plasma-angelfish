@@ -47,12 +47,29 @@ WebEngineView {
         }
 
         onDownloadRequested: {
-            showPassiveNotification(i18n("Do you want to download this file?"), "long", "Download", function() {
-                download.accept
-            })
+            // if we don't accept the request right away, it will be deleted
+            download.accept()
+            // therefore just stop the download again as quickly as possible,
+            // and ask the user for confirmation
+            download.pause()
+            downloadQuestion.download = download
+            downloadQuestion.visible = true
         }
-        onDownloadFinished: showPassiveNotification(i18n("Download finished"))
+
+        onDownloadFinished: {
+            if (download.state === WebEngineDownloadItem.DownloadCompleted) {
+                showPassiveNotification(i18n("Download finished"))
+            }
+            else if (download.state === WebEngineDownloadItem.DownloadInterrupted) {
+                showPassiveNotification(i18n("Download failed"))
+                console.log("Download interrupt reason: " + download.interruptReason)
+            }
+            else if (download.state === WebEngineDownloadItem.DownloadCancelled) {
+                console.log("Download cancelled by the user")
+            }
+        }
     }
+
     settings {
         errorPageEnabled: false
     }
