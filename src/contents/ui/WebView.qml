@@ -21,6 +21,7 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.4 as Controls
+import QtQuick.Window 2.1
 
 import QtWebEngine 1.7
 
@@ -151,6 +152,14 @@ WebEngineView {
             newTabQuestion.url = request.requestedUrl
             newTabQuestion.visible = true
         }
+    }
+
+    onFullScreenRequested: {
+        request.accept()
+        if (webBrowser.visibility !== Window.FullScreen)
+            webBrowser.showFullScreen()
+        else
+            webBrowser.showNormal()
     }
 
     onContextMenuRequested: {

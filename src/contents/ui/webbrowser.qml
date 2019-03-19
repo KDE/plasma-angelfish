@@ -21,7 +21,7 @@
 
 import QtQuick 2.1
 import QtWebEngine 1.6
-import QtQuick.Window 2.1
+import QtQuick.Window 2.3
 
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -171,21 +171,13 @@ Kirigami.ApplicationWindow {
 
         Navigation {
             id: navigation
-            visible: !webappcontainer
-
-            height: {
-                if (!webappcontainer)
-                    return Kirigami.Units.gridUnit * 3
-                else
-                    return 0
-            }
+            navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
             anchors {
                 top: parent.top
                 left: parent.left
                 right: parent.right
             }
-        
 
             onTextChanged: urlFilter.setFilterFixedString(text)
         }

@@ -30,16 +30,14 @@ import "regex-weburl.js" as RegexWebUrl
 
 
 Item {
-    id: errorHandler
+    id: navigation
 
-    property string errorCode: ""
-
-    property bool navigationShown: errorCode != "" || webBrowser.url === "" || true
+    property bool navigationShown: true
 
     property alias textFocus: urlInput.activeFocus
     property alias text: urlInput.text
 
-    property int expandedHeight: Kirigami.Units.gridUnit * 2.5
+    property int expandedHeight: Kirigami.Units.gridUnit * 3
     property int buttonSize: Kirigami.Units.gridUnit * 2
 
     Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
@@ -156,12 +154,12 @@ Item {
         State {
             name: "shown"
             when: navigationShown
-            PropertyChanges { target: errorHandler; x: -expandedHeight}
+            PropertyChanges { target: navigation; height: expandedHeight}
         },
         State {
             name: "hidden"
             when: !navigationShown
-            PropertyChanges { target: errorHandler; x: 0}
+            PropertyChanges { target: navigation; height: 0}
         }
     ]
 
