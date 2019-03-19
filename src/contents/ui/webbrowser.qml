@@ -216,9 +216,8 @@ Kirigami.ApplicationWindow {
         Completion {
             id: completion
             model: urlFilter
-            width: 0.9 * navigation.width
+            width: parent.width
             height: 0.5 * parent.height
-            z: 10
             visible: navigation.textFocus
             searchText: navigation.text
 
