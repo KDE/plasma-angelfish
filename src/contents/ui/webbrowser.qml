@@ -22,7 +22,6 @@
 import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
-import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -68,7 +67,7 @@ Kirigami.ApplicationWindow {
 
     property bool layerShown : pageStack.layers.depth > 1
 
-    pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
+    pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Titles : Kirigami.ApplicationHeaderStyle.None
 
     pageStack.initialPage: Kirigami.Page {
         leftPadding: 0
@@ -227,17 +226,9 @@ Kirigami.ApplicationWindow {
             visible: navigation.textFocus
             searchText: navigation.text
 
-            anchors.bottom: navigation.top
+            onVisibleChanged: options.state = "hidden"
 
-            layer.enabled: completion.visible
-            layer.effect: DropShadow {
-                verticalOffset: - 1
-                color: Kirigami.Theme.disabledTextColor
-                samples: 10
-                //radius: 3
-                spread: 0.1
-                cached: true // element is static
-            }
+            anchors.bottom: navigation.top
         }
 
         // Thin line underneath navigation

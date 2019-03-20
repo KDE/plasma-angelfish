@@ -21,6 +21,7 @@
  ***************************************************************************/
 
 import QtQuick 2.7
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.5 as Kirigami
 
@@ -29,11 +30,27 @@ ListView {
 
     property string searchText
 
+    Behavior on height {
+        SmoothedAnimation {
+            duration: Kirigami.Units.shortDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     Rectangle {
         z: -1
         anchors.fill: parent
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor
+    }
+
+    layer.enabled: completion.visible
+    layer.effect: DropShadow {
+        verticalOffset: - 1
+        color: Kirigami.Theme.disabledTextColor
+        samples: 10
+        spread: 0.1
+        cached: true // element is static
     }
 
     verticalLayoutDirection: ListView.BottomToTop

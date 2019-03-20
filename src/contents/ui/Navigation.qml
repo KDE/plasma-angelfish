@@ -108,19 +108,6 @@ Item {
             }
         }
 
-        Controls.ToolButton {
-            id: reloadButton
-
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
-
-            visible: !Kirigami.Settings.isMobile
-            icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
-
-            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
-
-        }
-
         Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize

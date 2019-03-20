@@ -80,7 +80,10 @@ ColumnLayout {
         iconSource: "edit-find"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onClicked: findSheet.open()
+        onClicked: {
+            findSheet.open()
+            options.state = "hidden"
+        }
         text: i18n("Find in page")
     }
 
@@ -104,6 +107,7 @@ ColumnLayout {
             shareSheet.url = currentWebView.url
             shareSheet.title = currentWebView.title
             shareSheet.open()
+            options.state = "hidden"
         }
     }
 
