@@ -29,8 +29,14 @@ ListView {
 
     property string searchText
 
+    Rectangle {
+        z: -1
+        anchors.fill: parent
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
+    }
 
-//    verticalLayoutDirection: ListView.BottomToTop
+    verticalLayoutDirection: ListView.BottomToTop
     clip: true
 
     delegate: UrlDelegate {

@@ -22,6 +22,7 @@
 import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -205,7 +206,7 @@ Kirigami.ApplicationWindow {
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
             anchors {
-                bottom: completion.top
+                bottom: parent.bottom
                 left: parent.left
                 right: parent.right
             }
@@ -217,13 +218,25 @@ Kirigami.ApplicationWindow {
             id: completion
             model: urlFilter
             width: parent.width
-            height: 0.5 * parent.height
+            height: {
+                if (Kirigami.Units.gridUnit * 3 * count >= parent.height * 0.5)
+                    return parent.height * 0.5
+                else
+                    Kirigami.Units.gridUnit * 3 * count
+            }
             visible: navigation.textFocus
             searchText: navigation.text
 
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: navigation.horizontalCenter
+            anchors.bottom: navigation.top
+
+            layer.enabled: completion.visible
+            layer.effect: DropShadow {
+                verticalOffset: - 1
+                color: Kirigami.Theme.disabledTextColor
+                samples: 10
+                //radius: 3
+                spread: 0.1
+                cached: true // element is static
             }
         }
 
