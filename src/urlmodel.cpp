@@ -172,7 +172,7 @@ bool UrlModel::save()
 
     QJsonArray urls;
 
-    Q_FOREACH (const auto &url, m_data) {
+    for (const auto &url : m_data) {
         urls << url;
     }
 
@@ -211,10 +211,16 @@ QString UrlModel::key(int role) const
 
 void UrlModel::add(const QJsonObject &data)
 {
-    foreach (const auto &urldata, m_data) {
+    size_t i = 0;
+    for(const auto &urldata : m_data) {
         if (urldata == data) {
+            beginMoveRows(QModelIndex(), i, i, QModelIndex(), m_data.size());
+            m_data.removeAt(i);
+            m_data.append(data);
+            endMoveRows();
             return;
         }
+        ++i;
     }
     beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
     m_data.append(data);
