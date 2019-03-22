@@ -164,7 +164,7 @@ WebEngineView {
     onNewViewRequested: {
         if (request.userInitiated) {
             newTab(request.requestedUrl.toString())
-            showPassiveNotification("Website was opened in a new tab")
+            showPassiveNotification(i18n("Website was opened in a new tab"))
         } else {
             newTabQuestion.url = request.requestedUrl
             newTabQuestion.visible = true

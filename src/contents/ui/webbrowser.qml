@@ -28,7 +28,7 @@ import org.kde.kirigami 2.4 as Kirigami
 
 Kirigami.ApplicationWindow {
     id: webBrowser
-    title: "Angelfish Webbrowser"
+    title: i18n("Angelfish Web Browser")
 
     /** Pointer to the currently active view.
      *

@@ -33,7 +33,7 @@ Kirigami.ScrollablePage {
         id: settingsPage
 
         Controls.CheckDelegate {
-            text: i18n("Enable javascript")
+            text: i18n("Enable JavaScript")
             Layout.fillWidth: true
             onCheckedChanged: {
                 var settings = currentWebView.settings;
@@ -61,7 +61,7 @@ Kirigami.ScrollablePage {
         InputSheet {
             id: homePagePopup
             title: i18n("Homepage")
-            description: i18n("website that should be loaded on startup")
+            description: i18n("Website that should be loaded on startup")
             placeholderText: browserManager.homepage
             onAccepted: {
                 if (homePagePopup.text !== "")
@@ -72,7 +72,7 @@ Kirigami.ScrollablePage {
         InputSheet {
             id: searchEnginePopup
             title: i18n("Search Engine")
-            description: i18n("Base url of your preferred search engine")
+            description: i18n("Base URL of your preferred search engine")
             placeholderText: browserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")

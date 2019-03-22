@@ -23,6 +23,8 @@
 #include <QCommandLineOption>
 #include <QtWebEngine>
 
+#include <KLocalizedString>
+
 #include "browsermanager.h"
 #include "urlfilterproxymodel.h"
 
@@ -38,8 +40,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Command line parser
     QCommandLineParser parser;
     QCommandLineOption helpOption = parser.addHelpOption();
-    parser.addPositionalArgument("url", "An url to open", "[url]");
-    parser.addOption({"webapp-container", "Start without ui"});
+    parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
+    parser.addOption({"webapp-container", i18n("Start without UI")});
     parser.parse(QGuiApplication::arguments());
 
     // QML loading
