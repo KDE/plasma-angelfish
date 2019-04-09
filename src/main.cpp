@@ -39,10 +39,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Command line parser
     QCommandLineParser parser;
-    QCommandLineOption helpOption = parser.addHelpOption();
     parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
     parser.addOption({"webapp-container", i18n("Start without UI")});
-    parser.parse(QGuiApplication::arguments());
+    parser.addHelpOption();
+    parser.process(app);
 
     // QML loading
     QQmlApplicationEngine engine;
@@ -75,7 +75,5 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return -1;
     }
 
-
-    int ret = app.exec();
-    return ret;
+    return app.exec();
 }
