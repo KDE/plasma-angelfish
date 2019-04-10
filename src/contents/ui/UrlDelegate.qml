@@ -87,7 +87,6 @@ Kirigami.AbstractListItem {
             Controls.Label {
                 text: url ? url.replace(regex, highlightedText) : ""
                 opacity: 0.6
-                font.pointSize: theme.smallestFont.pointSize
                 elide: Qt.ElideRight
                 maximumLineCount: 1
                 Layout.fillWidth: true
