@@ -95,7 +95,7 @@ Kirigami.ScrollablePage {
             Rectangle {
                 anchors.fill: parent;
                 anchors.margins: Kirigami.Units.gridUnit / 4;
-                border.color: theme.textColor;
+                border.color: Kirigami.Theme.textColor;
                 border.width: webBrowser.borderWidth
                 color: "transparent"
                 opacity: 0.3;
