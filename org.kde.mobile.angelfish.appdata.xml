@@ -8,6 +8,7 @@
   <name xml:lang="es">Navegador web Angelfish</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
   <name xml:lang="it">Browser web Angelfish</name>
+  <name xml:lang="ko">Angelfish 웹 브라우저</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="nn">Angelfish nettlesar</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
@@ -23,6 +24,7 @@
   <summary xml:lang="es">Navegador web optimizado para dispositivos móviles</summary>
   <summary xml:lang="gl">Navegador web optimizado para dispositivos móbiles</summary>
   <summary xml:lang="it">Browser web ottimizzato per i dispositivi mobili</summary>
+  <summary xml:lang="ko">모바일 장치에 최적화된 웹 브라우저</summary>
   <summary xml:lang="nl">Webbrowser geoptimaliseerd voor mobiele apparaten</summary>
   <summary xml:lang="nn">Nettlesar optimert for mobile einingar</summary>
   <summary xml:lang="pt">Navegador Web optimizado para dispositivos móveis</summary>
@@ -39,6 +41,7 @@
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
   <developer_name xml:lang="it">Comunità KDE</developer_name>
+  <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
@@ -56,6 +59,7 @@
     <p xml:lang="es">Angelfish está basado en QtWebEngine</p>
     <p xml:lang="gl">Angelfish está baseado en QtWebEngine</p>
     <p xml:lang="it">Angelfish è basato su QtWebEngine</p>
+    <p xml:lang="ko">Angelfish는 QtWebEngine을 사용합니다</p>
     <p xml:lang="nl">Angelfish is gebaseerd op QtWebEngine</p>
     <p xml:lang="nn">Angelfish er basert på QtWebEngine</p>
     <p xml:lang="pt">O Angelfish baseia-se no QtWebEngine</p>
@@ -70,6 +74,7 @@
     <p xml:lang="es">Permite las funciones típicas de un navegador, como</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
     <p xml:lang="it">Supporta le funzionalità tipiche del browser, quali</p>
+    <p xml:lang="ko">다음과 같은 웹 브라우저 기능을 제공합니다</p>
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="nn">Støttar vanlege nettlesarfunksjonar, som</p>
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
@@ -86,6 +91,7 @@
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
       <li xml:lang="it">segnalibri</li>
+      <li xml:lang="ko">책갈피</li>
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="nn">bokmerke</li>
       <li xml:lang="pt">favoritos</li>
@@ -102,6 +108,7 @@
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
       <li xml:lang="it">cronologia</li>
+      <li xml:lang="ko">과거 기록</li>
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="nn">besøkslogg</li>
       <li xml:lang="pt">histórico</li>
