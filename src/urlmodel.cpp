@@ -214,10 +214,18 @@ void UrlModel::add(const QJsonObject &data)
     size_t i = 0;
     for(const auto &urldata : m_data) {
         if (urldata == data) {
-            beginMoveRows(QModelIndex(), i, i, QModelIndex(), m_data.size());
-            m_data.removeAt(i);
-            m_data.append(data);
-            endMoveRows();
+            if (i+1 < m_data.size()) {
+                beginMoveRows(QModelIndex(), i, i, QModelIndex(), m_data.size());
+                m_data.removeAt(i);
+                m_data.append(data);
+                endMoveRows();
+            } else {
+                //Qt Model Api does not  allow overlapping moves, so we need to make sure
+                //not to move down the last entry
+                m_data[i] = data;
+            }
+            //notify about lastVisited changed
+            emit dataChanged(index(m_data.size()), index(m_data.size()));
             return;
         }
         ++i;
