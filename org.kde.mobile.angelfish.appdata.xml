@@ -12,6 +12,7 @@
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="nn">Angelfish nettlesar</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
+  <name xml:lang="pt-BR">Navegador Web Angelfish</name>
   <name xml:lang="sk">Prehliadač Angelfish</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
   <name xml:lang="uk">Браузер Angelfish</name>
@@ -28,6 +29,7 @@
   <summary xml:lang="nl">Webbrowser geoptimaliseerd voor mobiele apparaten</summary>
   <summary xml:lang="nn">Nettlesar optimert for mobile einingar</summary>
   <summary xml:lang="pt">Navegador Web optimizado para dispositivos móveis</summary>
+  <summary xml:lang="pt-BR">Navegador Web otimizado para dispositivos móveis</summary>
   <summary xml:lang="sv">Webbläsare optimerad för mobila apparater</summary>
   <summary xml:lang="uk">Браузер, роботу якого оптимізовано для мобільних пристроїв</summary>
   <summary xml:lang="x-test">xxWebbrowser optimized for mobile devicesxx</summary>
@@ -45,6 +47,7 @@
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
+  <developer_name xml:lang="pt-BR">KDE Community</developer_name>
   <developer_name xml:lang="ru">Сообщество KDE</developer_name>
   <developer_name xml:lang="sk">KDE komunita</developer_name>
   <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
@@ -63,6 +66,7 @@
     <p xml:lang="nl">Angelfish is gebaseerd op QtWebEngine</p>
     <p xml:lang="nn">Angelfish er basert på QtWebEngine</p>
     <p xml:lang="pt">O Angelfish baseia-se no QtWebEngine</p>
+    <p xml:lang="pt-BR">O Angelfish tem como base o QtWebEngine</p>
     <p xml:lang="sv">Angelfish är baserad på QtWebEngine</p>
     <p xml:lang="uk">Angelfish засновано на QtWebEngine</p>
     <p xml:lang="x-test">xxAngelfish is based on QtWebEnginexx</p>
@@ -78,6 +82,7 @@
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="nn">Støttar vanlege nettlesarfunksjonar, som</p>
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
+    <p xml:lang="pt-BR">Tem suporte a funcionalidades típicas de navegação, como</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
     <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
     <p xml:lang="x-test">xxIt supports typical browser features, such asxx</p>
@@ -95,6 +100,7 @@
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="nn">bokmerke</li>
       <li xml:lang="pt">favoritos</li>
+      <li xml:lang="pt-BR">favoritos</li>
       <li xml:lang="sk">zalozky</li>
       <li xml:lang="sv">bokmärken</li>
       <li xml:lang="uk">закладки</li>
@@ -112,6 +118,7 @@
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="nn">besøkslogg</li>
       <li xml:lang="pt">histórico</li>
+      <li xml:lang="pt-BR">histórico</li>
       <li xml:lang="sk">História</li>
       <li xml:lang="sv">historik</li>
       <li xml:lang="uk">журнал</li>
