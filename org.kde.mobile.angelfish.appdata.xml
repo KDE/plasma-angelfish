@@ -6,6 +6,7 @@
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
   <name xml:lang="en-GB">Angelfish Webbrowser</name>
   <name xml:lang="es">Navegador web Angelfish</name>
+  <name xml:lang="fi">Angelfish-verkkoselain</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
   <name xml:lang="it">Browser web Angelfish</name>
   <name xml:lang="ko">Angelfish 웹 브라우저</name>
@@ -23,6 +24,7 @@
   <summary xml:lang="ca-valencia">Navegador web optimitzat per a dispositius mòbils</summary>
   <summary xml:lang="en-GB">Webbrowser optimised for mobile devices</summary>
   <summary xml:lang="es">Navegador web optimizado para dispositivos móviles</summary>
+  <summary xml:lang="fi">Mobiililaitteille optimoitu verkkoselain</summary>
   <summary xml:lang="gl">Navegador web optimizado para dispositivos móbiles</summary>
   <summary xml:lang="it">Browser web ottimizzato per i dispositivi mobili</summary>
   <summary xml:lang="ko">모바일 장치에 최적화된 웹 브라우저</summary>
@@ -41,6 +43,7 @@
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
   <developer_name xml:lang="en-GB">KDE Community</developer_name>
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
+  <developer_name xml:lang="fi">KDE-yhteisö</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
   <developer_name xml:lang="it">Comunità KDE</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
@@ -60,6 +63,7 @@
     <p xml:lang="ca-valencia">L'Angelfish està basat en el QtWebEngine</p>
     <p xml:lang="en-GB">Angelfish is based on QtWebEngine</p>
     <p xml:lang="es">Angelfish está basado en QtWebEngine</p>
+    <p xml:lang="fi">Angelfish pohjautuu QtWebEngineen</p>
     <p xml:lang="gl">Angelfish está baseado en QtWebEngine</p>
     <p xml:lang="it">Angelfish è basato su QtWebEngine</p>
     <p xml:lang="ko">Angelfish는 QtWebEngine을 사용합니다</p>
@@ -76,6 +80,7 @@
     <p xml:lang="ca-valencia">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="en-GB">It supports typical browser features, such as</p>
     <p xml:lang="es">Permite las funciones típicas de un navegador, como</p>
+    <p xml:lang="fi">Tukee tavallisia selainominaisuuksia kuten</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
     <p xml:lang="it">Supporta le funzionalità tipiche del browser, quali</p>
     <p xml:lang="ko">다음과 같은 웹 브라우저 기능을 제공합니다</p>
@@ -93,6 +98,7 @@
       <li xml:lang="ca-valencia">adreces d'interés</li>
       <li xml:lang="en-GB">bookmarks</li>
       <li xml:lang="es">marcadores</li>
+      <li xml:lang="fi">kirjanmerkit</li>
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
       <li xml:lang="it">segnalibri</li>
@@ -111,6 +117,7 @@
       <li xml:lang="ca-valencia">historial</li>
       <li xml:lang="en-GB">history</li>
       <li xml:lang="es">historial</li>
+      <li xml:lang="fi">historia</li>
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
       <li xml:lang="it">cronologia</li>
