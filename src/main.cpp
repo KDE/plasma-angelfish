@@ -57,10 +57,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
     // Browser manager
-    AngelFish::BrowserManager *browserManager = new AngelFish::BrowserManager(engine.rootContext());
+    auto *browserManager = new AngelFish::BrowserManager(engine.rootContext());
     engine.rootContext()->setContextProperty("browserManager", browserManager);
 
-    UrlFilterProxyModel *proxy = new UrlFilterProxyModel(browserManager);
+    auto *proxy = new UrlFilterProxyModel(browserManager);
     proxy->setSourceModel(browserManager->history());
     proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
     engine.rootContext()->setContextProperty("urlFilter", proxy);

@@ -28,8 +28,6 @@ using namespace AngelFish;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent),
-      m_bookmarks(nullptr),
-      m_history(nullptr),
       m_settings(new QSettings)
 {
 }

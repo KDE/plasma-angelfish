@@ -81,8 +81,8 @@ public slots:
 
 private:
 
-    UrlModel* m_bookmarks;
-    UrlModel* m_history;
+    UrlModel* m_bookmarks = nullptr;
+    UrlModel* m_history = nullptr;
     QSettings* m_settings;
 };
 

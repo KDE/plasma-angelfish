@@ -73,11 +73,10 @@ QHash<int, QByteArray> UrlModel::roleNames() const
 int UrlModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    if (m_data.size() <= 0) {
+    if (m_data.isEmpty()) {
         return 0;
-    } else {
-        return m_data.size();
     }
+    return m_data.size();
 }
 
 QVariant UrlModel::data(const QModelIndex &index, int role) const
@@ -166,13 +165,12 @@ bool UrlModel::load()
 bool UrlModel::save()
 {
     QVariantMap vm;
-    QVariantMap urlsVm;
     vm[QStringLiteral("Version")] = QStringLiteral("1.0");
     vm[QStringLiteral("Timestamp")] = QDateTime::currentMSecsSinceEpoch();
 
     QJsonArray urls;
 
-    for (const auto &url : m_data) {
+    for (const auto &url : qAsConst(m_data)) {
         urls << url;
     }
 
@@ -211,10 +209,10 @@ QString UrlModel::key(int role) const
 
 void UrlModel::add(const QJsonObject &data)
 {
-    size_t i = 0;
-    for(const auto &urldata : m_data) {
+    int i = 0;
+    for (const auto &urldata : qAsConst(m_data)) {
         if (urldata == data) {
-            if (i+1 < m_data.size()) {
+            if (i + 1 < m_data.size()) {
                 beginMoveRows(QModelIndex(), i, i, QModelIndex(), m_data.size());
                 m_data.removeAt(i);
                 m_data.append(data);

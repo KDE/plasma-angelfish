@@ -38,7 +38,7 @@ class UrlModelTest : public QObject
     {
         QCOMPARE(data.count(), model->rowCount(QModelIndex()));
         QStringList roleNames;
-        foreach (auto rn, model->roleNames()) {
+        for (const auto &rn : model->roleNames()) {
             roleNames << rn;
         }
         for (int i = 0; i < data.count(); i++) {
@@ -46,13 +46,13 @@ class UrlModelTest : public QObject
 
             QVariantMap vm = data.at(i).toObject().toVariantMap();
 
-            foreach (auto k, vm.keys()) {
+	    for (const auto &k : vm.keys()) {
                 QVERIFY2(roleNames.contains(k), QString("Key \"" + k + "\" not found roleNames").toLocal8Bit());
             }
 
 
-            foreach (int k, model->roleNames().keys()) {
-                auto *urlmodel = static_cast<UrlModel*>(model);
+            for (const int &k : model->roleNames().keys()) {
+                auto *urlmodel = dynamic_cast<UrlModel*>(model);
                 const QString ks = urlmodel->key(k);
 
                 QVariant ori = vm[ks];
@@ -78,7 +78,7 @@ class UrlModelTest : public QObject
             //QVERIFY(!u.isEmpty());
 //             qDebug() << i << "URL: " << u;
         }
-    };
+    }
 
     static QJsonArray readFile(const QString &fileName)
     {
@@ -163,13 +163,13 @@ private Q_SLOTS:
             m_data << u;
         }
         cleanup();
-    };
+    }
 
     void testEmpty()
     {
         QVERIFY(m_data.count() > 0);
         QVERIFY(m_bookmarksModel->rowCount(QModelIndex()) == 0);
-    };
+    }
 
     void testSetSourceData() {
 
@@ -206,7 +206,7 @@ private Q_SLOTS:
 
         compare(written, loadModel);
         delete loadModel;
-    };
+    }
 
     void compareData()
     {
@@ -272,7 +272,7 @@ private Q_SLOTS:
             QCOMPARE(copy.count() - 1, m_bookmarksModel->rowCount(QModelIndex()));
             //QVERIFY(!compare(copy, m_bookmarksModel));
         }
-    };
+    }
 
     void testDataChanged()
     {
@@ -316,18 +316,18 @@ private Q_SLOTS:
             urls << r;
         }
         int c3 = m_bookmarksModel->rowCount(QModelIndex());
-        foreach (auto r, urls) {
+        for (const auto &r : urls) {
             c3--;
             m_bookmarksModel->remove(r);
             QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), c3);
         }
         QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), 0);
-    };
+    }
 
     void testNotify() {
         m_bookmarksModel->setSourceData(m_data);
         // save to file while waiting for model update...
-    };
+    }
 
 private: // disable from here for testing just the above
 
