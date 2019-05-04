@@ -135,7 +135,7 @@ Item {
             }
         }
 
-        OptionButton {
+        Controls.ToolButton {
             id: optionsButton
 
             property string targetState: "overview"
@@ -144,9 +144,9 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            iconSource: "open-menu-symbolic"
+            icon.name: "open-menu-symbolic"
 
-            onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
+            onClicked: contextDrawer.open()
         }
     }
 

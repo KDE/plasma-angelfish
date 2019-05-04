@@ -192,14 +192,111 @@ Kirigami.ApplicationWindow {
             anchors.fill: parent
         }
 
-        // The menu at the top right
-        Options {
-            id: options
-
-            anchors {
-                bottom: navigation.top
-            }
+        InputSheet {
+            id: findSheet
+            title: i18n("Find in page")
+            placeholderText: i18n("Find...")
+            description: i18n("Highlight text on the current website")
+            onAccepted: currentWebView.findText(findSheet.text)
         }
+
+        ShareSheet {
+            id: shareSheet
+        }
+
+        Kirigami.ContextDrawer {
+            id: contextDrawer
+
+            handleVisible: false
+        }
+
+        // The menu at the top right
+        contextualActions: [
+            Kirigami.Action {
+                icon.name: "tab-duplicate"
+                onTriggered: {
+                    pageStack.layers.push("Tabs.qml")
+                }
+                text: i18n("Tabs")
+            },
+            Kirigami.Action {
+                icon.name: "bookmarks"
+                onTriggered: {
+                    pageStack.layers.push("Bookmarks.qml")
+                }
+                text: i18n("Bookmarks")
+            },
+            Kirigami.Action {
+                icon.name: "view-history"
+                onTriggered: {
+                    pageStack.layers.push("History.qml")
+                }
+                text: i18n("History")
+            },
+            Kirigami.Action {
+                icon.name: "edit-find"
+                onTriggered: findSheet.open()
+                text: i18n("Find in page")
+            },
+            Kirigami.Action {
+                icon.name: "configure"
+                text: i18n("Settings")
+                onTriggered: {
+                    pageStack.layers.push("Settings.qml")
+                }
+            },
+            Kirigami.Action {
+                icon.name: "document-share"
+                text: i18n("Share page")
+                onTriggered: {
+                    shareSheet.url = currentWebView.url
+                    shareSheet.title = currentWebView.title
+                    shareSheet.open()
+                }
+            },
+            Kirigami.Action {
+                enabled: currentWebView.canGoBack
+                icon.name: "go-previous"
+                text: i18n("Go previous")
+
+                onTriggered: {
+                    options.state = "hidden";
+                    currentWebView.goBack()
+                }
+            },
+            Kirigami.Action {
+                enabled: currentWebView.canGoForward
+                icon.name: "go-next"
+                text: i18n("Go forward")
+
+
+                onTriggered: {
+                    currentWebView.goForward()
+                }
+            },
+            Kirigami.Action {
+                icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
+                text: currentWebView.loading ? i18n("Stop loading") : i18n("Refresh")
+
+                onTriggered: {
+                    currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+                }
+            },
+            Kirigami.Action {
+                icon.name: "bookmarks"
+                text: i18n("Add bookmark")
+
+                onTriggered: {
+                    print("Adding bookmark");
+                    var request = new Object;// FIXME
+                    request.url = currentWebView.url;
+                    request.title = currentWebView.title;
+                    request.icon = currentWebView.icon;
+                    request.bookmarked = true;
+                    browserManager.addBookmark(request);
+                }
+            }
+        ]
 
         Navigation {
             id: navigation
