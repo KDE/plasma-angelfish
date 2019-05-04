@@ -184,14 +184,6 @@ Kirigami.ApplicationWindow {
 
         }
 
-        // When clicked outside the menu, hide it
-        MouseArea {
-            id: optionsDismisser
-            visible: options.state != "hidden"
-            onClicked: options.state = "hidden"
-            anchors.fill: parent
-        }
-
         InputSheet {
             id: findSheet
             title: i18n("Find in page")
