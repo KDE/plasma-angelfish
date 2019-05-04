@@ -10,7 +10,6 @@
         <file alias="OptionsOverview.qml">contents/ui/OptionsOverview.qml</file>
         <file alias="Settings.qml">contents/ui/Settings.qml</file>
         <file alias="Tabs.qml">contents/ui/Tabs.qml</file>
-        <file alias="TabWebView.qml">contents/ui/TabWebView.qml</file>
         <file alias="UrlDelegate.qml">contents/ui/UrlDelegate.qml</file>
         <file alias="webbrowser.qml">contents/ui/webbrowser.qml</file>
         <file alias="WebView.qml">contents/ui/WebView.qml</file>
