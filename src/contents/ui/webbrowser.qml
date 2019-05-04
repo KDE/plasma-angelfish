@@ -22,6 +22,7 @@
 import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
+import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.4 as Kirigami
 
@@ -203,6 +204,15 @@ Kirigami.ApplicationWindow {
         Navigation {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
+
+            layer.enabled: true
+            layer.effect: DropShadow {
+                verticalOffset: 1
+                color: Kirigami.Theme.disabledTextColor
+                samples: 20
+                spread: 0.3
+                cached: true // element is static
+            }
 
             anchors {
                 bottom: completion.top
