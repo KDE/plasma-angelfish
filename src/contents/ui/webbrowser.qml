@@ -105,7 +105,7 @@ Kirigami.ApplicationWindow {
             type: Kirigami.MessageType.Warning
             text: i18n("Site wants to open a new tab: \n%1", url.toString())
             showCloseButton: true
-            anchors.top: navigation.bottom
+            anchors.bottom: navigation.top
             anchors.left: parent.left
             anchors.right: parent.right
 
@@ -128,7 +128,7 @@ Kirigami.ApplicationWindow {
             id: downloadQuestion
             text: i18n("Do you want to download this file?")
             showCloseButton: false
-            anchors.top: navigation.bottom
+            anchors.bottom: navigation.top
             anchors.left: parent.left
             anchors.right: parent.right
 
