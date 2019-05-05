@@ -97,6 +97,11 @@ Item {
 
             selectByMouse: true
             focus: false
+            onActiveFocusChanged: {
+                if (activeFocus) {
+                    selectAll()
+                }
+            }
 
             onAccepted: {
                 if (text.match(RegexWebUrl.re_weburl)) {
