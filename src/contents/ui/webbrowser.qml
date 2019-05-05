@@ -104,7 +104,7 @@ Kirigami.ApplicationWindow {
         Kirigami.InlineMessage {
             id: newTabQuestion
             type: Kirigami.MessageType.Warning
-            text: i18n("Site wants to open a new tab: \n%1", url.toString())
+            text: url? i18n("Site wants to open a new tab: \n%1", url.toString()) : ""
             showCloseButton: true
             anchors.bottom: navigation.top
             anchors.left: parent.left
