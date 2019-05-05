@@ -332,7 +332,7 @@ Kirigami.ApplicationWindow {
             anchors {
                 left: parent.left
                 bottom: navigation.top
-                right: options.left
+                right: parent.right
             }
         }
     }

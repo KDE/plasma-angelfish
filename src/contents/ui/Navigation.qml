@@ -61,7 +61,6 @@ Item {
 
             onClicked: {
                 pageStack.layers.push("Tabs.qml")
-                options.state = "hidden"
             }
         }
 
