@@ -325,7 +325,7 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        // Thin line underneath navigation
+        // Thin line above navigation
         Rectangle {
             height: webBrowser.borderWidth
             color: webBrowser.borderColor
