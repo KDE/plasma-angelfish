@@ -252,7 +252,6 @@ Kirigami.ApplicationWindow {
                 text: i18n("Go previous")
 
                 onTriggered: {
-                    options.state = "hidden";
                     currentWebView.goBack()
                 }
             },
