@@ -294,12 +294,12 @@ Kirigami.ApplicationWindow {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
-            layer.enabled: true
+            layer.enabled: navigation.visible
             layer.effect: DropShadow {
-                verticalOffset: 1
+                verticalOffset: - 1
                 color: Kirigami.Theme.disabledTextColor
-                samples: 20
-                spread: 0.3
+                samples: 10
+                spread: 0.1
                 cached: true // element is static
             }
 
