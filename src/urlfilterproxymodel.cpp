@@ -38,3 +38,9 @@ bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
     return (sourceModel()->data(index, UrlModel::url).toString().contains(filterRegExp())
             || sourceModel()->data(index, UrlModel::title).toString().contains(filterRegExp()));
 }
+
+bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+{
+    //as we currently don't write the lastVisited role to disk, we simply sort by index/position in the model
+    return source_left.row() < source_right.row();
+}
