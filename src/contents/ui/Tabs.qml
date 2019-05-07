@@ -145,7 +145,7 @@ Kirigami.ScrollablePage {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    tabs.newTab("https://duckduckgo.com")
+                    tabs.newTab(browserManager.homepage)
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
                     tabs.currentIndex = tabs.count - 1;
