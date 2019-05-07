@@ -100,7 +100,7 @@ WebEngineView {
         }
         Controls.MenuItem {
             text: i18n("View source")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.ViewSource)
+            onTriggered: newTab("view-source:" + webEngineView.url)
         }
         Controls.MenuItem {
             text: i18n("Download")
