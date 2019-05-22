@@ -109,17 +109,7 @@ Kirigami.ScrollablePage {
                     tabs.positionViewAtIndex(index, ListView.Beginning);
                     //tabs.positionViewAtEnd();
                     pageStack.layers.pop()
-                    return;
-
-                    if (tabItem.width < tabsRoot.width) {
-//                         tabItem.width = currentWebView.width
-//                         tabItem.height = currentWebView.height
-                    } else {
-                        tabItem.width = itemWidth
-                        tabItem.height = itemHeight
-                    }
                 }
-
             }
 
             Controls.ToolButton {
@@ -131,6 +121,20 @@ Kirigami.ScrollablePage {
                 anchors.top: parent.top
                 anchors.topMargin: Kirigami.Units.smallSpacing
                 onClicked: tabs.closeTab(index)
+            }
+
+            Controls.Label {
+                anchors {
+                    left: tabItem.left
+                    right: tabItem.right
+                    bottom: tabItem.bottom
+                    margins: Kirigami.Units.gridUnit * 0.5
+                }
+                width: itemWidth
+
+                text: tabs.itemAt(tabs.pageWidth * index, 0).title
+                elide: Qt.ElideRight
+
             }
         }
 
