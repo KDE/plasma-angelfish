@@ -4,6 +4,7 @@
   <name>Angelfish Webbrowser</name>
   <name xml:lang="ca">Navegador web Angelfish</name>
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
+  <name xml:lang="de">Angelfish-Webbrowser</name>
   <name xml:lang="en-GB">Angelfish Webbrowser</name>
   <name xml:lang="es">Navegador web Angelfish</name>
   <name xml:lang="fi">Angelfish-verkkoselain</name>
@@ -22,6 +23,7 @@
   <summary>Webbrowser optimized for mobile devices</summary>
   <summary xml:lang="ca">Navegador web optimitzat per a dispositius mòbils</summary>
   <summary xml:lang="ca-valencia">Navegador web optimitzat per a dispositius mòbils</summary>
+  <summary xml:lang="de">Optimierter Webbrowser für mobile Geräte</summary>
   <summary xml:lang="en-GB">Webbrowser optimised for mobile devices</summary>
   <summary xml:lang="es">Navegador web optimizado para dispositivos móviles</summary>
   <summary xml:lang="fi">Mobiililaitteille optimoitu verkkoselain</summary>
@@ -42,6 +44,7 @@
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
   <developer_name xml:lang="cs">Komunita KDE</developer_name>
+  <developer_name xml:lang="de">KDE-Gemeinschaft</developer_name>
   <developer_name xml:lang="en-GB">KDE Community</developer_name>
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
   <developer_name xml:lang="fi">KDE-yhteisö</developer_name>
@@ -62,6 +65,7 @@
     <p>Angelfish is based on QtWebEngine</p>
     <p xml:lang="ca">L'Angelfish està basat en el QtWebEngine</p>
     <p xml:lang="ca-valencia">L'Angelfish està basat en el QtWebEngine</p>
+    <p xml:lang="de">Angelfish basiert auf QtWebEngine</p>
     <p xml:lang="en-GB">Angelfish is based on QtWebEngine</p>
     <p xml:lang="es">Angelfish está basado en QtWebEngine</p>
     <p xml:lang="fi">Angelfish pohjautuu QtWebEngineen</p>
@@ -79,6 +83,7 @@
     <p>It supports typical browser features, such as</p>
     <p xml:lang="ca">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="ca-valencia">Permet les funcionalitats típiques de navegació, com</p>
+    <p xml:lang="de">Es unterstützt die typischen Funktionen von Browsern wie</p>
     <p xml:lang="en-GB">It supports typical browser features, such as</p>
     <p xml:lang="es">Permite las funciones típicas de un navegador, como</p>
     <p xml:lang="fi">Tukee tavallisia selainominaisuuksia kuten</p>
@@ -98,6 +103,7 @@
       <li xml:lang="ca">adreces d'interès</li>
       <li xml:lang="ca-valencia">adreces d'interés</li>
       <li xml:lang="cs">záložky</li>
+      <li xml:lang="de">Lesezeichen</li>
       <li xml:lang="en-GB">bookmarks</li>
       <li xml:lang="es">marcadores</li>
       <li xml:lang="fi">kirjanmerkit</li>
@@ -118,6 +124,7 @@
       <li xml:lang="ca">historial</li>
       <li xml:lang="ca-valencia">historial</li>
       <li xml:lang="cs">historie</li>
+      <li xml:lang="de">Verlauf</li>
       <li xml:lang="en-GB">history</li>
       <li xml:lang="es">historial</li>
       <li xml:lang="fi">historia</li>
