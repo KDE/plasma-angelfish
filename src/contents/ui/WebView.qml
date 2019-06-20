@@ -22,6 +22,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.4 as Controls
 import QtQuick.Window 2.1
+import QtQuick.Layouts 1.3
 
 import QtWebEngine 1.7
 
@@ -113,6 +114,60 @@ WebEngineView {
         }
     }
 
+    Kirigami.OverlaySheet {
+        id: authSheet
+        property var request
+
+        Kirigami.FormLayout {
+            Layout.fillWidth: true
+
+            Kirigami.Heading {
+                elide: Text.ElideRight
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+
+                text: i18n("Authentification required")
+            }
+
+            Controls.TextField {
+                id: usernameField
+
+                Kirigami.FormData.label: i18n("Username")
+                Layout.fillWidth: true
+            }
+            Controls.TextField {
+                id: passwordField
+                echoMode: TextInput.Password
+
+                Kirigami.FormData.label: i18n("Password")
+                Layout.fillWidth: true
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+
+                Controls.Button {
+                    Layout.fillWidth: true
+                    text: i18n("Accept")
+
+                    onClicked: {
+                        authSheet.request.dialogAccept(usernameField.text, passwordField.text)
+                        authSheet.close()
+                    }
+                }
+                Controls.Button {
+                    Layout.fillWidth: true
+                    text: i18n("Cancel")
+
+                    onClicked: {
+                        authSheet.request.dialogReject()
+                        authSheet.close()
+                    }
+                }
+            }
+        }
+    }
+
     //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
     onLoadingChanged: { // Doesn't work!?!
@@ -180,10 +235,15 @@ WebEngineView {
     }
 
     onContextMenuRequested: {
-        request.accepted = true;
         contextMenu.request = request
         contextMenu.x = request.x
         contextMenu.y = request.y
         contextMenu.open()
+    }
+
+    onAuthenticationDialogRequested: {
+        request.accepted = true
+        authSheet.request = request
+        authSheet.open()
     }
 }
