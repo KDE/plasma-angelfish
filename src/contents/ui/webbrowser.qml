@@ -53,6 +53,11 @@ Kirigami.ApplicationWindow {
         currentWebView.forceActiveFocus()
     }
 
+    /**
+      * Make loading available to c++
+      */
+    Component.onCompleted: browserManager.loadUrlRequested.connect(load)
+
     width: Kirigami.Units.gridUnit * 20
     height: Kirigami.Units.gridUnit * 30
 

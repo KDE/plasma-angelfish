@@ -67,6 +67,8 @@ signals:
     void homepageChanged();
     void searchBaseUrlChanged();
 
+    void loadUrlRequested(const QString &url);
+
 public slots:
     void reload();
 
