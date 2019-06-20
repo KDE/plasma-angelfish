@@ -47,6 +47,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // QML loading
     QQmlApplicationEngine engine;
+
+    // Setup QtWebEngine
+    qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
     QtWebEngine::initialize();
 
     // initial url command line parameter
