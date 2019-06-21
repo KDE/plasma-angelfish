@@ -126,7 +126,7 @@ WebEngineView {
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
 
-                text: i18n("Authentification required")
+                text: i18n("Authentication required")
             }
 
             Controls.TextField {
