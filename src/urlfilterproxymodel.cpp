@@ -19,7 +19,6 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #include "urlfilterproxymodel.h"
 
 #include "urlmodel.h"
@@ -28,7 +27,6 @@ using namespace AngelFish;
 
 UrlFilterProxyModel::UrlFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
-
 }
 
 bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
@@ -39,8 +37,10 @@ bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
             || sourceModel()->data(index, UrlModel::title).toString().contains(filterRegExp()));
 }
 
-bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left,
+                                   const QModelIndex &source_right) const
 {
-    //as we currently don't write the lastVisited role to disk, we simply sort by index/position in the model
+    // as we currently don't write the lastVisited role to disk, we simply sort by index/position in
+    // the model
     return source_left.row() < source_right.row();
 }

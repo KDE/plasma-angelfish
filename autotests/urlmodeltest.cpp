@@ -27,7 +27,6 @@
 
 #include "urlmodel.h"
 
-
 using namespace AngelFish;
 
 class UrlModelTest : public QObject
@@ -46,23 +45,23 @@ class UrlModelTest : public QObject
 
             QVariantMap vm = data.at(i).toObject().toVariantMap();
 
-	    for (const auto &k : vm.keys()) {
-                QVERIFY2(roleNames.contains(k), QString("Key \"" + k + "\" not found roleNames").toLocal8Bit());
+            for (const auto &k : vm.keys()) {
+                QVERIFY2(roleNames.contains(k),
+                         QString("Key \"" + k + "\" not found roleNames").toLocal8Bit());
             }
 
-
             for (const int &k : model->roleNames().keys()) {
-                auto *urlmodel = dynamic_cast<UrlModel*>(model);
+                auto *urlmodel = dynamic_cast<UrlModel *>(model);
                 const QString ks = urlmodel->key(k);
 
                 QVariant ori = vm[ks];
                 QVariant val = model->data(index, k);
 
-//                 qDebug() << "Comparing " << ks << k;
-//                 qDebug() << "          " << (ori == val) << ori << " == " << val;
+                // qDebug() << "Comparing " << ks << k;
+                // qDebug() << "          " << (ori == val) << ori << " == " << val;
 
                 if (!vm.keys().contains(ks)) {
-                    //QVERIFY(val == QVariant());
+                    // QVERIFY(val == QVariant());
                     continue;
                 }
                 if (ks == "lastVisited") {
@@ -75,8 +74,8 @@ class UrlModelTest : public QObject
             }
 
             QString u = model->data(index, UrlModel::url).toString();
-            //QVERIFY(!u.isEmpty());
-//             qDebug() << i << "URL: " << u;
+            // QVERIFY(!u.isEmpty());
+            //             qDebug() << i << "URL: " << u;
         }
     }
 
@@ -84,12 +83,11 @@ class UrlModelTest : public QObject
     {
         QFile jsonFile(fileName);
         jsonFile.open(QIODevice::ReadOnly);
-        //QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
+        // QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
         QJsonDocument jdoc = QJsonDocument::fromJson(jsonFile.readAll());
         jsonFile.close();
         return jdoc.array();
     }
-
 
 private Q_SLOTS:
 
@@ -112,17 +110,21 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Nieuws"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
             QJsonObject u;
             u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://vizZzion.org"));
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("sebas' blog"));
-            u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
-            u.insert(m_bookmarksModel->key(UrlModel::preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
+            u.insert(m_bookmarksModel->key(UrlModel::icon),
+                     QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
+            u.insert(m_bookmarksModel->key(UrlModel::preview),
+                     QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -131,7 +133,8 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Linux Weekly News"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -140,26 +143,32 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Tweakers.net"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
             QJsonObject u;
-            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://en.wikipedia.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::url),
+                     QStringLiteral("http://en.wikipedia.org"));
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Wikipedia"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
-            //u.insert(m_bookmarksModel->key(UrlModel::preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
+            // u.insert(m_bookmarksModel->key(UrlModel::preview),
+            // QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), false);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
             QJsonObject u;
-            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://plasma-mobile.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::url),
+                     QStringLiteral("http://plasma-mobile.org"));
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Plasma Mobile"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("plasma"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         cleanup();
@@ -171,7 +180,8 @@ private Q_SLOTS:
         QVERIFY(m_bookmarksModel->rowCount(QModelIndex()) == 0);
     }
 
-    void testSetSourceData() {
+    void testSetSourceData()
+    {
 
         m_bookmarksModel->setSourceData(m_data);
 
@@ -182,7 +192,6 @@ private Q_SLOTS:
         QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), m_data.count());
 
         QCOMPARE(m_data, m_bookmarksModel->sourceData());
-
     }
 
     void testSave()
@@ -200,9 +209,8 @@ private Q_SLOTS:
         auto loadModel = new UrlModel(fileName);
         QVERIFY(loadModel->load());
 
-
         QJsonArray written = readFile(fpath);
-//         return;
+        // return;
 
         compare(written, loadModel);
         delete loadModel;
@@ -226,11 +234,11 @@ private Q_SLOTS:
         compare(readFile(file1), model);
     };
 
-    void testAdd() {
+    void testAdd()
+    {
         m_bookmarksModel->setSourceData(m_data);
         // Adding bookmarks
         compare(m_data, m_bookmarksModel);
-
 
         {
             int i0 = m_bookmarksModel->rowCount(QModelIndex());
@@ -239,8 +247,9 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("KDE"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("kde-start-here"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
-            //m_data << u;
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
+            // m_data << u;
             m_bookmarksModel->add(u);
             int i1 = m_bookmarksModel->rowCount(QModelIndex());
             QCOMPARE(i0 + 1, i1);
@@ -257,11 +266,13 @@ private Q_SLOTS:
             int i0 = m_bookmarksModel->rowCount(QModelIndex());
 
             QJsonObject u;
-            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://plasma-mobile.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::url),
+                     QStringLiteral("http://plasma-mobile.org"));
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Plasma Mobile"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("plasma"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
 
             m_bookmarksModel->add(u);
             int i2 = m_bookmarksModel->rowCount(QModelIndex());
@@ -270,13 +281,14 @@ private Q_SLOTS:
             QJsonArray copy = m_data;
             copy << u;
             QCOMPARE(copy.count() - 1, m_bookmarksModel->rowCount(QModelIndex()));
-            //QVERIFY(!compare(copy, m_bookmarksModel));
+            // QVERIFY(!compare(copy, m_bookmarksModel));
         }
     }
 
     void testDataChanged()
     {
-        //QSignalSpy spy(m_bookmarksModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &, const QVector<int> &)));
+        // QSignalSpy spy(m_bookmarksModel, SIGNAL(dataChanged(const QModelIndex &, const
+        // QModelIndex &, const QVector<int> &)));
         QSignalSpy spy(m_bookmarksModel, &UrlModel::rowsInserted);
         {
             QJsonObject u;
@@ -284,8 +296,9 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("KDE"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("kde-start-here"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
-            //m_data << u;
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited),
+                     QDateTime::currentDateTime().toString(Qt::ISODate));
+            // m_data << u;
             m_bookmarksModel->add(u);
             m_bookmarksModel->add(u);
         }
@@ -295,10 +308,10 @@ private Q_SLOTS:
         m_bookmarksModel->remove("http://kde.org");
 
         QCOMPARE(spy2.count(), 1);
-
     }
 
-    void testRemove() {
+    void testRemove()
+    {
         m_bookmarksModel->setSourceData(m_data);
 
         // Remove a bookmark
@@ -324,20 +337,18 @@ private Q_SLOTS:
         QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), 0);
     }
 
-    void testNotify() {
+    void testNotify()
+    {
         m_bookmarksModel->setSourceData(m_data);
         // save to file while waiting for model update...
     }
 
 private: // disable from here for testing just the above
-
-
 private:
     QJsonArray m_data;
     QJsonArray m_empty;
 
-    UrlModel* m_bookmarksModel;
-
+    UrlModel *m_bookmarksModel;
 };
 
 QTEST_MAIN(UrlModelTest)

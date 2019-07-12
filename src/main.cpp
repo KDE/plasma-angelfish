@@ -29,7 +29,6 @@
 #include "urlfilterproxymodel.h"
 #include "urlmodel.h"
 
-
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -41,7 +40,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Command line parser
     QCommandLineParser parser;
     parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
-    parser.addOption({"webapp-container", i18n("Start without UI")});
+    parser.addOption({ "webapp-container", i18n("Start without UI") });
     parser.addHelpOption();
     parser.process(app);
 
@@ -67,13 +66,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     auto *proxy = new UrlFilterProxyModel(browserManager);
     proxy->setSourceModel(browserManager->history());
     proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
-// lastVisited is currently not written to disk
-//    proxy->setSortRole(AngelFish::UrlModel::Roles::lastVisited);
-// instead UrlFilterProxyModel sorts based on index
+    // lastVisited is currently not written to disk
+    // proxy->setSortRole(AngelFish::UrlModel::Roles::lastVisited);
+    // instead UrlFilterProxyModel sorts based on index
     proxy->sort(0, Qt::DescendingOrder);
     engine.rootContext()->setContextProperty("urlFilter", proxy);
 
-    qmlRegisterUncreatableType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", "");
+    qmlRegisterUncreatableType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0,
+                                                          "BrowserManager", "");
     qmlRegisterType<QAbstractListModel>();
 
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));

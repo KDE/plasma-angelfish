@@ -31,12 +31,10 @@
 
 #include <QJsonDocument>
 
-
 using namespace AngelFish;
 
-UrlModel::UrlModel(const QString &fileName, QObject *parent) :
-    QAbstractListModel(parent),
-    m_fileName(fileName)
+UrlModel::UrlModel(const QString &fileName, QObject *parent)
+    : QAbstractListModel(parent), m_fileName(fileName)
 {
     m_roleNames.insert(url, "url");
     m_roleNames.insert(title, "title");
@@ -45,18 +43,18 @@ UrlModel::UrlModel(const QString &fileName, QObject *parent) :
     m_roleNames.insert(lastVisited, "lastVisited");
     m_roleNames.insert(bookmarked, "bookmarked");
 
-    //m_fakeData = fakeData();
+    // m_fakeData = fakeData();
 
-    //setSourceData(&m_fakeData);
+    // setSourceData(&m_fakeData);
 
-    //save();
+    // save();
 }
 
 void UrlModel::setSourceData(QJsonArray &data)
 {
     if (m_data != data) {
         m_data = data;
-        //modelReset(); ??
+        // modelReset(); ??
     }
 }
 
@@ -104,10 +102,10 @@ void UrlModel::update()
     // FIXME: Can we be more fine-grained, please?
     beginResetModel();
     endResetModel();
-    //emit QAbstractItemModel::modelReset();
-//     auto topleft = index(0);
-//     auto bottomright = index(rowCount(topleft));
-    //     emit dataChanged(topleft, bottomright);
+    // emit QAbstractItemModel::modelReset();
+    // auto topleft = index(0);
+    // auto bottomright = index(rowCount(topleft));
+    // emit dataChanged(topleft, bottomright);
 }
 
 bool UrlModel::updateIcon(const QString &url, const QString &iconSource)
@@ -120,7 +118,7 @@ bool UrlModel::updateIcon(const QString &url, const QString &iconSource)
             auto obj = m_data[i].toObject();
             obj[key(UrlModel::icon)] = iconSource;
             m_data[i] = obj;
-            emit dataChanged(index(i), index(i), {UrlModel::Roles::icon});
+            emit dataChanged(index(i), index(i), { UrlModel::Roles::icon });
             found = true;
         }
     }
@@ -134,9 +132,8 @@ QString UrlModel::filePath() const
     if (fi.isAbsolute()) {
         return m_fileName;
     }
-    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) \
-                    + QStringLiteral("/angelfish/") \
-                    + m_fileName;
+    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
+            + QStringLiteral("/angelfish/") + m_fileName;
 }
 
 bool UrlModel::load()
@@ -150,10 +147,9 @@ bool UrlModel::load()
         qDebug() << "Could not open" << m_fileName;
         return false;
     }
-    //QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
+    // QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
     QJsonDocument jdoc = QJsonDocument::fromJson(jsonFile.readAll());
     jsonFile.close();
-
 
     qDebug() << "Loaded from file:" << jdoc.array().count() << filePath();
     QJsonArray plugins = jdoc.array();
@@ -178,7 +174,8 @@ bool UrlModel::save()
     jdoc.setArray(urls);
 
     QString destfile = m_fileName;
-    QString destdir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/");
+    QString destdir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
+            + QStringLiteral("/angelfish/");
     QDir dir(destdir);
     const QFileInfo fi(m_fileName);
     if (!fi.isAbsolute()) {
@@ -196,8 +193,8 @@ bool UrlModel::save()
     }
 
     file.write(jdoc.toJson());
-//     file.write(jdoc.toBinaryData());
-    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls) ";// << jdoc.toJson();
+    // file.write(jdoc.toBinaryData());
+    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls) "; // << jdoc.toJson();
 
     return true;
 }
@@ -218,11 +215,11 @@ void UrlModel::add(const QJsonObject &data)
                 m_data.append(data);
                 endMoveRows();
             } else {
-                //Qt Model Api does not  allow overlapping moves, so we need to make sure
-                //not to move down the last entry
+                // Qt Model Api does not  allow overlapping moves, so we need to make sure
+                // not to move down the last entry
                 m_data[i] = data;
             }
-            //notify about lastVisited changed
+            // notify about lastVisited changed
             emit dataChanged(index(m_data.size()), index(m_data.size()));
             return;
         }
@@ -233,7 +230,7 @@ void UrlModel::add(const QJsonObject &data)
     endInsertRows();
 }
 
-void UrlModel::remove(const QString& url)
+void UrlModel::remove(const QString &url)
 {
     for (int i = 0; i < m_data.count(); i++) {
         const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
@@ -241,10 +238,9 @@ void UrlModel::remove(const QString& url)
             beginRemoveRows(QModelIndex(), i, i);
             m_data.removeAt(i);
             endRemoveRows();
-            //int n = m_data.count();
-            //qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
+            // int n = m_data.count();
+            // qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
             return;
         }
     }
 }
-

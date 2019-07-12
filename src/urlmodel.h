@@ -28,19 +28,11 @@
 
 namespace AngelFish {
 
-
 class UrlModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum Roles {
-        url = Qt::UserRole + 1,
-        title,
-        icon,
-        preview,
-        lastVisited,
-        bookmarked
-    };
+    enum Roles { url = Qt::UserRole + 1, title, icon, preview, lastVisited, bookmarked };
 
     explicit UrlModel(const QString &filename, QObject *parent = 0);
 
@@ -68,7 +60,6 @@ public:
 private:
     QJsonArray m_data;
     QHash<int, QByteArray> m_roleNames;
-
 
     QString m_fileName;
 };

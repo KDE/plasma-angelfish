@@ -23,12 +23,9 @@
 #include <QUrl>
 #include <QSettings>
 
-
 using namespace AngelFish;
 
-BrowserManager::BrowserManager(QObject *parent)
-    : QObject(parent),
-      m_settings(new QSettings)
+BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(new QSettings)
 {
 }
 
@@ -44,9 +41,9 @@ void BrowserManager::reload()
     qDebug() << "BookmarksManager::reload()";
 }
 
-UrlModel* BrowserManager::bookmarks()
+UrlModel *BrowserManager::bookmarks()
 {
-//     qDebug() << "BookmarksManager::bookmarks()";
+    // qDebug() << "BookmarksManager::bookmarks()";
     if (!m_bookmarks) {
         m_bookmarks = new UrlModel(QStringLiteral("bookmarks.json"), this);
         m_bookmarks->load();
@@ -54,9 +51,9 @@ UrlModel* BrowserManager::bookmarks()
     return m_bookmarks;
 }
 
-UrlModel* BrowserManager::history()
+UrlModel *BrowserManager::history()
 {
-//     qDebug() << "BrowserManager::history()";
+    // qDebug() << "BrowserManager::history()";
     if (!m_history) {
         m_history = new UrlModel(QStringLiteral("history.json"), this);
         m_history->load();
@@ -64,39 +61,39 @@ UrlModel* BrowserManager::history()
     return m_history;
 }
 
-void BrowserManager::addBookmark(const QVariantMap& bookmarkdata)
+void BrowserManager::addBookmark(const QVariantMap &bookmarkdata)
 {
     qDebug() << "Add bookmark";
     qDebug() << "      data: " << bookmarkdata;
     bookmarks()->add(QJsonObject::fromVariantMap(bookmarkdata));
 }
 
-void BrowserManager::removeBookmark(const QString& url)
+void BrowserManager::removeBookmark(const QString &url)
 {
     bookmarks()->remove(url);
 }
 
-void BrowserManager::addToHistory(const QVariantMap& pagedata)
+void BrowserManager::addToHistory(const QVariantMap &pagedata)
 {
-//     qDebug() << "Add History";
-//     qDebug() << "      data: " << pagedata;
+    // qDebug() << "Add History";
+    // qDebug() << "      data: " << pagedata;
     history()->add(QJsonObject::fromVariantMap(pagedata));
     emit historyChanged();
 }
 
-void BrowserManager::removeFromHistory(const QString& url)
+void BrowserManager::removeFromHistory(const QString &url)
 {
     history()->remove(url);
     emit historyChanged();
 }
 
-QString BrowserManager::urlFromUserInput(const QString& input)
+QString BrowserManager::urlFromUserInput(const QString &input)
 {
     QUrl url = QUrl::fromUserInput(input);
     return url.toString();
 }
 
-void BrowserManager::setHomepage(const QString& homepage)
+void BrowserManager::setHomepage(const QString &homepage)
 {
     m_settings->setValue("browser/homepage", homepage);
     emit homepageChanged();
@@ -107,7 +104,7 @@ QString BrowserManager::homepage()
     return m_settings->value("browser/homepage", "https://start.duckduckgo.com").toString();
 }
 
-void BrowserManager::setSearchBaseUrl(const QString& searchBaseUrl)
+void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
 {
     m_settings->setValue("browser/searchBaseUrl", searchBaseUrl);
     emit searchBaseUrlChanged();
@@ -115,5 +112,6 @@ void BrowserManager::setSearchBaseUrl(const QString& searchBaseUrl)
 
 QString BrowserManager::searchBaseUrl()
 {
-    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=").toString();
+    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=")
+            .toString();
 }

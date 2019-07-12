@@ -40,19 +40,19 @@ class BrowserManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
-    Q_PROPERTY(QAbstractListModel* history READ history NOTIFY historyChanged)
+    Q_PROPERTY(QAbstractListModel *bookmarks READ bookmarks NOTIFY bookmarksChanged)
+    Q_PROPERTY(QAbstractListModel *history READ history NOTIFY historyChanged)
 
     Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
-    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY searchBaseUrlChanged)
+    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
+                       searchBaseUrlChanged)
 
 public:
-
     BrowserManager(QObject *parent = nullptr);
     ~BrowserManager() override;
 
-    UrlModel* bookmarks();
-    UrlModel* history();
+    UrlModel *bookmarks();
+    UrlModel *history();
 
     QString homepage();
     QString searchBaseUrl();
@@ -78,16 +78,15 @@ public slots:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void setHomepage(const QString& homepage);
-    void setSearchBaseUrl(const QString& searchBaseUrl);
+    void setHomepage(const QString &homepage);
+    void setSearchBaseUrl(const QString &searchBaseUrl);
 
 private:
-
-    UrlModel* m_bookmarks = nullptr;
-    UrlModel* m_history = nullptr;
-    QSettings* m_settings;
+    UrlModel *m_bookmarks = nullptr;
+    UrlModel *m_history = nullptr;
+    QSettings *m_settings;
 };
 
 } // namespace
 
-#endif //BOOKMARKSMANAGER_H
+#endif // BOOKMARKSMANAGER_H
