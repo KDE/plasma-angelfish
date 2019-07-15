@@ -14,6 +14,7 @@
   <name xml:lang="ko">Angelfish 웹 브라우저</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="nn">Angelfish nettlesar</name>
+  <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
   <name xml:lang="pt-BR">Navegador Web Angelfish</name>
   <name xml:lang="sk">Prehliadač Angelfish</name>
@@ -34,6 +35,7 @@
   <summary xml:lang="ko">모바일 장치에 최적화된 웹 브라우저</summary>
   <summary xml:lang="nl">Webbrowser geoptimaliseerd voor mobiele apparaten</summary>
   <summary xml:lang="nn">Nettlesar optimert for mobile einingar</summary>
+  <summary xml:lang="pl">Przeglądarka sieciowa zoptymalizowana dla urządzeń przenośnych</summary>
   <summary xml:lang="pt">Navegador Web optimizado para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web otimizado para dispositivos móveis</summary>
   <summary xml:lang="sv">Webbläsare optimerad för mobila apparater</summary>
@@ -56,6 +58,7 @@
   <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
+  <developer_name xml:lang="pl">Społeczność KDE</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
   <developer_name xml:lang="pt-BR">KDE Community</developer_name>
   <developer_name xml:lang="ru">Сообщество KDE</developer_name>
@@ -78,6 +81,7 @@
     <p xml:lang="ko">Angelfish는 QtWebEngine을 사용합니다</p>
     <p xml:lang="nl">Angelfish is gebaseerd op QtWebEngine</p>
     <p xml:lang="nn">Angelfish er basert på QtWebEngine</p>
+    <p xml:lang="pl">Angelfish jest oparta na QtWebEngine</p>
     <p xml:lang="pt">O Angelfish baseia-se no QtWebEngine</p>
     <p xml:lang="pt-BR">O Angelfish tem como base o QtWebEngine</p>
     <p xml:lang="sv">Angelfish är baserad på QtWebEngine</p>
@@ -97,6 +101,7 @@
     <p xml:lang="ko">다음과 같은 웹 브라우저 기능을 제공합니다</p>
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="nn">Støttar vanlege nettlesarfunksjonar, som</p>
+    <p xml:lang="pl">Obsługuje zwyczajne funkcje przeglądarki, takie jak</p>
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
     <p xml:lang="pt-BR">Tem suporte a funcionalidades típicas de navegação, como</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
@@ -119,6 +124,7 @@
       <li xml:lang="ko">책갈피</li>
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="nn">bokmerke</li>
+      <li xml:lang="pl">zakładki</li>
       <li xml:lang="pt">favoritos</li>
       <li xml:lang="pt-BR">favoritos</li>
       <li xml:lang="sk">zalozky</li>
@@ -141,6 +147,7 @@
       <li xml:lang="ko">과거 기록</li>
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="nn">besøkslogg</li>
+      <li xml:lang="pl">historia</li>
       <li xml:lang="pt">histórico</li>
       <li xml:lang="pt-BR">histórico</li>
       <li xml:lang="sk">História</li>
