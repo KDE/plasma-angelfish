@@ -76,10 +76,13 @@ Kirigami.ApplicationWindow {
     pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
 
     pageStack.initialPage: Kirigami.Page {
+        id: rootPage
         leftPadding: 0
         rightPadding: 0
         topPadding: 0
         bottomPadding: 0
+
+        property bool privateMode: false
 
         ListWebView {
             id: tabs
@@ -217,6 +220,13 @@ Kirigami.ApplicationWindow {
                 text: i18n("Tabs")
             },
             Kirigami.Action {
+                icon.name: "view-private"
+                onTriggered: {
+                    rootPage.privateMode ? rootPage.privateMode = false : rootPage.privateMode = true
+                }
+                text: rootPage.privateMode ? i18n("Leave private mode") : i18n("Private mode")
+            },
+            Kirigami.Action {
                 icon.name: "bookmarks"
                 onTriggered: {
                     pageStack.layers.push("Bookmarks.qml")
@@ -297,6 +307,8 @@ Kirigami.ApplicationWindow {
         Navigation {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
+
+            Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
 
             layer.enabled: navigation.visible
             layer.effect: DropShadow {

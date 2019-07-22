@@ -52,12 +52,15 @@ Item {
         visible: navigationShown
 
         spacing: Kirigami.Units.smallSpacing
+        Kirigami.Theme.inherit: true
 
         Controls.ToolButton {
             icon.name: "tab-duplicate"
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
+
+            Kirigami.Theme.inherit: true
 
             onClicked: {
                 pageStack.layers.push("Tabs.qml")
@@ -73,6 +76,8 @@ Item {
             visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile
             icon.name: "go-previous"
 
+            Kirigami.Theme.inherit: true
+
             onClicked: currentWebView.goBack()
         }
 
@@ -84,6 +89,8 @@ Item {
 
             visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile
             icon.name: "go-next"
+
+            Kirigami.Theme.inherit: true
 
             onClicked: currentWebView.goForward()
         }
@@ -97,6 +104,9 @@ Item {
 
             selectByMouse: true
             focus: false
+
+            Kirigami.Theme.inherit: true
+
             onActiveFocusChanged: {
                 if (activeFocus) {
                     selectAll()
@@ -120,6 +130,8 @@ Item {
 
             visible: !Kirigami.Settings.isMobile
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
+
+            Kirigami.Theme.inherit: true
 
             onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
 
@@ -149,6 +161,8 @@ Item {
             Layout.preferredHeight: buttonSize
 
             icon.name: "open-menu-symbolic"
+
+            Kirigami.Theme.inherit: true
 
             onClicked: contextDrawer.open()
         }

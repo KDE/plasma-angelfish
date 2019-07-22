@@ -193,7 +193,9 @@ WebEngineView {
             //pageInfo.url = webEngineView.url;
             //pageInfo.title = webEngineView.title;
             //pageInfo.icon = webEngineView.icon;
-            addHistoryEntry();
+
+            if (!rootPage.privateMode)
+                addHistoryEntry();
 
         }
         if (loadRequest.status == WebEngineView.LoadFailedStatus) {
