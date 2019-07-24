@@ -47,6 +47,8 @@ WebEngineView {
                 return desktopUserAgent
         }
 
+        offTheRecord: rootPage.privateMode
+
         onDownloadRequested: {
             // if we don't accept the request right away, it will be deleted
             download.accept()
