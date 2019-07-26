@@ -250,4 +250,10 @@ WebEngineView {
         authSheet.request = request
         authSheet.open()
     }
+
+    onFeaturePermissionRequested: {
+        permissionQuestion.permission = feature
+        permissionQuestion.origin = securityOrigin
+        permissionQuestion.visible = true
+    }
 }

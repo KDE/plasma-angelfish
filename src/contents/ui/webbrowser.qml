@@ -122,7 +122,7 @@ Kirigami.ApplicationWindow {
 
             actions: [
                 Kirigami.Action {
-                    iconName: "tab-new"
+                    icon.name: "tab-new"
                     text: i18n("Open")
                     onTriggered: {
                         tabs.newTab(newTabQuestion.url.toString())
@@ -153,10 +153,53 @@ Kirigami.ApplicationWindow {
                     }
                 },
                 Kirigami.Action {
-                    iconName: "dialog-cancel"
+                    icon.name: "dialog-cancel"
                     text: i18n("Cancel")
                     onTriggered: {
                         downloadQuestion.download.cancel()
+                        downloadQuestion.visible = false
+                    }
+                }
+            ]
+        }
+
+        Kirigami.InlineMessage {
+            property int permission
+            property string origin
+
+            id: permissionQuestion
+            text: {
+                var text = ""
+                if (permission === WebEngineView.Geolocation)
+                    text = i18n("geo location")
+                else if (permission === WebEngineView.MediaAudioCapture)
+                    text = i18n("the microphone")
+                else if (permission === WebEngineView.MediaVideoCapture)
+                    text = i18n("the camera")
+                else if (permission === WebEngineView.MediaAudioVideoCapture)
+                    text = i18n("camera and microphone")
+
+                i18n("Do you want to allow the website to access " + text + "?")
+            }
+            showCloseButton: false
+            anchors.bottom: navigation.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            actions: [
+                Kirigami.Action {
+                    icon.name: "dialog-ok-apply"
+                    text: i18n("Accept")
+                    onTriggered: {
+                        currentWebView.grantFeaturePermission(permissionQuestion.origin, permissionQuestion.permission, true)
+                        permissionQuestion.visible = false
+                    }
+                },
+                Kirigami.Action {
+                    icon.name: "dialog-cancel"
+                    text: i18n("Decline")
+                    onTriggered: {
+                        currentWebView.grantFeaturePermission(permissionQuestion.origin, permissionQuestion.permission, false)
                         downloadQuestion.visible = false
                     }
                 }
