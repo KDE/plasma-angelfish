@@ -171,15 +171,15 @@ Kirigami.ApplicationWindow {
             text: {
                 var text = ""
                 if (permission === WebEngineView.Geolocation)
-                    text = i18n("geo location")
+                    text = i18n("Do you want to allow the website to access the geo location?")
                 else if (permission === WebEngineView.MediaAudioCapture)
-                    text = i18n("the microphone")
+                    text = i18n("Do you want to allow the website to access the microphone?")
                 else if (permission === WebEngineView.MediaVideoCapture)
-                    text = i18n("the camera")
+                    text = i18n("Do you want to allow the website to access the camera?")
                 else if (permission === WebEngineView.MediaAudioVideoCapture)
-                    text = i18n("camera and microphone")
+                    text = i18n("Do you want to allow the website to access the camera and the microphone?")
 
-                i18n("Do you want to allow the website to access " + text + "?")
+                text
             }
             showCloseButton: false
             anchors.bottom: navigation.top
