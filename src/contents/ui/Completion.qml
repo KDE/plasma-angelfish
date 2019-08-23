@@ -29,7 +29,6 @@ ListView {
 
     property string searchText
 
-
 //    verticalLayoutDirection: ListView.BottomToTop
     clip: true
 

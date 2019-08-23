@@ -379,6 +379,12 @@ Kirigami.ApplicationWindow {
             visible: navigation.textFocus
             searchText: navigation.text
 
+            Behavior on height {
+                NumberAnimation {
+                    duration: Kirigami.Units.shortDuration * 2
+                }
+            }
+
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: navigation.horizontalCenter
