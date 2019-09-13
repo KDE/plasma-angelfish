@@ -34,7 +34,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("KDE");
-    QCoreApplication::setOrganizationDomain("kde.org");
+    QCoreApplication::setOrganizationDomain("mobile.kde.org");
     QCoreApplication::setApplicationName("angelfish");
 
     // Command line parser
