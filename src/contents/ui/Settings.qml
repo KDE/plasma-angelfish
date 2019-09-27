@@ -29,32 +29,50 @@ import org.kde.kirigami 2.2 as Kirigami
 Kirigami.ScrollablePage {
     title: i18n("Settings")
 
+    topPadding: 0
+    bottomPadding: 0
+    leftPadding: 0
+    rightPadding: 0
+
+    background: Rectangle {
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        color: Kirigami.Theme.backgroundColor
+    }
+
     ColumnLayout {
         id: settingsPage
 
-        Controls.CheckDelegate {
-            text: i18n("Enable JavaScript")
-            Layout.fillWidth: true
-            onCheckedChanged: {
-                var settings = currentWebView.settings;
-                settings.javascriptEnabled = checked;
-                // FIXME: save to config
-            }
-            Component.onCompleted: {
-                checked = currentWebView.settings.javascriptEnabled;
+        spacing: 0
+
+        Kirigami.AbstractListItem {
+            width: parent.width
+            Controls.CheckBox {
+                text: i18n("Enable JavaScript")
+                Layout.fillWidth: true
+                onCheckedChanged: {
+                    var settings = currentWebView.settings;
+                    settings.javascriptEnabled = checked;
+                    // FIXME: save to config
+                }
+                Component.onCompleted: {
+                    checked = currentWebView.settings.javascriptEnabled;
+                }
             }
         }
 
-        Controls.CheckDelegate {
-            text: i18n("Load images")
-            Layout.fillWidth: true
-            onCheckedChanged: {
-                var settings = currentWebView.settings;
-                settings.autoLoadImages = checked;
-                // FIXME: save to config
-            }
-            Component.onCompleted: {
-                checked = currentWebView.settings.autoLoadImages;
+        Kirigami.AbstractListItem {
+            width: parent.width
+            Controls.CheckBox {
+                text: i18n("Load images")
+                Layout.fillWidth: true
+                onCheckedChanged: {
+                    var settings = currentWebView.settings;
+                    settings.autoLoadImages = checked;
+                    // FIXME: save to config
+                }
+                Component.onCompleted: {
+                    checked = currentWebView.settings.autoLoadImages;
+                }
             }
         }
 
@@ -80,7 +98,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        Controls.ItemDelegate {
+        Kirigami.BasicListItem {
             text: i18n("Homepage")
             Layout.fillWidth: true
             onClicked: {
@@ -88,7 +106,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        Controls.ItemDelegate {
+        Kirigami.BasicListItem {
             text: i18n("Search Engine")
             Layout.fillWidth: true
             onClicked: {
