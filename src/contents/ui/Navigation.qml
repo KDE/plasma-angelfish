@@ -55,6 +55,17 @@ Item {
         Kirigami.Theme.inherit: true
 
         Controls.ToolButton {
+            icon.name: "open-menu-symbolic"
+
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            Kirigami.Theme.inherit: true
+
+            onClicked: globalDrawer.open()
+        }
+
+        Controls.ToolButton {
             icon.name: "tab-duplicate"
 
             Layout.preferredWidth: buttonSize
@@ -160,7 +171,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            icon.name: "open-menu-symbolic"
+            icon.name: "overflow-menu"
 
             Kirigami.Theme.inherit: true
 

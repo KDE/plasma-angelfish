@@ -253,47 +253,56 @@ Kirigami.ApplicationWindow {
             handleVisible: false
         }
 
+        Kirigami.GlobalDrawer {
+            id: globalDrawer
+
+            handleVisible: false
+
+            actions: [
+                Kirigami.Action {
+                    icon.name: "tab-duplicate"
+                    onTriggered: {
+                        pageStack.layers.push("Tabs.qml")
+                    }
+                    text: i18n("Tabs")
+                },
+                Kirigami.Action {
+                    icon.name: "view-private"
+                    onTriggered: {
+                        rootPage.privateMode ? rootPage.privateMode = false : rootPage.privateMode = true
+                    }
+                    text: rootPage.privateMode ? i18n("Leave private mode") : i18n("Private mode")
+                },
+                Kirigami.Action {
+                    icon.name: "bookmarks"
+                    onTriggered: {
+                        pageStack.layers.push("Bookmarks.qml")
+                    }
+                    text: i18n("Bookmarks")
+                },
+                Kirigami.Action {
+                    icon.name: "view-history"
+                    onTriggered: {
+                        pageStack.layers.push("History.qml")
+                    }
+                    text: i18n("History")
+                },
+                Kirigami.Action {
+                    icon.name: "configure"
+                    text: i18n("Settings")
+                    onTriggered: {
+                        pageStack.layers.push("Settings.qml")
+                    }
+                }
+            ]
+        }
+
         // The menu at the top right
         contextualActions: [
-            Kirigami.Action {
-                icon.name: "tab-duplicate"
-                onTriggered: {
-                    pageStack.layers.push("Tabs.qml")
-                }
-                text: i18n("Tabs")
-            },
-            Kirigami.Action {
-                icon.name: "view-private"
-                onTriggered: {
-                    rootPage.privateMode ? rootPage.privateMode = false : rootPage.privateMode = true
-                }
-                text: rootPage.privateMode ? i18n("Leave private mode") : i18n("Private mode")
-            },
-            Kirigami.Action {
-                icon.name: "bookmarks"
-                onTriggered: {
-                    pageStack.layers.push("Bookmarks.qml")
-                }
-                text: i18n("Bookmarks")
-            },
-            Kirigami.Action {
-                icon.name: "view-history"
-                onTriggered: {
-                    pageStack.layers.push("History.qml")
-                }
-                text: i18n("History")
-            },
             Kirigami.Action {
                 icon.name: "edit-find"
                 onTriggered: findSheet.open()
                 text: i18n("Find in page")
-            },
-            Kirigami.Action {
-                icon.name: "configure"
-                text: i18n("Settings")
-                onTriggered: {
-                    pageStack.layers.push("Settings.qml")
-                }
             },
             Kirigami.Action {
                 icon.name: "document-share"
