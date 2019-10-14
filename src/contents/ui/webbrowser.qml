@@ -56,7 +56,12 @@ Kirigami.ApplicationWindow {
     /**
       * Make loading available to c++
       */
-    Component.onCompleted: browserManager.loadUrlRequested.connect(load)
+    Connections {
+        target: browserManager
+        onLoadUrlRequested: {
+            load(url)
+        }
+    }
 
     width: Kirigami.Units.gridUnit * 20
     height: Kirigami.Units.gridUnit * 30
