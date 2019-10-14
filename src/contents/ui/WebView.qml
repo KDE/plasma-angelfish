@@ -33,7 +33,16 @@ WebEngineView {
 
     property string errorCode: ""
     property string errorString: ""
+
+    /**
+      * User agent used on mobile devices
+      */
     property string mobileUserAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.128 Mobile Safari/537.36"
+
+    /**
+      * User agent used on desktop devices,
+      * Defaults to QtWebEngine's default (it is only supported on desktop devices by Qt currently)
+      */
     property string desktopUserAgent: profile.httpUserAgent
 
     width: pageWidth
@@ -74,9 +83,11 @@ WebEngineView {
     }
 
     settings {
+        // Disable builtin error pages in favor of our own
         errorPageEnabled: false
     }
 
+    // Custom context menu
     Controls.Menu {
         property var request
         id: contextMenu

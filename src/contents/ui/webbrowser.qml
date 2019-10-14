@@ -71,6 +71,9 @@ Kirigami.ApplicationWindow {
     width: Kirigami.Units.gridUnit * 20
     height: Kirigami.Units.gridUnit * 30
 
+    /**
+      * Add page of currently active webview to history
+      */
     function addHistoryEntry() {
         //print("Adding history");
         var request = new Object;// FIXME
@@ -80,8 +83,8 @@ Kirigami.ApplicationWindow {
         browserManager.addToHistory(request);
     }
 
+    // Only show ToolBar if a layer is open
     property bool layerShown : pageStack.layers.depth > 1
-
     pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
 
     globalDrawer: Kirigami.GlobalDrawer {
@@ -134,6 +137,7 @@ Kirigami.ApplicationWindow {
         handleVisible: false
     }
 
+    // Main Page
     pageStack.initialPage: Kirigami.Page {
         id: rootPage
         leftPadding: 0
@@ -228,17 +232,14 @@ Kirigami.ApplicationWindow {
 
             id: permissionQuestion
             text: {
-                var text = ""
                 if (permission === WebEngineView.Geolocation)
-                    text = i18n("Do you want to allow the website to access the geo location?")
+                    i18n("Do you want to allow the website to access the geo location?")
                 else if (permission === WebEngineView.MediaAudioCapture)
-                    text = i18n("Do you want to allow the website to access the microphone?")
+                    i18n("Do you want to allow the website to access the microphone?")
                 else if (permission === WebEngineView.MediaVideoCapture)
-                    text = i18n("Do you want to allow the website to access the camera?")
+                    i18n("Do you want to allow the website to access the camera?")
                 else if (permission === WebEngineView.MediaAudioVideoCapture)
-                    text = i18n("Do you want to allow the website to access the camera and the microphone?")
-
-                text
+                    i18n("Do you want to allow the website to access the camera and the microphone?")
             }
             showCloseButton: false
             anchors.bottom: navigation.top
@@ -294,6 +295,7 @@ Kirigami.ApplicationWindow {
 
         }
 
+        // Find in page
         InputSheet {
             id: findSheet
             title: i18n("Find in page")
@@ -302,11 +304,12 @@ Kirigami.ApplicationWindow {
             onAccepted: currentWebView.findText(findSheet.text)
         }
 
+        // Share page
         ShareSheet {
             id: shareSheet
         }
 
-        // The menu at the top right
+        // The menu at the bottom right
         contextualActions: [
             Kirigami.Action {
                 icon.name: "edit-find"
@@ -365,6 +368,7 @@ Kirigami.ApplicationWindow {
             }
         ]
 
+        // Bottom navigation bar
         Navigation {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
