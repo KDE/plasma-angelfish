@@ -20,6 +20,7 @@
  ***************************************************************************/
 
 #include "urlfilterproxymodel.h"
+#include "browsermanager.h"
 
 #include "urlmodel.h"
 
@@ -27,6 +28,7 @@ using namespace AngelFish;
 
 UrlFilterProxyModel::UrlFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
+    setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
 
 bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
@@ -43,4 +45,20 @@ bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left,
     // as we currently don't write the lastVisited role to disk, we simply sort by index/position in
     // the model
     return source_left.row() < source_right.row();
+}
+
+void UrlFilterProxyModel::setSourceModel(QAbstractItemModel *sourceModel)
+{
+    if (QSortFilterProxyModel::sourceModel() != sourceModel) {
+        QSortFilterProxyModel::setSourceModel(sourceModel);
+
+        sort(0, Qt::DescendingOrder);
+
+        emit sourceModelChanged();
+    }
+}
+
+QAbstractItemModel *UrlFilterProxyModel::sourceModel() const
+{
+    return QSortFilterProxyModel::sourceModel();
 }

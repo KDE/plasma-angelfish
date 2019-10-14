@@ -23,16 +23,25 @@
 #define URLFILTERPROXYMODEL_H
 
 #include <QtCore/QSortFilterProxyModel>
+#include <QAbstractItemModel>
 
 class UrlFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+
+    Q_PROPERTY(QAbstractItemModel *sourceModel READ sourceModel WRITE setSourceModel NOTIFY sourceModelChanged)
+
 public:
     UrlFilterProxyModel(QObject *parent = nullptr);
 
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
-
     bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
+
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
+    QAbstractItemModel *sourceModel() const;
+
+signals:
+    void sourceModelChanged();
 };
 
 #endif // URLFILTERPROXYMODEL_H

@@ -34,7 +34,7 @@ class UrlModel : public QAbstractListModel
 public:
     enum Roles { url = Qt::UserRole + 1, title, icon, preview, lastVisited, bookmarked };
 
-    explicit UrlModel(const QString &filename, QObject *parent = 0);
+    explicit UrlModel(const QString &filename, QObject *parent = nullptr);
 
     void setSourceData(QJsonArray &data);
     QJsonArray sourceData() const;

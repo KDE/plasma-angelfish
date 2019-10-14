@@ -25,6 +25,7 @@ import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.4 as Kirigami
+import org.kde.mobile.angelfish 1.0
 
 
 Kirigami.ApplicationWindow {
@@ -53,6 +54,10 @@ Kirigami.ApplicationWindow {
         currentWebView.forceActiveFocus()
     }
 
+    BrowserManager {
+        id: browserManager
+    }
+
     /**
       * Make loading available to c++
       */
@@ -73,7 +78,6 @@ Kirigami.ApplicationWindow {
         request.title = currentWebView.title;
         request.icon = currentWebView.icon;
         browserManager.addToHistory(request);
-
     }
 
     property bool layerShown : pageStack.layers.depth > 1
@@ -387,7 +391,10 @@ Kirigami.ApplicationWindow {
 
         Completion {
             id: completion
-            model: urlFilter
+            model: UrlFilterProxyModel {
+                id: urlFilter
+                sourceModel: browserManager.history
+            }
             width: parent.width
             height: 0.5 * parent.height
             visible: navigation.textFocus
