@@ -172,7 +172,7 @@ WebEngineView {
 
     //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
-    onLoadingChanged: { // Doesn't work!?!
+    onLoadingChanged: {
         //print("Loading: " + loading);
         print("    url: " + loadRequest.url)
         //print("   icon: " + webEngineView.icon)
@@ -186,19 +186,10 @@ WebEngineView {
         */
         var ec = "";
         var es = "";
-        //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
-        //if (loadRequest.status == WebEngineView.LoadStartedStatus) {
-        //}
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
-            // record history, set current page info
-            //contentView.state = "hidden"
-            //pageInfo.url = webEngineView.url;
-            //pageInfo.title = webEngineView.title;
-            //pageInfo.icon = webEngineView.icon;
-
-            if (!rootPage.privateMode)
+            if (!rootPage.privateMode) {
                 addHistoryEntry();
-
+            }
         }
         if (loadRequest.status === WebEngineView.LoadFailedStatus) {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
