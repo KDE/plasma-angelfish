@@ -189,7 +189,7 @@ WebEngineView {
         //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
         //if (loadRequest.status == WebEngineView.LoadStartedStatus) {
         //}
-        if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
+        if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             // record history, set current page info
             //contentView.state = "hidden"
             //pageInfo.url = webEngineView.url;
@@ -200,7 +200,7 @@ WebEngineView {
                 addHistoryEntry();
 
         }
-        if (loadRequest.status == WebEngineView.LoadFailedStatus) {
+        if (loadRequest.status === WebEngineView.LoadFailedStatus) {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
             ec = loadRequest.errorCode;
             es = loadRequest.errorString;

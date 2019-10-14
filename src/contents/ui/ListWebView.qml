@@ -46,7 +46,7 @@ ListView {
 
     model: ListModel {
         id: tabsModel
-        ListElement { pageurl: "https://plasma-mobile.org" }
+        ListElement { pageurl: "about:blank" }
     }
 
     delegate: WebView {
