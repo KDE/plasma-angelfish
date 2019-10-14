@@ -89,8 +89,7 @@ void BrowserManager::removeFromHistory(const QString &url)
 
 QString BrowserManager::urlFromUserInput(const QString &input)
 {
-    QUrl url = QUrl::fromUserInput(input);
-    return url.toString();
+    return QUrl::fromUserInput(input).toString();
 }
 
 void BrowserManager::setHomepage(const QString &homepage)
