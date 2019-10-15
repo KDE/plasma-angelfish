@@ -14,5 +14,10 @@
         <file alias="InputSheet.qml">contents/ui/InputSheet.qml</file>
         <file alias="ShareSheet.qml">contents/ui/ShareSheet.qml</file>
         <file alias="Completion.qml">contents/ui/Completion.qml</file>
+        <file alias="AuthSheet.qml">contents/ui/AuthSheet.qml</file>
+        <file alias="NewTabQuestion.qml">contents/ui/NewTabQuestion.qml</file>
+        <file alias="DownloadQuestion.qml">contents/ui/DownloadQuestion.qml</file>
+        <file alias="PermissionQuestion.qml">contents/ui/PermissionQuestion.qml</file>
+        <file alias="FindInPageSheet.qml">contents/ui/FindInPageSheet.qml</file>
     </qresource>
 </RCC>

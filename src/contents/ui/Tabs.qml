@@ -57,7 +57,7 @@ Kirigami.ScrollablePage {
 
                 //live: true
                 anchors.fill: parent
-                anchors.margins: Kirigami.Units.gridUnit / 2
+                anchors.margins: Kirigami.Units.gridUnit * 0.5
 
                 sourceRect: Qt.rect(0, 0, width * 2, height * 2)
 

@@ -172,98 +172,12 @@ Kirigami.ApplicationWindow {
             visible: currentWebView.errorCode !== ""
         }
 
-        Kirigami.InlineMessage {
-            id: newTabQuestion
-            type: Kirigami.MessageType.Warning
-            text: url? i18n("Site wants to open a new tab: \n%1", url.toString()) : ""
-            showCloseButton: true
+        Loader {
+            id: questionLoader
+
             anchors.bottom: navigation.top
             anchors.left: parent.left
             anchors.right: parent.right
-
-            property var url
-
-            actions: [
-                Kirigami.Action {
-                    icon.name: "tab-new"
-                    text: i18n("Open")
-                    onTriggered: {
-                        tabs.newTab(newTabQuestion.url.toString())
-                        newTabQuestion.visible = false
-                    }
-                }
-
-            ]
-        }
-
-        Kirigami.InlineMessage {
-            id: downloadQuestion
-            text: i18n("Do you want to download this file?")
-            showCloseButton: false
-            anchors.bottom: navigation.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            property var download
-
-            actions: [
-                Kirigami.Action {
-                    iconName: "download"
-                    text: i18n("Download")
-                    onTriggered: {
-                        downloadQuestion.download.resume()
-                        downloadQuestion.visible = false
-                    }
-                },
-                Kirigami.Action {
-                    icon.name: "dialog-cancel"
-                    text: i18n("Cancel")
-                    onTriggered: {
-                        downloadQuestion.download.cancel()
-                        downloadQuestion.visible = false
-                    }
-                }
-            ]
-        }
-
-        Kirigami.InlineMessage {
-            property int permission
-            property string origin
-
-            id: permissionQuestion
-            text: {
-                if (permission === WebEngineView.Geolocation)
-                    i18n("Do you want to allow the website to access the geo location?")
-                else if (permission === WebEngineView.MediaAudioCapture)
-                    i18n("Do you want to allow the website to access the microphone?")
-                else if (permission === WebEngineView.MediaVideoCapture)
-                    i18n("Do you want to allow the website to access the camera?")
-                else if (permission === WebEngineView.MediaAudioVideoCapture)
-                    i18n("Do you want to allow the website to access the camera and the microphone?")
-            }
-            showCloseButton: false
-            anchors.bottom: navigation.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            actions: [
-                Kirigami.Action {
-                    icon.name: "dialog-ok-apply"
-                    text: i18n("Accept")
-                    onTriggered: {
-                        currentWebView.grantFeaturePermission(permissionQuestion.origin, permissionQuestion.permission, true)
-                        permissionQuestion.visible = false
-                    }
-                },
-                Kirigami.Action {
-                    icon.name: "dialog-cancel"
-                    text: i18n("Decline")
-                    onTriggered: {
-                        currentWebView.grantFeaturePermission(permissionQuestion.origin, permissionQuestion.permission, false)
-                        downloadQuestion.visible = false
-                    }
-                }
-            ]
         }
 
         // Container for the progress bar
@@ -292,37 +206,30 @@ Kirigami.ApplicationWindow {
                     bottom: parent.bottom
                 }
             }
-
         }
 
-        // Find in page
-        InputSheet {
-            id: findSheet
-            title: i18n("Find in page")
-            placeholderText: i18n("Find...")
-            description: i18n("Highlight text on the current website")
-            onAccepted: currentWebView.findText(findSheet.text)
-        }
-
-        // Share page
-        ShareSheet {
-            id: shareSheet
+        Loader {
+            id: sheetLoader
         }
 
         // The menu at the bottom right
         contextualActions: [
             Kirigami.Action {
                 icon.name: "edit-find"
-                onTriggered: findSheet.open()
+                onTriggered: {
+                    sheetLoader.setSource("FindInPageSheet.qml")
+                    sheetLoader.item.open()
+                }
                 text: i18n("Find in page")
             },
             Kirigami.Action {
                 icon.name: "document-share"
                 text: i18n("Share page")
                 onTriggered: {
-                    shareSheet.url = currentWebView.url
-                    shareSheet.title = currentWebView.title
-                    shareSheet.open()
+                    sheetLoader.setSource("ShareSheet.qml")
+                    sheetLoader.item.url = currentWebView.url
+                    sheetLoader.item.title = currentWebView.title
+                    sheetLoader.item.open()
                 }
             },
             Kirigami.Action {

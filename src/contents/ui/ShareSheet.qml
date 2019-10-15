@@ -35,6 +35,7 @@ Kirigami.OverlaySheet {
         id: view
         pluginType: "ShareUrl"
         implicitHeight: initialItem.contentHeight
+        clip: true
 
         delegate: Kirigami.BasicListItem {
             label: model.display

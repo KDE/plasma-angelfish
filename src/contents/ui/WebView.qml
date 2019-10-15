@@ -64,8 +64,10 @@ WebEngineView {
             // therefore just stop the download again as quickly as possible,
             // and ask the user for confirmation
             download.pause()
-            downloadQuestion.download = download
-            downloadQuestion.visible = true
+
+            questionLoader.setSource("DownloadQuestion.qml")
+            questionLoader.item.download = download
+            questionLoader.item.visible = true
         }
 
         onDownloadFinished: {
@@ -110,7 +112,7 @@ WebEngineView {
         Controls.MenuItem {
             enabled: contextMenu.request.linkUrl !== ""
             text: i18n("Copy Url")
-            onTriggered:  webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
         }
         Controls.MenuItem {
             text: i18n("View source")
@@ -127,61 +129,6 @@ WebEngineView {
         }
     }
 
-    Kirigami.OverlaySheet {
-        id: authSheet
-        property var request
-
-        Kirigami.FormLayout {
-            Layout.fillWidth: true
-
-            Kirigami.Heading {
-                elide: Text.ElideRight
-                wrapMode: Text.WordWrap
-                Layout.fillWidth: true
-
-                text: i18n("Authentication required")
-            }
-
-            Controls.TextField {
-                id: usernameField
-
-                Kirigami.FormData.label: i18n("Username")
-                Layout.fillWidth: true
-            }
-            Controls.TextField {
-                id: passwordField
-                echoMode: TextInput.Password
-
-                Kirigami.FormData.label: i18n("Password")
-                Layout.fillWidth: true
-            }
-
-            RowLayout {
-                Layout.fillWidth: true
-
-                Controls.Button {
-                    Layout.fillWidth: true
-                    text: i18n("Accept")
-
-                    onClicked: {
-                        authSheet.request.dialogAccept(usernameField.text, passwordField.text)
-                        authSheet.close()
-                    }
-                }
-                Controls.Button {
-                    Layout.fillWidth: true
-                    text: i18n("Cancel")
-
-                    onClicked: {
-                        authSheet.request.dialogReject()
-                        authSheet.close()
-                    }
-                }
-            }
-        }
-    }
-
-    //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
     onLoadingChanged: {
         //print("Loading: " + loading);
@@ -227,8 +174,9 @@ WebEngineView {
             newTab(request.requestedUrl.toString())
             showPassiveNotification(i18n("Website was opened in a new tab"))
         } else {
-            newTabQuestion.url = request.requestedUrl
-            newTabQuestion.visible = true
+            questionLoader.setSource("NewTabQuestion.qml")
+            questionLoader.item.url = request.requestedUrl
+            questionLoader.item.visible = true
         }
     }
 
@@ -250,13 +198,15 @@ WebEngineView {
 
     onAuthenticationDialogRequested: {
         request.accepted = true
-        authSheet.request = request
-        authSheet.open()
+        sheetLoader.setSource("AuthSheet.qml")
+        sheetLoader.item.request = request
+        sheetLoader.item.open()
     }
 
     onFeaturePermissionRequested: {
-        permissionQuestion.permission = feature
-        permissionQuestion.origin = securityOrigin
-        permissionQuestion.visible = true
+        questionLoader.setSource("PermissionQuestion.qml")
+        questionLoader.item.permission = feature
+        questionLoader.item.origin = securityOrigin
+        questionLoader.item.visible = true
     }
 }
