@@ -22,6 +22,8 @@
 #include "urlfilterproxymodel.h"
 #include "browsermanager.h"
 
+#include <QDateTime>
+
 #include "urlmodel.h"
 
 using namespace AngelFish;
@@ -42,9 +44,10 @@ bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
 bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left,
                                    const QModelIndex &source_right) const
 {
-    // as we currently don't write the lastVisited role to disk, we simply sort by index/position in
-    // the model
-    return source_left.row() < source_right.row();
+    auto leftDate = QDateTime::fromString(sourceModel()->data(source_left, UrlModel::lastVisited).toString(), Qt::ISODate);
+    auto rightDate = QDateTime::fromString(sourceModel()->data(source_right, UrlModel::lastVisited).toString(), Qt::ISODate);
+
+    return leftDate < rightDate;
 }
 
 void UrlFilterProxyModel::setSourceModel(QAbstractItemModel *sourceModel)

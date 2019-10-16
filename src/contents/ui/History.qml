@@ -23,6 +23,7 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.mobile.angelfish 1.0
 
 Kirigami.ScrollablePage {
     id: history
@@ -34,7 +35,9 @@ Kirigami.ScrollablePage {
         interactive: height < contentHeight
         clip: true
 
-        model: browserManager.history
+        model: UrlFilterProxyModel {
+            sourceModel: browserManager.history
+        }
 
         delegate: UrlDelegate {
             onClicked: pageStack.layers.pop()
