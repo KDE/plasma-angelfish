@@ -21,21 +21,26 @@
  ***************************************************************************/
 
 import QtQuick 2.7
+import QtQuick.Controls 2.2 as Controls
 
 import org.kde.kirigami 2.5 as Kirigami
 
-ListView {
+Controls.ScrollView {
     id: completion
 
     property string searchText
+    property alias model: listView.model
+    property alias count: listView.count
 
-//    verticalLayoutDirection: ListView.BottomToTop
-    clip: true
+    ListView {
+        id: listView
+        clip: true
 
-    delegate: UrlDelegate {
-        showRemove: false
-        onClicked: tabs.forceActiveFocus()
-        highlightText: completion.searchText
+        delegate: UrlDelegate {
+            showRemove: false
+            onClicked: tabs.forceActiveFocus()
+            highlightText: completion.searchText
+        }
     }
 
     states: [
