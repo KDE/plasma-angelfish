@@ -37,25 +37,37 @@ WebEngineView {
     /**
       * User agent used on mobile devices
       */
-    property string mobileUserAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.128 Mobile Safari/537.36"
+    readonly property string mobileUserAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/75.0.3770.116 Mobile Safari/537.36"
 
     /**
       * User agent used on desktop devices,
       * Defaults to QtWebEngine's default (it is only supported on desktop devices by Qt currently)
       */
-    property string desktopUserAgent: profile.httpUserAgent
+    readonly property string desktopUserAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.14.0 Chrome/75.0.3770.116 Safari/537.36"
 
     width: pageWidth
     height: pageHeight
 
-    profile {
-        httpUserAgent: {
-            if (Kirigami.Settings.isMobile)
-                return mobileUserAgent
-            else
-                return desktopUserAgent
-        }
+    state: Kirigami.Settings.isMobile ? "mobile" : "desktop"
 
+    states: [
+        State {
+            name: "mobile"
+            PropertyChanges {
+                target: webEngineView
+                profile.httpUserAgent: mobileUserAgent
+            }
+        },
+        State {
+            name: "desktop"
+            PropertyChanges {
+                target: webEngineView
+                profile.httpUserAgent: desktopUserAgent
+            }
+        }
+    ]
+
+    profile {
         offTheRecord: rootPage.privateMode
 
         onDownloadRequested: {

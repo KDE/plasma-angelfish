@@ -273,6 +273,27 @@ Kirigami.ApplicationWindow {
                     request.bookmarked = true;
                     browserManager.addBookmark(request);
                 }
+            },
+            Kirigami.Action {
+                icon.name: "computer"
+                text: i18n("Show desktop site")
+                checkable: true
+                checked: {
+                    if (currentWebView.state === "mobile") {
+                        false
+                    } else if (currentWebView.state === "desktop") {
+                        true
+                    }
+                }
+                onTriggered: {
+                    if (currentWebView.state === "desktop") {
+                        currentWebView.state = "mobile"
+                    } else if (currentWebView.state === "mobile") {
+                        currentWebView.state = "desktop"
+                    }
+
+                    currentWebView.reload()
+                }
             }
         ]
 
