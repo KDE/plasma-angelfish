@@ -23,10 +23,11 @@ import QtQuick 2.3
 import QtQuick.Controls 2.4 as Controls
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.3
-
 import QtWebEngine 1.7
 
 import org.kde.kirigami 2.4 as Kirigami
+import org.kde.mobile.angelfish 1.0
+
 
 WebEngineView {
     id: webEngineView
@@ -34,41 +35,20 @@ WebEngineView {
     property string errorCode: ""
     property string errorString: ""
 
-    /**
-      * User agent used on mobile devices
-      */
-    readonly property string mobileUserAgent: "Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0 ) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/75.0.3770.116 Mobile Safari/537.36"
-
-    /**
-      * User agent used on desktop devices,
-      * Defaults to QtWebEngine's default (it is only supported on desktop devices by Qt currently)
-      */
-    readonly property string desktopUserAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.14.0 Chrome/75.0.3770.116 Safari/537.36"
+    property alias userAgent: userAgent
 
     width: pageWidth
     height: pageHeight
 
-    state: Kirigami.Settings.isMobile ? "mobile" : "desktop"
-
-    states: [
-        State {
-            name: "mobile"
-            PropertyChanges {
-                target: webEngineView
-                profile.httpUserAgent: mobileUserAgent
-            }
-        },
-        State {
-            name: "desktop"
-            PropertyChanges {
-                target: webEngineView
-                profile.httpUserAgent: desktopUserAgent
-            }
-        }
-    ]
+    UserAgentGenerator {
+        id: userAgent
+        isMobile: Kirigami.Settings.isMobile
+    }
 
     profile {
         offTheRecord: rootPage.privateMode
+
+        httpUserAgent: userAgent.userAgent
 
         onDownloadRequested: {
             // if we don't accept the request right away, it will be deleted

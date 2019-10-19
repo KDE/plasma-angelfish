@@ -278,18 +278,12 @@ Kirigami.ApplicationWindow {
                 icon.name: "computer"
                 text: i18n("Show desktop site")
                 checkable: true
-                checked: {
-                    if (currentWebView.state === "mobile") {
-                        false
-                    } else if (currentWebView.state === "desktop") {
-                        true
-                    }
-                }
+                checked: !currentWebView.userAgent.isMobile
                 onTriggered: {
-                    if (currentWebView.state === "desktop") {
-                        currentWebView.state = "mobile"
-                    } else if (currentWebView.state === "mobile") {
-                        currentWebView.state = "desktop"
+                    if (currentWebView.userAgent.isMobile) {
+                        currentWebView.userAgent.isMobile = false
+                    } else {
+                        currentWebView.userAgent.isMobile = true
                     }
 
                     currentWebView.reload()
