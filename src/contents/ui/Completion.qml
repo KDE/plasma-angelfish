@@ -28,6 +28,10 @@ import org.kde.kirigami 2.5 as Kirigami
 Controls.ScrollView {
     id: completion
 
+    background: Rectangle {
+        color: Kirigami.Theme.backgroundColor
+    }
+
     property string searchText
     property alias model: listView.model
     property alias count: listView.count

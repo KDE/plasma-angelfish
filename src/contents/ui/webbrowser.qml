@@ -318,6 +318,9 @@ Kirigami.ApplicationWindow {
 
         Completion {
             id: completion
+
+            z: -1
+
             model: UrlFilterProxyModel {
                 id: urlFilter
                 sourceModel: browserManager.history
