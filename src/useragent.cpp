@@ -1,6 +1,6 @@
 #include "useragent.h"
 
-#include <QtWebEngine/qtwebengineversion.h>
+#include <QtWebEngine/QtWebEngineVersion>
 #include <QtWebEngine/QQuickWebEngineProfile>
 
 UserAgent::UserAgent(QObject *parent) : QObject(parent)

@@ -232,7 +232,7 @@ private Q_SLOTS:
         QVERIFY(model->rowCount(QModelIndex()));
 
         compare(readFile(file1), model);
-    };
+    }
 
     void testAdd()
     {
