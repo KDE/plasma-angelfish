@@ -31,11 +31,15 @@ using namespace AngelFish;
 UrlFilterProxyModel::UrlFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
     setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    connect(this, &UrlFilterProxyModel::sourceModelChanged, this, [this] {
+        sort(0, Qt::DescendingOrder);
+    });
 }
 
 bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
-    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
+    const QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
 
     return (sourceModel()->data(index, UrlModel::url).toString().contains(filterRegExp())
             || sourceModel()->data(index, UrlModel::title).toString().contains(filterRegExp()));
@@ -50,20 +54,4 @@ bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left,
             sourceModel()->data(source_right, UrlModel::lastVisited).toString(), Qt::ISODate);
 
     return leftDate < rightDate;
-}
-
-void UrlFilterProxyModel::setSourceModel(QAbstractItemModel *sourceModel)
-{
-    if (QSortFilterProxyModel::sourceModel() != sourceModel) {
-        QSortFilterProxyModel::setSourceModel(sourceModel);
-
-        sort(0, Qt::DescendingOrder);
-
-        emit sourceModelChanged();
-    }
-}
-
-QAbstractItemModel *UrlFilterProxyModel::sourceModel() const
-{
-    return QSortFilterProxyModel::sourceModel();
 }
