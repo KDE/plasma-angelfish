@@ -29,7 +29,8 @@ class UrlFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QAbstractItemModel *sourceModel READ sourceModel WRITE setSourceModel NOTIFY sourceModelChanged)
+    Q_PROPERTY(QAbstractItemModel *sourceModel READ sourceModel WRITE setSourceModel NOTIFY
+                       sourceModelChanged)
 
 public:
     UrlFilterProxyModel(QObject *parent = nullptr);

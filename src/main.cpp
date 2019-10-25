@@ -30,7 +30,6 @@
 #include "urlmodel.h"
 #include "useragent.h"
 
-
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -62,12 +61,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
     // Browser manager
-    qmlRegisterType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0,
-                                               "BrowserManager");
-    qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0,
-                                         "UrlFilterProxyModel");
-    qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0,
-                               "UserAgentGenerator");
+    qmlRegisterType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager");
+    qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0, "UrlFilterProxyModel");
+    qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
     // Error handling

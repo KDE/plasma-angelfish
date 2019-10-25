@@ -23,7 +23,6 @@
 
 #include "useragent.h"
 
-
 class UserAgentTest : public QObject
 {
     Q_OBJECT
@@ -43,8 +42,10 @@ private Q_SLOTS:
     void desktopUserAgent()
     {
         m_userAgent->setIsMobile(false);
-        const QString expectedString = QString("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/%1 Chrome/75.0.3770.116 Desktop Safari/537.36")
-                .arg(QTWEBENGINE_VERSION_STR);
+        const QString expectedString =
+                QString("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "QtWebEngine/%1 Chrome/75.0.3770.116 Desktop Safari/537.36")
+                        .arg(QTWEBENGINE_VERSION_STR);
 
         QCOMPARE(m_userAgent->userAgent(), expectedString);
     }
@@ -59,8 +60,11 @@ private Q_SLOTS:
     void mobileUserAgent()
     {
         m_userAgent->setIsMobile(true);
-        const QString expectedString = QString("Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/%1 Chrome/75.0.3770.116 Mobile Safari/537.36")
-                .arg(QTWEBENGINE_VERSION_STR);
+        const QString expectedString =
+                QString("Mozilla/5.0 (Linux; Plasma Mobile, like Android 9.0) AppleWebKit/537.36 "
+                        "(KHTML, like Gecko) QtWebEngine/%1 Chrome/75.0.3770.116 Mobile "
+                        "Safari/537.36")
+                        .arg(QTWEBENGINE_VERSION_STR);
 
         QCOMPARE(m_userAgent->userAgent(), expectedString);
     }

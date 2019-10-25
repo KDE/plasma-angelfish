@@ -44,8 +44,10 @@ bool UrlFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sou
 bool UrlFilterProxyModel::lessThan(const QModelIndex &source_left,
                                    const QModelIndex &source_right) const
 {
-    auto leftDate = QDateTime::fromString(sourceModel()->data(source_left, UrlModel::lastVisited).toString(), Qt::ISODate);
-    auto rightDate = QDateTime::fromString(sourceModel()->data(source_right, UrlModel::lastVisited).toString(), Qt::ISODate);
+    auto leftDate = QDateTime::fromString(
+            sourceModel()->data(source_left, UrlModel::lastVisited).toString(), Qt::ISODate);
+    auto rightDate = QDateTime::fromString(
+            sourceModel()->data(source_right, UrlModel::lastVisited).toString(), Qt::ISODate);
 
     return leftDate < rightDate;
 }
