@@ -219,8 +219,10 @@ Kirigami.ApplicationWindow {
                 icon.name: "edit-find"
                 shortcut: "Ctrl+F"
                 onTriggered: {
-                    sheetLoader.setSource("FindInPageSheet.qml")
-                    sheetLoader.item.open()
+                    if (!sheetLoader.item || !sheetLoader.item.sheetOpen) {
+                        sheetLoader.setSource("FindInPageSheet.qml")
+                        sheetLoader.item.open()
+                    }
                 }
                 text: i18n("Find in page")
             },
