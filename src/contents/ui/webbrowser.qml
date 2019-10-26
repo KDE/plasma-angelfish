@@ -217,6 +217,7 @@ Kirigami.ApplicationWindow {
         contextualActions: [
             Kirigami.Action {
                 icon.name: "edit-find"
+                shortcut: "Ctrl+F"
                 onTriggered: {
                     sheetLoader.setSource("FindInPageSheet.qml")
                     sheetLoader.item.open()
