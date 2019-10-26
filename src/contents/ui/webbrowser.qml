@@ -299,6 +299,8 @@ Kirigami.ApplicationWindow {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
+            z: 2
+
             Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
 
             layer.enabled: navigation.visible
@@ -322,7 +324,7 @@ Kirigami.ApplicationWindow {
         Completion {
             id: completion
 
-            z: -1
+            z: 1
 
             model: UrlFilterProxyModel {
                 id: urlFilter
