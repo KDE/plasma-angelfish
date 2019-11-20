@@ -9,6 +9,7 @@
   <name xml:lang="el">Angelfish περιηγητής ιστού</name>
   <name xml:lang="en-GB">Angelfish Webbrowser</name>
   <name xml:lang="es">Navegador web Angelfish</name>
+  <name xml:lang="et">Angelfishi veebilehitseja</name>
   <name xml:lang="fi">Angelfish-verkkoselain</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
   <name xml:lang="id">Angelfish Webbrowser</name>
@@ -32,6 +33,7 @@
   <summary xml:lang="el">Πειηγητής ιστού βελτιστοποιημένος για κινητά</summary>
   <summary xml:lang="en-GB">Webbrowser optimised for mobile devices</summary>
   <summary xml:lang="es">Navegador web optimizado para dispositivos móviles</summary>
+  <summary xml:lang="et">Mobiilseadmetele optimeeritud veebilehitseja</summary>
   <summary xml:lang="fi">Mobiililaitteille optimoitu verkkoselain</summary>
   <summary xml:lang="gl">Navegador web optimizado para dispositivos móbiles</summary>
   <summary xml:lang="id">Webbrowser dioptimalkan untuk perangkat-perangkat mobile</summary>
@@ -56,6 +58,7 @@
   <developer_name xml:lang="el">Κοινότητα του KDE</developer_name>
   <developer_name xml:lang="en-GB">KDE Community</developer_name>
   <developer_name xml:lang="es">Comunidad KDE</developer_name>
+  <developer_name xml:lang="et">KDE kogukond</developer_name>
   <developer_name xml:lang="fi">KDE-yhteisö</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
   <developer_name xml:lang="id">Komunitas KDE</developer_name>
@@ -80,6 +83,7 @@
     <p xml:lang="el">Το Angelfish βασίζεται στο QtWebEngine</p>
     <p xml:lang="en-GB">Angelfish is based on QtWebEngine</p>
     <p xml:lang="es">Angelfish está basado en QtWebEngine</p>
+    <p xml:lang="et">Angelfishi põhjaks on QtWebEngine</p>
     <p xml:lang="fi">Angelfish pohjautuu QtWebEngineen</p>
     <p xml:lang="gl">Angelfish está baseado en QtWebEngine</p>
     <p xml:lang="id">Angelfish berbasikan pada QtWebEngine</p>
@@ -101,6 +105,7 @@
     <p xml:lang="el">Υποστηρίζει τις τυπικές λειτουργίες ενός περιηγητή, όπως</p>
     <p xml:lang="en-GB">It supports typical browser features, such as</p>
     <p xml:lang="es">Permite las funciones típicas de un navegador, como</p>
+    <p xml:lang="et">See toetab tüüpilisi veebilehitseja võimalusi, nagu</p>
     <p xml:lang="fi">Tukee tavallisia selainominaisuuksia kuten</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
     <p xml:lang="id">Ini mendukung fitur-fitur browser biasanya, sepertihalnya</p>
@@ -124,6 +129,7 @@
       <li xml:lang="el">σελιδοδείκτες</li>
       <li xml:lang="en-GB">bookmarks</li>
       <li xml:lang="es">marcadores</li>
+      <li xml:lang="et">järjehoidjad</li>
       <li xml:lang="fi">kirjanmerkit</li>
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
@@ -148,6 +154,7 @@
       <li xml:lang="el">ιστορικό</li>
       <li xml:lang="en-GB">history</li>
       <li xml:lang="es">historial</li>
+      <li xml:lang="et">ajalugu</li>
       <li xml:lang="fi">historia</li>
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
