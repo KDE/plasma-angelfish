@@ -49,7 +49,6 @@
 //   first and last IP address of each class is considered invalid
 //   (since they are broadcast/network addresses)
 //
-// - Added exclusion of private, reserved and/or local networks ranges
 // - Made starting path slash optional (http://example.com?foo=bar)
 // - Allow a dot (.) at the end of hostnames (http://example.com.)
 // - Allow an underscore (_) character in host/domain names
@@ -77,11 +76,6 @@ var re_weburl = new RegExp(
     // user:pass BasicAuth (optional)
     "(?:\\S+(?::\\S*)?@)?" +
     "(?:" +
-      // IP address exclusion
-      // private & local networks
-      "(?!(?:10|127)(?:\\.\\d{1,3}){3})" +
-      "(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})" +
-      "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})" +
       // IP address dotted notation octets
       // excludes loopback network 0.0.0.0
       // excludes reserved space >= 224.0.0.0
