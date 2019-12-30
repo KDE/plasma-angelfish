@@ -228,6 +228,7 @@ void UrlModel::add(const QJsonObject &data)
     beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
     m_data.append(data);
     endInsertRows();
+    save();
 }
 
 void UrlModel::remove(const QString &url)
@@ -240,6 +241,7 @@ void UrlModel::remove(const QString &url)
             endRemoveRows();
             // int n = m_data.count();
             // qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
+            save();
             return;
         }
     }
