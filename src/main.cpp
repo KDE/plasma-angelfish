@@ -53,9 +53,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QtWebEngine::initialize();
 
     // initial url command line parameter
-    QString initialUrl;
+    QUrl initialUrl;
     if (!parser.positionalArguments().isEmpty())
-        initialUrl = QUrl::fromUserInput(parser.positionalArguments()[0].toUtf8()).toEncoded();
+        initialUrl = QUrl::fromUserInput(parser.positionalArguments().first());
     engine.rootContext()->setContextProperty("initialUrl", initialUrl);
 
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
