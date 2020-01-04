@@ -24,7 +24,7 @@ import QtWebEngine 1.6
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
 
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
 
@@ -145,6 +145,7 @@ Kirigami.ApplicationWindow {
         rightPadding: 0
         topPadding: 0
         bottomPadding: 0
+        Kirigami.ColumnView.preventStealing: true
 
         property bool privateMode: false
 
