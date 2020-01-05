@@ -22,12 +22,21 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.4 as Kirigami
 
 
 Kirigami.ScrollablePage {
 //    id: options
     title: i18n("Bookmarks")
+
+    Component {
+        id: delegateComponent
+
+        UrlDelegate {
+            onClicked: pageStack.layers.pop()
+            onRemoved: browserManager.removeBookmark(url);
+        }
+    }
 
     ListView {
         anchors.fill: parent
@@ -37,11 +46,10 @@ Kirigami.ScrollablePage {
 
         model: browserManager.bookmarks
 
-        delegate: UrlDelegate {
-            onClicked: pageStack.layers.pop()
-            onRemoved: browserManager.removeBookmark(url);
+        delegate: Kirigami.DelegateRecycler {
+            width: parent.width
+            sourceComponent: delegateComponent
         }
     }
     Component.onCompleted: print("Bookmarks.qml complete.");
-
 }

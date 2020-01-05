@@ -25,7 +25,7 @@ import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.5 as Kirigami
 
-Kirigami.AbstractListItem {
+Kirigami.SwipeListItem {
     id: urlDelegate
 
     property bool showRemove: true
@@ -46,12 +46,6 @@ Kirigami.AbstractListItem {
     }
 
     signal removed
-
-    Rectangle {
-        Kirigami.Theme.inherit: true
-        anchors.fill: parent
-        color: Kirigami.Theme.backgroundColor
-    }
 
     RowLayout {
         Kirigami.Theme.inherit: true
@@ -92,18 +86,13 @@ Kirigami.AbstractListItem {
                 Layout.fillWidth: true
             }
         }
-
-        // We can't use SwipeListItem for performance reasons
-        Kirigami.Icon {
-            height: Kirigami.Units.gridUnit * 2
-            width: height
-            source: "list-remove"
-            visible: urlDelegate.showRemove
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: urlDelegate.removed();
-            }
-        }
     }
+
+    actions: [
+        Kirigami.Action {
+            icon.name: "list-remove"
+            visible: urlDelegate.showRemove
+            onTriggered: urlDelegate.removed();
+        }
+    ]
 }

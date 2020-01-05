@@ -22,12 +22,21 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.4 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
 Kirigami.ScrollablePage {
     id: history
     title: i18n("History")
+
+    Component {
+        id: delegateComponent
+
+        UrlDelegate {
+            onClicked: pageStack.layers.pop()
+            onRemoved: browserManager.removeFromHistory(url);
+        }
+    }
 
     ListView {
         anchors.fill: parent
@@ -39,9 +48,9 @@ Kirigami.ScrollablePage {
             sourceModel: browserManager.history
         }
 
-        delegate: UrlDelegate {
-            onClicked: pageStack.layers.pop()
-            onRemoved: browserManager.removeFromHistory(url);
+        delegate: Kirigami.DelegateRecycler {
+            width: parent.width
+            sourceComponent: delegateComponent
         }
     }
     Component.onCompleted: print("History.qml complete.");
