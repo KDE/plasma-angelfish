@@ -148,20 +148,6 @@ Item {
 
         }
 
-        Item {
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
-
-            visible: currentWebView.loading
-
-            Controls.BusyIndicator {
-                width: buttonSize
-                height: width
-                anchors.centerIn: parent
-                running: currentWebView.loading
-            }
-        }
-
         Controls.ToolButton {
             id: optionsButton
 
