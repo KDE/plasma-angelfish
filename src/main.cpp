@@ -58,7 +58,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QUrl initialUrl;
     if (!parser.positionalArguments().isEmpty())
         initialUrl = QUrl::fromUserInput(parser.positionalArguments().first());
-    engine.rootContext()->setContextProperty("initialUrl", initialUrl);
+    engine.rootContext()->setContextProperty("initialUrl", initialUrl.url());
 
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
