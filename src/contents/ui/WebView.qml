@@ -79,6 +79,8 @@ WebEngineView {
     settings {
         // Disable builtin error pages in favor of our own
         errorPageEnabled: false
+        // Disable scrollbars on mobile
+        showScrollBars: !Kirigami.Settings.isMobile
     }
 
     // Custom context menu
