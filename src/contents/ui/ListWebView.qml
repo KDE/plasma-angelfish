@@ -27,30 +27,33 @@ import QtQml.Models 2.1
 import QtWebEngine 1.6
 
 
-ListView {
+Repeater {
     id: tabs
 
-    // Make sure we don't delete and re-create tabs "randomly"
-    cacheBuffer: 10000
-    // Don't animate tab switching, this just feels slow
-    highlightMoveDuration: 0
-    // No horizontal swiping between tabs, disturbs page interaction
-    interactive: false
+    property int currentIndex: -1
+    property var currentItem: currentIndex >= 0 && currentIndex < tabsModel.count ? tabs.itemAt(currentIndex) : null
 
     property int pageHeight: height
     property int pageWidth: width
 
     property alias count: tabsModel.count
 
-    orientation: Qt.Horizontal
-
     model: ListModel {
         id: tabsModel
-        ListElement { pageurl: "about:blank" }
     }
 
     delegate: WebView {
+        id: wv
+        anchors.fill: tabs
         url: pageurl;
+        visible: index === tabs.currentIndex
+        Connections {
+            target: tabs
+            onCurrentIndexChanged: {
+                if (currentIndex===index)
+                    tabs.currentItem = wv;
+            }
+        }
     }
 
     function createEmptyTab() {
@@ -70,7 +73,8 @@ ListView {
     }
 
     Component.onCompleted: {
-        if (initialUrl !== "") {
+        newTab("about:blank");
+        if (initialUrl) {
             load(initialUrl)
         } else {
             console.log("Using homepage")

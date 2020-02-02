@@ -62,7 +62,7 @@ Kirigami.ScrollablePage {
                 sourceRect: Qt.rect(0, 0, width * 2, height * 2)
 
                 sourceItem: {
-                    tabs.itemAt(tabs.pageWidth * index, 0);
+                    tabs.itemAt(index);
                 }
                 //opacity: tabs.currentIndex == index ? 1 : 0.0
 
@@ -106,7 +106,7 @@ Kirigami.ScrollablePage {
                     print("Switch from " + tabs.currentIndex + "  to tab " + index);
 
                     tabs.currentIndex = index;
-                    tabs.positionViewAtIndex(index, ListView.Beginning);
+                    //tabs.positionViewAtIndex(index, ListView.Beginning);
                     //tabs.positionViewAtEnd();
                     pageStack.layers.pop()
                 }
@@ -132,7 +132,7 @@ Kirigami.ScrollablePage {
                 }
                 width: itemWidth
 
-                text: tabs.itemAt(tabs.pageWidth * index, 0).title
+                text: tabs.itemAt(index).title
                 elide: Qt.ElideRight
 
             }

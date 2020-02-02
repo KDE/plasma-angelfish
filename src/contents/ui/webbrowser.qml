@@ -37,7 +37,7 @@ Kirigami.ApplicationWindow {
      * Browser-level functionality should use this to refer to the current
      * view, rather than looking up views in the mode, as far as possible.
      */
-    property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.currentItem : null
+    property Item currentWebView: tabs.currentItem
 
     onCurrentWebViewChanged: {
         print("Current WebView is now : " + tabs.currentIndex);
