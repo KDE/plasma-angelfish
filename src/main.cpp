@@ -24,6 +24,7 @@
 #include <QtWebEngine>
 
 #include <KLocalizedString>
+#include <KLocalizedContext>
 
 #include "browsermanager.h"
 #include "urlfilterproxymodel.h"
@@ -47,6 +48,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // QML loading
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     // Setup QtWebEngine
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
