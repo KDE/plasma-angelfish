@@ -132,7 +132,7 @@ Kirigami.ScrollablePage {
                 }
                 width: itemWidth
 
-                text: tabs.itemAt(index).title
+                text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
                 elide: Qt.ElideRight
 
             }

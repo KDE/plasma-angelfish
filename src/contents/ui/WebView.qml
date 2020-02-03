@@ -89,22 +89,22 @@ WebEngineView {
         id: contextMenu
 
         Controls.MenuItem {
+            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
             text: i18n("Copy")
-            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Copy)
         }
         Controls.MenuItem {
+            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
             text: i18n("Cut")
-            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Cut)
         }
         Controls.MenuItem {
+            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
             text: i18n("Paste")
-            enabled: (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request.linkUrl !== ""
+            enabled: contextMenu.request != null && contextMenu.request.linkUrl !== ""
             text: i18n("Copy Url")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
         }
@@ -117,7 +117,7 @@ WebEngineView {
             onTriggered: webEngineView.triggerWebAction(WebEngineView.DownloadLinkToDisk)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request.linkUrl !== ""
+            enabled: contextMenu.request != null && contextMenu.request.linkUrl !== ""
             text: i18n("Open in new Tab")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
         }
