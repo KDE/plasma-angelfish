@@ -74,12 +74,13 @@ Repeater {
             // create new tab before removing the last one
             // to avoid linking all signals to null object
             createEmptyTab(true);
+            tabs.currentItem = tabs.itemAt(0);
             index = 1;
         }
-        if (tabs.currentIndex === index && tabs.currentIndex === tabs.count-1) {
-            // handle the removal of current tab when its the
-            // last one
+        if (tabs.currentIndex === index) {
+            // handle the removal of current tab
             tabs.currentIndex = 0;
+            tabs.currentItem = tabs.itemAt(0);
         }
 
         tabsModel.remove(index);
