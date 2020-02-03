@@ -31,7 +31,7 @@ Repeater {
     id: tabs
 
     property int currentIndex: -1
-    property var currentItem: currentIndex >= 0 && currentIndex < tabsModel.count ? tabs.itemAt(currentIndex) : null
+    property var currentItem
 
     property int pageHeight: height
     property int pageWidth: width
@@ -47,33 +47,46 @@ Repeater {
         anchors.fill: tabs
         url: pageurl;
         visible: index === tabs.currentIndex
-        Connections {
-            target: tabs
-            onCurrentIndexChanged: {
-                if (currentIndex===index)
-                    tabs.currentItem = wv;
-            }
+        onVisibleChanged: if (visible) tabs.currentItem = wv
+    }
+
+    function createEmptyTab(front) {
+        newTab("about:blank", front);
+    }
+
+    function newTab(url, front) {
+        var p = {pageurl: url};
+        if (front) {
+            tabsModel.insert(0, p);
+            tabs.currentIndex = 0;
+        }
+        else {
+            tabsModel.append(p);
+            tabs.currentIndex = tabs.count - 1;
         }
     }
 
-    function createEmptyTab() {
-        var t = newTab("");
-        return t;
-    }
-
-    function newTab(url) {
-        tabsModel.append({pageurl: url});
-        tabs.currentIndex = tabs.count - 1
-    }
-
     function closeTab(index) {
-        tabsModel.remove(index)
-        if (tabs.count === 0)
-            createEmptyTab()
+        if (index<0 && index >= tabs.count)
+            return; // index out of bounds
+
+        if (tabs.count <= 1) {
+            // create new tab before removing the last one
+            // to avoid linking all signals to null object
+            createEmptyTab(true);
+            index = 1;
+        }
+        if (tabs.currentIndex === index && tabs.currentIndex === tabs.count-1) {
+            // handle the removal of current tab when its the
+            // last one
+            tabs.currentIndex = 0;
+        }
+
+        tabsModel.remove(index);
     }
 
     Component.onCompleted: {
-        newTab("about:blank");
+        createEmptyTab();
         if (initialUrl) {
             load(initialUrl)
         } else {
