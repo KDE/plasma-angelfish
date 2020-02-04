@@ -52,7 +52,7 @@ Repeater {
         property bool showView: index === tabs.currentIndex
 
         x: showView ? 0 : -width
-        z: showView ? 1000 : 0
+        z: showView ? 1 : 0
 
         onShowViewChanged: if (showView) tabs.currentItem = wv
     }
