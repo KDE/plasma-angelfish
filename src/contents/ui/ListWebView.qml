@@ -29,12 +29,10 @@ import QtWebEngine 1.6
 
 Repeater {
     id: tabs
+    clip: true
 
     property int currentIndex: -1
     property var currentItem
-
-    property int pageHeight: height
-    property int pageWidth: width
 
     property alias count: tabsModel.count
 
@@ -44,10 +42,19 @@ Repeater {
 
     delegate: WebView {
         id: wv
-        anchors.fill: tabs
+        anchors {
+            bottom: tabs.bottom
+            top: tabs.top
+        }
         url: pageurl;
-        visible: index === tabs.currentIndex
-        onVisibleChanged: if (visible) tabs.currentItem = wv
+        width: tabs.width
+
+        property bool showView: index === tabs.currentIndex
+
+        x: showView ? 0 : -width
+        z: showView ? 1000 : 0
+
+        onShowViewChanged: if (showView) tabs.currentItem = wv
     }
 
     function createEmptyTab(front) {

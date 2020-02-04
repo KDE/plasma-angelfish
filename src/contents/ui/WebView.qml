@@ -37,9 +37,6 @@ WebEngineView {
 
     property alias userAgent: userAgent
 
-    width: pageWidth
-    height: pageHeight
-
     UserAgentGenerator {
         id: userAgent
         isMobile: Kirigami.Settings.isMobile
