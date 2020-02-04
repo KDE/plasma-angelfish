@@ -26,16 +26,15 @@ import QtQuick.Controls 2.0 as Controls
 
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 // import org.kde.plasma.components 2.0 as PlasmaComponents
 // import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Kirigami.ScrollablePage {
-
     id: tabsRoot
-
     title: i18n("Tabs")
+    Kirigami.ColumnView.fillWidth: false
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
     property int itemWidth: Kirigami.Units.gridUnit * 9
@@ -108,7 +107,7 @@ Kirigami.ScrollablePage {
                     tabs.currentIndex = index;
                     //tabs.positionViewAtIndex(index, ListView.Beginning);
                     //tabs.positionViewAtEnd();
-                    pageStack.layers.pop()
+                    pageStack.pop()
                 }
             }
 
@@ -153,7 +152,7 @@ Kirigami.ScrollablePage {
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
                     tabs.currentIndex = tabs.count - 1;
-                    pageStack.layers.pop()
+                    pageStack.pop()
                 }
             }
         }

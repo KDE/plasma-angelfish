@@ -74,7 +74,7 @@ Item {
             Kirigami.Theme.inherit: true
 
             onClicked: {
-                pageStack.layers.push("Tabs.qml")
+                pageStack.push(Qt.resolvedUrl("Tabs.qml"))
             }
         }
 

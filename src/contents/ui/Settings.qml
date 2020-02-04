@@ -23,7 +23,7 @@ import QtQuick 2.3
 import QtQuick.Controls 2.4 as Controls
 import QtQuick.Layouts 1.11
 
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 
 
 Kirigami.ScrollablePage {
@@ -33,6 +33,7 @@ Kirigami.ScrollablePage {
     bottomPadding: 0
     leftPadding: 0
     rightPadding: 0
+    Kirigami.ColumnView.fillWidth: false
 
     background: Rectangle {
         Kirigami.Theme.colorSet: Kirigami.Theme.View

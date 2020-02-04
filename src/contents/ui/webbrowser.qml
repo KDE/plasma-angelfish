@@ -84,9 +84,14 @@ Kirigami.ApplicationWindow {
         browserManager.addToHistory(request);
     }
 
-    // Only show ToolBar if a layer is open
-    property bool layerShown : pageStack.layers.depth > 1
-    pageStack.globalToolBar.style: layerShown ? Kirigami.ApplicationHeaderStyle.Auto : Kirigami.ApplicationHeaderStyle.None
+    pageStack.globalToolBar.showNavigationButtons: {
+        if (pageStack.depth <= 1)
+            return Kirigami.ApplicationHeaderStyle.None;
+        if (pageStack.currentIndex === pageStack.depth - 1)
+            return Kirigami.ApplicationHeaderStyle.ShowBackButton;
+        // not used so far, but maybe in future
+        return (Kirigami.ApplicationHeaderStyle.ShowBackButton | Kirigami.ApplicationHeaderStyle.ShowForwardButton);
+    }
 
     globalDrawer: Kirigami.GlobalDrawer {
         id: globalDrawer
@@ -97,7 +102,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "tab-duplicate"
                 onTriggered: {
-                    pageStack.layers.push("Tabs.qml")
+                    pageStack.push(Qt.resolvedUrl("Tabs.qml"))
                 }
                 text: i18n("Tabs")
             },
@@ -111,14 +116,14 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "bookmarks"
                 onTriggered: {
-                    pageStack.layers.push("Bookmarks.qml")
+                    pageStack.push(Qt.resolvedUrl("Bookmarks.qml"))
                 }
                 text: i18n("Bookmarks")
             },
             Kirigami.Action {
                 icon.name: "view-history"
                 onTriggered: {
-                    pageStack.layers.push("History.qml")
+                    pageStack.push(Qt.resolvedUrl("History.qml"))
                 }
                 text: i18n("History")
             },
@@ -126,7 +131,7 @@ Kirigami.ApplicationWindow {
                 icon.name: "configure"
                 text: i18n("Settings")
                 onTriggered: {
-                    pageStack.layers.push("Settings.qml")
+                    pageStack.push(Qt.resolvedUrl("Settings.qml"))
                 }
             }
         ]
@@ -145,6 +150,9 @@ Kirigami.ApplicationWindow {
         rightPadding: 0
         topPadding: 0
         bottomPadding: 0
+        globalToolBarStyle: Kirigami.ApplicationHeaderStyle.None
+        Kirigami.ColumnView.fillWidth: true
+        Kirigami.ColumnView.pinned: true
         Kirigami.ColumnView.preventStealing: true
 
         property bool privateMode: false
@@ -357,6 +365,16 @@ Kirigami.ApplicationWindow {
                 bottom: navigation.top
                 right: parent.right
             }
+        }
+    }
+
+    Connections {
+        target: webBrowser.pageStack
+        onCurrentIndexChanged: {
+            // drop all sub pages as soon as the browser window is the
+            // focussed one
+            if (webBrowser.pageStack.currentIndex === 0)
+                webBrowser.pageStack.pop();
         }
     }
 }

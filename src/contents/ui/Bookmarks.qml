@@ -22,18 +22,19 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 
 
 Kirigami.ScrollablePage {
 //    id: options
     title: i18n("Bookmarks")
+    Kirigami.ColumnView.fillWidth: false
 
     Component {
         id: delegateComponent
 
         UrlDelegate {
-            onClicked: pageStack.layers.pop()
+            onClicked: pageStack.pop()
             onRemoved: browserManager.removeBookmark(url);
         }
     }

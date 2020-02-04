@@ -22,18 +22,19 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.4 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
 Kirigami.ScrollablePage {
     id: history
     title: i18n("History")
+    Kirigami.ColumnView.fillWidth: false
 
     Component {
         id: delegateComponent
 
         UrlDelegate {
-            onClicked: pageStack.layers.pop()
+            onClicked: pageStack.pop()
             onRemoved: browserManager.removeFromHistory(url);
         }
     }
