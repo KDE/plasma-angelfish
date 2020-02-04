@@ -203,4 +203,12 @@ WebEngineView {
         questionLoader.item.origin = securityOrigin
         questionLoader.item.visible = true
     }
+
+    onVisibleChanged: {
+        // set user agent to the current displayed tab
+        // this ensures that we follow mobile preference
+        // of the current webview
+        if (visible)
+            profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; })
+    }
 }
