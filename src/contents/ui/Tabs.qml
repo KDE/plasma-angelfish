@@ -75,7 +75,7 @@ Kirigami.ScrollablePage {
                 //live: true
                 anchors.fill: parent
 
-                sourceRect: Qt.rect(0, 0, width * 2, height * 2)
+                sourceRect: Qt.rect(0, 0, width, height)
 
                 sourceItem: {
                     tabs.itemAt(index);
