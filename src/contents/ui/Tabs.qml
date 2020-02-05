@@ -119,8 +119,8 @@ Kirigami.ScrollablePage {
                         start: Qt.point(0,0)
                         end: Qt.point(0,height)
                         gradient: Gradient {
-                            GradientStop { position: Math.max(0.25, 1 - 1.25 * (1 - label.y / itemHeight)); color: "transparent"; }
-                            GradientStop { position: Math.max(0.5, 1 - 0.7 * (1 - label.y / itemHeight)); color: Kirigami.Theme.backgroundColor; }
+                            GradientStop { position: Math.max(0.25, 1 - 1.5 * (1 - label.y / itemHeight)); color: "transparent"; }
+                            GradientStop { position: Math.max(0.25, label.y / itemHeight); color: Kirigami.Theme.backgroundColor; }
                         }
                     }
                 }
