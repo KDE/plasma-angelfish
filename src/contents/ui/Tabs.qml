@@ -60,103 +60,117 @@ Kirigami.ScrollablePage {
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
     GridView {
+        id: grid
         anchors.fill: parent
         model: tabs.model
         cellWidth: itemWidth
-        cellHeight: itemHeight
+        cellHeight: itemHeight + Kirigami.Units.largeSpacing
 
         delegate: Item {
-            id: tabItem
-            width: itemWidth
-            height: itemHeight
-            ShaderEffectSource {
-                id: shaderItem
-
-                //live: true
-                anchors.fill: parent
-
-                sourceRect: Qt.rect(0, 0, width, height)
-
-                sourceItem: {
-                    tabs.itemAt(index);
-                }
-                //opacity: tabs.currentIndex == index ? 1 : 0.0
-
-
-                Behavior on height {
-                    SequentialAnimation {
-                        ScriptAction {
-                            script: {
-                                print("Animation start");
-                                // switch to tabs
-                            }
-                        }
-                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
-                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
-                        ScriptAction {
-                            script: {
-                                print("Animation done");
-                                contentView.state = "hidden"
-                            }
-                        }
-                    }
-                }
-
-                Behavior on width {
-                    NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
-
-                }
-
-                LinearGradient {
-                    id: grad
-                    anchors.fill: parent
-                    cached: true
-                    start: Qt.point(0,0)
-                    end: Qt.point(0,height)
-                    gradient: Gradient {
-                        GradientStop { position: 0.0; color: "transparent"; }
-                        GradientStop { position: Math.max(0.25, (grad.height - label.x * 4) / grad.height); color: "transparent"; }
-                        GradientStop { position: Math.max(0.25, (grad.height - (label.x + label.height) / 2) / grad.height); color: Kirigami.Theme.backgroundColor; }
-                        GradientStop { position: 1; color: Kirigami.Theme.backgroundColor; }
-                    }
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    print("Switch from " + tabs.currentIndex + "  to tab " + index);
-
-                    tabs.currentIndex = index;
-                    //tabs.positionViewAtIndex(index, ListView.Beginning);
-                    //tabs.positionViewAtEnd();
-                    pageStack.pop()
-                }
-            }
-
-            Controls.ToolButton {
-                icon.name: "window-close"
-                height: Kirigami.gridUnit
-                width: height
-                anchors.right: parent.right
-                anchors.rightMargin: Kirigami.Units.smallSpacing
-                anchors.top: parent.top
-                anchors.topMargin: Kirigami.Units.smallSpacing
-                onClicked: tabs.closeTab(index)
-            }
-
-            Controls.Label {
-                id: label
-                anchors {
-                    left: tabItem.left
-                    right: tabItem.right
-                    bottom: tabItem.bottom
-                    margins: Kirigami.Units.gridUnit * 0.5
-                }
+            // taking care of spacing
+            width: grid.cellWidth
+            height: grid.cellHeight
+            Item {
+                id: tabItem
+                anchors.centerIn: parent
                 width: itemWidth
+                height: itemHeight
+                ShaderEffectSource {
+                    id: shaderItem
 
-                text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
-                elide: Qt.ElideRight
+                    //live: true
+                    anchors.fill: parent
 
+                    sourceRect: Qt.rect(0, 0, width, height)
+
+                    sourceItem: {
+                        tabs.itemAt(index);
+                    }
+                    //opacity: tabs.currentIndex == index ? 1 : 0.0
+
+                    Behavior on height {
+                        SequentialAnimation {
+                            ScriptAction {
+                                script: {
+                                    print("Animation start");
+                                    // switch to tabs
+                                }
+                            }
+                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
+                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+                            ScriptAction {
+                                script: {
+                                    print("Animation done");
+                                    contentView.state = "hidden"
+                                }
+                            }
+                        }
+                    }
+
+                    Behavior on width {
+                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
+
+                    }
+
+                    LinearGradient {
+                        id: grad
+                        anchors.fill: parent
+                        cached: true
+                        start: Qt.point(0,0)
+                        end: Qt.point(0,height)
+                        gradient: Gradient {
+                            GradientStop { position: Math.max(0.25, 1 - 1.25 * (1 - label.y / itemHeight)); color: "transparent"; }
+                            GradientStop { position: Math.max(0.5, 1 - 0.7 * (1 - label.y / itemHeight)); color: Kirigami.Theme.backgroundColor; }
+                        }
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        print("Switch from " + tabs.currentIndex + "  to tab " + index);
+
+                        tabs.currentIndex = index;
+                        //tabs.positionViewAtIndex(index, ListView.Beginning);
+                        //tabs.positionViewAtEnd();
+                        pageStack.pop()
+                    }
+                }
+
+                Controls.ToolButton {
+                    icon.name: "window-close"
+                    height: Kirigami.gridUnit
+                    width: height
+                    anchors.right: parent.right
+                    anchors.rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing
+                    anchors.top: parent.top
+                    anchors.topMargin: Kirigami.Units.smallSpacing
+                    onClicked: tabs.closeTab(index)
+                }
+
+                Column {
+                    id: label
+                    anchors {
+                        left: tabItem.left
+                        right: tabItem.right
+                        bottom: tabItem.bottom
+                        bottomMargin: Kirigami.Units.smallSpacing
+                        leftMargin: Kirigami.Units.largeSpacing
+                        rightMargin: Kirigami.Units.largeSpacing
+                    }
+                    spacing: 0
+
+                    Kirigami.Heading {
+                        level: 4
+                        text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
+                        elide: Qt.ElideRight
+                    }
+
+                    Controls.Label {
+                        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.5
+                        text: tabs.itemAt(index) != null ? tabs.itemAt(index).url : ""
+                        elide: Qt.ElideRight
+                    }
+                }
             }
         }
     }
