@@ -21,6 +21,7 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.0 as Controls
+import QtGraphicalEffects 1.0
 
 //import QtWebEngine 1.0
 
@@ -56,7 +57,6 @@ Kirigami.ScrollablePage {
 
                 //live: true
                 anchors.fill: parent
-                anchors.margins: Kirigami.Units.gridUnit * 0.5
 
                 sourceRect: Qt.rect(0, 0, width * 2, height * 2)
 
@@ -90,14 +90,19 @@ Kirigami.ScrollablePage {
 
                 }
 
-            }
-            Rectangle {
-                anchors.fill: parent;
-                anchors.margins: Kirigami.Units.gridUnit / 4;
-                border.color: Kirigami.Theme.textColor;
-                border.width: webBrowser.borderWidth
-                color: "transparent"
-                opacity: 0.3;
+                LinearGradient {
+                    id: grad
+                    anchors.fill: parent
+                    cached: true
+                    start: Qt.point(0,0)
+                    end: Qt.point(0,height)
+                    gradient: Gradient {
+                        GradientStop { position: 0.0; color: "transparent"; }
+                        GradientStop { position: Math.max(0.25, (grad.height - label.x * 4) / grad.height); color: "transparent"; }
+                        GradientStop { position: Math.max(0.25, (grad.height - (label.x + label.height) / 2) / grad.height); color: Kirigami.Theme.backgroundColor; }
+                        GradientStop { position: 1; color: Kirigami.Theme.backgroundColor; }
+                    }
+                }
             }
             MouseArea {
                 anchors.fill: parent
@@ -123,6 +128,7 @@ Kirigami.ScrollablePage {
             }
 
             Controls.Label {
+                id: label
                 anchors {
                     left: tabItem.left
                     right: tabItem.right
