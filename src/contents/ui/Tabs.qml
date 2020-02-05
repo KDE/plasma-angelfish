@@ -55,11 +55,12 @@ Kirigami.ScrollablePage {
     property int  itemHeight: Kirigami.Units.gridUnit * 6
     property int  itemWidth: {
         if (!landscapeMode) return width;
-        var n = Math.floor( (width - Kirigami.Units.largeSpacing) / (landscapeMinWidth + Kirigami.Units.largeSpacing) );
-        return width / n - Kirigami.Units.largeSpacing;
+        // using grid width to take into account its scrollbar
+        var n = Math.floor((grid.width - Kirigami.Units.largeSpacing) / (landscapeMinWidth + Kirigami.Units.largeSpacing));
+        return Math.floor(grid.width / n) - Kirigami.Units.largeSpacing;
     }
-    property int  landscapeMinWidth: Kirigami.Units.gridUnit * 18
-    property bool landscapeMode: width > landscapeMinWidth*2 + 3*Kirigami.Units.largeSpacing
+    property int  landscapeMinWidth: Kirigami.Units.gridUnit * 12
+    property bool landscapeMode: grid.width > landscapeMinWidth * 2 + 3 * Kirigami.Units.largeSpacing
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
@@ -67,8 +68,8 @@ Kirigami.ScrollablePage {
         id: grid
         anchors.fill: parent
         anchors.bottomMargin: Kirigami.Units.largeSpacing
-        anchors.leftMargin: landscapeMode ? Kirigami.Units.largeSpacing/2 : 0 // second half comes from item
-        anchors.rightMargin: landscapeMode ? Kirigami.Units.largeSpacing/2 : 0 // second half comes from item
+        anchors.leftMargin: landscapeMode ? Kirigami.Units.largeSpacing / 2 : 0 // second half comes from item
+        anchors.rightMargin: landscapeMode ? Kirigami.Units.largeSpacing / 2 : 0 // second half comes from item
         anchors.topMargin: Kirigami.Units.largeSpacing
         model: tabs.model
         cellWidth: itemWidth + (landscapeMode ? Kirigami.Units.largeSpacing : 0)
@@ -165,7 +166,7 @@ Kirigami.ScrollablePage {
                     height: Kirigami.gridUnit
                     width: height
                     anchors.right: parent.right
-                    anchors.rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing
+                    anchors.rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing + (tabsRoot.landscapeMode ? 0 : tabsRoot.width-grid.width)
                     anchors.top: parent.top
                     anchors.topMargin: Kirigami.Units.smallSpacing
                     onClicked: tabs.closeTab(index)
