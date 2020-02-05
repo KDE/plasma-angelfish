@@ -35,7 +35,18 @@ import org.kde.kirigami 2.7 as Kirigami
 Kirigami.ScrollablePage {
     id: tabsRoot
     title: i18n("Tabs")
+
     Kirigami.ColumnView.fillWidth: false
+
+    actions.main: Kirigami.Action {
+        icon.name: "list-add"
+        text: i18n("New")
+        onTriggered: {
+            tabs.newTab(browserManager.homepage)
+            tabs.currentIndex = tabs.count - 1;
+            pageStack.pop()
+        }
+    }
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
     property int itemWidth: Kirigami.Units.gridUnit * 9
@@ -140,26 +151,6 @@ Kirigami.ScrollablePage {
                 text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
                 elide: Qt.ElideRight
 
-            }
-        }
-
-        footer: Item {
-            width: itemWidth
-            height: itemHeight
-            Kirigami.Icon {
-                anchors.fill: parent
-                anchors.margins: Math.round(itemHeight / 4)
-                source: "list-add"
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    tabs.newTab(browserManager.homepage)
-                    //addressBar.forceActiveFocus();
-                    //addressBar.selectAll();
-                    tabs.currentIndex = tabs.count - 1;
-                    pageStack.pop()
-                }
             }
         }
     }
