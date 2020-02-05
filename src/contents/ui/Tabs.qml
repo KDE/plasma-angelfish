@@ -52,18 +52,26 @@ Kirigami.ScrollablePage {
         }
     }
 
-    // property int itemHeight: Math.round(itemWidth/ 3 * 2)
-    // property int itemWidth: Kirigami.Units.gridUnit * 9
-    property int itemHeight: Kirigami.Units.gridUnit * 6
-    property int itemWidth: width
+    property int  itemHeight: Kirigami.Units.gridUnit * 6
+    property int  itemWidth: {
+        if (!landscapeMode) return width;
+        var n = Math.floor( (width - Kirigami.Units.largeSpacing) / (landscapeMinWidth + Kirigami.Units.largeSpacing) );
+        return width / n - Kirigami.Units.largeSpacing;
+    }
+    property int  landscapeMinWidth: Kirigami.Units.gridUnit * 18
+    property bool landscapeMode: width > landscapeMinWidth*2 + 3*Kirigami.Units.largeSpacing
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
     GridView {
         id: grid
         anchors.fill: parent
+        anchors.bottomMargin: Kirigami.Units.largeSpacing
+        anchors.leftMargin: landscapeMode ? Kirigami.Units.largeSpacing/2 : 0 // second half comes from item
+        anchors.rightMargin: landscapeMode ? Kirigami.Units.largeSpacing/2 : 0 // second half comes from item
+        anchors.topMargin: Kirigami.Units.largeSpacing
         model: tabs.model
-        cellWidth: itemWidth
+        cellWidth: itemWidth + (landscapeMode ? Kirigami.Units.largeSpacing : 0)
         cellHeight: itemHeight + Kirigami.Units.largeSpacing
 
         delegate: Item {
@@ -176,15 +184,17 @@ Kirigami.ScrollablePage {
                     spacing: 0
 
                     Kirigami.Heading {
+                        elide: Text.ElideRight
                         level: 4
                         text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
-                        elide: Qt.ElideRight
+                        width: label.width
                     }
 
                     Controls.Label {
+                        elide: Text.ElideRight
                         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.5
                         text: tabs.itemAt(index) != null ? tabs.itemAt(index).url : ""
-                        elide: Qt.ElideRight
+                        width: label.width
                     }
                 }
             }
