@@ -36,6 +36,10 @@ Kirigami.ScrollablePage {
     id: tabsRoot
     title: i18n("Tabs")
 
+    leftPadding: 0
+    rightPadding: 0
+    topPadding: 0
+    bottomPadding: 0
     Kirigami.ColumnView.fillWidth: false
 
     actions.main: Kirigami.Action {
@@ -48,8 +52,10 @@ Kirigami.ScrollablePage {
         }
     }
 
-    property int itemHeight: Math.round(itemWidth/ 3 * 2)
-    property int itemWidth: Kirigami.Units.gridUnit * 9
+    // property int itemHeight: Math.round(itemWidth/ 3 * 2)
+    // property int itemWidth: Kirigami.Units.gridUnit * 9
+    property int itemHeight: Kirigami.Units.gridUnit * 6
+    property int itemWidth: width
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
