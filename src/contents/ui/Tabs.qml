@@ -124,14 +124,30 @@ Kirigami.ScrollablePage {
                         }
                     }
                 }
+
+                Rectangle {
+                    // border around a tile
+                    anchors.fill: parent;
+                    border.color: Kirigami.Theme.textColor
+                    border.width: webBrowser.borderWidth
+                    color: "transparent"
+                    opacity: tabs.currentIndex === index ? 0.5 : 0.3
+                }
+
+                Rectangle {
+                    // selection indicator
+                    anchors.fill: parent
+                    color: mouse.pressed ? Kirigami.Theme.highlightColor : "transparent"
+                    opacity: 0.2
+                }
+
                 MouseArea {
+                    id: mouse
                     anchors.fill: parent
                     onClicked: {
                         print("Switch from " + tabs.currentIndex + "  to tab " + index);
 
                         tabs.currentIndex = index;
-                        //tabs.positionViewAtIndex(index, ListView.Beginning);
-                        //tabs.positionViewAtEnd();
                         pageStack.pop()
                     }
                 }
