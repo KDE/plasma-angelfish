@@ -36,10 +36,26 @@ WebEngineView {
     property string errorString: ""
 
     property alias userAgent: userAgent
+    property alias thumb: thumb
 
     UserAgentGenerator {
         id: userAgent
         isMobile: Kirigami.Settings.isMobile
+    }
+
+    Image {
+        id: thumb
+        visible: false
+    }
+
+    Timer {
+        id: snaphotTimer
+        interval: 1000
+        repeat: false
+        onTriggered: {
+            if (webEngineView.visible)
+                grabThumb();
+        }
     }
 
     profile {
@@ -135,15 +151,20 @@ WebEngineView {
         */
         var ec = "";
         var es = "";
+        if (loadRequest.status === WebEngineView.LoadStartedStatus) {
+            thumb.source = "";
+        }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!rootPage.privateMode) {
                 addHistoryEntry();
             }
+            grabThumb();
         }
         if (loadRequest.status === WebEngineView.LoadFailedStatus) {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
             ec = loadRequest.errorCode;
             es = loadRequest.errorString;
+            thumb.source = "";
         }
         errorCode = ec;
         errorString = es;
@@ -170,6 +191,8 @@ WebEngineView {
             questionLoader.item.visible = true
         }
     }
+
+    onUrlChanged: thumb.source = ""
 
     onFullScreenRequested: {
         request.accept()
@@ -204,8 +227,18 @@ WebEngineView {
     onVisibleChanged: {
         // set user agent to the current displayed tab
         // this ensures that we follow mobile preference
-        // of the current webview
-        if (visible)
-            profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; })
+        // of the current webview. also update the current
+        // snapshot image with short delay to be sure that
+        // all kirigami pages have moved into place
+        if (visible) {
+            profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; });
+            snaphotTimer.start();
+        }
+    }
+
+    function grabThumb() {
+        webEngineView.grabToImage(function(result) {
+            webEngineView.thumb.source = result.url;
+        });
     }
 }

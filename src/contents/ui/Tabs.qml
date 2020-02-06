@@ -84,42 +84,13 @@ Kirigami.ScrollablePage {
                 anchors.centerIn: parent
                 width: itemWidth
                 height: itemHeight
-                ShaderEffectSource {
-                    id: shaderItem
 
-                    //live: true
+                Image {
                     anchors.fill: parent
-
-                    sourceRect: Qt.rect(0, 0, width, height)
-
-                    sourceItem: {
-                        tabs.itemAt(index);
-                    }
-                    //opacity: tabs.currentIndex == index ? 1 : 0.0
-
-                    Behavior on height {
-                        SequentialAnimation {
-                            ScriptAction {
-                                script: {
-                                    print("Animation start");
-                                    // switch to tabs
-                                }
-                            }
-                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
-                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
-                            ScriptAction {
-                                script: {
-                                    print("Animation done");
-                                    contentView.state = "hidden"
-                                }
-                            }
-                        }
-                    }
-
-                    Behavior on width {
-                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
-
-                    }
+                    clip: true
+                    fillMode: Image.PreserveAspectCrop
+                    source: tabs.itemAt(index).thumb.source
+                    verticalAlignment: Image.AlignTop
 
                     LinearGradient {
                         id: grad
@@ -133,6 +104,59 @@ Kirigami.ScrollablePage {
                         }
                     }
                 }
+
+                // ShaderEffectSource requires that corresponding WebEngineView is
+                // visible. Which is probably not the best practice as it seems to keep
+                // all the views active.
+//                ShaderEffectSource {
+//                    id: shaderItem
+
+//                    //live: true
+//                    anchors.fill: parent
+
+//                    sourceRect: Qt.rect(0, 0, width, height)
+
+//                    sourceItem: {
+//                        tabs.itemAt(index);
+//                    }
+//                    //opacity: tabs.currentIndex == index ? 1 : 0.0
+
+//                    Behavior on height {
+//                        SequentialAnimation {
+//                            ScriptAction {
+//                                script: {
+//                                    print("Animation start");
+//                                    // switch to tabs
+//                                }
+//                            }
+//                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
+//                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+//                            ScriptAction {
+//                                script: {
+//                                    print("Animation done");
+//                                    contentView.state = "hidden"
+//                                }
+//                            }
+//                        }
+//                    }
+
+//                    Behavior on width {
+//                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
+
+//                    }
+
+//                    LinearGradient {
+//                        id: grad
+//                        anchors.fill: parent
+//                        cached: true
+//                        start: Qt.point(0,0)
+//                        end: Qt.point(0,height)
+//                        gradient: Gradient {
+//                            GradientStop { position: Math.max(0.25, 1 - 1.5*(1-label.y/itemHeight)); color: "transparent"; }
+//                            GradientStop { position: Math.max(0.25, label.y/itemHeight); color: Kirigami.Theme.backgroundColor; }
+//                        }
+//                    }
+//                }
 
                 Rectangle {
                     // border around a tile
