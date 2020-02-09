@@ -350,7 +350,7 @@ Kirigami.ApplicationWindow {
             onActivateUrlEntry: urlEntry.open()
         }
 
-        Completion {
+        NavigationEntrySheet {
             id: urlEntry
         }
 
