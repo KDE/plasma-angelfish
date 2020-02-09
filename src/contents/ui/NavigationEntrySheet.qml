@@ -88,27 +88,27 @@ Kirigami.OverlaySheet {
         }
     }
 
-    Item {
-        width: parent.width
-        height: rootPage.height*0.9 - editRow.height
+    ListView {
+        id: listView
+        clip: true
+        implicitWidth: parent.width
 
-        ListView {
-            id: listView
-            boundsBehavior: Flickable.StopAtBounds
-            clip: true
-            width: parent.width
-            height: parent.height
+        delegate: UrlDelegate {
+            showRemove: false
+            onClicked: overlay.close()
+            highlightText: urlInput.text
+        }
 
-            delegate: UrlDelegate {
-                showRemove: false
-                onClicked: overlay.close()
-                highlightText: urlInput.text
-            }
+        model: UrlFilterProxyModel {
+            id: urlFilter
+            sourceModel: browserManager.history
+        }
 
-            model: UrlFilterProxyModel {
-                id: urlFilter
-                sourceModel: browserManager.history
-            }
+        footer: Item {
+            // ensure that it covers most of the window
+            // even if there is nothing to show in the list
+            width: listView.width
+            height: rootPage.height*0.9 - editRow.height
         }
     }
 
