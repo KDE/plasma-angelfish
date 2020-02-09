@@ -67,6 +67,9 @@ public:
     Q_INVOKABLE void rmTab(int index);
 
     Q_INVOKABLE static QString urlFromUserInput(const QString &input);
+    Q_INVOKABLE static QString urlScheme(const QString &url);
+    Q_INVOKABLE static QString urlHostPort(const QString &url);
+    Q_INVOKABLE static QString urlPath(const QString &url);
 
 signals:
     void updated();

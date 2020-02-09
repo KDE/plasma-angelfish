@@ -34,7 +34,7 @@ Item {
 
     property bool navigationShown: true
 
-    property alias textFocus: urlInput.activeFocus
+    property bool textFocus: false
     property alias text: urlInput.text
 
     property int expandedHeight: Kirigami.Units.gridUnit * 3
@@ -56,6 +56,7 @@ Item {
 
         Controls.ToolButton {
             icon.name: "open-menu-symbolic"
+            visible: !textFocus
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -66,7 +67,21 @@ Item {
         }
 
         Controls.ToolButton {
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            icon.name: "window-minimize"
+
+            visible: textFocus
+
+            Kirigami.Theme.inherit: true
+
+            onClicked: textFocus = false;
+        }
+
+        Controls.ToolButton {
             icon.name: "tab-duplicate"
+            visible: !textFocus
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -84,7 +99,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile
+            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile && !textFocus
             icon.name: "go-previous"
 
             Kirigami.Theme.inherit: true
@@ -98,12 +113,66 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile
+            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile && !textFocus
             icon.name: "go-next"
 
             Kirigami.Theme.inherit: true
 
             onClicked: currentWebView.goForward()
+        }
+
+        Item {
+            id: labelItem
+            Layout.fillWidth: true
+            Layout.preferredHeight: layout.height
+            visible: !textFocus
+
+            property string scheme: browserManager.urlScheme(currentWebView.url)
+
+            Controls.ToolButton {
+                id: schemeIcon
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                icon.name: {
+                    if (labelItem.scheme === "https") return "lock";
+                    if (labelItem.scheme === "http") return "unlock";
+                    return "";
+                }
+                visible: icon.name
+                height: buttonSize*0.75
+                width: visible ? buttonSize*0.75 : 0
+                Kirigami.Theme.inherit: true
+                background: Rectangle {
+                    implicitWidth: schemeIcon.width
+                    implicitHeight: schemeIcon.height
+                    color: "transparent"
+                }
+            }
+
+            Controls.Label {
+                anchors.left: schemeIcon.right
+                anchors.right: parent.right
+                anchors.top: parent.top
+                height: parent.height
+
+                text: {
+                    if (labelItem.scheme==="http" || labelItem.scheme==="https") {
+                        var h = browserManager.urlHostPort(currentWebView.url);
+                        var p = browserManager.urlPath(currentWebView.url);
+                        if (p === "/") p = ""
+                        return '%1<font size="2">%2</font>'.arg(h).arg(p);
+                    }
+                    return currentWebView.url;
+                }
+                textFormat: Text.StyledText
+                elide: Text.ElideRight
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: textFocus = true
+            }
         }
 
         Controls.TextField {
@@ -115,6 +184,7 @@ Item {
 
             selectByMouse: true
             focus: false
+            visible: textFocus
 
             Kirigami.Theme.inherit: true
 
@@ -125,6 +195,13 @@ Item {
             }
 
             onAccepted: {
+                applyUrl();
+                textFocus = false;
+            }
+
+            Keys.onEscapePressed: textFocus = false
+
+            function applyUrl() {
                 if (text.match(RegexWebUrl.re_weburl)) {
                     load(browserManager.urlFromUserInput(text))
                 } else {
@@ -139,7 +216,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: !Kirigami.Settings.isMobile
+            visible: !Kirigami.Settings.isMobile && !textFocus
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
 
             Kirigami.Theme.inherit: true
@@ -158,10 +235,27 @@ Item {
             Layout.preferredHeight: buttonSize
 
             icon.name: "overflow-menu"
+            visible: !textFocus
 
             Kirigami.Theme.inherit: true
 
             onClicked: contextDrawer.open()
+        }
+
+        Controls.ToolButton {
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            icon.name: "go-next"
+
+            visible: textFocus
+
+            Kirigami.Theme.inherit: true
+
+            onClicked: {
+                urlInput.applyUrl();
+                textFocus = false;
+            }
         }
     }
 
@@ -178,4 +272,8 @@ Item {
         }
     ]
 
+    onTextFocusChanged: {
+        if (textFocus) urlInput.forceActiveFocus();
+        else urlInput.activeFocus = false;
+    }
 }
