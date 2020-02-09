@@ -26,19 +26,15 @@ import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.5 as Kirigami
 
-import "regex-weburl.js" as RegexWebUrl
-
-
 Item {
     id: navigation
 
     property bool navigationShown: true
 
-    property bool textFocus: false
-    property alias text: urlInput.text
-
     property int expandedHeight: Kirigami.Units.gridUnit * 3
     property int buttonSize: Kirigami.Units.gridUnit * 2
+
+    signal activateUrlEntry;
 
     Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
@@ -56,7 +52,6 @@ Item {
 
         Controls.ToolButton {
             icon.name: "open-menu-symbolic"
-            visible: !textFocus
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -67,21 +62,7 @@ Item {
         }
 
         Controls.ToolButton {
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
-
-            icon.name: "window-minimize"
-
-            visible: textFocus
-
-            Kirigami.Theme.inherit: true
-
-            onClicked: textFocus = false;
-        }
-
-        Controls.ToolButton {
             icon.name: "tab-duplicate"
-            visible: !textFocus
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -99,7 +80,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile && !textFocus
+            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile
             icon.name: "go-previous"
 
             Kirigami.Theme.inherit: true
@@ -113,7 +94,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile && !textFocus
+            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile
             icon.name: "go-next"
 
             Kirigami.Theme.inherit: true
@@ -125,7 +106,6 @@ Item {
             id: labelItem
             Layout.fillWidth: true
             Layout.preferredHeight: layout.height
-            visible: !textFocus
 
             property string scheme: browserManager.urlScheme(currentWebView.url)
 
@@ -171,42 +151,7 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: textFocus = true
-            }
-        }
-
-        Controls.TextField {
-            id: urlInput
-
-            Layout.fillWidth: true
-
-            text: currentWebView.url
-
-            selectByMouse: true
-            focus: false
-            visible: textFocus
-
-            Kirigami.Theme.inherit: true
-
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    selectAll()
-                }
-            }
-
-            onAccepted: {
-                applyUrl();
-                textFocus = false;
-            }
-
-            Keys.onEscapePressed: textFocus = false
-
-            function applyUrl() {
-                if (text.match(RegexWebUrl.re_weburl)) {
-                    load(browserManager.urlFromUserInput(text))
-                } else {
-                    load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
-                }
+                onClicked: activateUrlEntry()
             }
         }
 
@@ -216,7 +161,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: !Kirigami.Settings.isMobile && !textFocus
+            visible: !Kirigami.Settings.isMobile
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
 
             Kirigami.Theme.inherit: true
@@ -235,27 +180,10 @@ Item {
             Layout.preferredHeight: buttonSize
 
             icon.name: "overflow-menu"
-            visible: !textFocus
 
             Kirigami.Theme.inherit: true
 
             onClicked: contextDrawer.open()
-        }
-
-        Controls.ToolButton {
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
-
-            icon.name: "go-next"
-
-            visible: textFocus
-
-            Kirigami.Theme.inherit: true
-
-            onClicked: {
-                urlInput.applyUrl();
-                textFocus = false;
-            }
         }
     }
 
@@ -271,9 +199,4 @@ Item {
             PropertyChanges { target: navigation; height: 0}
         }
     ]
-
-    onTextFocusChanged: {
-        if (textFocus) urlInput.forceActiveFocus();
-        else urlInput.activeFocus = false;
-    }
 }

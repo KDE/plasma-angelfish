@@ -22,39 +22,103 @@
 
 import QtQuick 2.7
 import QtQuick.Controls 2.2 as Controls
+import QtQuick.Layouts 1.2
 
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.mobile.angelfish 1.0
 
-Controls.ScrollView {
-    id: completion
+import "regex-weburl.js" as RegexWebUrl
 
-    background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
-    }
+Kirigami.OverlaySheet {
+    id: overlay
+    showCloseButton: false
 
-    property string searchText
-    property alias model: listView.model
-    property alias count: listView.count
+    property int buttonSize: Kirigami.Units.gridUnit * 2
 
-    ListView {
-        id: listView
-        clip: true
+    header: RowLayout {
+        id: editRow
+        Layout.fillWidth: true
 
-        delegate: UrlDelegate {
-            showRemove: false
-            onClicked: tabs.forceActiveFocus()
-            highlightText: completion.searchText
+        Controls.ToolButton {
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            icon.name: "window-minimize"
+
+            Kirigami.Theme.inherit: true
+
+            onClicked: overlay.close()
         }
-    }
 
-    states: [
-        State {
-            name: "hidden"
-            when: visible === false
-            PropertyChanges {
-                target: completion
-                height: 0
+        Controls.TextField {
+            id: urlInput
+
+            Layout.fillWidth: true
+
+            text: currentWebView.url
+
+            selectByMouse: true
+            focus: false
+
+            Kirigami.Theme.inherit: true
+
+            onAccepted: applyUrl()
+            onTextChanged: urlFilter.setFilterFixedString(text)
+            Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
+
+            function applyUrl() {
+                if (text.match(RegexWebUrl.re_weburl)) {
+                    load(browserManager.urlFromUserInput(text))
+                } else {
+                    load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
+                }
+                overlay.close();
             }
         }
-    ]
+
+        Controls.ToolButton {
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            icon.name: "go-next"
+
+            Kirigami.Theme.inherit: true
+
+            onClicked: urlInput.applyUrl();
+        }
+    }
+
+    Item {
+        width: parent.width
+        height: rootPage.height*0.9 - editRow.height
+
+        ListView {
+            id: listView
+            clip: true
+            width: parent.width
+            height: parent.height
+
+            delegate: UrlDelegate {
+                showRemove: false
+                onClicked: overlay.close()
+                highlightText: urlInput.text
+            }
+
+            model: UrlFilterProxyModel {
+                id: urlFilter
+                sourceModel: browserManager.history
+            }
+        }
+    }
+
+    onSheetOpenChanged: {
+        if (sheetOpen) {
+            urlInput.text = currentWebView.url;
+            urlInput.selectAll();
+            urlInput.forceActiveFocus();
+        }
+        else {
+            currentWebView.forceActiveFocus();
+        }
+    }
 }

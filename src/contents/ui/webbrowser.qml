@@ -27,6 +27,7 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
+import QtQuick.Layouts 1.2
 
 Kirigami.ApplicationWindow {
     id: webBrowser
@@ -329,8 +330,6 @@ Kirigami.ApplicationWindow {
             id: navigation
             navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
-            z: 2
-
             Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
 
             layer.enabled: navigation.visible
@@ -343,38 +342,16 @@ Kirigami.ApplicationWindow {
             }
 
             anchors {
-                bottom: completion.top
+                bottom: parent.bottom
                 left: parent.left
                 right: parent.right
             }
 
-            onTextChanged: urlFilter.setFilterFixedString(text)
+            onActivateUrlEntry: urlEntry.open()
         }
 
         Completion {
-            id: completion
-
-            z: 1
-
-            model: UrlFilterProxyModel {
-                id: urlFilter
-                sourceModel: browserManager.history
-            }
-            width: parent.width
-            height: 0.5 * parent.height
-            visible: navigation.textFocus
-            searchText: navigation.text
-
-            Behavior on height {
-                NumberAnimation {
-                    duration: Kirigami.Units.shortDuration * 2
-                }
-            }
-
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: navigation.horizontalCenter
-            }
+            id: urlEntry
         }
 
         // Thin line above navigation
