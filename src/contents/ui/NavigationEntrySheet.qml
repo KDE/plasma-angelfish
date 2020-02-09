@@ -94,6 +94,7 @@ Kirigami.OverlaySheet {
 
         ListView {
             id: listView
+            boundsBehavior: Flickable.StopAtBounds
             clip: true
             width: parent.width
             height: parent.height
@@ -116,6 +117,7 @@ Kirigami.OverlaySheet {
             urlInput.text = currentWebView.url;
             urlInput.selectAll();
             urlInput.forceActiveFocus();
+            listView.positionViewAtBeginning();
         }
         else {
             currentWebView.forceActiveFocus();
