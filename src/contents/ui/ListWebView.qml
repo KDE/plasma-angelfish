@@ -31,6 +31,9 @@ Repeater {
     id: tabs
     clip: true
 
+    property bool activeTabs: true
+    property bool privateTabsMode: false
+
     property int currentIndex: -1
     property var currentItem
 
@@ -46,15 +49,17 @@ Repeater {
             bottom: tabs.bottom
             top: tabs.top
         }
+        privateMode: tabs.privateTabsMode
         url: pageurl;
         width: tabs.width
 
         property bool showView: index === tabs.currentIndex
 
-        visible: showView
+        visible: showView && tabs.activeTabs
         x: 0
 
         onShowViewChanged: if (showView) tabs.currentItem = wv
+        onUrlChanged: if (!privateTabsMode) browserManager.setTabUrl(index, url)
     }
 
     function createEmptyTab(front) {
@@ -90,11 +95,15 @@ Repeater {
             tabs.currentItem = tabs.itemAt(0);
         }
 
+        if (!privateTabsMode) browserManager.rmTab(index);
         tabsModel.remove(index);
     }
 
     Component.onCompleted: {
-        createEmptyTab();
+        if (privateTabsMode)
+            createEmptyTab();
+        else
+            newTab(browserManager.homepage);
         if (initialUrl) {
             load(initialUrl)
         } else {
@@ -102,4 +111,6 @@ Repeater {
             load(browserManager.homepage)
         }
     }
+
+    onCurrentIndexChanged: browserManager.setCurrentTab(tabs.currentIndex)
 }

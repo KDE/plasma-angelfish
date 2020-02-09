@@ -57,6 +57,15 @@ public:
     QString homepage();
     QString searchBaseUrl();
 
+    Q_INVOKABLE int currentTab() const;
+    Q_INVOKABLE QString tabs() const;
+    Q_INVOKABLE void setCurrentTab(int index);
+    Q_INVOKABLE void setTab(int index, QString url, bool isMobile);
+    Q_INVOKABLE void setTabIsMobile(int index, bool isMobile);
+    Q_INVOKABLE void setTabUrl(int index, QString url);
+    Q_INVOKABLE void setTabsWritable();
+    Q_INVOKABLE void rmTab(int index);
+
     Q_INVOKABLE static QString urlFromUserInput(const QString &input);
 
 signals:
@@ -81,10 +90,24 @@ public slots:
     void setHomepage(const QString &homepage);
     void setSearchBaseUrl(const QString &searchBaseUrl);
 
+protected:
+    void loadTabs();
+    void saveTabs();
+
 private:
     UrlModel *m_bookmarks = nullptr;
     UrlModel *m_history = nullptr;
     QSettings *m_settings;
+
+    struct TabState {
+        TabState(QString u=QString(), bool im=false): url(u), isMobile(im) {}
+        QString url;
+        bool isMobile = false;
+    };
+
+    int m_current_tab = 0;
+    QList<TabState> m_tabs;
+    bool m_tabs_readonly = true;
 };
 
 } // namespace

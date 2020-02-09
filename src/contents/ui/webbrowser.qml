@@ -39,6 +39,12 @@ Kirigami.ApplicationWindow {
      */
     property Item currentWebView: tabs.currentItem
 
+    // Pointer to the currently active list of tabs.
+    //
+    // As there are private and normal tabs, switch between
+    // them according to the current mode.
+    property Item tabs: rootPage.privateMode ? privateTabs : regularTabs
+
     onCurrentWebViewChanged: {
         print("Current WebView is now : " + tabs.currentIndex);
     }
@@ -158,13 +164,26 @@ Kirigami.ApplicationWindow {
         property bool privateMode: false
 
         ListWebView {
-            id: tabs
+            id: regularTabs
             anchors {
                 top: parent.top
                 left: parent.left
                 right: parent.right
                 bottom: navigation.top
             }
+            activeTabs: !rootPage.privateMode
+        }
+
+        ListWebView {
+            id: privateTabs
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                bottom: navigation.top
+            }
+            activeTabs: rootPage.privateMode
+            privateTabsMode: true
         }
 
         ErrorHandler {
@@ -297,7 +316,9 @@ Kirigami.ApplicationWindow {
                     } else {
                         currentWebView.userAgent.isMobile = true
                     }
-
+                    if (!rootPage.privateMode) {
+                        browserManager.setTabIsMobile(tabs.currentIndex, currentWebView.userAgent.isMobile);
+                    }
                     currentWebView.reload()
                 }
             }
@@ -375,6 +396,32 @@ Kirigami.ApplicationWindow {
             // focussed one
             if (webBrowser.pageStack.currentIndex === 0)
                 webBrowser.pageStack.pop();
+        }
+    }
+
+    Component.onCompleted: {
+        if (!webappcontainer) {
+            // initialize tabs
+            var t = JSON.parse(browserManager.tabs());
+            var ct = browserManager.currentTab();
+            for (var i = 0; i < t.length; i++) {
+                if (i < regularTabs.count)
+                    regularTabs.itemAt(i).url = t[i].url;
+                else
+                    regularTabs.newTab(t[i].url);
+                regularTabs.itemAt(i).userAgent.isMobile = t[i].isMobile;
+                regularTabs.itemAt(i).reloadOnVisible = true;
+            }
+            if (ct >= 0 && ct < regularTabs.count) regularTabs.currentIndex = ct;
+            browserManager.setTabsWritable();
+
+            if (initialUrl) {
+                regularTabs.newTab(initialUrl);
+            }
+        } else {
+            if (initialUrl) {
+                load(initialUrl);
+            }
         }
     }
 }

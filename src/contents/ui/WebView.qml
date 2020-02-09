@@ -35,8 +35,12 @@ WebEngineView {
     property string errorCode: ""
     property string errorString: ""
 
+    property bool privateMode: false
+
     property alias userAgent: userAgent
     property alias thumb: thumb
+
+    property bool reloadOnVisible: false
 
     UserAgentGenerator {
         id: userAgent
@@ -59,7 +63,7 @@ WebEngineView {
     }
 
     profile {
-        offTheRecord: rootPage.privateMode
+        offTheRecord: privateMode
 
         httpUserAgent: userAgent.userAgent
 
@@ -155,7 +159,7 @@ WebEngineView {
             thumb.source = "";
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
-            if (!rootPage.privateMode) {
+            if (!privateMode) {
                 addHistoryEntry();
             }
             grabThumb();
@@ -233,6 +237,10 @@ WebEngineView {
         if (visible) {
             profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; });
             snaphotTimer.start();
+            if (reloadOnVisible) {
+                reloadOnVisible = false;
+                reload();
+            }
         }
     }
 

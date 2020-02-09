@@ -34,7 +34,7 @@ import org.kde.kirigami 2.7 as Kirigami
 
 Kirigami.ScrollablePage {
     id: tabsRoot
-    title: i18n("Tabs")
+    title: rootPage.privateMode ? i18n("Private Tabs") : i18n("Tabs")
 
     leftPadding: 0
     rightPadding: 0
@@ -46,7 +46,7 @@ Kirigami.ScrollablePage {
         icon.name: "list-add"
         text: i18n("New")
         onTriggered: {
-            tabs.newTab(browserManager.homepage)
+            tabs.newTab(rootPage.privateMode ? "about:blank" : browserManager.homepage)
             tabs.currentIndex = tabs.count - 1;
             pageStack.pop()
         }
@@ -164,7 +164,7 @@ Kirigami.ScrollablePage {
                     border.color: Kirigami.Theme.textColor
                     border.width: webBrowser.borderWidth
                     color: "transparent"
-                    opacity: tabs.currentIndex === index ? 0.5 : 0.3
+                    opacity: tabs.currentIndex === index ? 0.75 : 0.3
                 }
 
                 Rectangle {
@@ -224,5 +224,8 @@ Kirigami.ScrollablePage {
                 }
             }
         }
+
     }
+
+    Component.onCompleted: grid.currentIndex = tabs.currentIndex
 }
