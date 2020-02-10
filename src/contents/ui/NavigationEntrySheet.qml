@@ -42,6 +42,7 @@ Controls.Drawer {
 
     property int buttonSize: Kirigami.Units.gridUnit * 2
     property int fullHeight: 0.9*rootPage.height
+    property bool openedState: false
 
     property Item urlInput
     property Item listView
@@ -136,15 +137,18 @@ Controls.Drawer {
         }
     }
 
-    onOpenedChanged: {
-        if (opened) {
-            urlInput.text = currentWebView.url;
-            urlInput.selectAll();
-            urlInput.forceActiveFocus();
-            listView.positionViewAtBeginning();
-        }
-        else {
-            currentWebView.forceActiveFocus();
-        }
+    onOpened: {
+        // check if the drawer was just slightly slided
+        if (openedState) return;
+        openedState = true;
+        urlInput.text = currentWebView.url;
+        urlInput.selectAll();
+        urlInput.forceActiveFocus();
+        listView.positionViewAtBeginning();
+    }
+
+    onClosed: {
+        openedState = false;
+        currentWebView.forceActiveFocus();
     }
 }
