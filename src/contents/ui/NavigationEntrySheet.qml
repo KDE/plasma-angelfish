@@ -91,7 +91,7 @@ Kirigami.OverlaySheet {
     ListView {
         id: listView
         clip: true
-        implicitWidth: parent.width
+        Layout.fillWidth: true
 
         delegate: UrlDelegate {
             showRemove: false
