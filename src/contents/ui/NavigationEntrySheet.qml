@@ -29,91 +29,115 @@ import org.kde.mobile.angelfish 1.0
 
 import "regex-weburl.js" as RegexWebUrl
 
-Kirigami.OverlaySheet {
+Controls.Drawer {
     id: overlay
-    showCloseButton: false
+    dragMargin: 0
+    edge: Qt.BottomEdge
+    width: parent.width
+
+    bottomPadding: 0
+    topPadding: 0
+    rightPadding: Kirigami.Units.gridUnit/2
+    leftPadding: Kirigami.Units.gridUnit/2
 
     property int buttonSize: Kirigami.Units.gridUnit * 2
+    property int fullHeight: 0.9*rootPage.height
 
-    header: RowLayout {
-        id: editRow
-        Layout.fillWidth: true
+    property Item urlInput
+    property Item listView
 
-        Controls.ToolButton {
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
+    contentHeight: fullHeight - topPadding - bottomPadding
+    contentWidth: parent.width - rightPadding - leftPadding
+    contentItem: Item {
+        width: parent.width
+        height: parent.height
 
-            icon.name: "window-minimize"
+        RowLayout {
+            id: editRow
+            anchors.top: parent.top
+            height: Kirigami.Units.gridUnit * 3
+            width: parent.width
 
-            Kirigami.Theme.inherit: true
+            Controls.ToolButton {
+                Layout.preferredWidth: buttonSize
+                Layout.preferredHeight: buttonSize
 
-            onClicked: overlay.close()
-        }
+                icon.name: "window-minimize"
 
-        Controls.TextField {
-            id: urlInput
+                Kirigami.Theme.inherit: true
 
-            Layout.fillWidth: true
+                onClicked: overlay.close()
+            }
 
-            text: currentWebView.url
+            Controls.TextField {
+                id: urlInput
 
-            selectByMouse: true
-            focus: false
+                Layout.fillWidth: true
 
-            Kirigami.Theme.inherit: true
+                text: currentWebView.url
 
-            onAccepted: applyUrl()
-            onTextChanged: urlFilter.setFilterFixedString(text)
-            Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
+                selectByMouse: true
+                focus: false
 
-            function applyUrl() {
-                if (text.match(RegexWebUrl.re_weburl)) {
-                    load(browserManager.urlFromUserInput(text))
-                } else {
-                    load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
+                Kirigami.Theme.inherit: true
+
+                onAccepted: applyUrl()
+                onTextChanged: urlFilter.setFilterFixedString(text)
+                Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
+                Component.onCompleted: overlay.urlInput = urlInput
+
+                function applyUrl() {
+                    if (text.match(RegexWebUrl.re_weburl)) {
+                        load(browserManager.urlFromUserInput(text))
+                    } else {
+                        load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
+                    }
+                    overlay.close();
                 }
-                overlay.close();
+            }
+
+            Controls.ToolButton {
+                Layout.preferredWidth: buttonSize
+                Layout.preferredHeight: buttonSize
+
+                icon.name: "go-next"
+
+                Kirigami.Theme.inherit: true
+
+                onClicked: urlInput.applyUrl();
             }
         }
 
-        Controls.ToolButton {
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
+        ListView {
+            id: listView
 
-            icon.name: "go-next"
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+                top: editRow.bottom
+            }
 
-            Kirigami.Theme.inherit: true
+            boundsBehavior: Flickable.StopAtBounds
+            clip: true
 
-            onClicked: urlInput.applyUrl();
+            delegate: UrlDelegate {
+                showRemove: false
+                onClicked: overlay.close()
+                highlightText: urlInput.text
+            }
+
+            model: UrlFilterProxyModel {
+                id: urlFilter
+                sourceModel: browserManager.history
+            }
+
+            Component.onCompleted: overlay.listView = listView
         }
     }
 
-    ListView {
-        id: listView
-        clip: true
-        Layout.fillWidth: true
-
-        delegate: UrlDelegate {
-            showRemove: false
-            onClicked: overlay.close()
-            highlightText: urlInput.text
-        }
-
-        model: UrlFilterProxyModel {
-            id: urlFilter
-            sourceModel: browserManager.history
-        }
-
-        footer: Item {
-            // ensure that it covers most of the window
-            // even if there is nothing to show in the list
-            width: listView.width
-            height: rootPage.height*0.9 - editRow.height
-        }
-    }
-
-    onSheetOpenChanged: {
-        if (sheetOpen) {
+    onOpenedChanged: {
+        if (opened) {
             urlInput.text = currentWebView.url;
             urlInput.selectAll();
             urlInput.forceActiveFocus();
