@@ -69,8 +69,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
 
     // URL utils
-    AngelFish::UrlUtils urlUtils;
-    engine.rootContext()->setContextProperty("urlUtils", &urlUtils);
+    qmlRegisterSingletonType<AngelFish::UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils",
+                                                  [](QQmlEngine * /*engine*/, QJSEngine * /*scriptEngine*/) -> QObject * {
+        AngelFish::UrlUtils *urlUtils = new AngelFish::UrlUtils();
+        return urlUtils;
+    });
 
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));

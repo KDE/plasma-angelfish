@@ -89,9 +89,9 @@ Controls.Drawer {
 
                 function applyUrl() {
                     if (text.match(RegexWebUrl.re_weburl)) {
-                        load(urlUtils.urlFromUserInput(text))
+                        load(UrlUtils.urlFromUserInput(text))
                     } else {
-                        load(urlUtils.urlFromUserInput(browserManager.searchBaseUrl + text))
+                        load(UrlUtils.urlFromUserInput(browserManager.searchBaseUrl + text))
                     }
                     overlay.close();
                 }

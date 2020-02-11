@@ -25,6 +25,7 @@ import QtWebEngine 1.4
 import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.mobile.angelfish 1.0
 
 Item {
     id: navigation
@@ -107,7 +108,7 @@ Item {
             Layout.fillWidth: true
             Layout.preferredHeight: layout.height
 
-            property string scheme: urlUtils.urlScheme(currentWebView.url)
+            property string scheme: UrlUtils.urlScheme(currentWebView.url)
 
             Controls.ToolButton {
                 id: schemeIcon
@@ -137,8 +138,8 @@ Item {
 
                 text: {
                     if (labelItem.scheme === "http" || labelItem.scheme === "https") {
-                        var h = urlUtils.urlHostPort(currentWebView.url);
-                        var p = urlUtils.urlPath(currentWebView.url);
+                        var h = UrlUtils.urlHostPort(currentWebView.url);
+                        var p = UrlUtils.urlPath(currentWebView.url);
                         if (p === "/") p = ""
                         return '%1<font size="2">%2</font>'.arg(h).arg(p);
                     }
