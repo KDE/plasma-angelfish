@@ -74,14 +74,13 @@ Controls.Drawer {
                 id: urlInput
 
                 Layout.fillWidth: true
-
-                text: currentWebView.url
-
-                selectByMouse: true
+                clip: true
                 focus: false
-
+                text: currentWebView.url
+                selectByMouse: true
                 Kirigami.Theme.inherit: true
 
+                onActiveFocusChanged: if (activeFocus) selectAll()
                 onAccepted: applyUrl()
                 onTextChanged: urlFilter.setFilterFixedString(text)
                 Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
@@ -142,7 +141,6 @@ Controls.Drawer {
         if (openedState) return;
         openedState = true;
         urlInput.text = currentWebView.url;
-        urlInput.selectAll();
         urlInput.forceActiveFocus();
         listView.positionViewAtBeginning();
     }
