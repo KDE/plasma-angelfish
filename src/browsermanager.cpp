@@ -118,67 +118,58 @@ int BrowserManager::currentTab() const
     return m_current_tab;
 }
 
-QString BrowserManager::tabs() const
+QList<QString> BrowserManager::tabs() const
 {
-    QJsonArray arr;
-    for (auto i=m_tabs.constBegin(); i != m_tabs.constEnd(); ++i) {
-        QJsonObject o;
-        o["url"] = i->url;
-        o["isMobile"] = i->isMobile;
-        arr.append(o);
-    }
-    return QJsonDocument(arr).toJson();
+    return m_tabs;
 }
 
 void BrowserManager::loadTabs()
 {
-    QJsonArray arr = QJsonDocument::fromJson(m_settings->value("browser/tabs").toByteArray()).array();
-    m_tabs.clear();
-    for (auto i = arr.constBegin(); i != arr.constEnd(); ++i) {
-        QJsonObject o = i->toObject();
-        TabState ts(o.value("url").toString(), o.value("isMobile").toBool());
-        m_tabs.push_back(ts);
-    }
+    m_tabs = m_settings->value("browser/tabs").toStringList();
     m_current_tab = m_settings->value("browser/current_tab", 0).toInt();
 }
 
 void BrowserManager::saveTabs()
 {
-    m_settings->setValue("browser/tabs", tabs());
+    qDebug() << "saveTabs called" << m_tabs;
+    m_settings->setValue("browser/tabs", QVariant(m_tabs));
 }
 
 void BrowserManager::setCurrentTab(int index)
 {
-    if (m_tabs_readonly) return;
+    if (m_tabsReadonly) return;
     m_current_tab = index;
     m_settings->setValue("browser/current_tab", m_current_tab);
 }
 
 void BrowserManager::setTab(int index, QString url, bool isMobile)
 {
-    if (m_tabs_readonly) return;
-    while (m_tabs.length() <= index) {
-        m_tabs.append(TabState());
-    }
-    m_tabs[index] = TabState(url, isMobile);
-    saveTabs();
-}
+    if (m_tabsReadonly)
+        return;
 
-void BrowserManager::setTabIsMobile(int index, bool isMobile)
-{
-    TabState ts = m_tabs.value(index);
-    setTab(index, ts.url, isMobile);
+    while (m_tabs.length() <= index) {
+        m_tabs.append(QString());
+    }
+    m_tabs[index] = url;
+    saveTabs();
+
+    tabsChanged();
 }
 
 void BrowserManager::setTabUrl(int index, QString url)
 {
-    TabState ts = m_tabs.value(index);
-    setTab(index, url, ts.isMobile);
+    while (m_tabs.length() <= index) {
+        m_tabs.append(QString());
+    }
+    m_tabs[index] = url;
+
+    saveTabs();
+    tabsChanged();
 }
 
 void BrowserManager::setTabsWritable()
 {
-    m_tabs_readonly = false;
+    m_tabsReadonly = false;
 }
 
 void BrowserManager::rmTab(int index)
