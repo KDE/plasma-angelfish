@@ -29,6 +29,7 @@
 #include "browsermanager.h"
 #include "urlfilterproxymodel.h"
 #include "urlmodel.h"
+#include "urlutils.h"
 #include "useragent.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -66,6 +67,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager");
     qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0, "UrlFilterProxyModel");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
+
+    // URL utils
+    AngelFish::UrlUtils urlUtils;
+    engine.rootContext()->setContextProperty("urlUtils", &urlUtils);
+
+    // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
     // Error handling

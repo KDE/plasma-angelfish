@@ -107,7 +107,7 @@ Item {
             Layout.fillWidth: true
             Layout.preferredHeight: layout.height
 
-            property string scheme: browserManager.urlScheme(currentWebView.url)
+            property string scheme: urlUtils.urlScheme(currentWebView.url)
 
             Controls.ToolButton {
                 id: schemeIcon
@@ -137,8 +137,8 @@ Item {
 
                 text: {
                     if (labelItem.scheme==="http" || labelItem.scheme==="https") {
-                        var h = browserManager.urlHostPort(currentWebView.url);
-                        var p = browserManager.urlPath(currentWebView.url);
+                        var h = urlUtils.urlHostPort(currentWebView.url);
+                        var p = urlUtils.urlPath(currentWebView.url);
                         if (p === "/") p = ""
                         return '%1<font size="2">%2</font>'.arg(h).arg(p);
                     }

@@ -84,7 +84,7 @@ Kirigami.ScrollablePage {
             placeholderText: browserManager.homepage
             onAccepted: {
                 if (homePagePopup.text !== "")
-                    browserManager.homepage = browserManager.urlFromUserInput(homePagePopup.text)
+                    browserManager.homepage = urlUtils.urlFromUserInput(homePagePopup.text)
             }
         }
 
@@ -95,7 +95,7 @@ Kirigami.ScrollablePage {
             placeholderText: browserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")
-                    browserManager.searchBaseUrl = browserManager.urlFromUserInput(searchEnginePopup.text);
+                    browserManager.searchBaseUrl = urlUtils.urlFromUserInput(searchEnginePopup.text);
             }
         }
 

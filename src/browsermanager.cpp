@@ -90,30 +90,6 @@ void BrowserManager::removeFromHistory(const QString &url)
     emit historyChanged();
 }
 
-QString BrowserManager::urlFromUserInput(const QString &input)
-{
-    return QUrl::fromUserInput(input).toString();
-}
-
-QString BrowserManager::urlScheme(const QString &url)
-{
-    return QUrl::fromUserInput(url).scheme();
-}
-
-QString BrowserManager::urlHostPort(const QString &url)
-{
-    QUrl u(url);
-    QString r = u.host();
-    int p = u.port(-1);
-    if (p > 0) r = QString("%1:%2").arg(r).arg(p);
-    return r;
-}
-
-QString BrowserManager::urlPath(const QString &url)
-{
-    return QUrl::fromUserInput(url).path();
-}
-
 void BrowserManager::setHomepage(const QString &homepage)
 {
     m_settings->setValue("browser/homepage", homepage);
