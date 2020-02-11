@@ -119,7 +119,7 @@ Item {
                     return "";
                 }
                 visible: icon.name
-                height: buttonSize*0.75
+                height: buttonSize * 0.75
                 width: visible ? buttonSize*0.75 : 0
                 Kirigami.Theme.inherit: true
                 background: Rectangle {
