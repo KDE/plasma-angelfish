@@ -41,7 +41,7 @@ Controls.Drawer {
     leftPadding: 0
 
     property int buttonSize: Kirigami.Units.gridUnit * 2
-    property int fullHeight: 0.9*rootPage.height
+    property int fullHeight: 0.9 * rootPage.height
     property bool openedState: false
 
     property Item urlInput
