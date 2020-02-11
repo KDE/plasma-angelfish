@@ -143,6 +143,7 @@ Controls.Drawer {
         openedState = true;
         urlInput.text = currentWebView.url;
         urlInput.forceActiveFocus();
+        urlInput.selectAll();
         listView.positionViewAtBeginning();
     }
 
