@@ -37,8 +37,8 @@ Controls.Drawer {
 
     bottomPadding: 0
     topPadding: 0
-    rightPadding: Kirigami.Units.gridUnit/2
-    leftPadding: Kirigami.Units.gridUnit/2
+    rightPadding: 0
+    leftPadding: 0
 
     property int buttonSize: Kirigami.Units.gridUnit * 2
     property int fullHeight: 0.9*rootPage.height
@@ -56,8 +56,9 @@ Controls.Drawer {
         RowLayout {
             id: editRow
             anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             height: Kirigami.Units.gridUnit * 3
-            width: parent.width
+            width: parent.width - Kirigami.Units.gridUnit
 
             Controls.ToolButton {
                 Layout.preferredWidth: buttonSize
