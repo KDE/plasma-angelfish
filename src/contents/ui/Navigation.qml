@@ -136,7 +136,7 @@ Item {
                 height: parent.height
 
                 text: {
-                    if (labelItem.scheme==="http" || labelItem.scheme==="https") {
+                    if (labelItem.scheme === "http" || labelItem.scheme === "https") {
                         var h = urlUtils.urlHostPort(currentWebView.url);
                         var p = urlUtils.urlPath(currentWebView.url);
                         if (p === "/") p = ""
