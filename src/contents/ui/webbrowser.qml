@@ -379,17 +379,16 @@ Kirigami.ApplicationWindow {
     Component.onCompleted: {
         if (!webappcontainer) {
             // initialize tabs
-            var t = JSON.parse(browserManager.tabs());
-            var ct = browserManager.currentTab();
-            for (var i = 0; i < t.length; i++) {
+            for (var i = 0; i < browserManager.tabs.length; i++) {
                 if (i < regularTabs.count)
-                    regularTabs.itemAt(i).url = t[i].url;
+                    regularTabs.itemAt(i).url = browserManager.tabs[i];
                 else
-                    regularTabs.newTab(t[i].url);
-                regularTabs.itemAt(i).userAgent.isMobile = t[i].isMobile;
+                    regularTabs.newTab(browserManager.tabs[i]);
                 regularTabs.itemAt(i).reloadOnVisible = true;
             }
-            if (ct >= 0 && ct < regularTabs.count) regularTabs.currentIndex = ct;
+            if (browserManager.currentTab >= 0 && browserManager.currentTab < regularTabs.count)
+                regularTabs.currentIndex = browserManager.currentTab;
+
             browserManager.setTabsWritable();
 
             if (initialUrl) {
