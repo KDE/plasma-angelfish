@@ -12,6 +12,7 @@
   <name xml:lang="et">Angelfishi veebilehitseja</name>
   <name xml:lang="fi">Angelfish-verkkoselain</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
+  <name xml:lang="ia">Angelfish Webbrowser (navigator web)</name>
   <name xml:lang="id">Angelfish Webbrowser</name>
   <name xml:lang="it">Browser web Angelfish</name>
   <name xml:lang="ko">Angelfish 웹 브라우저</name>
@@ -61,6 +62,7 @@
   <developer_name xml:lang="et">KDE kogukond</developer_name>
   <developer_name xml:lang="fi">KDE-yhteisö</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
+  <developer_name xml:lang="ia">Communitate de KDE</developer_name>
   <developer_name xml:lang="id">Komunitas KDE</developer_name>
   <developer_name xml:lang="it">Comunità KDE</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
@@ -133,6 +135,7 @@
       <li xml:lang="fi">kirjanmerkit</li>
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
+      <li xml:lang="ia">Marcatores de libro</li>
       <li xml:lang="id">markah</li>
       <li xml:lang="it">segnalibri</li>
       <li xml:lang="ko">책갈피</li>
@@ -158,6 +161,7 @@
       <li xml:lang="fi">historia</li>
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
+      <li xml:lang="ia">Chronologia</li>
       <li xml:lang="id">histori</li>
       <li xml:lang="it">cronologia</li>
       <li xml:lang="ko">과거 기록</li>
