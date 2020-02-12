@@ -29,14 +29,13 @@ class TabsModel : public QAbstractListModel
     Q_PROPERTY(int currentTab READ currentTab WRITE setCurrentTab NOTIFY currentTabChanged)
     Q_PROPERTY(QList<QString> tabs READ tabs NOTIFY tabsChanged)
     Q_PROPERTY(bool privateMode READ privateMode WRITE setPrivateMode NOTIFY privateModeChanged)
-    Q_PROPERTY(bool tabsWritable READ tabsWritable WRITE setTabsWritable NOTIFY tabsWritableChanged)
 
     enum RoleNames {
         UrlRole = Qt::UserRole + 1
     };
 
 public:
-    explicit TabsModel(QObject *parent = nullptr, QSettings *settings = nullptr);
+    explicit TabsModel(QObject *parent = nullptr);
 
     QHash<int, QByteArray> roleNames() const override;
     QVariant data(const QModelIndex &index, int role) const override;
@@ -47,7 +46,8 @@ public:
     QList<QString> tabs() const;
 
     void setCurrentTab(int index);
-    Q_INVOKABLE void setTab(int index, QString url);
+
+    Q_INVOKABLE void setTabUrl(int index, QString url);
 
     Q_INVOKABLE void newTab(QString url);
     Q_INVOKABLE void createEmptyTab();
@@ -56,9 +56,6 @@ public:
 
     bool privateMode() const;
     void setPrivateMode(bool privateMode);
-
-    bool tabsWritable() const;
-    void setTabsWritable(bool writable);
 
 protected:
     void loadTabs();
@@ -69,14 +66,12 @@ private:
 
     int m_currentTab = 0;
     QList<QString> m_tabs;
-    bool m_tabsWritable = true;
     bool m_privateMode = false;
 
 signals:
     void currentTabChanged();
     void tabsChanged();
     void privateModeChanged();
-    void tabsWritableChanged();
 };
 
 #endif // TABSMODEL_H

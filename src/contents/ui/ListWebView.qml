@@ -35,7 +35,6 @@ Repeater {
     property bool privateTabsMode: false
 
     property alias currentIndex: tabsModel.currentTab
-    onCurrentIndexChanged: console.log("tabs index changed", currentIndex)
     property var currentItem
 
     property alias tabsModel: tabsModel
@@ -67,7 +66,7 @@ Repeater {
         }
         onUrlChanged: {
             if (!privateTabsMode)
-                tabs.tabsModel.setTab(index, url)
+                tabs.tabsModel.setTabUrl(index, url)
         }
     }
 

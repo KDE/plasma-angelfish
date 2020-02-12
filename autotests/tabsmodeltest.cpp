@@ -107,22 +107,8 @@ private Q_SLOTS:
     }
 
     void testSetTab() {
-        // tabs are writable by default
-        m_tabsModel->setTab(0, "https://debian.org");
+        m_tabsModel->setTabUrl(0, "https://debian.org");
         QCOMPARE(m_tabsModel->tabs(), QStringList({"https://debian.org", "third"}));
-    }
-
-    void testSetTabsWritable() {
-        // tabs are writable by default
-        QCOMPARE(m_tabsModel->tabsWritable(), true);
-
-        // Disable tabs writable
-        m_tabsModel->setTabsWritable(false);
-        QCOMPARE(m_tabsModel->tabsWritable(), false);
-
-        // Enable tabs writable
-        m_tabsModel->setTabsWritable(true);
-        QCOMPARE(m_tabsModel->tabsWritable(), true);
     }
 
     void testPrivateMode() {

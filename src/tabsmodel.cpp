@@ -21,9 +21,10 @@
 #include <QDebug>
 #include <QUrl>
 
-TabsModel::TabsModel(QObject *parent, QSettings *settings) : QAbstractListModel(parent),
-    m_settings(settings)
-{
+#include "browsermanager.h"
+
+TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
+    // We can only do this once we know whether we are in private mode or not
     connect(this, &TabsModel::privateModeChanged, [&] {
         if (!m_privateMode) {
             loadTabs();
@@ -34,11 +35,9 @@ TabsModel::TabsModel(QObject *parent, QSettings *settings) : QAbstractListModel(
         qDebug() << m_currentTab;
     });
 
-    // HACK
-    // TODO
-    // REMOVE
-    m_settings = new QSettings(this);
+    m_settings = AngelFish::BrowserManager::instance()->settings();
 
+    // Make sure model always contains at least one tab
     createEmptyTab();
 }
 
@@ -68,28 +67,22 @@ int TabsModel::rowCount(const QModelIndex &parent) const
     return parent.isValid() ? 0 : m_tabs.count();
 }
 
-void TabsModel::setTab(int index, QString url)
+/**
+ * @brief TabsModel::setTabUrl sets the url of a tab at a given index.
+ * It should be used in cases were a reload of the web engine after the url change
+ * is not wanted, e.g if this function is already triggered by a load of the web engine.
+ * @param index
+ * @param url
+ */
+void TabsModel::setTabUrl(int index, QString url)
 {
-    if (!m_tabsWritable)
-        return;
+    if (index < 0 && index >= m_tabs.count())
+        return; // index out of bounds
 
-    while (m_tabs.length() <= index) {
-        m_tabs.append(QString());
-    }
-    m_tabs[index] = url;
+    m_tabs.replace(index, url);
     saveTabs();
 
     tabsChanged();
-}
-
-bool TabsModel::tabsWritable() const
-{
-    return m_tabsWritable;
-}
-
-void TabsModel::setTabsWritable(bool writable)
-{
-    m_tabsWritable = writable;
 }
 
 int TabsModel::currentTab() const
@@ -99,9 +92,6 @@ int TabsModel::currentTab() const
 
 void TabsModel::setCurrentTab(int index)
 {
-    if (!m_tabsWritable)
-        return;
-
     if (index >= m_tabs.count())
         return;
 
