@@ -64,9 +64,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
     // Browser manager
-    qmlRegisterType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager");
     qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0, "UrlFilterProxyModel");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
+    qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
 
     // URL utils
     qmlRegisterSingletonType<AngelFish::UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils",
@@ -74,6 +74,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         AngelFish::UrlUtils *urlUtils = new AngelFish::UrlUtils();
         return urlUtils;
     });
+    qmlRegisterSingletonType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return static_cast<QObject *>(new AngelFish::BrowserManager());
+    });
+
 
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));

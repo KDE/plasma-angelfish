@@ -27,6 +27,8 @@ import QtQuick.Controls 2.0 as Controls
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
+import "regex-weburl.js" as RegexWebUrl
+
 Item {
     id: navigation
 
