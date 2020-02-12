@@ -24,6 +24,7 @@ import QtQuick.Controls 2.4 as Controls
 import QtQuick.Layouts 1.11
 
 import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mobile.angelfish 1.0
 
 
 Kirigami.ScrollablePage {
@@ -84,7 +85,7 @@ Kirigami.ScrollablePage {
             placeholderText: browserManager.homepage
             onAccepted: {
                 if (homePagePopup.text !== "")
-                    browserManager.homepage = browserManager.urlFromUserInput(homePagePopup.text)
+                    browserManager.homepage = UrlUtils.urlFromUserInput(homePagePopup.text)
             }
         }
 
@@ -95,7 +96,7 @@ Kirigami.ScrollablePage {
             placeholderText: browserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")
-                    browserManager.searchBaseUrl = browserManager.urlFromUserInput(searchEnginePopup.text);
+                    browserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text);
             }
         }
 

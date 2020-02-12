@@ -90,11 +90,6 @@ void BrowserManager::removeFromHistory(const QString &url)
     emit historyChanged();
 }
 
-QString BrowserManager::urlFromUserInput(const QString &input)
-{
-    return QUrl::fromUserInput(input).toString();
-}
-
 void BrowserManager::setHomepage(const QString &homepage)
 {
     m_settings->setValue("browser/homepage", homepage);

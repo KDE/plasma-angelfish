@@ -66,8 +66,6 @@ public:
     Q_INVOKABLE void setTabsWritable();
     Q_INVOKABLE void rmTab(int index);
 
-    Q_INVOKABLE static QString urlFromUserInput(const QString &input);
-
 signals:
     void updated();
     void bookmarksChanged();

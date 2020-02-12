@@ -3,6 +3,7 @@ set(angelfish_SRCS
     browsermanager.cpp
     urlmodel.cpp
     urlfilterproxymodel.cpp
+    urlutils.cpp
     useragent.cpp
 )
 

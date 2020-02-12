@@ -14,7 +14,7 @@ ecm_add_test(useragenttest.cpp ../src/useragent.cpp
              LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(browsermanagertest.cpp ../src/browsermanager.cpp ../src/urlmodel.cpp
+ecm_add_test(browsermanagertest.cpp ../src/browsermanager.cpp ../src/urlmodel.cpp ../src/urlutils.cpp
              TEST_NAME browsermanagertest
              LINK_LIBRARIES Qt5::Test Qt5::Qml
 )

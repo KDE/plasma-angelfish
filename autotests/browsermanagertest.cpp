@@ -22,6 +22,7 @@
 #include <QUrl>
 
 #include "browsermanager.h"
+#include "urlutils.h"
 
 using namespace AngelFish;
 
@@ -62,7 +63,7 @@ private Q_SLOTS:
         const QString incompleteUrl = QStringLiteral("kde.org");
         const QString completeUrl = QStringLiteral("http://kde.org");
 
-        QCOMPARE(m_browserManager->urlFromUserInput(incompleteUrl), completeUrl);
+        QCOMPARE(UrlUtils::urlFromUserInput(incompleteUrl), completeUrl);
     }
 
 private:
