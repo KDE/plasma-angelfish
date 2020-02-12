@@ -26,6 +26,8 @@ import QtQuick.Layouts 1.11
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
+import org.kde.mobile.angelfish 1.0
+
 
 Kirigami.ScrollablePage {
     title: i18n("Settings")
@@ -82,10 +84,10 @@ Kirigami.ScrollablePage {
             id: homePagePopup
             title: i18n("Homepage")
             description: i18n("Website that should be loaded on startup")
-            placeholderText: browserManager.homepage
+            placeholderText: BrowserManager.homepage
             onAccepted: {
                 if (homePagePopup.text !== "")
-                    browserManager.homepage = UrlUtils.urlFromUserInput(homePagePopup.text)
+                    BrowserManager.homepage = UrlUtils.urlFromUserInput(homePagePopup.text)
             }
         }
 
@@ -93,10 +95,10 @@ Kirigami.ScrollablePage {
             id: searchEnginePopup
             title: i18n("Search Engine")
             description: i18n("Base URL of your preferred search engine")
-            placeholderText: browserManager.searchBaseUrl
+            placeholderText: BrowserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")
-                    browserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text);
+                    BrowserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text);
             }
         }
 

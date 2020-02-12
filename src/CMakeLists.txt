@@ -5,6 +5,7 @@ set(angelfish_SRCS
     urlfilterproxymodel.cpp
     urlutils.cpp
     useragent.cpp
+    tabsmodel.cpp
 )
 
 qt5_add_resources(RESOURCES resources.qrc)

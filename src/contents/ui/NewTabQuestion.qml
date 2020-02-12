@@ -15,7 +15,7 @@ Kirigami.InlineMessage {
             icon.name: "tab-new"
             text: i18n("Open")
             onTriggered: {
-                tabs.newTab(newTabQuestion.url.toString())
+                tabs.tabsModel.newTab(newTabQuestion.url.toString())
                 newTabQuestion.visible = false
             }
         }

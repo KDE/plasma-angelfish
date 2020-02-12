@@ -35,7 +35,7 @@ Kirigami.ScrollablePage {
 
         UrlDelegate {
             onClicked: pageStack.pop()
-            onRemoved: browserManager.removeFromHistory(url);
+            onRemoved: BrowserManager.removeFromHistory(url);
         }
     }
 
@@ -46,7 +46,7 @@ Kirigami.ScrollablePage {
         clip: true
 
         model: UrlFilterProxyModel {
-            sourceModel: browserManager.history
+            sourceModel: BrowserManager.history
         }
 
         delegate: Kirigami.DelegateRecycler {

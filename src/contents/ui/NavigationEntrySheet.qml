@@ -89,9 +89,9 @@ Controls.Drawer {
 
                 function applyUrl() {
                     if (text.match(RegexWebUrl.re_weburl)) {
-                        load(UrlUtils.urlFromUserInput(text))
+                        tabs.tabsModel.load(UrlUtils.urlFromUserInput(text))
                     } else {
-                        load(UrlUtils.urlFromUserInput(browserManager.searchBaseUrl + text))
+                        tabs.tabsModel.load(UrlUtils.urlFromUserInput(BrowserManager.searchBaseUrl + text))
                     }
                     overlay.close();
                 }
@@ -131,7 +131,7 @@ Controls.Drawer {
 
             model: UrlFilterProxyModel {
                 id: urlFilter
-                sourceModel: browserManager.history
+                sourceModel: BrowserManager.history
             }
 
             Component.onCompleted: overlay.listView = listView

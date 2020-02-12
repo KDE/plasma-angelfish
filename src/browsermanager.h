@@ -23,7 +23,6 @@
 #define BOOKMARKSMANAGER_H
 
 #include <QObject>
-#include <QQmlPropertyMap>
 
 #include "urlmodel.h"
 
@@ -47,12 +46,11 @@ class BrowserManager : public QObject
     Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
                        searchBaseUrlChanged)
 
-    Q_PROPERTY(int currentTab READ currentTab NOTIFY currentTabChanged)
-    Q_PROPERTY(QList<QString> tabs READ tabs NOTIFY tabsChanged)
-
 public:
     BrowserManager(QObject *parent = nullptr);
     ~BrowserManager() override;
+
+    static BrowserManager *instance();
 
     UrlModel *bookmarks();
     UrlModel *history();
@@ -60,13 +58,7 @@ public:
     QString homepage();
     QString searchBaseUrl();
 
-    Q_INVOKABLE int currentTab() const;
-    Q_INVOKABLE QList<QString> tabs() const;
-    Q_INVOKABLE void setCurrentTab(int index);
-    Q_INVOKABLE void setTab(int index, QString url, bool isMobile);
-    Q_INVOKABLE void setTabUrl(int index, QString url);
-    Q_INVOKABLE void setTabsWritable();
-    Q_INVOKABLE void rmTab(int index);
+    QSettings* settings() const;
 
 signals:
     void updated();
@@ -75,11 +67,6 @@ signals:
 
     void homepageChanged();
     void searchBaseUrlChanged();
-
-    void loadUrlRequested(const QString &url);
-
-    void currentTabChanged();
-    void tabsChanged();
 
 public slots:
     void reload();
@@ -93,18 +80,12 @@ public slots:
     void setHomepage(const QString &homepage);
     void setSearchBaseUrl(const QString &searchBaseUrl);
 
-protected:
-    void loadTabs();
-    void saveTabs();
-
 private:
     UrlModel *m_bookmarks = nullptr;
     UrlModel *m_history = nullptr;
     QSettings *m_settings;
 
-    int m_current_tab = 0;
-    QList<QString> m_tabs;
-    bool m_tabsReadonly = true;
+    static BrowserManager *s_instance;
 };
 
 } // namespace

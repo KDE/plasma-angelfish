@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -28,9 +28,11 @@
 
 using namespace AngelFish;
 
+BrowserManager *BrowserManager::s_instance = nullptr;
+
 BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(new QSettings(this))
 {
-    loadTabs();
+    BrowserManager::s_instance = this;
 }
 
 BrowserManager::~BrowserManager()
@@ -107,75 +109,21 @@ void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
     emit searchBaseUrlChanged();
 }
 
+QSettings *BrowserManager::settings() const
+{
+    return m_settings;
+}
+
 QString BrowserManager::searchBaseUrl()
 {
     return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=")
             .toString();
 }
 
-int BrowserManager::currentTab() const
+BrowserManager *BrowserManager::instance()
 {
-    return m_current_tab;
-}
+    if (!s_instance)
+        s_instance = new BrowserManager();
 
-QList<QString> BrowserManager::tabs() const
-{
-    return m_tabs;
-}
-
-void BrowserManager::loadTabs()
-{
-    m_tabs = m_settings->value("browser/tabs").toStringList();
-    m_current_tab = m_settings->value("browser/current_tab", 0).toInt();
-}
-
-void BrowserManager::saveTabs()
-{
-    qDebug() << "saveTabs called" << m_tabs;
-    m_settings->setValue("browser/tabs", QVariant(m_tabs));
-}
-
-void BrowserManager::setCurrentTab(int index)
-{
-    if (m_tabsReadonly) return;
-    m_current_tab = index;
-    m_settings->setValue("browser/current_tab", m_current_tab);
-}
-
-void BrowserManager::setTab(int index, QString url, bool isMobile)
-{
-    if (m_tabsReadonly)
-        return;
-
-    while (m_tabs.length() <= index) {
-        m_tabs.append(QString());
-    }
-    m_tabs[index] = url;
-    saveTabs();
-
-    tabsChanged();
-}
-
-void BrowserManager::setTabUrl(int index, QString url)
-{
-    while (m_tabs.length() <= index) {
-        m_tabs.append(QString());
-    }
-    m_tabs[index] = url;
-
-    saveTabs();
-    tabsChanged();
-}
-
-void BrowserManager::setTabsWritable()
-{
-    m_tabsReadonly = false;
-}
-
-void BrowserManager::rmTab(int index)
-{
-    if (index >= 0 && index < m_tabs.size()) {
-        m_tabs.removeAt(index);
-        saveTabs();
-    }
+    return s_instance;
 }

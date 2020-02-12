@@ -39,7 +39,7 @@ Kirigami.SwipeListItem {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
     onClicked: {
-        load(url)
+        tabs.tabsModel.load(url)
         //tabs.newTab(url)
         //contentView.state = "hidden"
     }
