@@ -35,7 +35,6 @@ Kirigami.SwipeListItem {
     property string highlightedText: "<b><font color=\"" + Kirigami.Theme.highlightColor + "\">$&</font></b>"
 
     height: Kirigami.Units.gridUnit * 3
-    width: parent.width
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 

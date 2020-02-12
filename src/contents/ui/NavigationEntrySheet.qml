@@ -126,6 +126,7 @@ Controls.Drawer {
                 showRemove: false
                 onClicked: overlay.close()
                 highlightText: urlInput.text
+                width: parent.width
             }
 
             model: UrlFilterProxyModel {
