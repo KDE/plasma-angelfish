@@ -1,7 +1,7 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2019 Simon Schmeisser <s.schmeisser@gmx.net>                *
- *   Copyright 2019 Jonah Brüchert <jbb@kaidan.im>                         *
+ *   Copyright 2020 Jonah Brüchert  <jbb@kaidan.im>                        *
+ *             2020 Rinigus <rinigus.git@gmail.com>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,41 +20,33 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.7
-import QtQuick.Controls 2.2 as Controls
+#ifndef URLUTILS_H
+#define URLUTILS_H
 
-import org.kde.kirigami 2.5 as Kirigami
+#include <QObject>
 
-Controls.ScrollView {
-    id: completion
+#include "urlmodel.h"
 
-    background: Rectangle {
-        color: Kirigami.Theme.backgroundColor
-    }
+namespace AngelFish {
+/**
+ * @class UrlUtils
+ * @short Utilities for URL manipulation and parsing.
+ */
+class UrlUtils : public QObject
+{
+    Q_OBJECT
 
-    property string searchText
-    property alias model: listView.model
-    property alias count: listView.count
+public:
+    UrlUtils(QObject *parent = nullptr);
+    ~UrlUtils() override;
 
-    ListView {
-        id: listView
-        clip: true
+    Q_INVOKABLE static QString urlFromUserInput(const QString &input);
+    Q_INVOKABLE static QString urlScheme(const QString &url);
+    Q_INVOKABLE static QString urlHostPort(const QString &url);
+    Q_INVOKABLE static QString urlPath(const QString &url);
 
-        delegate: UrlDelegate {
-            showRemove: false
-            onClicked: tabs.forceActiveFocus()
-            highlightText: completion.searchText
-        }
-    }
+};
 
-    states: [
-        State {
-            name: "hidden"
-            when: visible === false
-            PropertyChanges {
-                target: completion
-                height: 0
-            }
-        }
-    ]
-}
+} // namespace
+
+#endif // URLUTILS_H

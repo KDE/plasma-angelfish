@@ -25,20 +25,17 @@ import QtWebEngine 1.4
 import QtQuick.Controls 2.0 as Controls
 
 import org.kde.kirigami 2.5 as Kirigami
-
-import "regex-weburl.js" as RegexWebUrl
-
+import org.kde.mobile.angelfish 1.0
 
 Item {
     id: navigation
 
     property bool navigationShown: true
 
-    property alias textFocus: urlInput.activeFocus
-    property alias text: urlInput.text
-
     property int expandedHeight: Kirigami.Units.gridUnit * 3
     property int buttonSize: Kirigami.Units.gridUnit * 2
+
+    signal activateUrlEntry;
 
     Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
@@ -106,30 +103,56 @@ Item {
             onClicked: currentWebView.goForward()
         }
 
-        Controls.TextField {
-            id: urlInput
-
+        Item {
+            id: labelItem
             Layout.fillWidth: true
+            Layout.preferredHeight: layout.height
 
-            text: currentWebView.url
+            property string scheme: UrlUtils.urlScheme(currentWebView.url)
 
-            selectByMouse: true
-            focus: false
-
-            Kirigami.Theme.inherit: true
-
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    selectAll()
+            Controls.ToolButton {
+                id: schemeIcon
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                icon.name: {
+                    if (labelItem.scheme === "https") return "lock";
+                    if (labelItem.scheme === "http") return "unlock";
+                    return "";
+                }
+                visible: icon.name
+                height: buttonSize * 0.75
+                width: visible ? buttonSize * 0.75 : 0
+                Kirigami.Theme.inherit: true
+                background: Rectangle {
+                    implicitWidth: schemeIcon.width
+                    implicitHeight: schemeIcon.height
+                    color: "transparent"
                 }
             }
 
-            onAccepted: {
-                if (text.match(RegexWebUrl.re_weburl)) {
-                    load(browserManager.urlFromUserInput(text))
-                } else {
-                    load(browserManager.urlFromUserInput(browserManager.searchBaseUrl + text))
+            Controls.Label {
+                anchors.left: schemeIcon.right
+                anchors.right: parent.right
+                anchors.top: parent.top
+                height: parent.height
+
+                text: {
+                    if (labelItem.scheme === "http" || labelItem.scheme === "https") {
+                        var h = UrlUtils.urlHostPort(currentWebView.url);
+                        var p = UrlUtils.urlPath(currentWebView.url);
+                        if (p === "/") p = ""
+                        return '%1<font size="2">%2</font>'.arg(h).arg(p);
+                    }
+                    return currentWebView.url;
                 }
+                textFormat: Text.StyledText
+                elide: Text.ElideRight
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: activateUrlEntry()
             }
         }
 
@@ -177,5 +200,4 @@ Item {
             PropertyChanges { target: navigation; height: 0}
         }
     ]
-
 }
