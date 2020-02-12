@@ -24,6 +24,8 @@ import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
 
+import org.kde.mobile.angelfish 1.0
+
 
 Kirigami.ScrollablePage {
 //    id: options
@@ -35,7 +37,7 @@ Kirigami.ScrollablePage {
 
         UrlDelegate {
             onClicked: pageStack.pop()
-            onRemoved: browserManager.removeBookmark(url);
+            onRemoved: BrowserManager.removeBookmark(url);
         }
     }
 
@@ -45,7 +47,7 @@ Kirigami.ScrollablePage {
         interactive: height < contentHeight
         clip: true
 
-        model: browserManager.bookmarks
+        model: BrowserManager.bookmarks
 
         delegate: Kirigami.DelegateRecycler {
             width: parent.width

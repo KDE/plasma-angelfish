@@ -121,20 +121,20 @@ WebEngineView {
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request != null && contextMenu.request.linkUrl !== ""
+            enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
             text: i18n("Copy Url")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
         }
         Controls.MenuItem {
             text: i18n("View source")
-            onTriggered: newTab("view-source:" + webEngineView.url)
+            onTriggered: tabsModel.newTab("view-source:" + webEngineView.url)
         }
         Controls.MenuItem {
             text: i18n("Download")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.DownloadLinkToDisk)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request != null && contextMenu.request.linkUrl !== ""
+            enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
             text: i18n("Open in new Tab")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
         }
@@ -182,12 +182,12 @@ WebEngineView {
 
     onIconChanged: {
         if (icon)
-            browserManager.history.updateIcon(url, icon)
+            BrowserManager.history.updateIcon(url, icon)
     }
 
     onNewViewRequested: {
         if (request.userInitiated) {
-            newTab(request.requestedUrl.toString())
+            tabsModel.newTab(request.requestedUrl.toString())
             showPassiveNotification(i18n("Website was opened in a new tab"))
         } else {
             questionLoader.setSource("NewTabQuestion.qml")

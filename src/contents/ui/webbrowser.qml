@@ -44,36 +44,13 @@ Kirigami.ApplicationWindow {
     //
     // As there are private and normal tabs, switch between
     // them according to the current mode.
-    property Item tabs: rootPage.privateMode ? privateTabs : regularTabs
+    property ListWebView tabs: rootPage.privateMode ? privateTabs : regularTabs
 
     onCurrentWebViewChanged: {
         print("Current WebView is now : " + tabs.currentIndex);
     }
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
     property color borderColor: Kirigami.Theme.highlightColor;
-
-    /**
-     * Load a url in the current tab
-     */
-    function load(url) {
-        print("Loading url: " + url);
-        currentWebView.url = url;
-        currentWebView.forceActiveFocus()
-    }
-
-    BrowserManager {
-        id: browserManager
-    }
-
-    /**
-      * Make loading available to c++
-      */
-    Connections {
-        target: browserManager
-        onLoadUrlRequested: {
-            load(url)
-        }
-    }
 
     width: Kirigami.Units.gridUnit * 20
     height: Kirigami.Units.gridUnit * 30
@@ -88,7 +65,7 @@ Kirigami.ApplicationWindow {
         request.title = currentWebView.title;
         request.icon = currentWebView.icon;
         request.lastVisited = new Date();
-        browserManager.addToHistory(request);
+        BrowserManager.addToHistory(request);
     }
 
     pageStack.globalToolBar.showNavigationButtons: {
@@ -317,9 +294,6 @@ Kirigami.ApplicationWindow {
                     } else {
                         currentWebView.userAgent.isMobile = true
                     }
-                    if (!rootPage.privateMode) {
-                        browserManager.setTabIsMobile(tabs.currentIndex, currentWebView.userAgent.isMobile);
-                    }
                     currentWebView.reload()
                 }
             }
@@ -378,25 +352,12 @@ Kirigami.ApplicationWindow {
 
     Component.onCompleted: {
         if (!webappcontainer) {
-            // initialize tabs
-            for (var i = 0; i < browserManager.tabs.length; i++) {
-                if (i < regularTabs.count)
-                    regularTabs.itemAt(i).url = browserManager.tabs[i];
-                else
-                    regularTabs.newTab(browserManager.tabs[i]);
-                regularTabs.itemAt(i).reloadOnVisible = true;
-            }
-            if (browserManager.currentTab >= 0 && browserManager.currentTab < regularTabs.count)
-                regularTabs.currentIndex = browserManager.currentTab;
-
-            browserManager.setTabsWritable();
-
             if (initialUrl) {
-                regularTabs.newTab(initialUrl);
+                regularTabs.tabsModel.newTab(initialUrl);
             }
         } else {
             if (initialUrl) {
-                load(initialUrl);
+                regularTabs.tabsModel.load(initialUrl);
             }
         }
     }
