@@ -21,10 +21,10 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.0
 import QtQml.Models 2.1
 
 import QtWebEngine 1.6
+import org.kde.mobile.angelfish 1.0
 
 
 Repeater {
@@ -34,23 +34,24 @@ Repeater {
     property bool activeTabs: true
     property bool privateTabsMode: false
 
-    property int currentIndex: -1
+    property alias currentIndex: tabsModel.currentTab
     property var currentItem
 
-    property alias count: tabsModel.count
+    property alias tabsModel: tabsModel
 
-    model: ListModel {
+    model: TabsModel {
         id: tabsModel
+        privateMode: privateTabsMode
     }
 
     delegate: WebView {
-        id: wv
+        id: webView
         anchors {
             bottom: tabs.bottom
             top: tabs.top
         }
         privateMode: tabs.privateTabsMode
-        url: pageurl;
+        url: model.pageurl
         width: tabs.width
 
         property bool showView: index === tabs.currentIndex
@@ -58,59 +59,23 @@ Repeater {
         visible: showView && tabs.activeTabs
         x: 0
 
-        onShowViewChanged: if (showView) tabs.currentItem = wv
-        onUrlChanged: if (!privateTabsMode) browserManager.setTabUrl(index, url)
-    }
-
-    function createEmptyTab(front) {
-        newTab("about:blank", front);
-    }
-
-    function newTab(url, front) {
-        var p = {pageurl: url};
-        if (front) {
-            tabsModel.insert(0, p);
-            tabs.currentIndex = 0;
+        onShowViewChanged: {
+            if (showView) {
+                tabs.currentItem = webView
+            }
         }
-        else {
-            tabsModel.append(p);
-            tabs.currentIndex = tabs.count - 1;
+        onUrlChanged: {
+            tabs.tabsModel.setTabUrl(index, url)
         }
-    }
-
-    function closeTab(index) {
-        if (index<0 && index >= tabs.count)
-            return; // index out of bounds
-
-        if (tabs.count <= 1) {
-            // create new tab before removing the last one
-            // to avoid linking all signals to null object
-            createEmptyTab(true);
-            tabs.currentItem = tabs.itemAt(0);
-            index = 1;
-        }
-        if (tabs.currentIndex === index) {
-            // handle the removal of current tab
-            tabs.currentIndex = 0;
-            tabs.currentItem = tabs.itemAt(0);
-        }
-
-        if (!privateTabsMode) browserManager.rmTab(index);
-        tabsModel.remove(index);
     }
 
     Component.onCompleted: {
-        if (privateTabsMode)
-            createEmptyTab();
-        else
-            newTab(browserManager.homepage);
-        if (initialUrl) {
-            load(initialUrl)
+        if (!privateTabsMode && !initialUrl && tabsModel.rowCount() === 1 && tabsModel.tabs[0] === "about:blank")
+            tabsModel.load(BrowserManager.homepage);
+        else if (initialUrl) {
+            tabsModel.newTab(initialUrl)
         } else {
-            console.log("Using homepage")
-            load(browserManager.homepage)
+            console.log("in private mode, not loading homepage")
         }
     }
-
-    onCurrentIndexChanged: browserManager.setCurrentTab(tabs.currentIndex)
 }

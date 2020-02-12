@@ -28,9 +28,8 @@ import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-// import org.kde.plasma.components 2.0 as PlasmaComponents
-// import org.kde.plasma.extras 2.0 as PlasmaExtras
 
+import org.kde.mobile.angelfish 1.0
 
 Kirigami.ScrollablePage {
     id: tabsRoot
@@ -46,7 +45,8 @@ Kirigami.ScrollablePage {
         icon.name: "list-add"
         text: i18n("New")
         onTriggered: {
-            tabs.newTab(rootPage.privateMode ? "about:blank" : browserManager.homepage)
+            // Somewhat weird behaviour, consider always just opening "about:blank"
+            tabs.tabsModel.newTab(rootPage.privateMode ? "about:blank" : BrowserManager.homepage)
             tabs.currentIndex = tabs.count - 1;
             pageStack.pop()
         }
@@ -193,7 +193,7 @@ Kirigami.ScrollablePage {
                     anchors.rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing + (tabsRoot.landscapeMode ? 0 : tabsRoot.width-grid.width)
                     anchors.top: parent.top
                     anchors.topMargin: Kirigami.Units.smallSpacing
-                    onClicked: tabs.closeTab(index)
+                    onClicked: tabs.tabsModel.closeTab(index)
                 }
 
                 Column {
