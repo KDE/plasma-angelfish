@@ -95,7 +95,7 @@ Kirigami.ScrollablePage {
             id: searchEnginePopup
             title: i18n("Search Engine")
             description: i18n("Base URL of your preferred search engine")
-            placeholderText: browserManager.searchBaseUrl
+            placeholderText: BrowserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")
                     browserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text);

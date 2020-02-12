@@ -28,8 +28,11 @@
 
 using namespace AngelFish;
 
+BrowserManager *BrowserManager::s_instance = nullptr;
+
 BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(new QSettings(this))
 {
+    BrowserManager::s_instance = this;
 }
 
 BrowserManager::~BrowserManager()
@@ -106,8 +109,21 @@ void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
     emit searchBaseUrlChanged();
 }
 
+QSettings *BrowserManager::settings() const
+{
+    return m_settings;
+}
+
 QString BrowserManager::searchBaseUrl()
 {
     return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=")
             .toString();
+}
+
+BrowserManager *BrowserManager::instance()
+{
+    if (!s_instance)
+        s_instance = new BrowserManager();
+
+    return s_instance;
 }

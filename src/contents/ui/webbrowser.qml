@@ -280,7 +280,7 @@ Kirigami.ApplicationWindow {
                     request.title = currentWebView.title;
                     request.icon = currentWebView.icon;
                     request.bookmarked = true;
-                    browserManager.addBookmark(request);
+                    BrowserManager.addBookmark(request);
                 }
             },
             Kirigami.Action {

@@ -16,10 +16,10 @@ ecm_add_test(useragenttest.cpp ../src/useragent.cpp
 
 ecm_add_test(browsermanagertest.cpp ../src/browsermanager.cpp ../src/urlmodel.cpp ../src/urlutils.cpp
              TEST_NAME browsermanagertest
-             LINK_LIBRARIES Qt5::Test Qt5::Qml
+             LINK_LIBRARIES Qt5::Test
 )
 
-ecm_add_test(tabsmodeltest.cpp ../src/tabsmodel.cpp
-              TEST_NAME tabsmodeltest
-	      LINK_LIBRARIES Qt5::Test
+ecm_add_test(tabsmodeltest.cpp ../src/tabsmodel.cpp ../src/browsermanager.cpp ../src/urlmodel.cpp
+             TEST_NAME tabsmodeltest
+             LINK_LIBRARIES Qt5::Test
 )

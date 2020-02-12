@@ -23,7 +23,6 @@
 #define BOOKMARKSMANAGER_H
 
 #include <QObject>
-#include <QQmlPropertyMap>
 
 #include "urlmodel.h"
 #include "tabsmodel.h"
@@ -52,11 +51,15 @@ public:
     BrowserManager(QObject *parent = nullptr);
     ~BrowserManager() override;
 
+    static BrowserManager *instance();
+
     UrlModel *bookmarks();
     UrlModel *history();
 
     QString homepage();
     QString searchBaseUrl();
+
+    QSettings* settings() const;
 
 signals:
     void updated();
@@ -65,8 +68,6 @@ signals:
 
     void homepageChanged();
     void searchBaseUrlChanged();
-
-    void loadUrlRequested(const QString &url);
 
 public slots:
     void reload();
@@ -84,6 +85,8 @@ private:
     UrlModel *m_bookmarks = nullptr;
     UrlModel *m_history = nullptr;
     QSettings *m_settings;
+
+    static BrowserManager *s_instance;
 };
 
 } // namespace
