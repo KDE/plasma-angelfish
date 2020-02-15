@@ -85,7 +85,7 @@ int TabsModel::rowCount(const QModelIndex &parent) const
  * @param url
  * @param isMobile
  */
-void TabsModel::setTab(int index, QString url, bool isMobile)
+void TabsModel::setTab(int index, const QString &url, bool isMobile)
 {
     if (index < 0 && index >= m_tabs.count())
         return; // index out of bounds
@@ -219,7 +219,7 @@ void TabsModel::createEmptyTab()
     newTab(QStringLiteral("about:blank"));
 };
 
-void TabsModel::newTab(QString url, bool isMobile) {
+void TabsModel::newTab(const QString &url, bool isMobile) {
     beginInsertRows({}, m_tabs.count(), m_tabs.count());
 
     QJsonObject tab;
@@ -274,7 +274,7 @@ void TabsModel::closeTab(int index) {
 /**
  * Load a url in the current tab
  */
-void TabsModel::load(QString url) {
+void TabsModel::load(const QString &url) {
     qDebug() << "Loading url:" << url;
 
     qDebug() << "current tab" << m_currentTab << "tabs open" << m_tabs.count();
