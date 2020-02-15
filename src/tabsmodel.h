@@ -20,18 +20,39 @@
 #define TABSMODEL_H
 
 #include <QAbstractListModel>
-#include <QSettings>
+#include <QJsonObject>
+
+class TabState {
+public:
+    static TabState fromJson(const QJsonObject &obj);
+    QJsonObject toJson() const;
+
+    TabState() = default;
+    TabState(const QString &url, const bool isMobile);
+
+    bool operator==(const TabState &other) const;
+
+    bool isMobile() const;
+    void setIsMobile(bool isMobile);
+
+    QString url() const;
+    void setUrl(const QString &url);
+
+private:
+    QString m_url;
+    bool m_isMobile;
+};
 
 class TabsModel : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_PROPERTY(int currentTab READ currentTab WRITE setCurrentTab NOTIFY currentTabChanged)
-    Q_PROPERTY(QList<QString> tabs READ tabs NOTIFY tabsChanged)
     Q_PROPERTY(bool privateMode READ privateMode WRITE setPrivateMode NOTIFY privateModeChanged)
 
     enum RoleNames {
-        UrlRole = Qt::UserRole + 1
+        UrlRole = Qt::UserRole + 1,
+        IsMobileRole
     };
 
 public:
@@ -42,14 +63,14 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     int currentTab() const;
-
-    QList<QString> tabs() const;
-
     void setCurrentTab(int index);
 
-    Q_INVOKABLE void setTabUrl(int index, QString url);
+    QVector<TabState> tabs() const;
 
-    Q_INVOKABLE void newTab(QString url);
+    Q_INVOKABLE void setTab(int index, QString url, bool isMobile = false);
+    Q_INVOKABLE TabState tab(int index);
+
+    Q_INVOKABLE void newTab(QString url, bool isMobile = false);
     Q_INVOKABLE void createEmptyTab();
     Q_INVOKABLE void closeTab(int index);
     Q_INVOKABLE void load(QString url);
@@ -58,14 +79,12 @@ public:
     void setPrivateMode(bool privateMode);
 
 protected:
-    void loadTabs();
-    void saveTabs();
+    bool loadTabs();
+    bool saveTabs() const;
 
 private:
-    QSettings *m_settings;
-
     int m_currentTab = 0;
-    QList<QString> m_tabs;
+    QVector<TabState> m_tabs {};
     bool m_privateMode = false;
 
 signals:
