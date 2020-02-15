@@ -21,5 +21,5 @@ ecm_add_test(browsermanagertest.cpp ../src/browsermanager.cpp ../src/urlmodel.cp
 
 ecm_add_test(tabsmodeltest.cpp ../src/tabsmodel.cpp ../src/browsermanager.cpp ../src/urlmodel.cpp
              TEST_NAME tabsmodeltest
-             LINK_LIBRARIES Qt5::Test
+	     LINK_LIBRARIES Qt5::Test
 )

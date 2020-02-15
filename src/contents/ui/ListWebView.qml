@@ -65,12 +65,12 @@ Repeater {
             }
         }
         onUrlChanged: {
-            tabs.tabsModel.setTabUrl(index, url)
+            tabs.tabsModel.setTab(index, url)
         }
     }
 
     Component.onCompleted: {
-        if (!privateTabsMode && !initialUrl && tabsModel.rowCount() === 1 && tabsModel.tabs[0] === "about:blank")
+        if (!privateTabsMode && !initialUrl && tabsModel.rowCount() === 1 && tabsModel.tabUrl(0) === "about:blank")
             tabsModel.load(BrowserManager.homepage);
         else if (initialUrl) {
             tabsModel.newTab(initialUrl)
