@@ -36,10 +36,21 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+
+    // Setup QtWebEngine
+    qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
+#if QT_VERSION > QT_VERSION_CHECK(5, 14, 0)
+    QtWebEngine::initialize();
+#endif
+
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("KDE");
     QCoreApplication::setOrganizationDomain("mobile.kde.org");
     QCoreApplication::setApplicationName("angelfish");
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+    QtWebEngine::initialize();
+#endif
 
     // Command line parser
     QCommandLineParser parser;
@@ -51,10 +62,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // QML loading
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-
-    // Setup QtWebEngine
-    qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
-    QtWebEngine::initialize();
 
     // initial url command line parameter
     QUrl initialUrl;
