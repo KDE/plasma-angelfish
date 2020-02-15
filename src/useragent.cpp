@@ -9,7 +9,7 @@ UserAgent::UserAgent(QObject *parent) : QObject(parent)
 
 QString UserAgent::userAgent() const
 {
-    return QString("Mozilla/5.0 (%1) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/%2 "
+    return QStringLiteral("Mozilla/5.0 (%1) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/%2 "
                    "Chrome/75.0.3770.116 %3 Safari/537.36")
             .arg(m_isMobile ? QStringLiteral("Linux; Plasma Mobile, like Android 9.0")
                             : QStringLiteral("X11; Linux x86_64"))
