@@ -32,7 +32,7 @@ TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
     connect(this, &TabsModel::privateModeChanged, [&] {
         qDebug() << "initialUrl" << AngelFish::BrowserManager::instance()->initialUrl();
         if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
-            if (!loadTabs() && m_tabs.first().url() == QLatin1String("about:blank") && !m_privateMode) {
+            if (!loadTabs() && m_tabs.first().url() == QStringLiteral("about:blank") && !m_privateMode) {
                 load(AngelFish::BrowserManager::instance()->homepage());
             }
         } else {
@@ -174,7 +174,7 @@ bool TabsModel::saveTabs() const
         QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
                     + QStringLiteral("/angelfish/");
 
-        QFile outputFile(outputDir + QLatin1String("tabs.json"));
+        QFile outputFile(outputDir + QStringLiteral("tabs.json"));
         if (!QDir(outputDir).mkpath(".")) {
             qDebug() << "Destdir doesn't exist and I can't create it: " << outputDir;
             return false;
