@@ -67,13 +67,13 @@ public:
 
     QVector<TabState> tabs() const;
 
-    Q_INVOKABLE void setTab(int index, QString url, bool isMobile = false);
+    Q_INVOKABLE void setTab(int index, const QString &url, bool isMobile = false);
     Q_INVOKABLE TabState tab(int index);
 
-    Q_INVOKABLE void newTab(QString url, bool isMobile = false);
+    Q_INVOKABLE void newTab(const QString &url, bool isMobile = false);
     Q_INVOKABLE void createEmptyTab();
     Q_INVOKABLE void closeTab(int index);
-    Q_INVOKABLE void load(QString url);
+    Q_INVOKABLE void load(const QString &url);
 
     bool privateMode() const;
     void setPrivateMode(bool privateMode);
