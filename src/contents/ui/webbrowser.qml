@@ -350,16 +350,4 @@ Kirigami.ApplicationWindow {
                 webBrowser.pageStack.pop();
         }
     }
-
-    Component.onCompleted: {
-        if (!webappcontainer) {
-            if (initialUrl) {
-                regularTabs.tabsModel.newTab(initialUrl);
-            }
-        } else {
-            if (initialUrl) {
-                regularTabs.tabsModel.load(initialUrl);
-            }
-        }
-    }
 }

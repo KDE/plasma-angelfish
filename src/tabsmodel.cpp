@@ -30,7 +30,14 @@
 TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
     // We can only do this once we know whether we are in private mode or not
     connect(this, &TabsModel::privateModeChanged, [&] {
-        loadTabs();
+        qDebug() << "initialUrl" << AngelFish::BrowserManager::instance()->initialUrl();
+        if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
+            if (!loadTabs() && m_tabs.first().url() == QLatin1String("about:blank") && !m_privateMode) {
+                load(AngelFish::BrowserManager::instance()->homepage());
+            }
+        } else {
+            load(AngelFish::BrowserManager::instance()->initialUrl());
+        }
     });
 
     connect(this, &TabsModel::currentTabChanged, [this] {

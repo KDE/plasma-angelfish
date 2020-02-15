@@ -109,6 +109,16 @@ void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
     emit searchBaseUrlChanged();
 }
 
+QString BrowserManager::initialUrl() const
+{
+    return m_initialUrl;
+}
+
+void BrowserManager::setInitialUrl(const QString &initialUrl)
+{
+    m_initialUrl = initialUrl;
+}
+
 QSettings *BrowserManager::settings() const
 {
     return m_settings;

@@ -46,6 +46,8 @@ class BrowserManager : public QObject
     Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
                        searchBaseUrlChanged)
 
+    Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
+
 public:
     BrowserManager(QObject *parent = nullptr);
     ~BrowserManager() override;
@@ -60,6 +62,9 @@ public:
 
     QSettings* settings() const;
 
+    QString initialUrl() const;
+    void setInitialUrl(const QString &initialUrl);
+
 signals:
     void updated();
     void bookmarksChanged();
@@ -67,6 +72,7 @@ signals:
 
     void homepageChanged();
     void searchBaseUrlChanged();
+    void initialUrlChanged();
 
 public slots:
     void reload();
@@ -84,6 +90,8 @@ private:
     UrlModel *m_bookmarks = nullptr;
     UrlModel *m_history = nullptr;
     QSettings *m_settings;
+
+    QString m_initialUrl;
 
     static BrowserManager *s_instance;
 };

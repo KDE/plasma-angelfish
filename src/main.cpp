@@ -65,10 +65,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     // initial url command line parameter
-    QUrl initialUrl;
+    QString initialUrl;
     if (!parser.positionalArguments().isEmpty())
-        initialUrl = QUrl::fromUserInput(parser.positionalArguments().first());
-    engine.rootContext()->setContextProperty("initialUrl", initialUrl.url());
+        initialUrl = QUrl::fromUserInput(parser.positionalArguments().first()).toString();
 
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
@@ -82,9 +81,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return static_cast<QObject *>(new AngelFish::UrlUtils());
     });
 
+    AngelFish::BrowserManager::instance()->setInitialUrl(initialUrl);
+
     // Browser Manager
     qmlRegisterSingletonType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(new AngelFish::BrowserManager());
+        return static_cast<QObject *>(AngelFish::BrowserManager::instance());
     });
 
     // Load QML

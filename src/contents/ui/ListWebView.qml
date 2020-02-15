@@ -68,14 +68,4 @@ Repeater {
             tabs.tabsModel.setTab(index, url)
         }
     }
-
-    Component.onCompleted: {
-        if (!privateTabsMode && !initialUrl && tabsModel.rowCount() === 1 && tabsModel.tabUrl(0) === "about:blank")
-            tabsModel.load(BrowserManager.homepage);
-        else if (initialUrl) {
-            tabsModel.newTab(initialUrl)
-        } else {
-            console.log("in private mode, not loading homepage")
-        }
-    }
 }
