@@ -35,6 +35,7 @@
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("KDE");
     QCoreApplication::setOrganizationDomain("mobile.kde.org");
