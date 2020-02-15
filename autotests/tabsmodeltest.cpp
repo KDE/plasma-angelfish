@@ -108,7 +108,7 @@ private Q_SLOTS:
     }
 
     void testSetTab() {
-        m_tabsModel->setTab(0, QLatin1String("https://debian.org"));
+        m_tabsModel->setTab(0, QStringLiteral("https://debian.org"));
         QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("https://debian.org", false), TabState("third", false)}));
     }
 
