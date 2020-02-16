@@ -75,8 +75,6 @@ signals:
     void initialUrlChanged();
 
 public slots:
-    void reload();
-
     void addBookmark(const QVariantMap &bookmarkdata);
     void removeBookmark(const QString &url);
 
