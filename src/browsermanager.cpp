@@ -41,11 +41,6 @@ BrowserManager::~BrowserManager()
     bookmarks()->save();
 }
 
-void BrowserManager::reload()
-{
-    qDebug() << "BookmarksManager::reload()";
-}
-
 UrlModel *BrowserManager::bookmarks()
 {
     // qDebug() << "BookmarksManager::bookmarks()";
