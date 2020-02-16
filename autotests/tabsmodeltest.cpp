@@ -36,15 +36,16 @@ private Q_SLOTS:
 
         // Current tab should be initial tab
         QCOMPARE(m_tabsModel->currentTab(), 0);
-        QCOMPARE(m_tabsModel->tab(0), TabState("about:blank", false));
+        QCOMPARE(m_tabsModel->tab(0).url(), "about:blank");
     }
 
     void testNewTab()
     {
         m_tabsModel->newTab("https://kde.org");
         QCOMPARE(m_tabsModel->tabs().count(), 2);
+
         qDebug() << m_tabsModel->tab(1).url() << m_tabsModel->tab(0).isMobile();
-        QCOMPARE(m_tabsModel->tab(1), TabState("https://kde.org", false));
+        QCOMPARE(m_tabsModel->tab(1).url(), "https://kde.org");
 
         // newly created tab should be current tab now
         QCOMPARE(m_tabsModel->currentTab(), 1);
@@ -52,7 +53,7 @@ private Q_SLOTS:
 
     void testCurrentTab()
     {
-        QCOMPARE(m_tabsModel->tabs().at(m_tabsModel->currentTab()), TabState("https://kde.org", false));
+        QCOMPARE(m_tabsModel->tabs().at(m_tabsModel->currentTab()).url(), "https://kde.org");
     }
 
     void testCloseTab() {
@@ -61,7 +62,7 @@ private Q_SLOTS:
         QCOMPARE(m_tabsModel->tabs().count(), 1);
 
         // Check tabs moved properly
-        QCOMPARE(m_tabsModel->tabs().at(0), TabState("https://kde.org", false));
+        QCOMPARE(m_tabsModel->tabs().at(0).url(), "https://kde.org");
     }
 
     void testLoad() {
@@ -70,7 +71,7 @@ private Q_SLOTS:
         // Number of tabs must not change
         QCOMPARE(m_tabsModel->tabs().count(), 1);
 
-        QCOMPARE(m_tabsModel->tabs().at(0), TabState("https://debian.org", false));
+        QCOMPARE(m_tabsModel->tabs().at(0).url(), "https://debian.org");
     }
 
     void testRowCountMatches() {
@@ -87,7 +88,7 @@ private Q_SLOTS:
 
         // Check whether a new empty tab was created (count must not be less than one)
         QCOMPARE(m_tabsModel->tabs().count(), 1);
-        QCOMPARE(m_tabsModel->tabs().at(0), TabState("about:blank", false));
+        QCOMPARE(m_tabsModel->tabs().at(0).url(), "about:blank");
 
         //
         // Case 2: There are multiple tabs
@@ -95,7 +96,7 @@ private Q_SLOTS:
         m_tabsModel->newTab("second");
         m_tabsModel->newTab("third");
 
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", false), TabState("second", false), TabState("third", false)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", true), TabState("second", true), TabState("third", true)}));
 
         // current tab is 2
         // close tab "second"
@@ -104,12 +105,12 @@ private Q_SLOTS:
         QCOMPARE(m_tabsModel->currentTab(), 0);
 
         // "second" is indeed gone
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", false), TabState("third", false)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", true), TabState("third", true)}));
     }
 
     void testSetTab() {
         m_tabsModel->setTab(0, QStringLiteral("https://debian.org"));
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("https://debian.org", false), TabState("third", false)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("https://debian.org", true), TabState("third", true)}));
     }
 
     void testPrivateMode() {
