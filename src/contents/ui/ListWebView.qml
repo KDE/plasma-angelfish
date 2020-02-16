@@ -42,6 +42,7 @@ Repeater {
     model: TabsModel {
         id: tabsModel
         privateMode: privateTabsMode
+        Component.onCompleted: tabsModel.loadInitialTabs()
     }
 
     delegate: WebView {
