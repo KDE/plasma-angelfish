@@ -28,18 +28,6 @@
 #include "browsermanager.h"
 
 TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
-    // We can only do this once we know whether we are in private mode or not
-    connect(this, &TabsModel::privateModeChanged, [&] {
-        qDebug() << "initialUrl" << AngelFish::BrowserManager::instance()->initialUrl();
-        if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
-            if (!loadTabs() && m_tabs.first().url() == QStringLiteral("about:blank") && !m_privateMode) {
-                load(AngelFish::BrowserManager::instance()->homepage());
-            }
-        } else {
-            load(AngelFish::BrowserManager::instance()->initialUrl());
-        }
-    });
-
     connect(this, &TabsModel::currentTabChanged, [this] {
         qDebug() << "Current tab changed to" << m_currentTab;
     });
@@ -105,6 +93,27 @@ TabState TabsModel::tab(int index) {
     return m_tabs.at(index);
 }
 
+/**
+ * @brief TabsModel::loadInitialTabs sets up the tabs that should already be open when starting the browser
+ * This includes the configured homepage, an url passed on the command line (usually by another app) and tabs
+ * which were still open when the browser was last closed.
+ */
+void TabsModel::loadInitialTabs()
+{
+    if (m_privateMode) return;
+    if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
+        if (!loadTabs() && m_tabs.first().url() == QStringLiteral("about:blank")) {
+            load(AngelFish::BrowserManager::instance()->homepage());
+        }
+    } else {
+        load(AngelFish::BrowserManager::instance()->initialUrl());
+    }
+}
+
+/**
+ * @brief TabsModel::currentTab returns the index of the tab that is currently visible to the user
+ * @return index
+ */
 int TabsModel::currentTab() const
 {
     return m_currentTab;
