@@ -66,7 +66,7 @@ int TabsModel::rowCount(const QModelIndex &parent) const
 }
 
 /**
- * @brief TabsModel::setTabUrl sets the url of a tab at a given index.
+ * @brief TabsModel::setTabUrl sets the properties of a tab at a given index.
  * It should be used in cases were a reload of the web engine after the url change
  * is not wanted, e.g if this function is already triggered by a load of the web engine.
  * @param index
@@ -86,6 +86,11 @@ void TabsModel::setTab(int index, const QString &url, bool isMobile)
     tabsChanged();
 }
 
+/**
+ * @brief TabsModel::tab returns the tab at the given index
+ * @param index
+ * @return tab at the index
+ */
 TabState TabsModel::tab(int index) {
     if (index < 0 && index >= m_tabs.count())
         return {}; // index out of bounds
@@ -119,6 +124,10 @@ int TabsModel::currentTab() const
     return m_currentTab;
 }
 
+/**
+ * @brief TabsModel::setCurrentTab sets the tab that is currently visible to the user
+ * @param index
+ */
 void TabsModel::setCurrentTab(int index)
 {
     if (index >= m_tabs.count())
@@ -134,6 +143,10 @@ QVector<TabState> TabsModel::tabs() const
     return m_tabs;
 }
 
+/**
+ * @brief TabsModel::loadTabs restores tabs saved in tabs.json
+ * @return whether any tabs were restored
+ */
 bool TabsModel::loadTabs()
 {
     if (!m_privateMode) {
@@ -176,6 +189,10 @@ bool TabsModel::loadTabs()
     return false;
 }
 
+/**
+ * @brief TabsModel::saveTabs saves the current state of the model to disk
+ * @return whether the tabs could be saved
+ */
 bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
@@ -223,16 +240,22 @@ void TabsModel::setPrivateMode(bool privateMode)
     privateModeChanged();
 }
 
+/**
+ * @brief TabsModel::createEmptyTab convinience function for opening a tab containing "about:blank"
+ */
 void TabsModel::createEmptyTab()
 {
     newTab(QStringLiteral("about:blank"));
 };
 
+/**
+ * @brief TabsModel::newTab
+ * @param url
+ * @param isMobile
+ */
 void TabsModel::newTab(const QString &url, bool isMobile) {
     beginInsertRows({}, m_tabs.count(), m_tabs.count());
 
-    QJsonObject tab;
-    tab.insert(QStringLiteral("url"), url);
     m_tabs.append(TabState(url, isMobile));
 
     endInsertRows();
@@ -242,6 +265,10 @@ void TabsModel::newTab(const QString &url, bool isMobile) {
     currentTabChanged();
 }
 
+/**
+ * @brief TabsModel::closeTab removes the tab at the index, handles moving the tabs after it and sets a new currentTab
+ * @param index
+ */
 void TabsModel::closeTab(int index) {
     if (index < 0 && index >= m_tabs.count())
         return; // index out of bounds
