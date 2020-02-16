@@ -49,7 +49,6 @@ class BrowserManager : public QObject
     Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
 
 public:
-    BrowserManager(QObject *parent = nullptr);
     ~BrowserManager() override;
 
     static BrowserManager *instance();
@@ -85,6 +84,9 @@ public slots:
     void setSearchBaseUrl(const QString &searchBaseUrl);
 
 private:
+    // BrowserManager should only be createdd by calling the instance() function
+    BrowserManager(QObject *parent = nullptr);
+
     UrlModel *m_bookmarks = nullptr;
     UrlModel *m_history = nullptr;
     QSettings *m_settings;
