@@ -89,7 +89,7 @@ Kirigami.ScrollablePage {
                     anchors.fill: parent
                     clip: true
                     fillMode: Image.PreserveAspectCrop
-                    source: tabs.itemAt(index).thumb.source
+                    source: tabs.itemAt(index) ? tabs.itemAt(index).thumb.source : ""
                     verticalAlignment: Image.AlignTop
 
                     LinearGradient {
