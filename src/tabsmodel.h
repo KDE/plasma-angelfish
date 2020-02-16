@@ -70,6 +70,8 @@ public:
     Q_INVOKABLE void setTab(int index, const QString &url, bool isMobile = false);
     Q_INVOKABLE TabState tab(int index);
 
+    Q_INVOKABLE void loadInitialTabs();
+
     Q_INVOKABLE void newTab(const QString &url, bool isMobile = false);
     Q_INVOKABLE void createEmptyTab();
     Q_INVOKABLE void closeTab(int index);
