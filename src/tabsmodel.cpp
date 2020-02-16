@@ -36,7 +36,6 @@ TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
     m_tabsReadOnly = true;
     // Make sure model always contains at least one tab
     createEmptyTab();
-    m_tabsReadOnly = false;
 }
 
 QHash<int, QByteArray> TabsModel::roleNames() const
@@ -105,17 +104,28 @@ TabState TabsModel::tab(int index) {
  * @brief TabsModel::loadInitialTabs sets up the tabs that should already be open when starting the browser
  * This includes the configured homepage, an url passed on the command line (usually by another app) and tabs
  * which were still open when the browser was last closed.
+ *
+ * @warning It is impossible to save any new tabs until this function was called.
  */
 void TabsModel::loadInitialTabs()
 {
-    if (m_privateMode) return;
-    if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
-        if (!loadTabs() && m_tabs.first().url() == QStringLiteral("about:blank")) {
-            load(AngelFish::BrowserManager::instance()->homepage());
-        }
-    } else {
-        load(AngelFish::BrowserManager::instance()->initialUrl());
+    if (!m_privateMode) {
+         loadTabs();
     }
+
+    m_tabsReadOnly = false;
+
+    if (!m_privateMode) {
+         if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
+            if (m_tabs.first().url() == QStringLiteral("about:blank"))
+                load(AngelFish::BrowserManager::instance()->homepage());
+         } else {
+            if (m_tabs.first().url() == QStringLiteral("about:blank"))
+                 load(AngelFish::BrowserManager::instance()->initialUrl());
+            else
+                 newTab(AngelFish::BrowserManager::instance()->initialUrl());
+         }
+     }
 }
 
 /**
@@ -199,7 +209,7 @@ bool TabsModel::loadTabs()
 bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
-    if (!m_privateMode && !m_tabsReadOnly) {
+    if (!m_privateMode) {
         QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
                     + QStringLiteral("/angelfish/");
 
