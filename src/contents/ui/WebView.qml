@@ -45,6 +45,7 @@ WebEngineView {
     UserAgentGenerator {
         id: userAgent
         isMobile: Kirigami.Settings.isMobile
+        onUserAgentChanged: tabs.tabsModel.setTab(tabs.tabsModel.currentTab, webEngineView.url, isMobile)
     }
 
     Image {
