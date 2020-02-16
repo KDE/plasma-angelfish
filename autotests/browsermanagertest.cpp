@@ -34,7 +34,7 @@ private Q_SLOTS:
 
     void initTestCase()
     {
-        m_browserManager = new BrowserManager();
+        m_browserManager = BrowserManager::instance();
     }
 
     void cleanupTestCase()
