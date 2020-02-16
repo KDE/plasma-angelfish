@@ -295,7 +295,7 @@ Kirigami.ApplicationWindow {
                         currentWebView.userAgent.isMobile = true
                     }
                     currentWebView.reload()
-                    tabs.tabsModel.setTab(tabs.tabsModel.currentTab)
+                    tabs.tabsModel.setTab(tabs.tabsModel.currentTab, currentWebView.url, currentWebView.userAgent.isMobile)
                 }
             }
         ]
