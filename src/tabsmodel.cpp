@@ -32,8 +32,11 @@ TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
         qDebug() << "Current tab changed to" << m_currentTab;
     });
 
+    // The fallback tab must not be saved, it would overwrite our actual data.
+    m_tabsReadOnly = true;
     // Make sure model always contains at least one tab
     createEmptyTab();
+    m_tabsReadOnly = false;
 }
 
 QHash<int, QByteArray> TabsModel::roleNames() const
@@ -196,7 +199,7 @@ bool TabsModel::loadTabs()
 bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
-    if (!m_privateMode) {
+    if (!m_privateMode && !m_tabsReadOnly) {
         QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
                     + QStringLiteral("/angelfish/");
 

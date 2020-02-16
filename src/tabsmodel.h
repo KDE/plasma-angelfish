@@ -88,6 +88,7 @@ private:
     int m_currentTab = 0;
     QVector<TabState> m_tabs {};
     bool m_privateMode = false;
+    bool m_tabsReadOnly = false;
 
 signals:
     void currentTabChanged();
