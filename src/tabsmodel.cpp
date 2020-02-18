@@ -68,27 +68,6 @@ int TabsModel::rowCount(const QModelIndex &parent) const
 }
 
 /**
- * @brief TabsModel::setTabUrl sets the properties of a tab at a given index.
- * It should be used in cases were a reload of the web engine after the url change
- * is not wanted, e.g if this function is already triggered by a load of the web engine.
- * @param index
- * @param url
- * @param isMobile
- */
-void TabsModel::setTab(int index, const QString &url, bool isMobile)
-{
-    if (index < 0 && index >= m_tabs.count())
-        return; // index out of bounds
-
-    m_tabs[index].setUrl(url);
-    m_tabs[index].setIsMobile(isMobile);
-
-    saveTabs();
-
-    tabsChanged();
-}
-
-/**
  * @brief TabsModel::tab returns the tab at the given index
  * @param index
  * @return tab at the index
@@ -118,10 +97,10 @@ void TabsModel::loadInitialTabs()
     if (!m_privateMode) {
          if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                load(AngelFish::BrowserManager::instance()->homepage());
+                setUrl(0, AngelFish::BrowserManager::instance()->homepage());
          } else {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                 load(AngelFish::BrowserManager::instance()->initialUrl());
+                 setUrl(0, AngelFish::BrowserManager::instance()->initialUrl());
             else
                  newTab(AngelFish::BrowserManager::instance()->initialUrl());
          }
@@ -192,10 +171,7 @@ bool TabsModel::loadTabs()
         }
 
         endResetModel();
-        tabsChanged();
         currentTabChanged();
-
-        inputFile.close();
 
         return true;
     }
@@ -236,10 +212,25 @@ bool TabsModel::saveTabs() const
         document.setObject(tabsStorage);
 
         outputFile.write(document.toJson());
-        outputFile.close();
         return true;
     }
     return false;
+}
+
+bool TabsModel::isMobileDefault() const
+{
+    return m_isMobileDefault;
+}
+
+void TabsModel::setIsMobileDefault(bool def)
+{
+    m_isMobileDefault = def;
+    isMobileDefaultChanged();
+
+    // used in initialization of the tab
+    if (m_tabs.count() == 1) {
+        setIsMobile(0, def);
+    }
 }
 
 bool TabsModel::privateMode() const
@@ -266,16 +257,17 @@ void TabsModel::createEmptyTab()
  * @param url
  * @param isMobile
  */
-void TabsModel::newTab(const QString &url, bool isMobile) {
+void TabsModel::newTab(const QString &url) {
     beginInsertRows({}, m_tabs.count(), m_tabs.count());
 
-    m_tabs.append(TabState(url, isMobile));
+    m_tabs.append(TabState(url, m_isMobileDefault));
 
     endInsertRows();
 
     // Switch to last tab
     m_currentTab = m_tabs.count() - 1;
     currentTabChanged();
+    saveTabs();
 }
 
 /**
@@ -319,20 +311,31 @@ void TabsModel::closeTab(int index) {
     saveTabs();
 }
 
+void TabsModel::setIsMobile(int index, bool isMobile)
+{
+    qDebug() << "Setting isMobile:" << index << isMobile << "tabs open" << m_tabs.count();
+    if (index < 0 && index >= m_tabs.count())
+        return; // index out of bounds
 
-/**
- * Load a url in the current tab
- */
-void TabsModel::load(const QString &url) {
-    qDebug() << "Loading url:" << url;
+    m_tabs[index].setIsMobile(isMobile);
 
-    qDebug() << "current tab" << m_currentTab << "tabs open" << m_tabs.count();
-    m_tabs[m_currentTab].setUrl(url);
+    QModelIndex mindex = createIndex(index, index);
+    dataChanged(mindex, mindex, { RoleNames::IsMobileRole });
+    saveTabs();
+}
 
-    QModelIndex index = createIndex(m_currentTab, m_currentTab);
-    dataChanged(index, index);
 
-    tabsChanged();
+void TabsModel::setUrl(int index, const QString &url)
+{
+    qDebug() << "Setting URL:" << index << url << "tabs open" << m_tabs.count();
+    if (index < 0 && index >= m_tabs.count())
+        return; // index out of bounds
+
+    m_tabs[index].setUrl(url);
+
+    QModelIndex mindex = createIndex(index, index);
+    dataChanged(mindex, mindex, { RoleNames::UrlRole });
+    saveTabs();
 }
 
 QString TabState::url() const

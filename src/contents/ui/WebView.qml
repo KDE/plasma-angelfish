@@ -40,12 +40,11 @@ WebEngineView {
     property alias userAgent: userAgent
     property alias thumb: thumb
 
-    property bool reloadOnVisible: false
+    property bool reloadOnVisible: true
 
     UserAgentGenerator {
         id: userAgent
-        isMobile: model.isMobile
-        onUserAgentChanged: tabs.tabsModel.setTab(index, webEngineView.url, isMobile)
+        onUserAgentChanged: webEngineView.reload()
     }
 
     Image {

@@ -139,6 +139,11 @@ Kirigami.ApplicationWindow {
         Kirigami.ColumnView.pinned: true
         Kirigami.ColumnView.preventStealing: true
 
+        // Required to enforce active tab reload
+        // on start. As a result, mixed isMobile
+        // tabs will work correctly
+        property bool initialized: false
+
         property bool privateMode: false
 
         ListWebView {
@@ -149,7 +154,7 @@ Kirigami.ApplicationWindow {
                 right: parent.right
                 bottom: navigation.top
             }
-            activeTabs: !rootPage.privateMode
+            activeTabs: rootPage.initialized && !rootPage.privateMode
         }
 
         ListWebView {
@@ -160,7 +165,7 @@ Kirigami.ApplicationWindow {
                 right: parent.right
                 bottom: navigation.top
             }
-            activeTabs: rootPage.privateMode
+            activeTabs: rootPage.initialized && rootPage.privateMode
             privateTabsMode: true
         }
 
@@ -289,12 +294,7 @@ Kirigami.ApplicationWindow {
                 checkable: true
                 checked: !currentWebView.userAgent.isMobile
                 onTriggered: {
-                    if (currentWebView.userAgent.isMobile) {
-                        currentWebView.userAgent.isMobile = false
-                    } else {
-                        currentWebView.userAgent.isMobile = true
-                    }
-                    currentWebView.reload()
+                    currentWebView.userAgent.isMobile = !currentWebView.userAgent.isMobile;
                 }
             }
         ]
@@ -349,4 +349,6 @@ Kirigami.ApplicationWindow {
                 webBrowser.pageStack.pop();
         }
     }
+
+    Component.onCompleted: rootPage.initialized = true
 }

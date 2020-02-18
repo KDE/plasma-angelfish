@@ -48,6 +48,7 @@ class TabsModel : public QAbstractListModel
     Q_OBJECT
 
     Q_PROPERTY(int currentTab READ currentTab WRITE setCurrentTab NOTIFY currentTabChanged)
+    Q_PROPERTY(bool isMobileDefault READ isMobileDefault WRITE setIsMobileDefault NOTIFY isMobileDefaultChanged)
     Q_PROPERTY(bool privateMode READ privateMode WRITE setPrivateMode NOTIFY privateModeChanged)
 
     enum RoleNames {
@@ -67,15 +68,19 @@ public:
 
     QVector<TabState> tabs() const;
 
-    Q_INVOKABLE void setTab(int index, const QString &url, bool isMobile = true);
     Q_INVOKABLE TabState tab(int index);
 
     Q_INVOKABLE void loadInitialTabs();
 
-    Q_INVOKABLE void newTab(const QString &url, bool isMobile = true);
+    Q_INVOKABLE void newTab(const QString &url);
     Q_INVOKABLE void createEmptyTab();
     Q_INVOKABLE void closeTab(int index);
-    Q_INVOKABLE void load(const QString &url);
+
+    Q_INVOKABLE void setUrl(int index, const QString &url);
+    Q_INVOKABLE void setIsMobile(int index, bool isMobile);
+
+    bool isMobileDefault() const;
+    void setIsMobileDefault(bool def);
 
     bool privateMode() const;
     void setPrivateMode(bool privateMode);
@@ -89,10 +94,11 @@ private:
     QVector<TabState> m_tabs {};
     bool m_privateMode = false;
     bool m_tabsReadOnly = false;
+    bool m_isMobileDefault = false;
 
 signals:
     void currentTabChanged();
-    void tabsChanged();
+    void isMobileDefaultChanged();
     void privateModeChanged();
 };
 

@@ -39,9 +39,7 @@ Kirigami.SwipeListItem {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
     onClicked: {
-        tabs.tabsModel.load(url)
-        //tabs.newTab(url)
-        //contentView.state = "hidden"
+        currentWebView.url = url;
     }
 
     signal removed

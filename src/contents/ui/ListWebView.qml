@@ -22,8 +22,9 @@
 import QtQuick 2.3
 import QtQuick.Controls 2.0
 import QtQml.Models 2.1
-
 import QtWebEngine 1.6
+
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
 
@@ -31,7 +32,7 @@ Repeater {
     id: tabs
     clip: true
 
-    property bool activeTabs: true
+    property bool activeTabs: false
     property bool privateTabsMode: false
 
     property alias currentIndex: tabsModel.currentTab
@@ -41,6 +42,7 @@ Repeater {
 
     model: TabsModel {
         id: tabsModel
+        isMobileDefault: Kirigami.Settings.isMobile
         privateMode: privateTabsMode
         Component.onCompleted: tabsModel.loadInitialTabs()
     }
@@ -53,6 +55,7 @@ Repeater {
         }
         privateMode: tabs.privateTabsMode
         url: model.pageurl
+        userAgent.isMobile: model.isMobile
         width: tabs.width
 
         property bool showView: index === tabs.currentIndex
@@ -65,8 +68,16 @@ Repeater {
                 tabs.currentItem = webView
             }
         }
+
         onUrlChanged: {
-            tabs.tabsModel.setTab(index, url)
+            tabsModel.setUrl(index, url);
+        }
+
+        Connections {
+            target: webView.userAgent
+            onUserAgentChanged: {
+                tabsModel.setIsMobile(index, webView.userAgent.isMobile);
+            }
         }
     }
 }
