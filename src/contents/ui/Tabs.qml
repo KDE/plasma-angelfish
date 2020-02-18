@@ -46,7 +46,7 @@ Kirigami.ScrollablePage {
         text: i18n("New")
         onTriggered: {
             // Somewhat weird behaviour, consider always just opening "about:blank"
-            tabs.tabsModel.newTab(rootPage.privateMode ? "about:blank" : BrowserManager.homepage, Kirigami.Settings.isMobile)
+            tabs.tabsModel.newTab(rootPage.privateMode ? "about:blank" : BrowserManager.homepage)
             pageStack.pop()
         }
     }

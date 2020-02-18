@@ -66,7 +66,7 @@ private Q_SLOTS:
     }
 
     void testLoad() {
-        m_tabsModel->load("https://debian.org");
+        m_tabsModel->setUrl(0, "https://debian.org");
 
         // Number of tabs must not change
         QCOMPARE(m_tabsModel->tabs().count(), 1);
@@ -109,7 +109,7 @@ private Q_SLOTS:
     }
 
     void testSetTab() {
-        m_tabsModel->setTab(0, QStringLiteral("https://debian.org"));
+        m_tabsModel->setUrl(0, QStringLiteral("https://debian.org"));
         QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("https://debian.org", true), TabState("third", true)}));
     }
 
