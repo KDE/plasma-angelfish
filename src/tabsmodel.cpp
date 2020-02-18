@@ -209,7 +209,7 @@ bool TabsModel::loadTabs()
 bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
-    if (!m_privateMode) {
+    if (!m_privateMode && !m_tabsReadOnly) {
         QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
                     + QStringLiteral("/angelfish/");
 

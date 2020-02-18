@@ -44,7 +44,7 @@ WebEngineView {
 
     UserAgentGenerator {
         id: userAgent
-        isMobile: Kirigami.Settings.isMobile
+        isMobile: model.isMobile
         onUserAgentChanged: tabs.tabsModel.setTab(index, webEngineView.url, isMobile)
     }
 
