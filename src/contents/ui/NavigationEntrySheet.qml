@@ -74,7 +74,6 @@ Controls.Drawer {
                 Layout.fillWidth: true
                 clip: true
                 focus: false
-                text: currentWebView.url
                 selectByMouse: true
                 Kirigami.Theme.inherit: true
 
@@ -136,7 +135,7 @@ Controls.Drawer {
         // check if the drawer was just slightly slided
         if (openedState) return;
         openedState = true;
-        urlInput.text = currentWebView.url;
+        urlInput.text = currentWebView.requestedUrl;
         urlInput.forceActiveFocus();
         urlInput.selectAll();
         listView.positionViewAtBeginning();

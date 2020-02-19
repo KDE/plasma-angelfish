@@ -108,7 +108,7 @@ Item {
             Layout.fillWidth: true
             Layout.preferredHeight: layout.height
 
-            property string scheme: UrlUtils.urlScheme(currentWebView.url)
+            property string scheme: UrlUtils.urlScheme(currentWebView.requestedUrl)
 
             Controls.ToolButton {
                 id: schemeIcon
@@ -138,12 +138,12 @@ Item {
 
                 text: {
                     if (labelItem.scheme === "http" || labelItem.scheme === "https") {
-                        var h = UrlUtils.urlHostPort(currentWebView.url);
-                        var p = UrlUtils.urlPath(currentWebView.url);
+                        var h = UrlUtils.urlHostPort(currentWebView.requestedUrl);
+                        var p = UrlUtils.urlPath(currentWebView.requestedUrl);
                         if (p === "/") p = ""
                         return '%1<font size="2">%2</font>'.arg(h).arg(p);
                     }
-                    return currentWebView.url;
+                    return currentWebView.requestedUrl;
                 }
                 textFormat: Text.StyledText
                 elide: Text.ElideRight

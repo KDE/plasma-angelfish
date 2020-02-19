@@ -44,7 +44,10 @@ Repeater {
         id: tabsModel
         isMobileDefault: Kirigami.Settings.isMobile
         privateMode: privateTabsMode
-        Component.onCompleted: tabsModel.loadInitialTabs()
+        Component.onCompleted: {
+            tabsModel.loadInitialTabs();
+            loadTabsModel();
+        }
         signal loadTabsModel()
     }
 
@@ -55,7 +58,6 @@ Repeater {
             top: tabs.top
         }
         privateMode: tabs.privateTabsMode
-        url: "about:empty"
         userAgent.isMobile: model.isMobile
         width: tabs.width
 
@@ -70,9 +72,7 @@ Repeater {
             }
         }
 
-        onUrlChanged: {
-            tabsModel.setUrl(index, url);
-        }
+        onRequestedUrlChanged: tabsModel.setUrl(index, requestedUrl)
 
         Component.onCompleted: url = model.pageurl
 

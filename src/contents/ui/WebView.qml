@@ -42,6 +42,11 @@ WebEngineView {
 
     property bool reloadOnVisible: true
 
+    // URL that was requested and should be used
+    // as a base for user interaction. It reflects
+    // last request (successful or failed)
+    property url requestedUrl: url
+
     UserAgentGenerator {
         id: userAgent
         onUserAgentChanged: webEngineView.reload()
@@ -166,9 +171,15 @@ WebEngineView {
         }
         if (loadRequest.status === WebEngineView.LoadFailedStatus) {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
+            print("Load failed url: " + loadRequest.url + " " + url);
             ec = loadRequest.errorCode;
             es = loadRequest.errorString;
             thumb.source = "";
+
+            // update requested URL only after its clear that it fails.
+            // Otherwise, its updated as a part of url property update.
+            if (requestedUrl !== loadRequest.url)
+                requestedUrl = loadRequest.url;
         }
         errorCode = ec;
         errorString = es;
@@ -196,7 +207,12 @@ WebEngineView {
         }
     }
 
-    onUrlChanged: thumb.source = ""
+    onUrlChanged: {
+        if (requestedUrl !== url) {
+            requestedUrl = url;
+        }
+        thumb.source = "";
+    }
 
     onFullScreenRequested: {
         request.accept()
