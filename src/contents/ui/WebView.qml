@@ -107,7 +107,7 @@ WebEngineView {
 
     // Custom context menu
     Controls.Menu {
-        property var request
+        property ContextMenuRequest request
         id: contextMenu
 
         Controls.MenuItem {

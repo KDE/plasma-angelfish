@@ -36,7 +36,7 @@ Repeater {
     property bool privateTabsMode: false
 
     property alias currentIndex: tabsModel.currentTab
-    property var currentItem
+    property WebView currentItem
 
     property alias tabsModel: tabsModel
 

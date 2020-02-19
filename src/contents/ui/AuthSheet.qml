@@ -3,9 +3,11 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2 as Controls
 import org.kde.kirigami 2.5 as Kirigami
 
+import QtWebEngine 1.4
+
 Kirigami.OverlaySheet {
     id: authSheet
-    property var request
+    property AuthenticationDialogRequest request
 
     Kirigami.FormLayout {
         Layout.fillWidth: true

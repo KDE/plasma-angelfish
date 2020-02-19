@@ -1,12 +1,14 @@
 import QtQuick 2.0
 import org.kde.kirigami 2.4 as Kirigami
 
+import QtWebEngine 1.1
+
 Kirigami.InlineMessage {
     id: downloadQuestion
     text: i18n("Do you want to download this file?")
     showCloseButton: false
 
-    property var download
+    property WebEngineDownloadItem download
 
     actions: [
         Kirigami.Action {
