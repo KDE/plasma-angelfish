@@ -44,9 +44,6 @@ Controls.Drawer {
     property int fullHeight: 0.9 * rootPage.height
     property bool openedState: false
 
-    property Item urlInput
-    property Item listView
-
     contentHeight: fullHeight - topPadding - bottomPadding
     contentWidth: parent.width - rightPadding - leftPadding
     contentItem: Item {
@@ -85,7 +82,6 @@ Controls.Drawer {
                 onAccepted: applyUrl()
                 onTextChanged: urlFilter.setFilterFixedString(text)
                 Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
-                Component.onCompleted: overlay.urlInput = urlInput
 
                 function applyUrl() {
                     if (text.match(RegexWebUrl.re_weburl)) {
@@ -133,8 +129,6 @@ Controls.Drawer {
                 id: urlFilter
                 sourceModel: BrowserManager.history
             }
-
-            Component.onCompleted: overlay.listView = listView
         }
     }
 
