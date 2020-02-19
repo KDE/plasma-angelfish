@@ -104,9 +104,7 @@ Controls.Drawer {
             }
         }
 
-        ListView {
-            id: listView
-
+        Controls.ScrollView {
             anchors {
                 bottom: parent.bottom
                 left: parent.left
@@ -114,19 +112,23 @@ Controls.Drawer {
                 top: editRow.bottom
             }
 
-            boundsBehavior: Flickable.StopAtBounds
-            clip: true
+            ListView {
+                id: listView
 
-            delegate: UrlDelegate {
-                showRemove: false
-                onClicked: overlay.close()
-                highlightText: urlInput.text
-                width: parent.width
-            }
+                boundsBehavior: Flickable.StopAtBounds
+                clip: true
 
-            model: UrlFilterProxyModel {
-                id: urlFilter
-                sourceModel: BrowserManager.history
+                delegate: UrlDelegate {
+                    showRemove: false
+                    onClicked: overlay.close()
+                    highlightText: urlInput.text
+                    width: parent.width
+                }
+
+                model: UrlFilterProxyModel {
+                    id: urlFilter
+                    sourceModel: BrowserManager.history
+                }
             }
         }
     }
