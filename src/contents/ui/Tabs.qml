@@ -45,8 +45,7 @@ Kirigami.ScrollablePage {
         icon.name: "list-add"
         text: i18n("New")
         onTriggered: {
-            // Somewhat weird behaviour, consider always just opening "about:blank"
-            tabs.tabsModel.newTab(rootPage.privateMode ? "about:blank" : BrowserManager.homepage)
+            tabs.tabsModel.newTab("about:blank")
             pageStack.pop()
             urlEntry.open();
         }
