@@ -1,8 +1,10 @@
 {
     "id": "org.kde.mobile.angelfish",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.12",
+    "runtime-version": "5.14",
     "sdk": "org.kde.Sdk",
+    "base": "io.qt.qtwebengine.BaseApp",
+    "base-version": "5.14",
     "command": "angelfish",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
@@ -13,22 +15,12 @@
         "--socket=wayland",
         "--device=dri",
         "--filesystem=home",
-        "--talk-name=org.freedesktop.Notifications"
+        "--talk-name=org.freedesktop.Notifications",
+        "--env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib/i386-linux-gnu:/app/lib/aarch64-linux-gnu:/app/lib/arm-linux-gnueabihf:/app/lib"
     ],
     "separate-locales": false,
 
     "modules": [
-        {
-            "name": "purpose",
-            "buildsystem": "cmake-ninja",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "git://anongit.kde.org/purpose.git",
-                    "tag": "v5.59.0"
-                }
-            ]
-        },
         {
             "name": "angelfish",
             "buildsystem": "cmake-ninja",
