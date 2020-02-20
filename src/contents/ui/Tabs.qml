@@ -48,6 +48,7 @@ Kirigami.ScrollablePage {
             // Somewhat weird behaviour, consider always just opening "about:blank"
             tabs.tabsModel.newTab(rootPage.privateMode ? "about:blank" : BrowserManager.homepage)
             pageStack.pop()
+            urlEntry.open();
         }
     }
 
