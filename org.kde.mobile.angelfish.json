@@ -15,8 +15,7 @@
         "--socket=wayland",
         "--device=dri",
         "--filesystem=home",
-        "--talk-name=org.freedesktop.Notifications",
-        "--env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib/i386-linux-gnu:/app/lib/aarch64-linux-gnu:/app/lib/arm-linux-gnueabihf:/app/lib"
+        "--talk-name=org.freedesktop.Notifications"
     ],
     "separate-locales": false,
 
@@ -25,6 +24,9 @@
             "name": "angelfish",
             "buildsystem": "cmake-ninja",
             "config-opts": ["-DBUILD_TESTING=OFF"],
+            "post-install": [
+                "ln -s /app/lib/*/*.so* /app/lib"
+            ],
             "builddir": true,
             "sources": [ { "type": "dir", "path": ".", "skip": [".git"] } ]
         }
