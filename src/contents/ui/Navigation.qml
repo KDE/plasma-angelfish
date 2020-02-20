@@ -30,14 +30,19 @@ import org.kde.mobile.angelfish 1.0
 Item {
     id: navigation
 
+    anchors {
+        bottom: parent.bottom
+        left: parent.left
+        right: parent.right
+    }
+    height: expandedHeight
+
     property bool navigationShown: true
 
     property int expandedHeight: Kirigami.Units.gridUnit * 3
     property int buttonSize: Kirigami.Units.gridUnit * 2
 
     signal activateUrlEntry;
-
-    Behavior on height { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad} }
 
     Rectangle { anchors.fill: parent; color: Kirigami.Theme.backgroundColor; }
 
@@ -46,7 +51,6 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: Kirigami.Units.gridUnit / 2
         anchors.rightMargin: Kirigami.Units.gridUnit / 2
-        visible: navigationShown
 
         spacing: Kirigami.Units.smallSpacing
         Kirigami.Theme.inherit: true
@@ -63,16 +67,37 @@ Item {
         }
 
         Controls.ToolButton {
-            icon.name: "tab-duplicate"
-
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            Kirigami.Theme.inherit: true
+            Rectangle {
+                anchors.centerIn: parent
+                height: Kirigami.Units.gridUnit * 1.25
+                width: Kirigami.Units.gridUnit * 1.25
 
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("Tabs.qml"))
+                color: "transparent"
+                border.color: Kirigami.Theme.textColor
+                border.width: Kirigami.Units.gridUnit/10
+                radius: Kirigami.Units.gridUnit/5
+
+                Kirigami.Theme.inherit: true
+
+                Controls.Label {
+                    anchors.centerIn: parent
+                    height: Kirigami.Units.gridUnit
+                    width: Kirigami.Units.gridUnit
+                    fontSizeMode: Text.Fit
+                    minimumPixelSize: 0
+                    minimumPointSize: 0
+                    clip: true
+                    text: "%1".arg(tabs.count)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    Kirigami.Theme.inherit: true
+                }
             }
+
+            onClicked: pageStack.push(Qt.resolvedUrl("Tabs.qml"))
         }
 
         Controls.ToolButton {
@@ -103,10 +128,10 @@ Item {
             onClicked: currentWebView.goForward()
         }
 
-        Item {
+        Controls.ToolButton {
             id: labelItem
             Layout.fillWidth: true
-            Layout.preferredHeight: layout.height
+            Layout.preferredHeight: buttonSize
 
             property string scheme: UrlUtils.urlScheme(currentWebView.requestedUrl)
 
@@ -128,6 +153,7 @@ Item {
                     implicitHeight: schemeIcon.height
                     color: "transparent"
                 }
+                onClicked: activateUrlEntry()
             }
 
             Controls.Label {
@@ -148,12 +174,10 @@ Item {
                 textFormat: Text.StyledText
                 elide: Text.ElideRight
                 verticalAlignment: Text.AlignVCenter
+                Kirigami.Theme.inherit: true
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: activateUrlEntry()
-            }
+            onClicked: activateUrlEntry()
         }
 
         Controls.ToolButton {
@@ -192,12 +216,23 @@ Item {
         State {
             name: "shown"
             when: navigationShown
-            PropertyChanges { target: navigation; height: expandedHeight}
+            AnchorChanges {
+                target: navigation
+                anchors.bottom: navigation.parent.bottom
+                anchors.top: undefined
+            }
         },
         State {
             name: "hidden"
             when: !navigationShown
-            PropertyChanges { target: navigation; height: 0}
+            AnchorChanges {
+                target: navigation
+                anchors.bottom: undefined
+                anchors.top: parent.bottom
+            }
         }
     ]
+    transitions: Transition {
+        AnchorAnimation { duration: Kirigami.Units.longDuration; }
+    }
 }

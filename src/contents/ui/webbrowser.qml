@@ -146,25 +146,20 @@ Kirigami.ApplicationWindow {
 
         property bool privateMode: false
 
+        // Used for automatically show or hid navigation
+        // bar. Set separately to combine with other options
+        // for navigation bar management (webapp and others)
+        property bool navigationAutoShow: true
+
         ListWebView {
             id: regularTabs
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: navigation.top
-            }
+            anchors.fill: parent
             activeTabs: rootPage.initialized && !rootPage.privateMode
         }
 
         ListWebView {
             id: privateTabs
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: navigation.top
-            }
+            anchors.fill: parent
             activeTabs: rootPage.initialized && rootPage.privateMode
             privateTabsMode: true
         }
@@ -199,8 +194,8 @@ Kirigami.ApplicationWindow {
             height: Math.round(Kirigami.Units.gridUnit / 6)
             z: navigation.z + 1
             anchors {
-                top: tabs.bottom
-                topMargin: -Math.round(height / 2)
+                bottom: navigation.top
+                bottomMargin: -Math.round(height / 2)
                 left: tabs.left
                 right: tabs.right
             }
@@ -251,7 +246,6 @@ Kirigami.ApplicationWindow {
                 enabled: currentWebView.canGoBack
                 icon.name: "go-previous"
                 text: i18n("Go previous")
-
                 onTriggered: {
                     currentWebView.goBack()
                 }
@@ -260,8 +254,6 @@ Kirigami.ApplicationWindow {
                 enabled: currentWebView.canGoForward
                 icon.name: "go-next"
                 text: i18n("Go forward")
-
-
                 onTriggered: {
                     currentWebView.goForward()
                 }
@@ -269,7 +261,6 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
                 text: currentWebView.loading ? i18n("Stop loading") : i18n("Refresh")
-
                 onTriggered: {
                     currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
                 }
@@ -277,7 +268,6 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "bookmarks"
                 text: i18n("Add bookmark")
-
                 onTriggered: {
                     print("Adding bookmark");
                     var request = new Object;// FIXME
@@ -296,17 +286,27 @@ Kirigami.ApplicationWindow {
                 onTriggered: {
                     currentWebView.userAgent.isMobile = !currentWebView.userAgent.isMobile;
                 }
+            },
+            Kirigami.Action {
+                icon.name: "edit-select-text"
+                text: rootPage.navigationAutoShow ? i18n("Hide navigation bar") : i18n("Show navigation bar")
+                visible: navigation.visible
+                onTriggered: {
+                    if (!navigation.visible) return;
+                    rootPage.navigationAutoShow = !rootPage.navigationAutoShow;
+                }
             }
         ]
 
         // Bottom navigation bar
         Navigation {
             id: navigation
-            navigationShown: !webappcontainer && webBrowser.visibility !== Window.FullScreen
+            navigationShown: visible && rootPage.navigationAutoShow
+            visible: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
             Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
 
-            layer.enabled: navigation.visible
+            layer.enabled: navigation.navigationShown
             layer.effect: DropShadow {
                 verticalOffset: - 1
                 color: Kirigami.Theme.disabledTextColor
@@ -336,6 +336,44 @@ Kirigami.ApplicationWindow {
                 left: parent.left
                 bottom: navigation.top
                 right: parent.right
+            }
+            visible: navigation.navigationShown
+        }
+
+        // dealing with hiding and showing navigation bar
+        property point oldScrollPosition: "0,0"
+        property bool  pageAlmostReady: !currentWebView.loading || currentWebView.loadProgress > 90
+
+        onPageAlmostReadyChanged: {
+            if (!rootPage.pageAlmostReady)
+                rootPage.navigationAutoShow = true;
+            else
+                rootPage.oldScrollPosition = currentWebView.scrollPosition;
+        }
+
+        Connections {
+            target: currentWebView
+            onScrollPositionChanged: {
+                var delta = 100;
+                if (rootPage.navigationAutoShow && rootPage.pageAlmostReady) {
+                    if (rootPage.oldScrollPosition.y + delta < currentWebView.scrollPosition.y) {
+                        // hide navbar
+                        rootPage.oldScrollPosition = currentWebView.scrollPosition;
+                        rootPage.navigationAutoShow = false;
+                    } else if (rootPage.oldScrollPosition.y > currentWebView.scrollPosition.y) {
+                        // navbar open and scrolling up
+                        rootPage.oldScrollPosition = currentWebView.scrollPosition;
+                    }
+                } else if (!rootPage.navigationAutoShow) {
+                    if (rootPage.oldScrollPosition.y - delta > currentWebView.scrollPosition.y) {
+                        // show navbar
+                        rootPage.oldScrollPosition = currentWebView.scrollPosition;
+                        rootPage.navigationAutoShow = true;
+                    } else if (rootPage.oldScrollPosition.y < currentWebView.scrollPosition.y) {
+                        // navbar closed and scrolling down
+                        rootPage.oldScrollPosition = currentWebView.scrollPosition;
+                    }
+                }
             }
         }
     }
