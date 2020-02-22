@@ -34,11 +34,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 Purpose I18n)
 # Necessary to support QtWebEngine installed in a different prefix than the rest of Qt (e.g flatpak)
 find_package(Qt5WebEngine REQUIRED)
 
-################# Enable C++11 features for clang and gcc #################
-
-if(UNIX)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x")
-endif()
+################# Definitions to pass to the compiler #################
 
 add_definitions(-DQT_NO_FOREACH)
 
