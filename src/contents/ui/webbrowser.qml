@@ -341,7 +341,7 @@ Kirigami.ApplicationWindow {
         }
 
         // dealing with hiding and showing navigation bar
-        property point oldScrollPosition: "0,0"
+        property point oldScrollPosition: Qt.point(0, 0)
         property bool  pageAlmostReady: !currentWebView.loading || currentWebView.loadProgress > 90
 
         onPageAlmostReadyChanged: {

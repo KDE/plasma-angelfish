@@ -144,7 +144,7 @@ Controls.Drawer {
         urlInput.forceActiveFocus();
         urlInput.selectAll();
         justOpened = true;
-        urlFilter.setFilterFixedString('');
+        urlFilter.setFilterFixedString("");
         openedState = true;
         listView.positionViewAtBeginning();
     }

@@ -77,8 +77,8 @@ Item {
 
                 color: "transparent"
                 border.color: Kirigami.Theme.textColor
-                border.width: Kirigami.Units.gridUnit/10
-                radius: Kirigami.Units.gridUnit/5
+                border.width: Kirigami.Units.gridUnit / 10
+                radius: Kirigami.Units.gridUnit / 5
 
                 Kirigami.Theme.inherit: true
 
