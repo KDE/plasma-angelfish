@@ -301,7 +301,7 @@ Kirigami.ApplicationWindow {
         // Bottom navigation bar
         Navigation {
             id: navigation
-            navigationShown: visible && rootPage.navigationAutoShow
+            navigationShown: visible && rootPage.navigationAutoShow && webBrowser.visibility !== Window.FullScreen
             visible: !webappcontainer && webBrowser.visibility !== Window.FullScreen
 
             Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
