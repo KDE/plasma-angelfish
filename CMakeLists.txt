@@ -14,7 +14,7 @@ include(FeatureSummary)
 
 ################# set KDE specific information #################
 
-find_package(ECM 0.0.8 REQUIRED NO_MODULE)
+find_package(ECM 5.64.0 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -23,6 +23,7 @@ include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
+include(KDEClangFormat)
 include(ECMPoQmTools)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
@@ -50,3 +51,6 @@ install(FILES org.kde.mobile.angelfish.appdata.xml DESTINATION ${KDE_INSTALL_MET
 install(FILES org.kde.mobile.angelfish.svg DESTINATION ${KDE_INSTALL_FULL_ICONDIR}/hicolor/scalable/apps)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES src/*.cpp src/*.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
