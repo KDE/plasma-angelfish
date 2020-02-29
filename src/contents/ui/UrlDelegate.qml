@@ -57,10 +57,6 @@ Kirigami.SwipeListItem {
 
                 source: model.icon ? model.icon : ""
             }
-
-            Image {
-                source: preview == undefined ? "" : preview
-            }
         }
 
         ColumnLayout {

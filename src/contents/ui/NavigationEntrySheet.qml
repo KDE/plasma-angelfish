@@ -82,7 +82,7 @@ Controls.Drawer {
                 onAccepted: applyUrl()
                 onTextChanged: {
                     if (!openedState) return; // avoid filtering
-                    urlFilter.setFilterFixedString(text);
+                    urlFilter.filter = text;
                     justOpened = false;
                 }
                 Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
@@ -129,9 +129,11 @@ Controls.Drawer {
                 width: parent.width
             }
 
-            model: UrlFilterProxyModel {
+            model: BookmarksHistoryModel {
                 id: urlFilter
-                sourceModel: (!openedState || justOpened || !urlInput.text) ?  BrowserManager.bookmarks : BrowserManager.history
+                active: openedState
+                bookmarks: true
+                history: true
             }
         }
     }
@@ -144,7 +146,7 @@ Controls.Drawer {
         urlInput.forceActiveFocus();
         urlInput.selectAll();
         justOpened = true;
-        urlFilter.setFilterFixedString("");
+        urlFilter.filter = "";
         openedState = true;
         listView.positionViewAtBeginning();
     }

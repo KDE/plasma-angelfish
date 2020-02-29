@@ -165,7 +165,13 @@ WebEngineView {
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!privateMode) {
-                addHistoryEntry();
+                var request = new Object;// FIXME
+                request.url = currentWebView.url;
+                request.title = currentWebView.title;
+                request.icon = currentWebView.icon;
+                request.lastVisited = new Date();
+                BrowserManager.addToHistory(request);
+                BrowserManager.lastVisited(currentWebView.url);
             }
             grabThumb();
         }
@@ -192,8 +198,8 @@ WebEngineView {
     }
 
     onIconChanged: {
-        if (icon)
-            BrowserManager.history.updateIcon(url, icon)
+        if (icon && !privateMode)
+            BrowserManager.updateIcon(url, icon)
     }
 
     onNewViewRequested: {

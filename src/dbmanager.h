@@ -1,6 +1,7 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2020 Jonah Brüchert  <jbb@kaidan.im>                        *
+ *             2020 Rinigus <rinigus.git@gmail.com>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,91 +20,62 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKMARKSMANAGER_H
-#define BOOKMARKSMANAGER_H
+#ifndef DBMANAGER_H
+#define DBMANAGER_H
 
 #include <QObject>
-
-#include "dbmanager.h"
-#include "urlmodel.h"
-
-class QSettings;
+#include <QString>
+#include <QSqlQuery>
 
 namespace AngelFish {
+
 /**
- * @class BookmarksManager
- * @short Access to Bookmarks and History. This is a singleton for
- * administration and access to the various models and browser-internal
- * data.
+ * @class DBManager
+ * @short Class for database initialization and applying changes in its records
  */
-class BrowserManager : public QObject
+class DBManager : public QObject
 {
     Q_OBJECT
-
-    Q_PROPERTY(QAbstractListModel *bookmarks READ bookmarks NOTIFY bookmarksChanged)
-    Q_PROPERTY(QAbstractListModel *history READ history NOTIFY historyChanged)
-
-    Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
-    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
-                       searchBaseUrlChanged)
-
-    Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
-
 public:
-    ~BrowserManager() override;
-
-    static BrowserManager *instance();
-
-    UrlModel *bookmarks();
-    UrlModel *history();
-
-    QString homepage();
-    QString searchBaseUrl();
-
-    QSettings* settings() const;
-
-    QString initialUrl() const;
-    void setInitialUrl(const QString &initialUrl);
+    explicit DBManager(QObject *parent = nullptr);
 
 signals:
-    void updated();
-    void bookmarksChanged();
-    void historyChanged();
-
-    void homepageChanged();
-    void searchBaseUrlChanged();
-    void initialUrlChanged();
-
+    // emitted with the name of the table that has been changed
     void databaseTableChanged(QString table);
 
-public slots:
+public:
     void addBookmark(const QVariantMap &bookmarkdata);
     void removeBookmark(const QString &url);
 
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void lastVisited(const QString &url);
     void updateIcon(const QString &url, const QString &iconSource);
-
-    void setHomepage(const QString &homepage);
-    void setSearchBaseUrl(const QString &searchBaseUrl);
+    void lastVisited(const QString &url);
 
 private:
-    // BrowserManager should only be createdd by calling the instance() function
-    BrowserManager(QObject *parent = nullptr);
+    // version of database schema
+    int version();
+    void setVersion(int v);
 
-    DBManager m_dbmanager;
+    // migration from earlier versions
+    bool migrate();
+    bool migrateTo1();
 
-    UrlModel *m_bookmarks = nullptr;
-    UrlModel *m_history = nullptr;
-    QSettings *m_settings;
+    // limit the size of history table
+    void trimHistory();
 
-    QString m_initialUrl;
+    // execute SQL statement
+    bool execute(const QString &command);
+    bool execute(QSqlQuery &query);
 
-    static BrowserManager *s_instance;
+    // methods for manipulation of bookmarks or history tables
+    void addRecord(const QString &table, const QVariantMap &pagedata);
+    void removeRecord(const QString &table, const QString &url);
+    void updateIconRecord(const QString &table, const QString &url, const QString &iconSource);
+    void lastVisitedRecord(const QString &table, const QString &url);
 };
 
 } // namespace
 
-#endif // BOOKMARKSMANAGER_H
+#endif // DBMANAGER_H

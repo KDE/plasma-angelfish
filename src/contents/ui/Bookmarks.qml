@@ -47,7 +47,9 @@ Kirigami.ScrollablePage {
         interactive: height < contentHeight
         clip: true
 
-        model: BrowserManager.bookmarks
+        model: BookmarksHistoryModel {
+            bookmarks: true
+        }
 
         delegate: Kirigami.DelegateRecycler {
             width: parent.width

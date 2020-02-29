@@ -55,19 +55,6 @@ Kirigami.ApplicationWindow {
     width: Kirigami.Units.gridUnit * 20
     height: Kirigami.Units.gridUnit * 30
 
-    /**
-      * Add page of currently active webview to history
-      */
-    function addHistoryEntry() {
-        //print("Adding history");
-        var request = new Object;// FIXME
-        request.url = currentWebView.url;
-        request.title = currentWebView.title;
-        request.icon = currentWebView.icon;
-        request.lastVisited = new Date();
-        BrowserManager.addToHistory(request);
-    }
-
     pageStack.globalToolBar.showNavigationButtons: {
         if (pageStack.depth <= 1)
             return Kirigami.ApplicationHeaderStyle.None;

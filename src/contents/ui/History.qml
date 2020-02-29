@@ -45,9 +45,10 @@ Kirigami.ScrollablePage {
         interactive: height < contentHeight
         clip: true
 
-        model: UrlFilterProxyModel {
-            sourceModel: BrowserManager.history
+        model: BookmarksHistoryModel {
+            history: true
         }
+
 
         delegate: Kirigami.DelegateRecycler {
             width: parent.width

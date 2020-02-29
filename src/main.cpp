@@ -26,12 +26,15 @@
 #include <KLocalizedString>
 #include <KLocalizedContext>
 
+#include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
 #include "tabsmodel.h"
 #include "urlfilterproxymodel.h"
 #include "urlmodel.h"
 #include "urlutils.h"
 #include "useragent.h"
+
+using namespace AngelFish;
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -71,7 +74,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
-    // Browser manager
+    // Exported types
+    qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
     qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0, "UrlFilterProxyModel");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
     qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
