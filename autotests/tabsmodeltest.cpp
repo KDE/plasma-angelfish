@@ -96,7 +96,11 @@ private Q_SLOTS:
         m_tabsModel->newTab("second");
         m_tabsModel->newTab("third");
 
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", true), TabState("second", true), TabState("third", true)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("about:blank", m_tabsModel->isMobileDefault()),
+            TabState("second", m_tabsModel->isMobileDefault()),
+            TabState("third", m_tabsModel->isMobileDefault())
+        }));
 
         // current tab is 2
         // close tab "second"
@@ -105,12 +109,18 @@ private Q_SLOTS:
         QCOMPARE(m_tabsModel->currentTab(), 0);
 
         // "second" is indeed gone
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("about:blank", true), TabState("third", true)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("about:blank",  m_tabsModel->isMobileDefault()),
+            TabState("third",  m_tabsModel->isMobileDefault())
+        }));
     }
 
     void testSetTab() {
         m_tabsModel->setUrl(0, QStringLiteral("https://debian.org"));
-        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({TabState("https://debian.org", true), TabState("third", true)}));
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("https://debian.org",  m_tabsModel->isMobileDefault()),
+            TabState("third",  m_tabsModel->isMobileDefault())}
+        ));
     }
 
     void testPrivateMode() {
