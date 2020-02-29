@@ -139,7 +139,7 @@ void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
     QString icon = pagedata.value("icon").toString();
     qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
 
-    if (url.isEmpty()) return;
+    if (url.isEmpty() || url == "about:blank") return;
 
     QSqlQuery query;
     query.prepare(QStringLiteral("INSERT OR REPLACE INTO %1 (url, title, icon, lastVisited) " \
