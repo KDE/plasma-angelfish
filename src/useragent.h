@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+namespace AngelFish {
+
 class UserAgent : public QObject
 {
     Q_PROPERTY(QString userAgent READ userAgent NOTIFY userAgentChanged)
@@ -25,5 +27,7 @@ signals:
 private:
     int m_isMobile;
 };
+
+} // namespace
 
 #endif // USERAGENT_H

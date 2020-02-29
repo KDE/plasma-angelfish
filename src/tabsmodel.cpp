@@ -27,6 +27,8 @@
 
 #include "browsermanager.h"
 
+using namespace AngelFish;
+
 TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
     connect(this, &TabsModel::currentTabChanged, [this] {
         qDebug() << "Current tab changed to" << m_currentTab;

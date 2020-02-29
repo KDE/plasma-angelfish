@@ -25,6 +25,8 @@
 #include <QtCore/QSortFilterProxyModel>
 #include <QAbstractItemModel>
 
+namespace AngelFish {
+
 class UrlFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -38,5 +40,7 @@ public:
 signals:
     void sourceModelChanged();
 };
+
+} // namespace
 
 #endif // URLFILTERPROXYMODEL_H

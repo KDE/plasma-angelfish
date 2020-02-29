@@ -31,7 +31,7 @@ private Q_SLOTS:
 
     void initTestCase()
     {
-        m_userAgent = new UserAgent();
+        m_userAgent = new AngelFish::UserAgent();
     }
 
     void cleanupTestCase()
@@ -52,7 +52,7 @@ private Q_SLOTS:
 
     void userAgentChanged()
     {
-        QSignalSpy spy(m_userAgent, &UserAgent::userAgentChanged);
+        QSignalSpy spy(m_userAgent, &AngelFish::UserAgent::userAgentChanged);
         m_userAgent->setIsMobile(true);
         QCOMPARE(spy.count(), 1);
     }
@@ -71,7 +71,7 @@ private Q_SLOTS:
 
     void setIsMobile()
     {
-        QSignalSpy spy(m_userAgent, &UserAgent::isMobileChanged);
+        QSignalSpy spy(m_userAgent, &AngelFish::UserAgent::isMobileChanged);
         m_userAgent->setIsMobile(false);
         QCOMPARE(spy.count(), 1);
         m_userAgent->setIsMobile(true);
@@ -87,7 +87,7 @@ private Q_SLOTS:
     }
 
 private:
-    UserAgent *m_userAgent;
+    AngelFish::UserAgent *m_userAgent;
 };
 
 QTEST_MAIN(UserAgentTest);

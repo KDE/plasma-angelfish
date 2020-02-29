@@ -3,6 +3,8 @@
 #include <QtWebEngine/QtWebEngineVersion>
 #include <QtWebEngine/QQuickWebEngineProfile>
 
+using namespace AngelFish;
+
 UserAgent::UserAgent(QObject *parent) : QObject(parent)
 {
 }

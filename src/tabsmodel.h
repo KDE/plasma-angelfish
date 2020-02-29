@@ -22,6 +22,8 @@
 #include <QAbstractListModel>
 #include <QJsonObject>
 
+namespace AngelFish {
+
 class TabState {
 public:
     static TabState fromJson(const QJsonObject &obj);
@@ -101,5 +103,7 @@ signals:
     void isMobileDefaultChanged();
     void privateModeChanged();
 };
+
+} // namespace
 
 #endif // TABSMODEL_H
