@@ -29,8 +29,6 @@
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
 #include "tabsmodel.h"
-#include "urlfilterproxymodel.h"
-#include "urlmodel.h"
 #include "urlutils.h"
 #include "useragent.h"
 
@@ -76,7 +74,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
-    qmlRegisterType<UrlFilterProxyModel>("org.kde.mobile.angelfish", 1, 0, "UrlFilterProxyModel");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
     qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
 

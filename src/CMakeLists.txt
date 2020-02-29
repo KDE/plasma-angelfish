@@ -4,8 +4,6 @@ set(angelfish_SRCS
     dbmanager.cpp
     bookmarkshistorymodel.cpp
     sqlquerymodel.cpp
-    urlmodel.cpp
-    urlfilterproxymodel.cpp
     urlutils.cpp
     useragent.cpp
     tabsmodel.cpp

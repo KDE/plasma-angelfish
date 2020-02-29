@@ -25,7 +25,6 @@
 #include <QObject>
 
 #include "dbmanager.h"
-#include "urlmodel.h"
 
 class QSettings;
 
@@ -40,9 +39,6 @@ class BrowserManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QAbstractListModel *bookmarks READ bookmarks NOTIFY bookmarksChanged)
-    Q_PROPERTY(QAbstractListModel *history READ history NOTIFY historyChanged)
-
     Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
     Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
                        searchBaseUrlChanged)
@@ -54,9 +50,6 @@ public:
 
     static BrowserManager *instance();
 
-    UrlModel *bookmarks();
-    UrlModel *history();
-
     QString homepage();
     QString searchBaseUrl();
 
@@ -67,8 +60,6 @@ public:
 
 signals:
     void updated();
-    void bookmarksChanged();
-    void historyChanged();
 
     void homepageChanged();
     void searchBaseUrlChanged();
@@ -95,8 +86,6 @@ private:
 
     DBManager m_dbmanager;
 
-    UrlModel *m_bookmarks = nullptr;
-    UrlModel *m_history = nullptr;
     QSettings *m_settings;
 
     QString m_initialUrl;

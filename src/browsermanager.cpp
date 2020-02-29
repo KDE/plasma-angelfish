@@ -37,41 +37,17 @@ BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(ne
 
 BrowserManager::~BrowserManager()
 {
-    history()->save();
-    bookmarks()->save();
-}
-
-UrlModel *BrowserManager::bookmarks()
-{
-    // qDebug() << "BookmarksManager::bookmarks()";
-    if (!m_bookmarks) {
-        m_bookmarks = new UrlModel(QStringLiteral("bookmarks.json"), this);
-        m_bookmarks->load();
-    }
-    return m_bookmarks;
-}
-
-UrlModel *BrowserManager::history()
-{
-    // qDebug() << "BrowserManager::history()";
-    if (!m_history) {
-        m_history = new UrlModel(QStringLiteral("history.json"), this);
-        m_history->load();
-    }
-    return m_history;
 }
 
 void BrowserManager::addBookmark(const QVariantMap &bookmarkdata)
 {
     qDebug() << "Add bookmark";
     qDebug() << "      data: " << bookmarkdata;
-    bookmarks()->add(QJsonObject::fromVariantMap(bookmarkdata));
     m_dbmanager.addBookmark(bookmarkdata);
 }
 
 void BrowserManager::removeBookmark(const QString &url)
 {
-    bookmarks()->remove(url);
     m_dbmanager.removeBookmark(url);
 }
 
@@ -79,15 +55,11 @@ void BrowserManager::addToHistory(const QVariantMap &pagedata)
 {
     // qDebug() << "Add History";
     // qDebug() << "      data: " << pagedata;
-    history()->add(QJsonObject::fromVariantMap(pagedata));
-    emit historyChanged();
     m_dbmanager.addToHistory(pagedata);
 }
 
 void BrowserManager::removeFromHistory(const QString &url)
 {
-    history()->remove(url);
-    emit historyChanged();
     m_dbmanager.removeFromHistory(url);
 }
 
