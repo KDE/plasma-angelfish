@@ -25,7 +25,6 @@
 
 #include <QObject>
 
-namespace AngelFish {
 /**
  * @class UrlUtils
  * @short Utilities for URL manipulation and parsing.
@@ -44,7 +43,5 @@ public:
     Q_INVOKABLE static QString urlPath(const QString &url);
 
 };
-
-} // namespace
 
 #endif // URLUTILS_H

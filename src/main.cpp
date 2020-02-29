@@ -32,8 +32,6 @@
 #include "urlutils.h"
 #include "useragent.h"
 
-using namespace AngelFish;
-
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -78,15 +76,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
 
     // URL utils
-    qmlRegisterSingletonType<AngelFish::UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(new AngelFish::UrlUtils());
+    qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return static_cast<QObject *>(new UrlUtils());
     });
 
-    AngelFish::BrowserManager::instance()->setInitialUrl(initialUrl);
+    BrowserManager::instance()->setInitialUrl(initialUrl);
 
     // Browser Manager
-    qmlRegisterSingletonType<AngelFish::BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(AngelFish::BrowserManager::instance());
+    qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return static_cast<QObject *>(BrowserManager::instance());
     });
 
     // Load QML

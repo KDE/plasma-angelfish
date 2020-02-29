@@ -27,8 +27,6 @@
 #include <QString>
 #include <QSqlQuery>
 
-namespace AngelFish {
-
 /**
  * @class DBManager
  * @short Class for database initialization and applying changes in its records
@@ -75,7 +73,5 @@ private:
     void updateIconRecord(const QString &table, const QString &url, const QString &iconSource);
     void lastVisitedRecord(const QString &table, const QString &url);
 };
-
-} // namespace
 
 #endif // DBMANAGER_H

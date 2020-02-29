@@ -28,7 +28,6 @@
 
 class QSettings;
 
-namespace AngelFish {
 /**
  * @class BookmarksManager
  * @short Access to Bookmarks and History. This is a singleton for
@@ -92,7 +91,5 @@ private:
 
     static BrowserManager *s_instance;
 };
-
-} // namespace
 
 #endif // BOOKMARKSMANAGER_H

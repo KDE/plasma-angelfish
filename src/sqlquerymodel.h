@@ -5,8 +5,6 @@
 
 #include <QSqlQueryModel>
 
-namespace AngelFish {
-
 /**
  * @class SqlQueryModel
  * @short Base class that can be used by models backed by SQL query
@@ -32,7 +30,5 @@ private:
 private:
     QHash<int, QByteArray> m_roleNames;
 };
-
-} // namespace
 
 #endif // SQLQUERYMODEL_H

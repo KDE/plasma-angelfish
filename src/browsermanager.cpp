@@ -26,8 +26,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-using namespace AngelFish;
-
 BrowserManager *BrowserManager::s_instance = nullptr;
 
 BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(new QSettings(this))

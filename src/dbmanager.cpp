@@ -35,8 +35,6 @@
 #define DB_USER_VERSION 1
 #define MAX_BROWSER_HISTORY_SIZE 3000
 
-using namespace AngelFish;
-
 DBManager::DBManager(QObject *parent) : QObject(parent)
 {
     QString dbname = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)

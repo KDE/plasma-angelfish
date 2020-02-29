@@ -7,8 +7,6 @@
 #include <QSqlRecord>
 #include <QSqlField>
 
-using namespace AngelFish;
-
 SqlQueryModel::SqlQueryModel(QObject *parent) :
     QSqlQueryModel(parent)
 {

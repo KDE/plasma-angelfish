@@ -29,8 +29,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-using namespace AngelFish;
-
 UrlUtils::UrlUtils(QObject *parent) : QObject(parent)
 {
 }

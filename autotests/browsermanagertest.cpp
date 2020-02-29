@@ -24,8 +24,6 @@
 #include "browsermanager.h"
 #include "urlutils.h"
 
-using namespace AngelFish;
-
 class UserAgentTest : public QObject
 {
     Q_OBJECT

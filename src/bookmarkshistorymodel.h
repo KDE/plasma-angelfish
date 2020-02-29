@@ -3,8 +3,6 @@
 
 #include "sqlquerymodel.h"
 
-namespace AngelFish {
-
 /**
  * @class BookmarksHistoryModel
  * @short Model for listing Bookmarks and History items.
@@ -57,7 +55,5 @@ private:
     bool m_history = false;
     QString m_filter;
 };
-
-} // namespace
 
 #endif // BOOKMARKSHISTORYMODEL_H

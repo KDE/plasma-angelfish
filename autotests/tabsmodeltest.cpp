@@ -27,7 +27,7 @@ class TabsModelTest : public QObject
 private Q_SLOTS:
     void initTestCase()
     {
-        m_tabsModel = new AngelFish::TabsModel();
+        m_tabsModel = new TabsModel();
     }
 
     void testInitialTabExists()
@@ -96,10 +96,10 @@ private Q_SLOTS:
         m_tabsModel->newTab("second");
         m_tabsModel->newTab("third");
 
-        QCOMPARE(m_tabsModel->tabs(), QVector<AngelFish::TabState>({
-            AngelFish::TabState("about:blank", m_tabsModel->isMobileDefault()),
-            AngelFish::TabState("second", m_tabsModel->isMobileDefault()),
-            AngelFish::TabState("third", m_tabsModel->isMobileDefault())
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("about:blank", m_tabsModel->isMobileDefault()),
+            TabState("second", m_tabsModel->isMobileDefault()),
+            TabState("third", m_tabsModel->isMobileDefault())
         }));
 
         // current tab is 2
@@ -109,17 +109,17 @@ private Q_SLOTS:
         QCOMPARE(m_tabsModel->currentTab(), 0);
 
         // "second" is indeed gone
-        QCOMPARE(m_tabsModel->tabs(), QVector<AngelFish::TabState>({
-            AngelFish::TabState("about:blank",  m_tabsModel->isMobileDefault()),
-            AngelFish::TabState("third",  m_tabsModel->isMobileDefault())
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("about:blank",  m_tabsModel->isMobileDefault()),
+            TabState("third",  m_tabsModel->isMobileDefault())
         }));
     }
 
     void testSetTab() {
         m_tabsModel->setUrl(0, QStringLiteral("https://debian.org"));
-        QCOMPARE(m_tabsModel->tabs(), QVector<AngelFish::TabState>({
-            AngelFish::TabState("https://debian.org",  m_tabsModel->isMobileDefault()),
-            AngelFish::TabState("third",  m_tabsModel->isMobileDefault())}
+        QCOMPARE(m_tabsModel->tabs(), QVector<TabState>({
+            TabState("https://debian.org",  m_tabsModel->isMobileDefault()),
+            TabState("third",  m_tabsModel->isMobileDefault())}
         ));
     }
 
@@ -134,7 +134,7 @@ private Q_SLOTS:
         QCOMPARE(m_tabsModel->privateMode(), false);
     }
 private:
-    AngelFish::TabsModel *m_tabsModel;
+    TabsModel *m_tabsModel;
 };
 
 QTEST_MAIN(TabsModelTest);

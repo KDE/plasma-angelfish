@@ -27,8 +27,6 @@
 
 #include "urlmodel.h"
 
-using namespace AngelFish;
-
 class UrlModelTest : public QObject
 {
     Q_OBJECT

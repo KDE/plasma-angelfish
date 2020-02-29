@@ -7,8 +7,6 @@
 
 #define QUERY_LIMIT 1000
 
-using namespace AngelFish;
-
 BookmarksHistoryModel::BookmarksHistoryModel()
 {
     connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged,

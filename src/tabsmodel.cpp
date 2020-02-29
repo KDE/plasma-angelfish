@@ -28,8 +28,6 @@
 
 #include "browsermanager.h"
 
-using namespace AngelFish;
-
 TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
     connect(this, &TabsModel::currentTabChanged, [this] {
         qDebug() << "Current tab changed to" << m_currentTab;
@@ -98,14 +96,14 @@ void TabsModel::loadInitialTabs()
     m_tabsReadOnly = false;
 
     if (!m_privateMode) {
-         if (AngelFish::BrowserManager::instance()->initialUrl().isEmpty()) {
+         if (BrowserManager::instance()->initialUrl().isEmpty()) {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                setUrl(0, AngelFish::BrowserManager::instance()->homepage());
+                setUrl(0, BrowserManager::instance()->homepage());
          } else {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                 setUrl(0, AngelFish::BrowserManager::instance()->initialUrl());
+                 setUrl(0, BrowserManager::instance()->initialUrl());
             else
-                 newTab(AngelFish::BrowserManager::instance()->initialUrl());
+                 newTab(BrowserManager::instance()->initialUrl());
          }
      }
 }
