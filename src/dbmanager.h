@@ -48,7 +48,7 @@ public:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void updateIcon(const QString &url, const QString &iconSource, const QImage &image);
+    void updateIcon(const QString &url, const QString &iconSource);
     void lastVisited(const QString &url);
 
 private:

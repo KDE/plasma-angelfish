@@ -4,21 +4,29 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QImage>
+#include <QPixmap>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QString>
+#include <QQmlApplicationEngine>
 
-IconImageProvider::IconImageProvider() :
+// As there is only one instance of the IconImageProvider
+// and icons are added into the database using static methods,
+// engine has to be accessed via static property
+QQmlApplicationEngine *IconImageProvider::s_engine;
+
+IconImageProvider::IconImageProvider(QQmlApplicationEngine *engine) :
     QQuickImageProvider(QQmlImageProviderBase::Image)
 {
+    s_engine = engine;
 }
 
 QString IconImageProvider::providerId()
 {
-    return "angelfish";
+    return "angelfish-favicon";
 }
 
-QString IconImageProvider::storeImage(const QString &iconSource, const QImage &image)
+QString IconImageProvider::storeImage(const QString &iconSource)
 {
     QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     if (!iconSource.startsWith(prefix_favicon)) {
@@ -43,18 +51,39 @@ QString IconImageProvider::storeImage(const QString &iconSource, const QImage &i
     if (query_check.next()) {
         // there is corresponding record in the database already
         // no need to store it again
-        qDebug() << "Icon stored already" << url;
         return url;
     }
     query_check.finish();
 
     // Store new icon
+    QQuickImageProvider *provider = dynamic_cast<QQuickImageProvider *>(s_engine->imageProvider("favicon"));
+    if (provider == nullptr) {
+        qWarning() << Q_FUNC_INFO << "Failed to load image provider" << url;
+        return iconSource; // as something is wrong
+    }
+
     QByteArray data;
     QBuffer buffer(&data);
     buffer.open(QIODevice::WriteOnly);
-    if (!image.save(&buffer, "PNG")) {
-         qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
-         return iconSource; // as something is wrong
+
+    QSize sz_requested;
+    QSize sz_obtained;
+    QString providerIconName = iconSource.mid(prefix_favicon.size());
+    if (provider->imageType() == QQmlImageProviderBase::Image) {
+        QImage image = provider->requestImage(providerIconName, &sz_obtained, sz_requested);
+        if (!image.save(&buffer, "PNG")) {
+             qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
+             return iconSource; // as something is wrong
+        }
+    } else if (provider->imageType() == QQmlImageProviderBase::Pixmap) {
+        QPixmap image = provider->requestPixmap(providerIconName, &sz_obtained, sz_requested);
+        if (!image.save(&buffer, "PNG")) {
+             qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
+             return iconSource; // as something is wrong
+        }
+    } else {
+        qWarning() << Q_FUNC_INFO << "Unsupported image provider" << provider->imageType();
+        return iconSource; // as something is wrong
     }
 
     QSqlQuery query_write;

@@ -64,7 +64,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
-    engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider);
+    engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider(&engine));
 
     // initial url command line parameter
     QString initialUrl;

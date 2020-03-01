@@ -74,7 +74,7 @@ public slots:
     void removeFromHistory(const QString &url);
 
     void lastVisited(const QString &url);
-    void updateIcon(const QString &url, const QString &iconSource, const QImage &image);
+    void updateIcon(const QString &url, const QString &iconSource);
 
     void setHomepage(const QString &homepage);
     void setSearchBaseUrl(const QString &searchBaseUrl);

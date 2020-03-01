@@ -57,25 +57,6 @@ WebEngineView {
         visible: false
     }
 
-    Image {
-        id: favicon
-        source: webEngineView.icon
-        visible: false
-        onSourceChanged: grab()
-        onStatusChanged: grab()
-
-        function grab() {
-            if (webEngineView.privateMode || status !== Image.Ready || !source)
-                return;
-
-            var url = webEngineView.url;
-            var icon = webEngineView.icon;
-            favicon.grabToImage(function (result){
-                BrowserManager.updateIcon(url, icon, result.image);
-            });
-        }
-    }
-
     Timer {
         id: snaphotTimer
         interval: 1000
@@ -216,6 +197,11 @@ WebEngineView {
         print("WebView completed.");
         var settings = webEngineView.settings;
         print("Settings: " + settings);
+    }
+
+    onIconChanged: {
+            if (icon && !privateMode)
+                BrowserManager.updateIcon(url, icon)
     }
 
     onNewViewRequested: {

@@ -25,7 +25,6 @@
 
 #include <QDateTime>
 #include <QDebug>
-#include <QImage>
 #include <QStandardPaths>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -231,9 +230,9 @@ void DBManager::lastVisited(const QString &url)
     lastVisitedRecord(QStringLiteral("history"), url);
 }
 
-void DBManager::updateIcon(const QString &url, const QString &iconSource, const QImage &image)
+void DBManager::updateIcon(const QString &url, const QString &iconSource)
 {
-    QString updatedSource = IconImageProvider::storeImage(iconSource, image);
+    QString updatedSource = IconImageProvider::storeImage(iconSource);
     updateIconRecord(QStringLiteral("bookmarks"), url, updatedSource);
     updateIconRecord(QStringLiteral("history"), url, updatedSource);
 }
