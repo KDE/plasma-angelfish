@@ -50,24 +50,24 @@ void BookmarksHistoryModel::setFilter(const QString &f)
 
 void BookmarksHistoryModel::onDatabaseChanged(const QString &table)
 {
-    if ( (table == "bookmarks" && m_bookmarks) ||
-            (table == "history" && m_history) )
+    if ( (table == QLatin1String("bookmarks") && m_bookmarks) ||
+            (table == QLatin1String("history") && m_history) )
         setQuery();
 }
 
 void BookmarksHistoryModel::setQuery()
 {
     QString command;
-    const char *b = "SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisited, %1 AS bookmarked FROM %2 ";
-    QString filter = m_filter.isEmpty() ? QString() : "WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'";
+    QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisited, %1 AS bookmarked FROM %2 ");
+    QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
     bool include_history = m_history && !(m_bookmarks && m_filter.isEmpty());
     if (m_bookmarks)
-        command = QString(b).arg(1).arg("bookmarks") + filter;
+        command = b.arg(1).arg(QLatin1String("bookmarks")) + filter;
     if (m_bookmarks && include_history)
-        command += "\n UNION \n";
+        command += QLatin1String("\n UNION \n");
     if (include_history)
-        command += QString(b).arg(0).arg("history") + filter;
-    command += "\n ORDER BY bookmarked, lastVisited ASC";
+        command += b.arg(0).arg(QLatin1String("history")) + filter;
+    command += QLatin1String("\n ORDER BY bookmarked, lastVisited ASC");
     if (include_history)
         command += QStringLiteral("\n LIMIT %1").arg(QUERY_LIMIT);
 
@@ -81,8 +81,8 @@ void BookmarksHistoryModel::setQuery()
     }
 
     if (!m_filter.isEmpty())
-        query.bindValue(":filter", m_filter);
-    query.bindValue(":now", ref);
+        query.bindValue(QStringLiteral(":filter"), m_filter);
+    query.bindValue(QStringLiteral(":now"), ref);
 
     if (!query.exec()) {
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";

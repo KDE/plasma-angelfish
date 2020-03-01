@@ -20,19 +20,19 @@ QString IconImageProvider::providerId()
 
 QString IconImageProvider::storeImage(const QString &iconSource, const QImage &image)
 {
-    QString prefix_favicon = "image://favicon/";
+    QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     if (!iconSource.startsWith(prefix_favicon)) {
         // don't know what to do with it, return as it is
         return iconSource;
     }
 
     // new uri for image
-    QString url = QStringLiteral("image://%1/%2").arg(providerId()).arg(iconSource.mid(prefix_favicon.length()));
+    QString url = QStringLiteral("image://%1/%2").arg(providerId()).arg(iconSource.mid(prefix_favicon.size()));
 
     // check if we have that image already
     QSqlQuery query_check;
-    query_check.prepare("SELECT 1 FROM icons WHERE url = :url LIMIT 1");
-    query_check.bindValue(":url", url);
+    query_check.prepare(QStringLiteral("SELECT 1 FROM icons WHERE url = :url LIMIT 1"));
+    query_check.bindValue(QStringLiteral(":url"), url);
     if (!query_check.exec()) {
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
         qWarning() << query_check.lastQuery();
@@ -58,9 +58,9 @@ QString IconImageProvider::storeImage(const QString &iconSource, const QImage &i
     }
 
     QSqlQuery query_write;
-    query_write.prepare("INSERT INTO icons(url, icon) VALUES (:url, :icon)");
-    query_write.bindValue(":url", url);
-    query_write.bindValue(":icon", data);
+    query_write.prepare(QStringLiteral("INSERT INTO icons(url, icon) VALUES (:url, :icon)"));
+    query_write.bindValue(QStringLiteral(":url"), url);
+    query_write.bindValue(QStringLiteral(":icon"), data);
     if (!query_write.exec()) {
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
         qWarning() << query_write.lastQuery();
@@ -74,8 +74,8 @@ QString IconImageProvider::storeImage(const QString &iconSource, const QImage &i
 QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSize &/*requestedSize*/)
 {
     QSqlQuery query;
-    query.prepare("SELECT icon FROM icons WHERE url LIKE :url LIMIT 1");
-    query.bindValue(":url", QStringLiteral("image://%1/%2%").arg(providerId()).arg(id));
+    query.prepare(QStringLiteral("SELECT icon FROM icons WHERE url LIKE :url LIMIT 1"));
+    query.bindValue(QStringLiteral(":url"), QStringLiteral("image://%1/%2%").arg(providerId()).arg(id));
     if (!query.exec()) {
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
         qWarning() << query.lastQuery();

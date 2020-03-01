@@ -42,7 +42,7 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
     QString dbname = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
             + QStringLiteral("/angelfish/angelfish.sqlite");
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     database.setDatabaseName(dbname);
     if (!database.open()) {
         throw std::runtime_error("Failed to open database " + dbname.toStdString());
@@ -58,7 +58,7 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
 
 int DBManager::version()
 {
-    QSqlQuery query("PRAGMA user_version");
+    QSqlQuery query(QLatin1String("PRAGMA user_version"));
     if (query.next()) {
         bool ok;
         int value = query.value(0).toInt(&ok);
@@ -117,12 +117,12 @@ bool DBManager::migrate()
 bool DBManager::migrateTo1()
 {
     // Starting from empty database, let's create the tables.
-    QString bookmarks = "CREATE TABLE bookmarks (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)";
-    QString history = "CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)";
-    QString icons = "CREATE TABLE icons (url TEXT UNIQUE, icon BLOB)";
-    QString idx_bookmarks = "CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)";
-    QString idx_history = "CREATE UNIQUE INDEX idx_history_url ON history(url)";
-    QString idx_icons = "CREATE UNIQUE INDEX idx_icons_url ON icons(url)";
+    QString bookmarks = QStringLiteral("CREATE TABLE bookmarks (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
+    QString history = QStringLiteral("CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
+    QString icons = QStringLiteral("CREATE TABLE icons (url TEXT UNIQUE, icon BLOB)");
+    QString idx_bookmarks = QStringLiteral("CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)");
+    QString idx_history = QStringLiteral("CREATE UNIQUE INDEX idx_history_url ON history(url)");
+    QString idx_icons = QStringLiteral("CREATE UNIQUE INDEX idx_icons_url ON icons(url)");
     if (!execute(bookmarks) || !execute(idx_bookmarks) ||
             !execute(history) || !execute(idx_history) ||
             !execute(icons) || !execute(idx_icons) )
@@ -157,10 +157,10 @@ void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
     QSqlQuery query;
     query.prepare(QStringLiteral("INSERT OR REPLACE INTO %1 (url, title, icon, lastVisited) " \
                                  "VALUES (:url, :title, :icon, :lastVisited)").arg(table));
-    query.bindValue(":url", url);
-    query.bindValue(":title", title);
-    query.bindValue(":icon", icon);
-    query.bindValue(":lastVisited", lastVisited);
+    query.bindValue(QStringLiteral(":url"), url);
+    query.bindValue(QStringLiteral(":title"), title);
+    query.bindValue(QStringLiteral(":icon"), icon);
+    query.bindValue(QStringLiteral(":lastVisited"), lastVisited);
     execute(query);
 
     emit databaseTableChanged(table);
@@ -172,7 +172,7 @@ void DBManager::removeRecord(const QString &table, const QString &url)
 
     QSqlQuery query;
     query.prepare(QStringLiteral("DELETE FROM %1 WHERE url = :url").arg(table));
-    query.bindValue(":url", url);
+    query.bindValue(QStringLiteral(":url"), url);
     execute(query);
 
     emit databaseTableChanged(table);
@@ -184,8 +184,8 @@ void DBManager::updateIconRecord(const QString &table, const QString &url, const
 
     QSqlQuery query;
     query.prepare(QStringLiteral("UPDATE %1 SET icon = :icon WHERE url = :url").arg(table));
-    query.bindValue(":url", url);
-    query.bindValue(":icon", iconSource);
+    query.bindValue(QStringLiteral(":url"), url);
+    query.bindValue(QStringLiteral(":icon"), iconSource);
     execute(query);
 
     emit databaseTableChanged(table);
@@ -198,8 +198,8 @@ void DBManager::lastVisitedRecord(const QString &table, const QString &url)
     qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
     QSqlQuery query;
     query.prepare(QStringLiteral("UPDATE %1 SET lastVisited = :lv WHERE url = :url").arg(table));
-    query.bindValue(":url", url);
-    query.bindValue(":lv", lastVisited);
+    query.bindValue(QStringLiteral(":url"), url);
+    query.bindValue(QStringLiteral(":lv"), lastVisited);
     execute(query);
 
     emit databaseTableChanged(table);
@@ -207,33 +207,33 @@ void DBManager::lastVisitedRecord(const QString &table, const QString &url)
 
 void DBManager::addBookmark(const QVariantMap &bookmarkdata)
 {
-    addRecord("bookmarks", bookmarkdata);
+    addRecord(QStringLiteral("bookmarks"), bookmarkdata);
 }
 
 void DBManager::removeBookmark(const QString &url)
 {
-    removeRecord("bookmarks", url);
+    removeRecord(QStringLiteral("bookmarks"), url);
 }
 
 void DBManager::addToHistory(const QVariantMap &pagedata)
 {
-    addRecord("history", pagedata);
+    addRecord(QStringLiteral("history"), pagedata);
 }
 
 void DBManager::removeFromHistory(const QString &url)
 {
-    removeRecord("history", url);
+    removeRecord(QStringLiteral("history"), url);
 }
 
 void DBManager::lastVisited(const QString &url)
 {
-    lastVisitedRecord("bookmarks", url);
-    lastVisitedRecord("history", url);
+    lastVisitedRecord(QStringLiteral("bookmarks"), url);
+    lastVisitedRecord(QStringLiteral("history"), url);
 }
 
 void DBManager::updateIcon(const QString &url, const QString &iconSource, const QImage &image)
 {
     QString updatedSource = IconImageProvider::storeImage(iconSource, image);
-    updateIconRecord("bookmarks", url, updatedSource);
-    updateIconRecord("history", url, updatedSource);
+    updateIconRecord(QStringLiteral("bookmarks"), url, updatedSource);
+    updateIconRecord(QStringLiteral("history"), url, updatedSource);
 }
