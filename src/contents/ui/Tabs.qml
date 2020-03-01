@@ -221,6 +221,18 @@ Kirigami.ScrollablePage {
                         width: label.width
                     }
                 }
+
+                Image {
+                    anchors {
+                        bottom: tabItem.bottom
+                        right: tabItem.right
+                        bottomMargin: Kirigami.Units.smallSpacing
+                        rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing + (tabsRoot.landscapeMode ? 0 : tabsRoot.width-grid.width)
+                    }
+                    fillMode: Image.PreserveAspectFit
+                    height: Math.min(sourceSize.height, label.height)
+                    source: tabs.itemAt(index).icon
+                }
             }
         }
 
