@@ -39,8 +39,8 @@
 
 DBManager::DBManager(QObject *parent) : QObject(parent)
 {
-    QString dbname = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
-            + QStringLiteral("/angelfish/angelfish.sqlite");
+    QString dbname = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)
+            + QStringLiteral("/angelfish.sqlite");
 
     QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     database.setDatabaseName(dbname);

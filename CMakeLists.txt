@@ -37,7 +37,7 @@ find_package(Qt5WebEngine REQUIRED)
 ################# Definitions to pass to the compiler #################
 
 add_definitions(-DQT_NO_FOREACH)
-add_definitions(-fexceptions)
+kde_enable_exceptions()
 
 ################# build and install #################
 add_subdirectory(src)

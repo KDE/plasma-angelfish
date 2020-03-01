@@ -21,24 +21,19 @@ void SqlQueryModel::setQuery(const QSqlQuery &query)
 void SqlQueryModel::generateRoleNames()
 {
     m_roleNames.clear();
-    for( int i = 0; i < record().count(); i ++) {
+    for ( int i = 0; i < record().count(); i++ ) {
         m_roleNames.insert(Qt::UserRole + i + 1, record().fieldName(i).toUtf8());
     }
 }
 
 QVariant SqlQueryModel::data(const QModelIndex &index, int role) const
 {
-    QVariant value;
-
-    if(role < Qt::UserRole) {
-        value = QSqlQueryModel::data(index, role);
-    }
-    else {
+    if (role > Qt::UserRole) {
         int columnIdx = role - Qt::UserRole - 1;
         QModelIndex modelIndex = this->index(index.row(), columnIdx);
-        value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+        return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
     }
-    return value;
+    return QVariant();
 }
 
 QHash<int, QByteArray> SqlQueryModel::roleNames() const
