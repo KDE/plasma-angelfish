@@ -21,9 +21,11 @@
  ***************************************************************************/
 
 #include "dbmanager.h"
+#include "iconimageprovider.h"
 
 #include <QDateTime>
 #include <QDebug>
+#include <QImage>
 #include <QStandardPaths>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -51,6 +53,7 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
     }
 
     trimHistory();
+    trimIcons();
 }
 
 int DBManager::version()
@@ -115,10 +118,14 @@ bool DBManager::migrateTo1()
 {
     // Starting from empty database, let's create the tables.
     QString bookmarks = "CREATE TABLE bookmarks (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)";
-    QString history   = "CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)";
+    QString history = "CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)";
+    QString icons = "CREATE TABLE icons (url TEXT UNIQUE, icon BLOB)";
     QString idx_bookmarks = "CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)";
-    QString idx_history   = "CREATE UNIQUE INDEX idx_history_url ON history(url)";
-    if (!execute(bookmarks) || !execute(history) || !execute(idx_bookmarks) || !execute(idx_history))
+    QString idx_history = "CREATE UNIQUE INDEX idx_history_url ON history(url)";
+    QString idx_icons = "CREATE UNIQUE INDEX idx_icons_url ON icons(url)";
+    if (!execute(bookmarks) || !execute(idx_bookmarks) ||
+            !execute(history) || !execute(idx_history) ||
+            !execute(icons) || !execute(idx_icons) )
         return false;
 
     setVersion(1);
@@ -128,8 +135,14 @@ bool DBManager::migrateTo1()
 
 void DBManager::trimHistory()
 {
-    execute(QStringLiteral("DELETE FROM history WHERE rowid NOT IN (SELECT rowid from history" \
+    execute(QStringLiteral("DELETE FROM history WHERE rowid NOT IN (SELECT rowid FROM history" \
                            " ORDER BY lastVisited DESC LIMIT %1)").arg(MAX_BROWSER_HISTORY_SIZE));
+}
+
+void DBManager::trimIcons()
+{
+    execute(QStringLiteral("DELETE FROM icons WHERE url NOT IN " \
+                           "(SELECT icon FROM history UNION SELECT icon FROM bookmarks)"));
 }
 
 void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
@@ -212,14 +225,15 @@ void DBManager::removeFromHistory(const QString &url)
     removeRecord("history", url);
 }
 
-void DBManager::updateIcon(const QString &url, const QString &iconSource)
-{
-    updateIconRecord("bookmarks", url, iconSource);
-    updateIconRecord("history", url, iconSource);
-}
-
 void DBManager::lastVisited(const QString &url)
 {
     lastVisitedRecord("bookmarks", url);
     lastVisitedRecord("history", url);
+}
+
+void DBManager::updateIcon(const QString &url, const QString &iconSource, const QImage &image)
+{
+    QString updatedSource = IconImageProvider::storeImage(iconSource, image);
+    updateIconRecord("bookmarks", url, updatedSource);
+    updateIconRecord("history", url, updatedSource);
 }

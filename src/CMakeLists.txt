@@ -1,8 +1,9 @@
 set(angelfish_SRCS
     main.cpp
     browsermanager.cpp
-    dbmanager.cpp
     bookmarkshistorymodel.cpp
+    dbmanager.cpp
+    iconimageprovider.cpp
     sqlquerymodel.cpp
     urlutils.cpp
     useragent.cpp

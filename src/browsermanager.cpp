@@ -66,9 +66,9 @@ void BrowserManager::lastVisited(const QString &url)
     m_dbmanager.lastVisited(url);
 }
 
-void BrowserManager::updateIcon(const QString &url, const QString &iconSource)
+void BrowserManager::updateIcon(const QString &url, const QString &iconSource, const QImage &image)
 {
-    m_dbmanager.updateIcon(url, iconSource);
+    m_dbmanager.updateIcon(url, iconSource, image);
 }
 
 void BrowserManager::setHomepage(const QString &homepage)

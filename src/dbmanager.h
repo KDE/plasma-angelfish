@@ -48,7 +48,7 @@ public:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void updateIcon(const QString &url, const QString &iconSource);
+    void updateIcon(const QString &url, const QString &iconSource, const QImage &image);
     void lastVisited(const QString &url);
 
 private:
@@ -62,6 +62,8 @@ private:
 
     // limit the size of history table
     void trimHistory();
+    // drop unused icons
+    void trimIcons();
 
     // execute SQL statement
     bool execute(const QString &command);

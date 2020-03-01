@@ -28,6 +28,7 @@
 
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
+#include "iconimageprovider.h"
 #include "tabsmodel.h"
 #include "urlutils.h"
 #include "useragent.h"
@@ -62,6 +63,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // QML loading
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
+
+    engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider);
 
     // initial url command line parameter
     QString initialUrl;
