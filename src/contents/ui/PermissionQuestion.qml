@@ -36,7 +36,7 @@ Kirigami.InlineMessage {
                 currentWebView.grantFeaturePermission(
                     permissionQuestion.origin,
                     permissionQuestion.permission, false)
-                downloadQuestion.visible = false
+                permissionQuestion.visible = false
             }
         }
     ]
