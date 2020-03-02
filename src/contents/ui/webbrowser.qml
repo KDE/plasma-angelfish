@@ -261,7 +261,6 @@ Kirigami.ApplicationWindow {
                     request.url = currentWebView.url;
                     request.title = currentWebView.title;
                     request.icon = currentWebView.icon;
-                    request.bookmarked = true;
                     BrowserManager.addBookmark(request);
                 }
             },
