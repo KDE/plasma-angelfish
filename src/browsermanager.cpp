@@ -28,9 +28,9 @@
 
 BrowserManager *BrowserManager::s_instance = nullptr;
 
-BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_settings(new QSettings(this))
+BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_dbmanager(new DBManager), m_settings(new QSettings(this))
 {
-    connect(&m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
+    connect(m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
 }
 
 BrowserManager::~BrowserManager()
@@ -41,34 +41,34 @@ void BrowserManager::addBookmark(const QVariantMap &bookmarkdata)
 {
     qDebug() << "Add bookmark";
     qDebug() << "      data: " << bookmarkdata;
-    m_dbmanager.addBookmark(bookmarkdata);
+    m_dbmanager->addBookmark(bookmarkdata);
 }
 
 void BrowserManager::removeBookmark(const QString &url)
 {
-    m_dbmanager.removeBookmark(url);
+    m_dbmanager->removeBookmark(url);
 }
 
 void BrowserManager::addToHistory(const QVariantMap &pagedata)
 {
     // qDebug() << "Add History";
     // qDebug() << "      data: " << pagedata;
-    m_dbmanager.addToHistory(pagedata);
+    m_dbmanager->addToHistory(pagedata);
 }
 
 void BrowserManager::removeFromHistory(const QString &url)
 {
-    m_dbmanager.removeFromHistory(url);
+    m_dbmanager->removeFromHistory(url);
 }
 
 void BrowserManager::lastVisited(const QString &url)
 {
-    m_dbmanager.lastVisited(url);
+    m_dbmanager->lastVisited(url);
 }
 
 void BrowserManager::updateIcon(const QString &url, const QString &iconSource)
 {
-    m_dbmanager.updateIcon(url, iconSource);
+    m_dbmanager->updateIcon(url, iconSource);
 }
 
 void BrowserManager::setHomepage(const QString &homepage)

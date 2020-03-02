@@ -1,3 +1,25 @@
+/***************************************************************************
+ *                                                                         *
+ *   Copyright 2020 Jonah Brüchert  <jbb@kaidan.im>                        *
+ *             2020 Rinigus <rinigus.git@gmail.com>                        *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
+ ***************************************************************************/
+
 #include "iconimageprovider.h"
 
 #include <QByteArray>
@@ -31,6 +53,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     if (!iconSource.startsWith(prefix_favicon)) {
         // don't know what to do with it, return as it is
+        qWarning() << Q_FUNC_INFO << "Don't know how to store image" << iconSource;
         return iconSource;
     }
 
@@ -56,7 +79,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     query_check.finish();
 
     // Store new icon
-    QQuickImageProvider *provider = dynamic_cast<QQuickImageProvider *>(s_engine->imageProvider("favicon"));
+    QQuickImageProvider *provider = static_cast<QQuickImageProvider *>(s_engine->imageProvider("favicon"));
     if (provider == nullptr) {
         qWarning() << Q_FUNC_INFO << "Failed to load image provider" << url;
         return iconSource; // as something is wrong
@@ -66,22 +89,27 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     QBuffer buffer(&data);
     buffer.open(QIODevice::WriteOnly);
 
-    QSize sz_requested;
-    QSize sz_obtained;
+    QSize szRequested;
+    QSize szObtained;
     QString providerIconName = iconSource.mid(prefix_favicon.size());
-    if (provider->imageType() == QQmlImageProviderBase::Image) {
-        QImage image = provider->requestImage(providerIconName, &sz_obtained, sz_requested);
+    switch (provider->imageType()) {
+    case QQmlImageProviderBase::Image: {
+        QImage image = provider->requestImage(providerIconName, &szObtained, szRequested);
         if (!image.save(&buffer, "PNG")) {
-             qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
-             return iconSource; // as something is wrong
+            qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
+            return iconSource; // as something is wrong
         }
-    } else if (provider->imageType() == QQmlImageProviderBase::Pixmap) {
-        QPixmap image = provider->requestPixmap(providerIconName, &sz_obtained, sz_requested);
+        break;
+    }
+    case QQmlImageProviderBase::Pixmap: {
+        QPixmap image = provider->requestPixmap(providerIconName, &szObtained, szRequested);
         if (!image.save(&buffer, "PNG")) {
-             qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
-             return iconSource; // as something is wrong
+            qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
+            return iconSource; // as something is wrong
         }
-    } else {
+        break;
+    }
+    default:
         qWarning() << Q_FUNC_INFO << "Unsupported image provider" << provider->imageType();
         return iconSource; // as something is wrong
     }
@@ -113,7 +141,7 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
     }
 
     if (query.next()) {
-        QImage image = QImage::fromData( query.value(0).toByteArray() );
+        QImage image = QImage::fromData(query.value(0).toByteArray());
         if (size) {
             size->setHeight(image.height());
             size->setWidth(image.width());

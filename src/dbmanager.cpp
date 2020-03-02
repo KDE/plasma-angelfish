@@ -44,10 +44,12 @@ DBManager::DBManager(QObject *parent) : QObject(parent)
     QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     database.setDatabaseName(dbname);
     if (!database.open()) {
+        qCritical() << "Failed to open database" << dbname;
         throw std::runtime_error("Failed to open database " + dbname.toStdString());
     }
 
     if (!migrate()) {
+        qCritical() << "Failed to initialize or migrate the schema in" << dbname;
         throw std::runtime_error("Failed to initialize or migrate the schema in " + dbname.toStdString());
     }
 

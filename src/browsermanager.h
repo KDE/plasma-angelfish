@@ -83,7 +83,7 @@ private:
     // BrowserManager should only be createdd by calling the instance() function
     BrowserManager(QObject *parent = nullptr);
 
-    DBManager m_dbmanager;
+    DBManager *m_dbmanager;
 
     QSettings *m_settings;
 
