@@ -141,7 +141,6 @@ Controls.Drawer {
     onOpened: {
         // check if the drawer was just slightly slided
         if (openedState) return;
-        openedState = true;
         urlInput.text = currentWebView.requestedUrl;
         urlInput.forceActiveFocus();
         urlInput.selectAll();

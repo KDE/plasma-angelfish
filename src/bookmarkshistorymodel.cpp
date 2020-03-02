@@ -79,6 +79,9 @@ void BookmarksHistoryModel::onDatabaseChanged(const QString &table)
 
 void BookmarksHistoryModel::setQuery()
 {
+    if (!m_active)
+        return;
+
     QString command;
     QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisited, %1 AS bookmarked FROM %2 ");
     QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
