@@ -23,13 +23,14 @@
 #include "urlutils.h"
 
 #include <QDebug>
-#include <QUrl>
-#include <QSettings>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
+#include <QUrl>
 
-UrlUtils::UrlUtils(QObject *parent) : QObject(parent)
+UrlUtils::UrlUtils(QObject *parent)
+    : QObject(parent)
 {
 }
 
@@ -52,7 +53,8 @@ QString UrlUtils::urlHostPort(const QString &url)
     QUrl u(url);
     QString r = u.host();
     int p = u.port(-1);
-    if (p > 0) r = QStringLiteral("%1:%2").arg(r).arg(p);
+    if (p > 0)
+        r = QStringLiteral("%1:%2").arg(r).arg(p);
     return r;
 }
 
@@ -60,4 +62,3 @@ QString UrlUtils::urlPath(const QString &url)
 {
     return QUrl::fromUserInput(url).path();
 }
-

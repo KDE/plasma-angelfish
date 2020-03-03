@@ -25,10 +25,10 @@
 
 #include <QDateTime>
 #include <QDebug>
-#include <QStandardPaths>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QStandardPaths>
 #include <QVariant>
 
 #include <exception>
@@ -36,10 +36,10 @@
 #define DB_USER_VERSION 1
 #define MAX_BROWSER_HISTORY_SIZE 3000
 
-DBManager::DBManager(QObject *parent) : QObject(parent)
+DBManager::DBManager(QObject *parent)
+    : QObject(parent)
 {
-    QString dbname = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)
-            + QStringLiteral("/angelfish.sqlite");
+    QString dbname = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QStringLiteral("/angelfish.sqlite");
 
     QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     database.setDatabaseName(dbname);
@@ -72,7 +72,7 @@ int DBManager::version()
 void DBManager::setVersion(int v)
 {
     QSqlQuery query;
-    query.prepare( QStringLiteral("PRAGMA user_version = %1").arg(v) );
+    query.prepare(QStringLiteral("PRAGMA user_version = %1").arg(v));
     query.exec();
 }
 
@@ -124,9 +124,7 @@ bool DBManager::migrateTo1()
     QString idx_bookmarks = QStringLiteral("CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)");
     QString idx_history = QStringLiteral("CREATE UNIQUE INDEX idx_history_url ON history(url)");
     QString idx_icons = QStringLiteral("CREATE UNIQUE INDEX idx_icons_url ON icons(url)");
-    if (!execute(bookmarks) || !execute(idx_bookmarks) ||
-            !execute(history) || !execute(idx_history) ||
-            !execute(icons) || !execute(idx_icons) )
+    if (!execute(bookmarks) || !execute(idx_bookmarks) || !execute(history) || !execute(idx_history) || !execute(icons) || !execute(idx_icons))
         return false;
 
     setVersion(1);
@@ -136,14 +134,16 @@ bool DBManager::migrateTo1()
 
 void DBManager::trimHistory()
 {
-    execute(QStringLiteral("DELETE FROM history WHERE rowid NOT IN (SELECT rowid FROM history" \
-                           " ORDER BY lastVisited DESC LIMIT %1)").arg(MAX_BROWSER_HISTORY_SIZE));
+    execute(QStringLiteral("DELETE FROM history WHERE rowid NOT IN (SELECT rowid FROM history"
+                           " ORDER BY lastVisited DESC LIMIT %1)")
+                .arg(MAX_BROWSER_HISTORY_SIZE));
 }
 
 void DBManager::trimIcons()
 {
-    execute(QStringLiteral("DELETE FROM icons WHERE url NOT IN " \
-                           "(SELECT icon FROM history UNION SELECT icon FROM bookmarks)"));
+    execute(
+        QStringLiteral("DELETE FROM icons WHERE url NOT IN "
+                       "(SELECT icon FROM history UNION SELECT icon FROM bookmarks)"));
 }
 
 void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
@@ -153,11 +153,13 @@ void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
     QString icon = pagedata.value("icon").toString();
     qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
 
-    if (url.isEmpty() || url == "about:blank") return;
+    if (url.isEmpty() || url == "about:blank")
+        return;
 
     QSqlQuery query;
-    query.prepare(QStringLiteral("INSERT OR REPLACE INTO %1 (url, title, icon, lastVisited) " \
-                                 "VALUES (:url, :title, :icon, :lastVisited)").arg(table));
+    query.prepare(QStringLiteral("INSERT OR REPLACE INTO %1 (url, title, icon, lastVisited) "
+                                 "VALUES (:url, :title, :icon, :lastVisited)")
+                      .arg(table));
     query.bindValue(QStringLiteral(":url"), url);
     query.bindValue(QStringLiteral(":title"), title);
     query.bindValue(QStringLiteral(":icon"), icon);
@@ -169,7 +171,8 @@ void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
 
 void DBManager::removeRecord(const QString &table, const QString &url)
 {
-    if (url.isEmpty()) return;
+    if (url.isEmpty())
+        return;
 
     QSqlQuery query;
     query.prepare(QStringLiteral("DELETE FROM %1 WHERE url = :url").arg(table));
@@ -181,7 +184,8 @@ void DBManager::removeRecord(const QString &table, const QString &url)
 
 void DBManager::updateIconRecord(const QString &table, const QString &url, const QString &iconSource)
 {
-    if (url.isEmpty()) return;
+    if (url.isEmpty())
+        return;
 
     QSqlQuery query;
     query.prepare(QStringLiteral("UPDATE %1 SET icon = :icon WHERE url = :url").arg(table));
@@ -194,7 +198,8 @@ void DBManager::updateIconRecord(const QString &table, const QString &url, const
 
 void DBManager::setLastVisitedRecord(const QString &table, const QString &url)
 {
-    if (url.isEmpty()) return;
+    if (url.isEmpty())
+        return;
 
     qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
     QSqlQuery query;

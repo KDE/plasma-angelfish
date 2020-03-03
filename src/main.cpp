@@ -16,15 +16,15 @@
 */
 
 #include <QApplication>
-#include <QQmlApplicationEngine>
-#include <QtQml>
-#include <QUrl>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QQmlApplicationEngine>
+#include <QUrl>
+#include <QtQml>
 #include <QtWebEngine>
 
-#include <KLocalizedString>
 #include <KLocalizedContext>
+#include <KLocalizedString>
 
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"

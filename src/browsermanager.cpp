@@ -20,11 +20,11 @@
 #include "browsermanager.h"
 
 #include <QDebug>
-#include <QUrl>
-#include <QSettings>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
+#include <QUrl>
 
 BrowserManager *BrowserManager::s_instance = nullptr;
 
@@ -108,8 +108,7 @@ QSettings *BrowserManager::settings() const
 
 QString BrowserManager::searchBaseUrl()
 {
-    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=")
-            .toString();
+    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=").toString();
 }
 
 BrowserManager *BrowserManager::instance()

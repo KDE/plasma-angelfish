@@ -31,13 +31,13 @@ constexpr int QUERY_LIMIT = 1000;
 
 BookmarksHistoryModel::BookmarksHistoryModel()
 {
-    connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged,
-            this, &BookmarksHistoryModel::onDatabaseChanged);
+    connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged, this, &BookmarksHistoryModel::onDatabaseChanged);
 }
 
 void BookmarksHistoryModel::setActive(bool a)
 {
-    if (m_active == a) return;
+    if (m_active == a)
+        return;
     m_active = a;
     if (m_active)
         setQuery();
@@ -48,7 +48,8 @@ void BookmarksHistoryModel::setActive(bool a)
 
 void BookmarksHistoryModel::setBookmarks(bool b)
 {
-    if (m_bookmarks == b) return;
+    if (m_bookmarks == b)
+        return;
     m_bookmarks = b;
     setQuery();
     emit bookmarksChanged();
@@ -56,7 +57,8 @@ void BookmarksHistoryModel::setBookmarks(bool b)
 
 void BookmarksHistoryModel::setHistory(bool h)
 {
-    if (m_history == h) return;
+    if (m_history == h)
+        return;
     m_history = h;
     setQuery();
     emit historyChanged();
@@ -64,7 +66,8 @@ void BookmarksHistoryModel::setHistory(bool h)
 
 void BookmarksHistoryModel::setFilter(const QString &f)
 {
-    if (m_filter == f) return;
+    if (m_filter == f)
+        return;
     m_filter = f;
     setQuery();
     emit filterChanged();
@@ -72,8 +75,7 @@ void BookmarksHistoryModel::setFilter(const QString &f)
 
 void BookmarksHistoryModel::onDatabaseChanged(const QString &table)
 {
-    if ( (table == QLatin1String("bookmarks") && m_bookmarks) ||
-            (table == QLatin1String("history") && m_history) )
+    if ((table == QLatin1String("bookmarks") && m_bookmarks) || (table == QLatin1String("history") && m_history))
         setQuery();
 }
 

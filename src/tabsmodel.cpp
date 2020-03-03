@@ -19,16 +19,18 @@
 #include "tabsmodel.h"
 
 #include <QDebug>
-#include <QUrl>
-#include <QStandardPaths>
+#include <QDir>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include <QDir>
+#include <QStandardPaths>
+#include <QUrl>
 
 #include "browsermanager.h"
 
-TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
+TabsModel::TabsModel(QObject *parent)
+    : QAbstractListModel(parent)
+{
     connect(this, &TabsModel::currentTabChanged, [this] {
         qDebug() << "Current tab changed to" << m_currentTab;
     });
@@ -41,10 +43,7 @@ TabsModel::TabsModel(QObject *parent) : QAbstractListModel(parent) {
 
 QHash<int, QByteArray> TabsModel::roleNames() const
 {
-    return {
-        { RoleNames::UrlRole, QByteArrayLiteral("pageurl") },
-        { RoleNames::IsMobileRole, QByteArrayLiteral("isMobile") }
-    };
+    return {{RoleNames::UrlRole, QByteArrayLiteral("pageurl")}, {RoleNames::IsMobileRole, QByteArrayLiteral("isMobile")}};
 }
 
 QVariant TabsModel::data(const QModelIndex &index, int role) const
@@ -53,7 +52,7 @@ QVariant TabsModel::data(const QModelIndex &index, int role) const
         return {};
     }
 
-    switch(role) {
+    switch (role) {
     case RoleNames::UrlRole:
         return m_tabs.at(index.row()).url();
     case RoleNames::IsMobileRole:
@@ -73,7 +72,8 @@ int TabsModel::rowCount(const QModelIndex &parent) const
  * @param index
  * @return tab at the index
  */
-TabState TabsModel::tab(int index) {
+TabState TabsModel::tab(int index)
+{
     if (index < 0 && index >= m_tabs.count())
         return {}; // index out of bounds
 
@@ -90,22 +90,22 @@ TabState TabsModel::tab(int index) {
 void TabsModel::loadInitialTabs()
 {
     if (!m_privateMode) {
-         loadTabs();
+        loadTabs();
     }
 
     m_tabsReadOnly = false;
 
     if (!m_privateMode) {
-         if (BrowserManager::instance()->initialUrl().isEmpty()) {
+        if (BrowserManager::instance()->initialUrl().isEmpty()) {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
                 setUrl(0, BrowserManager::instance()->homepage());
-         } else {
+        } else {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                 setUrl(0, BrowserManager::instance()->initialUrl());
+                setUrl(0, BrowserManager::instance()->initialUrl());
             else
-                 newTab(BrowserManager::instance()->initialUrl());
-         }
-     }
+                newTab(BrowserManager::instance()->initialUrl());
+        }
+    }
 }
 
 /**
@@ -144,8 +144,7 @@ bool TabsModel::loadTabs()
 {
     if (!m_privateMode) {
         beginResetModel();
-        QString input = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
-                    + QStringLiteral("/angelfish/tabs.json");
+        QString input = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/tabs.json");
 
         QFile inputFile(input);
         if (!inputFile.exists()) {
@@ -187,8 +186,7 @@ bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
     if (!m_privateMode && !m_tabsReadOnly) {
-        QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
-                    + QStringLiteral("/angelfish/");
+        QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/");
 
         QFile outputFile(outputDir + QStringLiteral("tabs.json"));
         if (!QDir(outputDir).mkpath(".")) {
@@ -205,7 +203,8 @@ bool TabsModel::saveTabs() const
         for (const auto &tab : m_tabs) {
             tabsArray.append(tab.toJson());
         }
-        qDebug() << "Wrote to file" << outputFile.fileName() << "(" << tabsArray.count() << "urls" << ")";
+        qDebug() << "Wrote to file" << outputFile.fileName() << "(" << tabsArray.count() << "urls"
+                 << ")";
 
         tabsStorage.insert(QLatin1String("tabs"), tabsArray);
         tabsStorage.insert(QLatin1String("currentTab"), m_currentTab);
@@ -258,7 +257,8 @@ void TabsModel::createEmptyTab()
  * @param url
  * @param isMobile
  */
-void TabsModel::newTab(const QString &url) {
+void TabsModel::newTab(const QString &url)
+{
     beginInsertRows({}, m_tabs.count(), m_tabs.count());
 
     m_tabs.append(TabState(url, m_isMobileDefault));
@@ -275,7 +275,8 @@ void TabsModel::newTab(const QString &url) {
  * @brief TabsModel::closeTab removes the tab at the index, handles moving the tabs after it and sets a new currentTab
  * @param index
  */
-void TabsModel::closeTab(int index) {
+void TabsModel::closeTab(int index)
+{
     if (index < 0 && index >= m_tabs.count())
         return; // index out of bounds
 
@@ -321,10 +322,9 @@ void TabsModel::setIsMobile(int index, bool isMobile)
     m_tabs[index].setIsMobile(isMobile);
 
     QModelIndex mindex = createIndex(index, index);
-    dataChanged(mindex, mindex, { RoleNames::IsMobileRole });
+    dataChanged(mindex, mindex, {RoleNames::IsMobileRole});
     saveTabs();
 }
-
 
 void TabsModel::setUrl(int index, const QString &url)
 {
@@ -335,7 +335,7 @@ void TabsModel::setUrl(int index, const QString &url)
     m_tabs[index].setUrl(url);
 
     QModelIndex mindex = createIndex(index, index);
-    dataChanged(mindex, mindex, { RoleNames::UrlRole });
+    dataChanged(mindex, mindex, {RoleNames::UrlRole});
     saveTabs();
 }
 
@@ -375,7 +375,7 @@ TabState::TabState(const QString &url, const bool isMobile)
 
 bool TabState::operator==(const TabState &other) const
 {
-    return  (m_url == other.url() && m_isMobile == other.isMobile());
+    return (m_url == other.url() && m_isMobile == other.isMobile());
 }
 
 QJsonObject TabState::toJson() const

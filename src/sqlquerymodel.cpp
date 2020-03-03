@@ -25,12 +25,12 @@
 #include "sqlquerymodel.h"
 
 #include <QDebug>
+#include <QSqlField>
 #include <QSqlQuery>
 #include <QSqlRecord>
-#include <QSqlField>
 
-SqlQueryModel::SqlQueryModel(QObject *parent) :
-    QSqlQueryModel(parent)
+SqlQueryModel::SqlQueryModel(QObject *parent)
+    : QSqlQueryModel(parent)
 {
 }
 
@@ -43,7 +43,7 @@ void SqlQueryModel::setQuery(const QSqlQuery &query)
 void SqlQueryModel::generateRoleNames()
 {
     m_roleNames.clear();
-    for ( int i = 0; i < record().count(); i++ ) {
+    for (int i = 0; i < record().count(); i++) {
         m_roleNames.insert(Qt::UserRole + i + 1, record().fieldName(i).toUtf8());
     }
 }
@@ -62,4 +62,3 @@ QHash<int, QByteArray> SqlQueryModel::roleNames() const
 {
     return m_roleNames;
 }
-

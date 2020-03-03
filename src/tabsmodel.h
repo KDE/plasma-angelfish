@@ -22,7 +22,8 @@
 #include <QAbstractListModel>
 #include <QJsonObject>
 
-class TabState {
+class TabState
+{
 public:
     static TabState fromJson(const QJsonObject &obj);
     QJsonObject toJson() const;
@@ -51,10 +52,7 @@ class TabsModel : public QAbstractListModel
     Q_PROPERTY(bool isMobileDefault READ isMobileDefault WRITE setIsMobileDefault NOTIFY isMobileDefaultChanged)
     Q_PROPERTY(bool privateMode READ privateMode WRITE setPrivateMode NOTIFY privateModeChanged)
 
-    enum RoleNames {
-        UrlRole = Qt::UserRole + 1,
-        IsMobileRole
-    };
+    enum RoleNames { UrlRole = Qt::UserRole + 1, IsMobileRole };
 
 public:
     explicit TabsModel(QObject *parent = nullptr);

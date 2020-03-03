@@ -22,23 +22,23 @@
 
 #include "iconimageprovider.h"
 
-#include <QByteArray>
 #include <QBuffer>
+#include <QByteArray>
 #include <QDebug>
 #include <QImage>
 #include <QPixmap>
+#include <QQmlApplicationEngine>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QString>
-#include <QQmlApplicationEngine>
 
 // As there is only one instance of the IconImageProvider
 // and icons are added into the database using static methods,
 // engine has to be accessed via static property
 QQmlApplicationEngine *IconImageProvider::s_engine;
 
-IconImageProvider::IconImageProvider(QQmlApplicationEngine *engine) :
-    QQuickImageProvider(QQmlImageProviderBase::Image)
+IconImageProvider::IconImageProvider(QQmlApplicationEngine *engine)
+    : QQuickImageProvider(QQmlImageProviderBase::Image)
 {
     s_engine = engine;
 }
@@ -128,7 +128,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     return url;
 }
 
-QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSize &/*requestedSize*/)
+QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSize & /*requestedSize*/)
 {
     QSqlQuery query;
     query.prepare(QStringLiteral("SELECT icon FROM icons WHERE url LIKE :url LIMIT 1"));

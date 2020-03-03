@@ -24,8 +24,8 @@
 #define DBMANAGER_H
 
 #include <QObject>
-#include <QString>
 #include <QSqlQuery>
+#include <QString>
 
 /**
  * @class DBManager

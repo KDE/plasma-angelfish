@@ -39,8 +39,7 @@ class BrowserManager : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
-    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY
-                       searchBaseUrlChanged)
+    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY searchBaseUrlChanged)
 
     Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
 
@@ -52,7 +51,7 @@ public:
     QString homepage();
     QString searchBaseUrl();
 
-    QSettings* settings() const;
+    QSettings *settings() const;
 
     QString initialUrl() const;
     void setInitialUrl(const QString &initialUrl);

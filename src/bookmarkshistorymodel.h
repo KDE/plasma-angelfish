@@ -47,18 +47,29 @@ class BookmarksHistoryModel : public SqlQueryModel
 public:
     BookmarksHistoryModel();
 
-    bool active() const { return m_active; }
+    bool active() const
+    {
+        return m_active;
+    }
     void setActive(bool a);
 
-    bool bookmarks() const { return m_bookmarks; }
+    bool bookmarks() const
+    {
+        return m_bookmarks;
+    }
     void setBookmarks(bool b);
 
-    bool history() const { return m_history; }
+    bool history() const
+    {
+        return m_history;
+    }
     void setHistory(bool h);
 
-    QString filter() const { return m_filter; }
+    QString filter() const
+    {
+        return m_filter;
+    }
     void setFilter(const QString &f);
-
 
 signals:
     void activeChanged();
