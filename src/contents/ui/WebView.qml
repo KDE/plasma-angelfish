@@ -128,6 +128,11 @@ WebEngineView {
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
         }
         Controls.MenuItem {
+            enabled: contextMenu.request != null && contextMenu.request.selectedText
+            text: contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
+            onTriggered: tabsModel.newTab(UrlUtils.urlFromUserInput(BrowserManager.searchBaseUrl + contextMenu.request.selectedText));
+        }
+        Controls.MenuItem {
             enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
             text: i18n("Copy Url")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
