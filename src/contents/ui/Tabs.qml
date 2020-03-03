@@ -210,14 +210,14 @@ Kirigami.ScrollablePage {
                     Kirigami.Heading {
                         elide: Text.ElideRight
                         level: 4
-                        text: tabs.itemAt(index) != null ? tabs.itemAt(index).title : ""
+                        text: tabs.itemAt(index) ? tabs.itemAt(index).title : ""
                         width: label.width
                     }
 
                     Controls.Label {
                         elide: Text.ElideRight
                         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.5
-                        text: tabs.itemAt(index) != null ? tabs.itemAt(index).url : ""
+                        text: tabs.itemAt(index) ? tabs.itemAt(index).url : ""
                         width: label.width
                     }
                 }
@@ -231,7 +231,7 @@ Kirigami.ScrollablePage {
                     }
                     fillMode: Image.PreserveAspectFit
                     height: Math.min(sourceSize.height, label.height)
-                    source: tabs.itemAt(index).icon
+                    source: tabs.itemAt(index) ? tabs.itemAt(index).icon : ""
                 }
             }
         }
