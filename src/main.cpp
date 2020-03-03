@@ -56,7 +56,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Command line parser
     QCommandLineParser parser;
     parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
-    parser.addOption({ "webapp-container", i18n("Start without UI") });
     parser.addHelpOption();
     parser.process(app);
 
@@ -70,8 +69,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QString initialUrl;
     if (!parser.positionalArguments().isEmpty())
         initialUrl = QUrl::fromUserInput(parser.positionalArguments().first()).toString();
-
-    engine.rootContext()->setContextProperty("webappcontainer", parser.isSet("webapp-container"));
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
