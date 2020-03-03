@@ -52,6 +52,16 @@ QString UrlUtils::urlHostPort(const QString &url)
 {
     QUrl u(url);
     QString r = u.host();
+    QStringList common = { QLatin1String("www."),
+                           QLatin1String("m."),
+                           QLatin1String("mobile.") };
+    for (const auto &i: common) {
+        if (r.startsWith(i) && r.length() > i.length()) {
+            r.remove(0, i.length());
+            break; // strip prefix only once
+        }
+    }
+
     int p = u.port(-1);
     if (p > 0)
         r = QStringLiteral("%1:%2").arg(r).arg(p);
