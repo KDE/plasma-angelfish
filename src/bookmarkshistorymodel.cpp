@@ -27,7 +27,7 @@
 #include <QDebug>
 #include <QSqlError>
 
-constexpr int QUERY_LIMIT=1000;
+constexpr int QUERY_LIMIT = 1000;
 
 BookmarksHistoryModel::BookmarksHistoryModel()
 {

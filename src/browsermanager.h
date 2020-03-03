@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *                                                                         *
  *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
@@ -73,7 +73,7 @@ public slots:
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
 
-    void lastVisited(const QString &url);
+    void updateLastVisited(const QString &url);
     void updateIcon(const QString &url, const QString &iconSource);
 
     void setHomepage(const QString &homepage);

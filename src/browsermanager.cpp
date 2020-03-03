@@ -28,7 +28,10 @@
 
 BrowserManager *BrowserManager::s_instance = nullptr;
 
-BrowserManager::BrowserManager(QObject *parent) : QObject(parent), m_dbmanager(new DBManager), m_settings(new QSettings(this))
+BrowserManager::BrowserManager(QObject *parent)
+    : QObject(parent)
+    , m_dbmanager(new DBManager)
+    , m_settings(new QSettings(this))
 {
     connect(m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
 }
@@ -61,9 +64,9 @@ void BrowserManager::removeFromHistory(const QString &url)
     m_dbmanager->removeFromHistory(url);
 }
 
-void BrowserManager::lastVisited(const QString &url)
+void BrowserManager::updateLastVisited(const QString &url)
 {
-    m_dbmanager->lastVisited(url);
+    m_dbmanager->updateLastVisited(url);
 }
 
 void BrowserManager::updateIcon(const QString &url, const QString &iconSource)

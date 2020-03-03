@@ -173,7 +173,7 @@ WebEngineView {
                 request.icon = currentWebView.icon;
                 request.lastVisited = new Date();
                 BrowserManager.addToHistory(request);
-                BrowserManager.lastVisited(currentWebView.url);
+                BrowserManager.updateLastVisited(currentWebView.url);
             }
             grabThumb();
         }

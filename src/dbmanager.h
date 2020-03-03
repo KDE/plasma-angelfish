@@ -49,7 +49,7 @@ public:
     void removeFromHistory(const QString &url);
 
     void updateIcon(const QString &url, const QString &iconSource);
-    void lastVisited(const QString &url);
+    void updateLastVisited(const QString &url);
 
 private:
     // version of database schema
@@ -73,7 +73,7 @@ private:
     void addRecord(const QString &table, const QVariantMap &pagedata);
     void removeRecord(const QString &table, const QString &url);
     void updateIconRecord(const QString &table, const QString &url, const QString &iconSource);
-    void lastVisitedRecord(const QString &table, const QString &url);
+    void setLastVisitedRecord(const QString &table, const QString &url);
 };
 
 #endif // DBMANAGER_H

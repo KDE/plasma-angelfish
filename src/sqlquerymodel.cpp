@@ -55,7 +55,7 @@ QVariant SqlQueryModel::data(const QModelIndex &index, int role) const
         QModelIndex modelIndex = this->index(index.row(), columnIdx);
         return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
     }
-    return QVariant();
+    return {};
 }
 
 QHash<int, QByteArray> SqlQueryModel::roleNames() const

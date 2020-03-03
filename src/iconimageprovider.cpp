@@ -137,7 +137,7 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
         qWarning() << query.lastQuery();
         qWarning() << query.lastError();
-        return QImage();
+        return {};
     }
 
     if (query.next()) {
@@ -150,5 +150,5 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
     }
 
     qWarning() << "Failed to find icon for" << id;
-    return QImage();
+    return {};
 }

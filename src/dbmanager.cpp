@@ -192,7 +192,7 @@ void DBManager::updateIconRecord(const QString &table, const QString &url, const
     emit databaseTableChanged(table);
 }
 
-void DBManager::lastVisitedRecord(const QString &table, const QString &url)
+void DBManager::setLastVisitedRecord(const QString &table, const QString &url)
 {
     if (url.isEmpty()) return;
 
@@ -226,10 +226,10 @@ void DBManager::removeFromHistory(const QString &url)
     removeRecord(QStringLiteral("history"), url);
 }
 
-void DBManager::lastVisited(const QString &url)
+void DBManager::updateLastVisited(const QString &url)
 {
-    lastVisitedRecord(QStringLiteral("bookmarks"), url);
-    lastVisitedRecord(QStringLiteral("history"), url);
+    setLastVisitedRecord(QStringLiteral("bookmarks"), url);
+    setLastVisitedRecord(QStringLiteral("history"), url);
 }
 
 void DBManager::updateIcon(const QString &url, const QString &iconSource)

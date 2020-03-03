@@ -4,10 +4,10 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Test Sql Gui Quick)
 
 include_directories(../src)
 
-#ecm_add_test(urlmodeltest.cpp ../src/urlmodel.cpp
-#             TEST_NAME urlmodeltest
-#             LINK_LIBRARIES Qt5::Test
-#)
+ecm_add_test(dbmanagertest.cpp ../src/dbmanager.cpp ../src/iconimageprovider.cpp ../src/sqlquerymodel.cpp
+             TEST_NAME dbmanagertest
+             LINK_LIBRARIES Qt5::Test Qt5::Sql Qt5::Quick
+)
 
 ecm_add_test(useragenttest.cpp ../src/useragent.cpp
              TEST_NAME useragenttest
