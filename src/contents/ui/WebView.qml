@@ -171,7 +171,6 @@ WebEngineView {
                 request.url = currentWebView.url;
                 request.title = currentWebView.title;
                 request.icon = currentWebView.icon;
-                request.lastVisited = new Date();
                 BrowserManager.addToHistory(request);
                 BrowserManager.updateLastVisited(currentWebView.url);
             }
