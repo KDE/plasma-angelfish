@@ -56,7 +56,7 @@ Item {
         Kirigami.Theme.inherit: true
 
         Controls.ToolButton {
-            icon.name: "open-menu-symbolic"
+            icon.name: rootPage.privateMode ? "view-private" : "open-menu-symbolic"
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
