@@ -30,6 +30,7 @@
 #include <QSqlQuery>
 #include <QStandardPaths>
 #include <QVariant>
+#include <QDir>
 
 #include <exception>
 
@@ -39,7 +40,13 @@
 DBManager::DBManager(QObject *parent)
     : QObject(parent)
 {
-    QString dbname = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + QStringLiteral("/angelfish.sqlite");
+    QString dbpath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QString dbname = dbpath + QStringLiteral("/angelfish.sqlite");
+
+    if(!QDir().mkpath(dbpath)) {
+        qCritical() << "Database directory does not exist and cannot be created: " << dbpath;
+        throw std::runtime_error("Database directory does not exist and cannot be created: " + dbpath.toStdString());
+    }
 
     QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
     database.setDatabaseName(dbname);
