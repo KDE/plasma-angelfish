@@ -129,7 +129,7 @@ WebEngineView {
         }
         Controls.MenuItem {
             enabled: contextMenu.request != null && contextMenu.request.selectedText
-            text: contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
+            text: contextMenu.request && contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
             onTriggered: tabsModel.newTab(UrlUtils.urlFromUserInput(BrowserManager.searchBaseUrl + contextMenu.request.selectedText));
         }
         Controls.MenuItem {
