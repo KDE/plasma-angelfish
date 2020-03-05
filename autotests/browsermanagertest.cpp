@@ -32,6 +32,11 @@ private Q_SLOTS:
 
     void initTestCase()
     {
+        QCoreApplication::setOrganizationName("autotests");
+        QCoreApplication::setApplicationName("angelfish_dbmanagertest");
+        QDir dir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
+        dir.mkpath(".");
+
         m_browserManager = BrowserManager::instance();
     }
 
