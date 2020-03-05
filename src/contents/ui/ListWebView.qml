@@ -113,14 +113,16 @@ Repeater {
 
         Connections {
             target: webView.userAgent
-            onUserAgentChanged: {
+            function onUserAgentChanged() {
                 tabsModel.setIsMobile(index, webView.userAgent.isMobile);
             }
         }
 
         Connections {
             target: tabs.model
-            onLoadTabsModel: url = model.pageurl
+            function onLoadTabsModel() {
+                url = model.pageurl
+            }
         }
     }
 }

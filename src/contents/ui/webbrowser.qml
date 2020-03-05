@@ -416,7 +416,7 @@ Kirigami.ApplicationWindow {
 
         Connections {
             target: currentWebView
-            onScrollPositionChanged: {
+            function onScrollPositionChanged() {
                 var delta = 100;
                 if (rootPage.navigationAutoShow && rootPage.pageAlmostReady) {
                     if (rootPage.oldScrollPosition.y + delta < currentWebView.scrollPosition.y) {
@@ -443,7 +443,7 @@ Kirigami.ApplicationWindow {
 
     Connections {
         target: webBrowser.pageStack
-        onCurrentIndexChanged: {
+        function onCurrentIndexChanged() {
             // drop all sub pages as soon as the browser window is the
             // focussed one
             if (webBrowser.pageStack.currentIndex === 0)
