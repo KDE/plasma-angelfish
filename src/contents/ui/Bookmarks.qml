@@ -40,6 +40,7 @@ Kirigami.ScrollablePage {
             width: parent.width - Kirigami.Units.gridUnit
 
             clip: true
+            inputMethodHints: rootPage.privateMode ? Qt.ImhNoPredictiveText : Qt.ImhNone
             Kirigami.Theme.inherit: true
 
             onDisplayTextChanged: list.model.filter = displayText;

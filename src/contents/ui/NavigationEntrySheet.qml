@@ -75,6 +75,7 @@ Controls.Drawer {
                 Layout.fillWidth: true
                 clip: true
                 focus: false
+                inputMethodHints: rootPage.privateMode ? Qt.ImhNoPredictiveText : Qt.ImhNone
                 Kirigami.Theme.inherit: true
 
                 onActiveFocusChanged: if (activeFocus) selectAll()
