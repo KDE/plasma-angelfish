@@ -22,24 +22,43 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.0
 
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami 2.8 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
 Kirigami.ScrollablePage {
-    id: history
     title: i18n("History")
     Kirigami.ColumnView.fillWidth: false
+
+    header: Item {
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: Kirigami.Units.gridUnit * 3
+        width: list.width
+
+        Kirigami.SearchField {
+            id: search
+            anchors.centerIn: parent
+            width: parent.width - Kirigami.Units.gridUnit
+
+            clip: true
+            Kirigami.Theme.inherit: true
+
+            onDisplayTextChanged: list.model.filter = displayText;
+            Keys.onEscapePressed: pageStack.pop()
+        }
+    }
 
     Component {
         id: delegateComponent
 
         UrlDelegate {
+            highlightText: list.model.filter
             onClicked: pageStack.pop()
             onRemoved: BrowserManager.removeFromHistory(url);
         }
     }
 
     ListView {
+        id: list
         anchors.fill: parent
 
         interactive: height < contentHeight
@@ -49,11 +68,11 @@ Kirigami.ScrollablePage {
             history: true
         }
 
-
         delegate: Kirigami.DelegateRecycler {
-            width: parent.width
+            width: list.width
             sourceComponent: delegateComponent
         }
     }
-    Component.onCompleted: print("History.qml complete.");
+
+    Component.onCompleted: search.forceActiveFocus()
 }

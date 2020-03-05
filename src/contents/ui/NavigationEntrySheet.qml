@@ -75,14 +75,13 @@ Controls.Drawer {
                 Layout.fillWidth: true
                 clip: true
                 focus: false
-                selectByMouse: true
                 Kirigami.Theme.inherit: true
 
                 onActiveFocusChanged: if (activeFocus) selectAll()
                 onAccepted: applyUrl()
-                onTextChanged: {
+                onDisplayTextChanged: {
                     if (!openedState) return; // avoid filtering
-                    urlFilter.filter = text;
+                    urlFilter.filter = displayText;
                     justOpened = false;
                 }
                 Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
@@ -125,7 +124,7 @@ Controls.Drawer {
             delegate: UrlDelegate {
                 showRemove: false
                 onClicked: overlay.close()
-                highlightText: urlInput.text
+                highlightText: urlInput.displayText
                 width: parent.width
             }
 

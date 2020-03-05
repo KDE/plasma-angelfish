@@ -32,7 +32,7 @@ Kirigami.SwipeListItem {
 
     property string highlightText
     property var regex: new RegExp(highlightText, 'i')
-    property string highlightedText: "<b><font color=\"" + Kirigami.Theme.highlightColor + "\">$&</font></b>"
+    property string highlightedText: "<b><font color=\"" + Kirigami.Theme.selectionTextColor + "\">$&</font></b>"
 
     height: Kirigami.Units.gridUnit * 3
 
@@ -55,7 +55,7 @@ Kirigami.SwipeListItem {
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectFit
 
-                source: model.icon ? model.icon : ""
+                source: model && model.icon ? model.icon : ""
             }
         }
 
