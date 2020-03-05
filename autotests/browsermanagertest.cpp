@@ -20,6 +20,7 @@
 
 #include <QSignalSpy>
 #include <QUrl>
+#include <QStandardPaths>
 
 #include "browsermanager.h"
 #include "urlutils.h"
