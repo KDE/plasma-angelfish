@@ -26,7 +26,6 @@ import QtQuick.Layouts 1.11
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
-
 Kirigami.ScrollablePage {
     title: i18n("Settings")
 
@@ -46,36 +45,36 @@ Kirigami.ScrollablePage {
 
         spacing: 0
 
-        Kirigami.AbstractListItem {
-            width: parent.width
-            Controls.CheckBox {
-                text: i18n("Enable JavaScript")
-                Layout.fillWidth: true
-                onCheckedChanged: {
-                    var settings = currentWebView.settings;
-                    settings.javascriptEnabled = checked;
-                    // FIXME: save to config
-                }
-                Component.onCompleted: {
-                    checked = currentWebView.settings.javascriptEnabled;
-                }
+        Controls.SwitchDelegate {
+            text: i18n("Enable JavaScript")
+            Layout.fillWidth: true
+            onCheckedChanged: {
+                var settings = currentWebView.settings
+                settings.javascriptEnabled = checked
+                // FIXME: save to config
             }
+            Component.onCompleted: {
+                checked = currentWebView.settings.javascriptEnabled
+            }
+            implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
-        Kirigami.AbstractListItem {
-            width: parent.width
-            Controls.CheckBox {
-                text: i18n("Load images")
-                Layout.fillWidth: true
-                onCheckedChanged: {
-                    var settings = currentWebView.settings;
-                    settings.autoLoadImages = checked;
-                    // FIXME: save to config
-                }
-                Component.onCompleted: {
-                    checked = currentWebView.settings.autoLoadImages;
-                }
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
+        Controls.SwitchDelegate {
+            text: i18n("Load images")
+            Layout.fillWidth: true
+            onCheckedChanged: {
+                var settings = currentWebView.settings
+                settings.autoLoadImages = checked
+                // FIXME: save to config
             }
+            Component.onCompleted: {
+                checked = currentWebView.settings.autoLoadImages
+            }
+            implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
         InputSheet {
@@ -96,24 +95,38 @@ Kirigami.ScrollablePage {
             placeholderText: BrowserManager.searchBaseUrl
             onAccepted: {
                 if (searchEnginePopup.text !== "")
-                    BrowserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text);
+                    BrowserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text)
             }
         }
 
-        Kirigami.BasicListItem {
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
+        Controls.ItemDelegate {
             text: i18n("Homepage")
             Layout.fillWidth: true
             onClicked: {
                 homePagePopup.open()
             }
+            implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
-        Kirigami.BasicListItem {
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
+        Controls.ItemDelegate {
             text: i18n("Search Engine")
             Layout.fillWidth: true
             onClicked: {
                 searchEnginePopup.open()
             }
+            implicitHeight: Kirigami.Units.gridUnit * 2.5
+        }
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
         }
 
         Item {
@@ -121,4 +134,3 @@ Kirigami.ScrollablePage {
         }
     }
 }
-
