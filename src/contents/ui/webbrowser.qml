@@ -23,6 +23,7 @@ import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
+import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
@@ -372,6 +373,13 @@ Kirigami.ApplicationWindow {
             if (webBrowser.pageStack.currentIndex === 0)
                 webBrowser.pageStack.pop();
         }
+    }
+
+    Settings {
+        property alias x: webBrowser.x
+        property alias y: webBrowser.y
+        property alias width: webBrowser.width
+        property alias height: webBrowser.height
     }
 
     Component.onCompleted: rootPage.initialized = true
