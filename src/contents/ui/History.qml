@@ -43,8 +43,21 @@ Kirigami.ScrollablePage {
             inputMethodHints: rootPage.privateMode ? Qt.ImhNoPredictiveText : Qt.ImhNone
             Kirigami.Theme.inherit: true
 
-            onDisplayTextChanged: list.model.filter = displayText;
+            onDisplayTextChanged: {
+                if (displayText === "" || displayText.length > 2) {
+                    list.model.filter = displayText;
+                    timer.running = false;
+                }
+                else timer.running = true;
+            }
             Keys.onEscapePressed: pageStack.pop()
+
+            Timer {
+                id: timer
+                repeat: false
+                interval: Math.max(1000, 3000 - search.displayText.length * 1000)
+                onTriggered: list.model.filter = search.displayText
+            }
         }
     }
 

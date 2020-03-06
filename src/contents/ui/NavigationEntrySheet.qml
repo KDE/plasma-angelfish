@@ -43,7 +43,6 @@ Controls.Drawer {
     property int buttonSize: Kirigami.Units.gridUnit * 2
     property int fullHeight: 0.9 * rootPage.height
     property bool openedState: false
-    property bool justOpened: false
 
     contentHeight: fullHeight - topPadding - bottomPadding
     contentWidth: parent.width - rightPadding - leftPadding
@@ -82,10 +81,20 @@ Controls.Drawer {
                 onAccepted: applyUrl()
                 onDisplayTextChanged: {
                     if (!openedState) return; // avoid filtering
-                    urlFilter.filter = displayText;
-                    justOpened = false;
+                    if (displayText === "" || displayText.length > 2) {
+                        urlFilter.filter = displayText;
+                        timer.running = false;
+                    }
+                    else timer.running = true;
                 }
                 Keys.onEscapePressed: if (overlay.sheetOpen) overlay.close()
+
+                Timer {
+                    id: timer
+                    repeat: false
+                    interval: Math.max(1000, 3000 - urlInput.displayText.length * 1000)
+                    onTriggered: urlFilter.filter = urlInput.displayText
+                }
 
                 function applyUrl() {
                     if (text.match(RegexWebUrl.re_weburl)) {
@@ -125,7 +134,7 @@ Controls.Drawer {
             delegate: UrlDelegate {
                 showRemove: false
                 onClicked: overlay.close()
-                highlightText: urlInput.displayText
+                highlightText: urlFilter.filter
                 width: parent.width
             }
 
@@ -144,7 +153,6 @@ Controls.Drawer {
         urlInput.text = currentWebView.requestedUrl;
         urlInput.forceActiveFocus();
         urlInput.selectAll();
-        justOpened = true;
         urlFilter.filter = "";
         openedState = true;
         listView.positionViewAtBeginning();
