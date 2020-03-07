@@ -85,7 +85,7 @@ void BookmarksHistoryModel::setQuery()
         return;
 
     QString command;
-    QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisited, %1 AS bookmarked FROM %2 ");
+    QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
     QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
     bool include_history = m_history && !(m_bookmarks && m_filter.isEmpty());
     if (m_bookmarks)
@@ -94,7 +94,7 @@ void BookmarksHistoryModel::setQuery()
         command += QLatin1String("\n UNION \n");
     if (include_history)
         command += b.arg(0).arg(QLatin1String("history")) + filter;
-    command += QLatin1String("\n ORDER BY bookmarked, lastVisited ASC");
+    command += QLatin1String("\n ORDER BY bookmarked DESC, lastVisitedDelta ASC");
     if (include_history)
         command += QStringLiteral("\n LIMIT %1").arg(QUERY_LIMIT);
 
