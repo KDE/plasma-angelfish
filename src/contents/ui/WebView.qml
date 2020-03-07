@@ -256,6 +256,13 @@ WebEngineView {
         questionLoader.item.visible = true
     }
 
+    onJavaScriptDialogRequested: {
+        request.accepted = true
+        sheetLoader.setSource("JavaScriptDialogSheet.qml")
+        sheetLoader.item.request = request
+        sheetLoader.item.open()
+    }
+
     onVisibleChanged: {
         // set user agent to the current displayed tab
         // this ensures that we follow mobile preference
