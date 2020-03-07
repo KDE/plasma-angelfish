@@ -38,7 +38,18 @@ WebEngineView {
     property bool privateMode: false
 
     property alias userAgent: userAgent
-    property alias thumb: thumb
+
+    // loadingActive property is set to true when loading is started
+    // and turned to false only after succesful or failed loading. It
+    // is possible to set it to false by calling stopLoading method.
+    //
+    // The property was introduced as it triggers visibility of the webEngineView
+    // in the other parts of the code. When using loading that is linked
+    // to visibility, stop/start loading was observed in some conditions. It looked as if
+    // there is an internal optimization of webengine in the case of parallel
+    // loading of several pages that could use visibility as one of the decision
+    // making parameters.
+    property bool loadingActive: false
 
     property bool reloadOnVisible: true
 
@@ -50,21 +61,6 @@ WebEngineView {
     UserAgentGenerator {
         id: userAgent
         onUserAgentChanged: webEngineView.reload()
-    }
-
-    Image {
-        id: thumb
-        visible: false
-    }
-
-    Timer {
-        id: snaphotTimer
-        interval: 1000
-        repeat: false
-        onTriggered: {
-            if (webEngineView.visible)
-                grabThumb();
-        }
     }
 
     profile {
@@ -168,7 +164,7 @@ WebEngineView {
         var ec = "";
         var es = "";
         if (loadRequest.status === WebEngineView.LoadStartedStatus) {
-            thumb.source = "";
+            loadingActive = true;
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!privateMode) {
@@ -179,14 +175,14 @@ WebEngineView {
                 BrowserManager.addToHistory(request);
                 BrowserManager.updateLastVisited(currentWebView.url);
             }
-            grabThumb();
+            loadingActive = false;
         }
         if (loadRequest.status === WebEngineView.LoadFailedStatus) {
             print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
             print("Load failed url: " + loadRequest.url + " " + url);
             ec = loadRequest.errorCode;
             es = loadRequest.errorString;
-            thumb.source = "";
+            loadingActive = false;
 
             // update requested URL only after its clear that it fails.
             // Otherwise, its updated as a part of url property update.
@@ -223,7 +219,6 @@ WebEngineView {
         if (requestedUrl !== url) {
             requestedUrl = url;
         }
-        thumb.source = "";
     }
 
     onFullScreenRequested: {
@@ -271,7 +266,6 @@ WebEngineView {
         // all kirigami pages have moved into place
         if (visible) {
             profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; });
-            snaphotTimer.start();
             if (reloadOnVisible) {
                 reloadOnVisible = false;
                 reload();
@@ -279,9 +273,8 @@ WebEngineView {
         }
     }
 
-    function grabThumb() {
-        webEngineView.grabToImage(function(result) {
-            webEngineView.thumb.source = result.url;
-        });
+    function stopLoading() {
+        loadingActive = false;
+        stop();
     }
 }

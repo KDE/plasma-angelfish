@@ -84,12 +84,22 @@ Kirigami.ScrollablePage {
                 width: itemWidth
                 height: itemHeight
 
-                Image {
+                // ShaderEffectSource requires that corresponding WebEngineView is
+                // visible. Here, visibility is enabled while snapshot is taken and
+                // removed as soon as it is ready.
+                ShaderEffectSource {
+                    id: shaderItem
+
+                    live: false
                     anchors.fill: parent
-                    clip: true
-                    fillMode: Image.PreserveAspectCrop
-                    source: tabs.itemAt(index) ? tabs.itemAt(index).thumb.source : ""
-                    verticalAlignment: Image.AlignTop
+                    sourceRect: Qt.rect(0, 0, sourceItem.width, height/width * sourceItem.width)
+                    sourceItem: tabs.itemAt(index)
+
+                    Component.onCompleted: {
+                        sourceItem.readyForSnapshot = true;
+                        scheduleUpdate();
+                    }
+                    onScheduledUpdateCompleted: sourceItem.readyForSnapshot = false
 
                     LinearGradient {
                         id: grad
@@ -103,59 +113,6 @@ Kirigami.ScrollablePage {
                         }
                     }
                 }
-
-                // ShaderEffectSource requires that corresponding WebEngineView is
-                // visible. Which is probably not the best practice as it seems to keep
-                // all the views active.
-//                ShaderEffectSource {
-//                    id: shaderItem
-
-//                    //live: true
-//                    anchors.fill: parent
-
-//                    sourceRect: Qt.rect(0, 0, width, height)
-
-//                    sourceItem: {
-//                        tabs.itemAt(index);
-//                    }
-//                    //opacity: tabs.currentIndex == index ? 1 : 0.0
-
-//                    Behavior on height {
-//                        SequentialAnimation {
-//                            ScriptAction {
-//                                script: {
-//                                    print("Animation start");
-//                                    // switch to tabs
-//                                }
-//                            }
-//                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
-//                            NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
-//                            ScriptAction {
-//                                script: {
-//                                    print("Animation done");
-//                                    contentView.state = "hidden"
-//                                }
-//                            }
-//                        }
-//                    }
-
-//                    Behavior on width {
-//                        NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad}
-
-//                    }
-
-//                    LinearGradient {
-//                        id: grad
-//                        anchors.fill: parent
-//                        cached: true
-//                        start: Qt.point(0,0)
-//                        end: Qt.point(0,height)
-//                        gradient: Gradient {
-//                            GradientStop { position: Math.max(0.25, 1 - 1.5*(1-label.y/itemHeight)); color: "transparent"; }
-//                            GradientStop { position: Math.max(0.25, label.y/itemHeight); color: Kirigami.Theme.backgroundColor; }
-//                        }
-//                    }
-//                }
 
                 Rectangle {
                     // border around a tile

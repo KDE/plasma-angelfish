@@ -250,7 +250,7 @@ Kirigami.ApplicationWindow {
                 icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
                 text: currentWebView.loading ? i18n("Stop loading") : i18n("Refresh")
                 onTriggered: {
-                    currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+                    currentWebView.loading ? currentWebView.stopLoading() : currentWebView.reload()
                 }
             },
             Kirigami.Action {

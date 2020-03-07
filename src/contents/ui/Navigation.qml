@@ -191,7 +191,7 @@ Item {
 
             Kirigami.Theme.inherit: true
 
-            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+            onClicked: currentWebView.loading ? currentWebView.stopLoading() : currentWebView.reload()
 
         }
 

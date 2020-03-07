@@ -61,10 +61,12 @@ Repeater {
         userAgent.isMobile: model.isMobile
         width: tabs.width
 
+        property bool readyForSnapshot: false
         property bool showView: index === tabs.currentIndex
 
-        visible: showView && tabs.activeTabs
-        x: 0
+        visible: (showView || readyForSnapshot || loadingActive) && tabs.activeTabs
+        x: showView && tabs.activeTabs ? 0 : -width
+        z: showView && tabs.activeTabs ? 0 : -1
 
         onShowViewChanged: {
             if (showView) {
