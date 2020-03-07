@@ -108,8 +108,8 @@ Kirigami.ScrollablePage {
                         start: Qt.point(0,0)
                         end: Qt.point(0,height)
                         gradient: Gradient {
-                            GradientStop { position: Math.max(0.25, 1 - 1.5 * (1 - label.y / itemHeight)); color: "transparent"; }
-                            GradientStop { position: Math.max(0.25, label.y / itemHeight); color: Kirigami.Theme.backgroundColor; }
+                            GradientStop { position: 0.5; color: "transparent"; }
+                            GradientStop { position: 1.1; color: "black"; }
                         }
                     }
                 }
@@ -143,7 +143,7 @@ Kirigami.ScrollablePage {
 
                 Controls.ToolButton {
                     icon.name: "window-close"
-                    height: Kirigami.gridUnit
+                    height: Kirigami.Units.gridUnit * 2
                     width: height
                     anchors.right: parent.right
                     anchors.rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing + (tabsRoot.landscapeMode ? 0 : tabsRoot.width-grid.width)
@@ -165,10 +165,12 @@ Kirigami.ScrollablePage {
                     spacing: 0
 
                     Kirigami.Heading {
+                        id: heading
                         elide: Text.ElideRight
                         level: 4
                         text: tabs.itemAt(index) ? tabs.itemAt(index).title : ""
                         width: label.width
+                        color: "white"
                     }
 
                     Controls.Label {
@@ -176,6 +178,8 @@ Kirigami.ScrollablePage {
                         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.5
                         text: tabs.itemAt(index) ? tabs.itemAt(index).url : ""
                         width: label.width
+                        color: "white"
+                        visible: heading.text === ""
                     }
                 }
 
@@ -187,7 +191,7 @@ Kirigami.ScrollablePage {
                         rightMargin: Kirigami.Units.smallSpacing + Kirigami.Units.largeSpacing + (tabsRoot.landscapeMode ? 0 : tabsRoot.width-grid.width)
                     }
                     fillMode: Image.PreserveAspectFit
-                    height: Math.min(sourceSize.height, label.height)
+                    height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 2)
                     source: tabs.itemAt(index) ? tabs.itemAt(index).icon : ""
                 }
             }
