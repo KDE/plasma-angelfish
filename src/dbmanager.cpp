@@ -34,8 +34,8 @@
 
 #include <exception>
 
-#define DB_USER_VERSION 1
-#define MAX_BROWSER_HISTORY_SIZE 3000
+constexpr int DB_USER_VERSION = 1;
+constexpr int MAX_BROWSER_HISTORY_SIZE = 3000;
 
 DBManager::DBManager(QObject *parent)
     : QObject(parent)
