@@ -68,7 +68,8 @@ Kirigami.ScrollablePage {
             text: i18n("Main menu in portrait")
             Layout.fillWidth: true
             checked: settings.navBarMainMenu
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarMainMenu = checked
         }
@@ -81,7 +82,8 @@ Kirigami.ScrollablePage {
             text: i18n("Tabs in portrait")
             Layout.fillWidth: true
             checked: settings.navBarTabs
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarTabs = checked
         }
@@ -94,7 +96,8 @@ Kirigami.ScrollablePage {
             text: i18n("Context menu in portrait")
             Layout.fillWidth: true
             checked: settings.navBarContextMenu
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarContextMenu = checked
         }
@@ -107,7 +110,8 @@ Kirigami.ScrollablePage {
             text: i18n("Go back")
             Layout.fillWidth: true
             checked: settings.navBarBack
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarBack = checked
         }
@@ -120,7 +124,8 @@ Kirigami.ScrollablePage {
             text: i18n("Go forward")
             Layout.fillWidth: true
             checked: settings.navBarForward
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarForward = checked
         }
@@ -133,7 +138,8 @@ Kirigami.ScrollablePage {
             text: i18n("Reload/Stop")
             Layout.fillWidth: true
             checked: settings.navBarReload
-            horizontalPadding: Kirigami.Units.gridUnit
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarReload = checked
         }
