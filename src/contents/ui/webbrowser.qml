@@ -80,6 +80,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "tab-duplicate"
                 onTriggered: {
+                    popSubPages();
                     pageStack.push(Qt.resolvedUrl("Tabs.qml"))
                 }
                 text: i18n("Tabs")
@@ -94,6 +95,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "bookmarks"
                 onTriggered: {
+                    popSubPages();
                     pageStack.push(Qt.resolvedUrl("Bookmarks.qml"))
                 }
                 text: i18n("Bookmarks")
@@ -101,6 +103,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "view-history"
                 onTriggered: {
+                    popSubPages();
                     pageStack.push(Qt.resolvedUrl("History.qml"))
                 }
                 text: i18n("History")
@@ -109,6 +112,7 @@ Kirigami.ApplicationWindow {
                 icon.name: "configure"
                 text: i18n("Settings")
                 onTriggered: {
+                    popSubPages();
                     pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
                 }
             }
@@ -377,8 +381,7 @@ Kirigami.ApplicationWindow {
             // drop all sub pages as soon as the browser window is the
             // focussed one
             if (webBrowser.pageStack.currentIndex === 0)
-                while (webBrowser.pageStack.depth > 1)
-                    webBrowser.pageStack.pop();
+                popSubPages();
         }
     }
 
@@ -395,4 +398,9 @@ Kirigami.ApplicationWindow {
     }
 
     Component.onCompleted: rootPage.initialized = true
+
+    function popSubPages() {
+        while (webBrowser.pageStack.depth > 1)
+            webBrowser.pageStack.pop();
+    }
 }
