@@ -6,6 +6,8 @@
         <file alias="ListWebView.qml">contents/ui/ListWebView.qml</file>
         <file alias="Navigation.qml">contents/ui/Navigation.qml</file>
         <file alias="Settings.qml">contents/ui/Settings.qml</file>
+        <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
+        <file alias="SettingsNavigationBarPage.qml">contents/ui/SettingsNavigationBarPage.qml</file>
         <file alias="Tabs.qml">contents/ui/Tabs.qml</file>
         <file alias="UrlDelegate.qml">contents/ui/UrlDelegate.qml</file>
         <file alias="webbrowser.qml">contents/ui/webbrowser.qml</file>

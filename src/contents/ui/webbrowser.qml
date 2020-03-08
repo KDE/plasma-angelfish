@@ -23,7 +23,7 @@ import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
-import Qt.labs.settings 1.0
+import Qt.labs.settings 1.0 as QtSettings
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
@@ -46,6 +46,12 @@ Kirigami.ApplicationWindow {
     // As there are private and normal tabs, switch between
     // them according to the current mode.
     property ListWebView tabs: rootPage.privateMode ? privateTabs : regularTabs
+
+    // Pointer to browser settings
+    property Settings settings: settings
+
+    // Used to determine if the window is in landscape mode
+    property bool landscape: width > height
 
     onCurrentWebViewChanged: {
         print("Current WebView is now : " + tabs.currentIndex);
@@ -103,7 +109,7 @@ Kirigami.ApplicationWindow {
                 icon.name: "configure"
                 text: i18n("Settings")
                 onTriggered: {
-                    pageStack.push(Qt.resolvedUrl("Settings.qml"))
+                    pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
                 }
             }
         ]
@@ -371,15 +377,21 @@ Kirigami.ApplicationWindow {
             // drop all sub pages as soon as the browser window is the
             // focussed one
             if (webBrowser.pageStack.currentIndex === 0)
-                webBrowser.pageStack.pop();
+                while (webBrowser.pageStack.depth > 1)
+                    webBrowser.pageStack.pop();
         }
     }
 
-    Settings {
+    QtSettings.Settings {
+        // kept separate to simplify definition of aliases
         property alias x: webBrowser.x
         property alias y: webBrowser.y
         property alias width: webBrowser.width
         property alias height: webBrowser.height
+    }
+
+    Settings {
+        id: settings
     }
 
     Component.onCompleted: rootPage.initialized = true

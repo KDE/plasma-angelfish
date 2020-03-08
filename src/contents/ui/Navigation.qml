@@ -56,7 +56,9 @@ Item {
         Kirigami.Theme.inherit: true
 
         Controls.ToolButton {
+            id: mainMenuButton
             icon.name: rootPage.privateMode ? "view-private" : "open-menu-symbolic"
+            visible: webBrowser.landscape || settings.navBarMainMenu
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -67,6 +69,7 @@ Item {
         }
 
         Controls.ToolButton {
+            visible: webBrowser.landscape || settings.navBarTabs
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
@@ -106,7 +109,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoBack && !Kirigami.Settings.isMobile
+            visible: currentWebView.canGoBack && settings.navBarBack
             icon.name: "go-previous"
 
             Kirigami.Theme.inherit: true
@@ -120,7 +123,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward && !Kirigami.Settings.isMobile
+            visible: currentWebView.canGoForward && settings.navBarForward
             icon.name: "go-next"
 
             Kirigami.Theme.inherit: true
@@ -186,7 +189,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: !Kirigami.Settings.isMobile
+            visible: settings.navBarReload
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
 
             Kirigami.Theme.inherit: true
@@ -204,6 +207,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
+            visible: webBrowser.landscape || settings.navBarContextMenu
             icon.name: "overflow-menu"
 
             Kirigami.Theme.inherit: true

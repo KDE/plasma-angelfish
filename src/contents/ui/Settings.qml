@@ -1,6 +1,7 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2020 Rinigus <rinigus.git@gmail.com>                        *
+ *             2020 Jonah Brüchert  <jbb@kaidan.im>                        *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,117 +21,42 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-import QtQuick.Controls 2.4 as Controls
-import QtQuick.Layouts 1.11
+import Qt.labs.settings 1.0 as QtSettings
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
-Kirigami.ScrollablePage {
-    title: i18n("Settings")
+QtObject {
+    id: settings
 
-    topPadding: 0
-    bottomPadding: 0
-    leftPadding: 0
-    rightPadding: 0
-    Kirigami.ColumnView.fillWidth: false
+    // WebView
+    property bool webAutoLoadImages: true
+    property bool webJavascriptEnabled: true
 
-    background: Rectangle {
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: Kirigami.Theme.backgroundColor
+    // Navigation bar
+    property bool navBarMainMenu: true
+    property bool navBarTabs: true
+    property bool navBarBack: !Kirigami.Settings.isMobile
+    property bool navBarForward: !Kirigami.Settings.isMobile
+    property bool navBarReload: !Kirigami.Settings.isMobile
+    property bool navBarContextMenu: true
+
+    ///////////////////////////////////
+    // settings storage
+
+    property QtSettings.Settings _settingsWebView: QtSettings.Settings {
+        category: "WebView"
+        property alias autoLoadImages: settings.webAutoLoadImages
+        property alias javascriptEnabled: settings.webJavascriptEnabled
     }
 
-    ColumnLayout {
-        id: settingsPage
-
-        spacing: 0
-
-        Controls.SwitchDelegate {
-            text: i18n("Enable JavaScript")
-            Layout.fillWidth: true
-            onCheckedChanged: {
-                var settings = currentWebView.settings
-                settings.javascriptEnabled = checked
-                // FIXME: save to config
-            }
-            Component.onCompleted: {
-                checked = currentWebView.settings.javascriptEnabled
-            }
-            implicitHeight: Kirigami.Units.gridUnit * 2.5
-        }
-
-        Kirigami.Separator {
-            Layout.fillWidth: true
-        }
-
-        Controls.SwitchDelegate {
-            text: i18n("Load images")
-            Layout.fillWidth: true
-            onCheckedChanged: {
-                var settings = currentWebView.settings
-                settings.autoLoadImages = checked
-                // FIXME: save to config
-            }
-            Component.onCompleted: {
-                checked = currentWebView.settings.autoLoadImages
-            }
-            implicitHeight: Kirigami.Units.gridUnit * 2.5
-        }
-
-        InputSheet {
-            id: homePagePopup
-            title: i18n("Homepage")
-            description: i18n("Website that should be loaded on startup")
-            placeholderText: BrowserManager.homepage
-            onAccepted: {
-                if (homePagePopup.text !== "")
-                    BrowserManager.homepage = UrlUtils.urlFromUserInput(homePagePopup.text)
-            }
-        }
-
-        InputSheet {
-            id: searchEnginePopup
-            title: i18n("Search Engine")
-            description: i18n("Base URL of your preferred search engine")
-            placeholderText: BrowserManager.searchBaseUrl
-            onAccepted: {
-                if (searchEnginePopup.text !== "")
-                    BrowserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text)
-            }
-        }
-
-        Kirigami.Separator {
-            Layout.fillWidth: true
-        }
-
-        Controls.ItemDelegate {
-            text: i18n("Homepage")
-            Layout.fillWidth: true
-            onClicked: {
-                homePagePopup.open()
-            }
-            implicitHeight: Kirigami.Units.gridUnit * 2.5
-        }
-
-        Kirigami.Separator {
-            Layout.fillWidth: true
-        }
-
-        Controls.ItemDelegate {
-            text: i18n("Search Engine")
-            Layout.fillWidth: true
-            onClicked: {
-                searchEnginePopup.open()
-            }
-            implicitHeight: Kirigami.Units.gridUnit * 2.5
-        }
-
-        Kirigami.Separator {
-            Layout.fillWidth: true
-        }
-
-        Item {
-            Layout.fillHeight: true
-        }
+    property QtSettings.Settings _settingsNavBar: QtSettings.Settings {
+        category: "NavigationBar"
+        property alias mainMenu: settings.navBarMainMenu
+        property alias tabs: settings.navBarTabs
+        property alias back: settings.navBarBack
+        property alias forward: settings.navBarForward
+        property alias reload: settings.navBarReload
+        property alias contextMenu: settings.navBarContextMenu
     }
 }
