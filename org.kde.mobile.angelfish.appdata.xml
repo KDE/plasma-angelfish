@@ -16,6 +16,7 @@
   <name xml:lang="id">Angelfish Webbrowser</name>
   <name xml:lang="it">Browser web Angelfish</name>
   <name xml:lang="ko">Angelfish 웹 브라우저</name>
+  <name xml:lang="lt">Angelfish saityno naršyklė</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="nn">Angelfish nettlesar</name>
   <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
@@ -29,9 +30,11 @@
   <summary>Webbrowser for mobile devices</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
+  <summary xml:lang="lt">Saityno naršyklė mobiliesiems įrenginiams</summary>
   <summary xml:lang="nl">Webbrowser voor mobiele apparaten</summary>
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web para dispositivos móveis</summary>
+  <summary xml:lang="sv">Webbläsare för mobila apparater</summary>
   <summary xml:lang="uk">Браузер для мобільних пристроїв</summary>
   <summary xml:lang="x-test">xxWebbrowser for mobile devicesxx</summary>
   <summary xml:lang="zh-TW">適用於行動裝置的網頁瀏覽器</summary>
@@ -52,6 +55,7 @@
   <developer_name xml:lang="id">Komunitas KDE</developer_name>
   <developer_name xml:lang="it">Comunità KDE</developer_name>
   <developer_name xml:lang="ko">KDE 커뮤니티</developer_name>
+  <developer_name xml:lang="lt">KDE bendruomenė</developer_name>
   <developer_name xml:lang="nl">KDE gemeenschap</developer_name>
   <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
   <developer_name xml:lang="pl">Społeczność KDE</developer_name>
@@ -67,9 +71,11 @@
     <p>Angelfish is a modern mobile webbrowser</p>
     <p xml:lang="ca">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
+    <p xml:lang="lt">Angelfish yra šiuolaikinė mobilioji saityno naršyklė</p>
     <p xml:lang="nl">Angelfish is een moderne mobiele webbrowser</p>
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
     <p xml:lang="pt-BR">O Angelfish é um navegador Web móvel modem</p>
+    <p xml:lang="sv">Angelfish är en modern mobilwebbläsare</p>
     <p xml:lang="uk">Angelfish — сучасний браузер для мобільних пристроїв</p>
     <p xml:lang="x-test">xxAngelfish is a modern mobile webbrowserxx</p>
     <p xml:lang="zh-TW">Angelfish 是款現代化的行動網頁瀏覽器</p>
@@ -86,6 +92,7 @@
     <p xml:lang="id">Ini mendukung fitur-fitur browser biasanya, sepertihalnya</p>
     <p xml:lang="it">Supporta le funzionalità tipiche del browser, quali</p>
     <p xml:lang="ko">다음과 같은 웹 브라우저 기능을 제공합니다</p>
+    <p xml:lang="lt">Ji palaiko tipines naršyklės ypatybes, tokias kaip</p>
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="nn">Støttar vanlege nettlesarfunksjonar, som</p>
     <p xml:lang="pl">Obsługuje zwyczajne funkcje przeglądarki, takie jak</p>
@@ -112,6 +119,7 @@
       <li xml:lang="id">markah</li>
       <li xml:lang="it">segnalibri</li>
       <li xml:lang="ko">책갈피</li>
+      <li xml:lang="lt">žymeles</li>
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="nn">bokmerke</li>
       <li xml:lang="pl">zakładki</li>
@@ -138,6 +146,7 @@
       <li xml:lang="id">histori</li>
       <li xml:lang="it">cronologia</li>
       <li xml:lang="ko">과거 기록</li>
+      <li xml:lang="lt">istoriją</li>
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="nn">besøkslogg</li>
       <li xml:lang="pl">historia</li>
@@ -151,9 +160,11 @@
       <li>tabs</li>
       <li xml:lang="ca">pestanyes</li>
       <li xml:lang="et">kaardid</li>
+      <li xml:lang="lt">korteles</li>
       <li xml:lang="nl">tabs</li>
       <li xml:lang="pt">páginas</li>
       <li xml:lang="pt-BR">abas</li>
+      <li xml:lang="sv">flikar</li>
       <li xml:lang="uk">вкладки</li>
       <li xml:lang="x-test">xxtabsxx</li>
       <li xml:lang="zh-TW">分頁</li>
@@ -164,9 +175,11 @@
       <caption>Homepage</caption>
       <caption xml:lang="ca">Pàgina inicial</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
+      <caption xml:lang="lt">Pagrindinis puslapis</caption>
       <caption xml:lang="nl">Homepagina</caption>
       <caption xml:lang="pt">Página Web</caption>
       <caption xml:lang="pt-BR">Site</caption>
+      <caption xml:lang="sv">Hemsida</caption>
       <caption xml:lang="uk">Домашня сторінка</caption>
       <caption xml:lang="x-test">xxHomepagexx</caption>
       <caption xml:lang="zh-TW">首頁</caption>
@@ -176,9 +189,11 @@
       <caption>Menu Actions</caption>
       <caption xml:lang="ca">Accions de menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
+      <caption xml:lang="lt">Meniu veiksmai</caption>
       <caption xml:lang="nl">Menuopties</caption>
       <caption xml:lang="pt">Acções do Menu</caption>
       <caption xml:lang="pt-BR">Menu de ações</caption>
+      <caption xml:lang="sv">Menyalternativ</caption>
       <caption xml:lang="uk">Пункти меню</caption>
       <caption xml:lang="x-test">xxMenu Actionsxx</caption>
       <caption xml:lang="zh-TW">選單動作</caption>
@@ -188,9 +203,11 @@
       <caption>Tabs</caption>
       <caption xml:lang="ca">Pestanyes</caption>
       <caption xml:lang="et">Kaardid</caption>
+      <caption xml:lang="lt">Kortelės</caption>
       <caption xml:lang="nl">Tabs</caption>
       <caption xml:lang="pt">Páginas</caption>
       <caption xml:lang="pt-BR">Abas</caption>
+      <caption xml:lang="sv">Flikar</caption>
       <caption xml:lang="uk">Вкладки</caption>
       <caption xml:lang="x-test">xxTabsxx</caption>
       <caption xml:lang="zh-TW">分頁</caption>
