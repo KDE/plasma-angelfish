@@ -50,6 +50,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             checked: settings.webJavascriptEnabled
             onCheckedChanged: settings.webJavascriptEnabled = checked
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
@@ -62,6 +63,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             checked: settings.webAutoLoadImages
             onCheckedChanged: settings.webAutoLoadImages = checked
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
@@ -97,6 +99,7 @@ Kirigami.ScrollablePage {
             onClicked: {
                 homePagePopup.open()
             }
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
@@ -110,6 +113,7 @@ Kirigami.ScrollablePage {
             onClicked: {
                 searchEnginePopup.open()
             }
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
@@ -120,8 +124,9 @@ Kirigami.ScrollablePage {
         Controls.ItemDelegate {
             text: i18n("Navigation bar")
             Layout.fillWidth: true
-            onClicked: pageStack.push(Qt.resolvedUrl("SettingsNavigationBarPage.qml"))
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
+            onClicked: pageStack.push(Qt.resolvedUrl("SettingsNavigationBarPage.qml"))
         }
 
         Kirigami.Separator {

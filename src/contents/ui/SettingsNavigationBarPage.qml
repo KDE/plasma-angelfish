@@ -47,7 +47,6 @@ Kirigami.ScrollablePage {
         property real itemHeight: Kirigami.Units.gridUnit * 2.5
 
         Controls.Label {
-            padding: Kirigami.Units.gridUnit
             text: i18n("Choose the buttons enabled in navigation bar. " +
                        "Some of the buttons can be hidden only in portrait " +
                        "orientation of the browser and are always shown if " +
@@ -57,6 +56,7 @@ Kirigami.ScrollablePage {
                        "from the left or right side or to a side along the bottom " +
                        "of the window.")
             Layout.fillWidth: true
+            padding: Kirigami.Units.gridUnit
             wrapMode: Text.WordWrap
         }
 
@@ -68,6 +68,7 @@ Kirigami.ScrollablePage {
             text: i18n("Main menu in portrait")
             Layout.fillWidth: true
             checked: settings.navBarMainMenu
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarMainMenu = checked
         }
@@ -80,6 +81,7 @@ Kirigami.ScrollablePage {
             text: i18n("Tabs in portrait")
             Layout.fillWidth: true
             checked: settings.navBarTabs
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarTabs = checked
         }
@@ -92,6 +94,7 @@ Kirigami.ScrollablePage {
             text: i18n("Context menu in portrait")
             Layout.fillWidth: true
             checked: settings.navBarContextMenu
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarContextMenu = checked
         }
@@ -104,6 +107,7 @@ Kirigami.ScrollablePage {
             text: i18n("Go back")
             Layout.fillWidth: true
             checked: settings.navBarBack
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarBack = checked
         }
@@ -116,6 +120,7 @@ Kirigami.ScrollablePage {
             text: i18n("Go forward")
             Layout.fillWidth: true
             checked: settings.navBarForward
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarForward = checked
         }
@@ -128,6 +133,7 @@ Kirigami.ScrollablePage {
             text: i18n("Reload/Stop")
             Layout.fillWidth: true
             checked: settings.navBarReload
+            horizontalPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
             onCheckedChanged: settings.navBarReload = checked
         }
