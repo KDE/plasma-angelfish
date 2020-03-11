@@ -29,6 +29,7 @@
   <name xml:lang="zh-TW">Angelfish 網頁瀏覽器</name>
   <summary>Webbrowser for mobile devices</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
+  <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="es">Navegador web para dispositivos móviles</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
   <summary xml:lang="lt">Saityno naršyklė mobiliesiems įrenginiams</summary>
@@ -71,6 +72,7 @@
   <description>
     <p>Angelfish is a modern mobile webbrowser</p>
     <p xml:lang="ca">L'Angelfish és un navegador web modern per a mòbils</p>
+    <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="es">Angelfish es un moderno navegador web móvil</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
     <p xml:lang="lt">Angelfish yra šiuolaikinė mobilioji saityno naršyklė</p>
@@ -161,6 +163,7 @@
       <li xml:lang="zh-TW">歷史記錄</li>
       <li>tabs</li>
       <li xml:lang="ca">pestanyes</li>
+      <li xml:lang="ca-valencia">pestanyes</li>
       <li xml:lang="es">pestañas</li>
       <li xml:lang="et">kaardid</li>
       <li xml:lang="lt">korteles</li>
@@ -177,6 +180,7 @@
     <screenshot type="default">
       <caption>Homepage</caption>
       <caption xml:lang="ca">Pàgina inicial</caption>
+      <caption xml:lang="ca-valencia">Pàgina inicial</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
       <caption xml:lang="lt">Pagrindinis puslapis</caption>
@@ -192,6 +196,7 @@
     <screenshot>
       <caption>Menu Actions</caption>
       <caption xml:lang="ca">Accions de menú</caption>
+      <caption xml:lang="ca-valencia">Accions de menú</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
       <caption xml:lang="lt">Meniu veiksmai</caption>
@@ -207,6 +212,7 @@
     <screenshot>
       <caption>Tabs</caption>
       <caption xml:lang="ca">Pestanyes</caption>
+      <caption xml:lang="ca-valencia">Pestanyes</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
       <caption xml:lang="lt">Kortelės</caption>
