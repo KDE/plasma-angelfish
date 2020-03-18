@@ -41,6 +41,9 @@ QtObject {
     property bool navBarReload: !Kirigami.Settings.isMobile
     property bool navBarContextMenu: true
 
+    // Search engine
+    property string searchCustomUrl
+
     ///////////////////////////////////
     // settings storage
 
@@ -58,5 +61,10 @@ QtObject {
         property alias forward: settings.navBarForward
         property alias reload: settings.navBarReload
         property alias contextMenu: settings.navBarContextMenu
+    }
+
+    property QtSettings.Settings _settingsSearch: QtSettings.Settings {
+        category: "SearchEngine"
+        property alias customUrl: settings.searchCustomUrl
     }
 }

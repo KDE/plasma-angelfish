@@ -80,17 +80,6 @@ Kirigami.ScrollablePage {
             }
         }
 
-        InputSheet {
-            id: searchEnginePopup
-            title: i18n("Search Engine")
-            description: i18n("Base URL of your preferred search engine")
-            placeholderText: BrowserManager.searchBaseUrl
-            onAccepted: {
-                if (searchEnginePopup.text !== "")
-                    BrowserManager.searchBaseUrl = UrlUtils.urlFromUserInput(searchEnginePopup.text)
-            }
-        }
-
         Kirigami.Separator {
             Layout.fillWidth: true
         }
@@ -113,9 +102,7 @@ Kirigami.ScrollablePage {
         Controls.ItemDelegate {
             text: i18n("Search Engine")
             Layout.fillWidth: true
-            onClicked: {
-                searchEnginePopup.open()
-            }
+            onClicked: pageStack.push(Qt.resolvedUrl("SettingsSearchEnginePage.qml"))
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5

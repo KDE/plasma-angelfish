@@ -76,6 +76,8 @@ void BrowserManager::updateIcon(const QString &url, const QString &iconSource)
 
 void BrowserManager::setHomepage(const QString &homepage)
 {
+    if (this->homepage() == homepage)
+        return;
     m_settings->setValue("browser/homepage", homepage);
     emit homepageChanged();
 }
@@ -87,6 +89,8 @@ QString BrowserManager::homepage()
 
 void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
 {
+    if (this->searchBaseUrl() == searchBaseUrl)
+        return;
     m_settings->setValue("browser/searchBaseUrl", searchBaseUrl);
     emit searchBaseUrlChanged();
 }

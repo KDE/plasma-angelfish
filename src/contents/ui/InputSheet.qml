@@ -55,8 +55,9 @@ Kirigami.OverlaySheet {
             id: sheetTextField
             Layout.fillWidth: true
             placeholderText: inputSheet.placeholderText
+            text: inputSheet.text
             focus: true
-            onEditingFinished: accept()
+            onAccepted: accept()
         }
 
         Controls.Button {
