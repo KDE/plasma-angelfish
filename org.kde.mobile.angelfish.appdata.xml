@@ -181,6 +181,7 @@
       <caption>Homepage</caption>
       <caption xml:lang="ca">Pàgina inicial</caption>
       <caption xml:lang="ca-valencia">Pàgina inicial</caption>
+      <caption xml:lang="cs">Domovská stránka</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
       <caption xml:lang="lt">Pagrindinis puslapis</caption>
@@ -197,6 +198,7 @@
       <caption>Menu Actions</caption>
       <caption xml:lang="ca">Accions de menú</caption>
       <caption xml:lang="ca-valencia">Accions de menú</caption>
+      <caption xml:lang="cs">Činnosti nabídky</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
       <caption xml:lang="lt">Meniu veiksmai</caption>
@@ -213,6 +215,7 @@
       <caption>Tabs</caption>
       <caption xml:lang="ca">Pestanyes</caption>
       <caption xml:lang="ca-valencia">Pestanyes</caption>
+      <caption xml:lang="cs">Karty</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
       <caption xml:lang="lt">Kortelės</caption>
