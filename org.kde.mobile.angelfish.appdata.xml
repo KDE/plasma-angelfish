@@ -32,6 +32,7 @@
   <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="es">Navegador web para dispositivos móviles</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
+  <summary xml:lang="it">Browser web per dispositivi mobili</summary>
   <summary xml:lang="lt">Saityno naršyklė mobiliesiems įrenginiams</summary>
   <summary xml:lang="nl">Webbrowser voor mobiele apparaten</summary>
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
@@ -75,6 +76,7 @@
     <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="es">Angelfish es un moderno navegador web móvil</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
+    <p xml:lang="it">Angelfish è un browser web moderno per dispositivi mobili</p>
     <p xml:lang="lt">Angelfish yra šiuolaikinė mobilioji saityno naršyklė</p>
     <p xml:lang="nl">Angelfish is een moderne mobiele webbrowser</p>
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
@@ -166,6 +168,7 @@
       <li xml:lang="ca-valencia">pestanyes</li>
       <li xml:lang="es">pestañas</li>
       <li xml:lang="et">kaardid</li>
+      <li xml:lang="it">schede</li>
       <li xml:lang="lt">korteles</li>
       <li xml:lang="nl">tabs</li>
       <li xml:lang="pt">páginas</li>
@@ -184,6 +187,7 @@
       <caption xml:lang="cs">Domovská stránka</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
+      <caption xml:lang="it">Pagina iniziale</caption>
       <caption xml:lang="lt">Pagrindinis puslapis</caption>
       <caption xml:lang="nl">Homepagina</caption>
       <caption xml:lang="pt">Página Web</caption>
@@ -201,6 +205,7 @@
       <caption xml:lang="cs">Činnosti nabídky</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
+      <caption xml:lang="it">Menu Azioni</caption>
       <caption xml:lang="lt">Meniu veiksmai</caption>
       <caption xml:lang="nl">Menuopties</caption>
       <caption xml:lang="pt">Acções do Menu</caption>
@@ -218,6 +223,7 @@
       <caption xml:lang="cs">Karty</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
+      <caption xml:lang="it">Schede</caption>
       <caption xml:lang="lt">Kortelės</caption>
       <caption xml:lang="nl">Tabs</caption>
       <caption xml:lang="pt">Páginas</caption>
