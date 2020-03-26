@@ -61,6 +61,7 @@ WebEngineView {
     UserAgentGenerator {
         id: userAgent
         onUserAgentChanged: webEngineView.reload()
+        isMobile: Kirigami.Settings.isMobile
     }
 
     profile {
@@ -95,8 +96,6 @@ WebEngineView {
     }
 
     settings {
-        autoLoadImages: webBrowser.settings.webAutoLoadImages
-        javascriptEnabled: webBrowser.settings.webJavascriptEnabled
         // Disable builtin error pages in favor of our own
         errorPageEnabled: false
         // Load larger touch icons
@@ -160,14 +159,6 @@ WebEngineView {
             loadingActive = true;
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
-            if (!privateMode) {
-                var request = new Object;// FIXME
-                request.url = currentWebView.url;
-                request.title = currentWebView.title;
-                request.icon = currentWebView.icon;
-                BrowserManager.addToHistory(request);
-                BrowserManager.updateLastVisited(currentWebView.url);
-            }
             loadingActive = false;
         }
         if (loadRequest.status === WebEngineView.LoadFailedStatus) {
@@ -246,21 +237,6 @@ WebEngineView {
         sheetLoader.setSource("JavaScriptDialogSheet.qml")
         sheetLoader.item.request = request
         sheetLoader.item.open()
-    }
-
-    onVisibleChanged: {
-        // set user agent to the current displayed tab
-        // this ensures that we follow mobile preference
-        // of the current webview. also update the current
-        // snapshot image with short delay to be sure that
-        // all kirigami pages have moved into place
-        if (visible) {
-            profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; });
-            if (reloadOnVisible) {
-                reloadOnVisible = false;
-                reload();
-            }
-        }
     }
 
     function stopLoading() {
