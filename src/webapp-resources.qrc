@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file alias="webapp.qml">contents/webapp-ui/webapp.qml</file>
-        <file alias="WebAppView.qml">contents/webapp-ui/WebAppView.qml</file>
-    </qresource>
-</RCC>
