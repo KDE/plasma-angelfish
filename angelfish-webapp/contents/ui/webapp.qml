@@ -34,19 +34,8 @@ Kirigami.ApplicationWindow {
     id: webBrowser
     title: webView.title
 
-    // Pointer to the currently active list of tabs.
-    //
-    // As there are private and normal tabs, switch between
-    // them according to the current mode.
-    property ListWebView tabs: rootPage.privateMode ? privateTabs : regularTabs
-
-    property WebView currentWebView: webView
-
     // Pointer to browser settings
     property Settings settings: settings
-
-    // Used to determine if the window is in landscape mode
-    property bool landscape: width > height
 
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
     property color borderColor: Kirigami.Theme.highlightColor;
@@ -68,12 +57,6 @@ Kirigami.ApplicationWindow {
         Kirigami.ColumnView.pinned: true
         Kirigami.ColumnView.preventStealing: true
 
-        // Required to enforce active tab reload
-        // on start. As a result, mixed isMobile
-        // tabs will work correctly
-        property bool initialized: false
-
-        //FIXME: WebView assumes a multi tab ui, will probably need own implementation
         WebAppView {
             id: webView
             anchors.fill: parent
@@ -128,9 +111,6 @@ Kirigami.ApplicationWindow {
         Loader {
             id: sheetLoader
         }
-
-        // dealing with hiding and showing navigation bar
-        property point oldScrollPosition: Qt.point(0, 0)
     }
 
     Connections {
@@ -154,8 +134,6 @@ Kirigami.ApplicationWindow {
     Settings {
         id: settings
     }
-
-    Component.onCompleted: rootPage.initialized = true
 
     function popSubPages() {
         while (webBrowser.pageStack.depth > 1)

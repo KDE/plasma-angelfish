@@ -57,7 +57,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Command line parser
     QCommandLineParser parser;
-    parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
+    parser.addPositionalArgument("desktopfile", i18n("desktop file to open"), "[file]");
     parser.addHelpOption();
     parser.process(app);
 
