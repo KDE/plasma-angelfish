@@ -72,3 +72,8 @@ QString UrlUtils::urlPath(const QString &url)
 {
     return QUrl::fromUserInput(url).path();
 }
+
+QString UrlUtils::urlHost(const QString &url)
+{
+    return QUrl::fromUserInput(url).host();
+}

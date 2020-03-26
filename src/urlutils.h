@@ -41,6 +41,7 @@ public:
     Q_INVOKABLE static QString urlScheme(const QString &url);
     Q_INVOKABLE static QString urlHostPort(const QString &url);
     Q_INVOKABLE static QString urlPath(const QString &url);
+    Q_INVOKABLE static QString urlHost(const QString &url);
 };
 
 #endif // URLUTILS_H

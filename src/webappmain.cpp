@@ -25,6 +25,8 @@
 
 #include <KLocalizedContext>
 #include <KLocalizedString>
+#include <KDesktopFile>
+#include <KAboutData>
 
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
@@ -45,9 +47,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     QApplication app(argc, argv);
-    QCoreApplication::setOrganizationName("KDE");
-    QCoreApplication::setOrganizationDomain("mobile.kde.org");
-    QCoreApplication::setApplicationName("angelfish");
+    //QCoreApplication::setOrganizationName("KDE");
+    //QCoreApplication::setOrganizationDomain("mobile.kde.org");
+    //QCoreApplication::setApplicationName("angelfish");
 
 #if QT_VERSION <= QT_VERSION_CHECK(5, 14, 0)
     QtWebEngine::initialize();
@@ -65,10 +67,27 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider(&engine));
 
-    // initial url command line parameter
-    QString initialUrl;
-    if (!parser.positionalArguments().isEmpty())
-        initialUrl = QUrl::fromUserInput(parser.positionalArguments().first()).toString();
+    if (parser.positionalArguments().isEmpty()) {
+        return 0;
+    }
+    
+    const QString fileName = parser.positionalArguments().first();
+    KDesktopFile desktopFile(fileName);
+    if (desktopFile.readUrl().isEmpty()) {
+        return 0;
+    }
+    const QString initialUrl = QUrl::fromUserInput(desktopFile.readUrl()).toString();
+
+    const QString appName = desktopFile.readName().toLower().replace(QLatin1Char(' '), QLatin1Char('-')) + QLatin1String("-angelfish-webapp");
+    KAboutData aboutData(appName.toLower(), desktopFile.readName(),
+                          QStringLiteral("0.1"),
+                          i18n("Angelfish Web App runtime"),
+                          KAboutLicense::GPL,
+                          i18n("Copyright 2020 Angelfish developers"));
+    QApplication::setWindowIcon(QIcon::fromTheme(desktopFile.readIcon()));
+    aboutData.addAuthor(i18n("Marco Martin"), QString(), "mart@kde.org");
+ 
+    KAboutData::setApplicationData(aboutData);
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");

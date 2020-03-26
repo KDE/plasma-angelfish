@@ -73,7 +73,8 @@ Kirigami.ApplicationWindow {
         // tabs will work correctly
         property bool initialized: false
 
-        WebView {
+        //FIXME: WebView assumes a multi tab ui, will probably need own implementation
+        WebAppView {
             id: webView
             anchors.fill: parent
             url: BrowserManager.initialUrl
