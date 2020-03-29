@@ -68,13 +68,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider(&engine));
 
     if (parser.positionalArguments().isEmpty()) {
-        return 0;
+        return 1;
     }
     
     const QString fileName = parser.positionalArguments().first();
     KDesktopFile desktopFile(fileName);
     if (desktopFile.readUrl().isEmpty()) {
-        return 0;
+        return 2;
     }
     const QString initialUrl = QUrl::fromUserInput(desktopFile.readUrl()).toString();
 
