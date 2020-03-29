@@ -115,12 +115,12 @@ Kirigami.ScrollablePage {
                 }
 
                 Rectangle {
-                    // border around a tile
+                    // border around a selected tile
                     anchors.fill: parent;
                     border.color: Kirigami.Theme.textColor
                     border.width: webBrowser.borderWidth
                     color: "transparent"
-                    opacity: tabs.currentIndex === index ? 0.75 : 0.3
+                    opacity: tabs.currentIndex === index ? 1.0 : 0.2
                 }
 
                 Rectangle {
