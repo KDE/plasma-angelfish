@@ -29,6 +29,8 @@ import org.kde.kirigami 2.0 as Kirigami
 Item {
     id: errorHandler
 
+    signal refreshRequested
+
     property string errorCode: ""
     property alias errorString: errorDescription.text
 
@@ -57,6 +59,12 @@ Item {
         }
         Item {
             Layout.fillHeight: true
+        }
+        Controls.ToolButton {
+            Layout.alignment: Qt.AlignHCenter
+            text: i18n("Retry")
+            icon.name: "view-refresh"
+            onClicked: errorHandler.refreshRequested()
         }
     }
 }

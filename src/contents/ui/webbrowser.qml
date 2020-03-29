@@ -175,6 +175,8 @@ Kirigami.ApplicationWindow {
                 bottom: navigation.top
             }
             visible: currentWebView.errorCode !== ""
+
+            onRefreshRequested: currentWebView.reload()
         }
 
         Loader {

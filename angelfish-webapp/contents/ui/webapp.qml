@@ -70,6 +70,7 @@ Kirigami.ApplicationWindow {
 
             anchors.fill: parent
             visible: webView.errorCode !== ""
+            onRefreshRequested: webView.reload()
         }
 
         Loader {
