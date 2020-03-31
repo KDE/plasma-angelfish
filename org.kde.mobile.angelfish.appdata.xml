@@ -30,6 +30,7 @@
   <summary>Webbrowser for mobile devices</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
+  <summary xml:lang="en-GB">Web browser for mobile devices</summary>
   <summary xml:lang="es">Navegador web para dispositivos móviles</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
   <summary xml:lang="it">Browser web per dispositivi mobili</summary>
@@ -75,6 +76,7 @@
     <p>Angelfish is a modern mobile webbrowser</p>
     <p xml:lang="ca">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
+    <p xml:lang="en-GB">Angelfish is a modern mobile web browser</p>
     <p xml:lang="es">Angelfish es un moderno navegador web móvil</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
     <p xml:lang="it">Angelfish è un browser web moderno per dispositivi mobili</p>
@@ -168,6 +170,7 @@
       <li>tabs</li>
       <li xml:lang="ca">pestanyes</li>
       <li xml:lang="ca-valencia">pestanyes</li>
+      <li xml:lang="en-GB">tabs</li>
       <li xml:lang="es">pestañas</li>
       <li xml:lang="et">kaardid</li>
       <li xml:lang="it">schede</li>
@@ -188,6 +191,7 @@
       <caption xml:lang="ca">Pàgina inicial</caption>
       <caption xml:lang="ca-valencia">Pàgina inicial</caption>
       <caption xml:lang="cs">Domovská stránka</caption>
+      <caption xml:lang="en-GB">Homepage</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
       <caption xml:lang="it">Pagina iniziale</caption>
@@ -207,6 +211,7 @@
       <caption xml:lang="ca">Accions de menú</caption>
       <caption xml:lang="ca-valencia">Accions de menú</caption>
       <caption xml:lang="cs">Činnosti nabídky</caption>
+      <caption xml:lang="en-GB">Menu Actions</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
       <caption xml:lang="it">Menu Azioni</caption>
@@ -226,6 +231,7 @@
       <caption xml:lang="ca">Pestanyes</caption>
       <caption xml:lang="ca-valencia">Pestanyes</caption>
       <caption xml:lang="cs">Karty</caption>
+      <caption xml:lang="en-GB">Tabs</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
       <caption xml:lang="it">Schede</caption>
