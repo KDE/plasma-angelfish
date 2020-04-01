@@ -89,8 +89,8 @@ Kirigami.ApplicationWindow {
             anchors {
                 bottom: parent.bottom
                 bottomMargin: -Math.round(height / 2)
-                left: tabs.left
-                right: tabs.right
+                left: webBrowser.left
+                right: webBrowser.right
             }
 
             opacity: webView.loading ? 1 : 0
