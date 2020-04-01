@@ -1,4 +1,4 @@
-find_package(KF5 REQUIRED COMPONENTS Config CoreAddons)
+find_package(KF5 REQUIRED COMPONENTS CoreAddons)
 
 set(angelfish_webapp_SRCS
     main.cpp

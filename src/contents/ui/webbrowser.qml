@@ -241,6 +241,15 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
+                icon.name: "list-add"
+                text: i18n("Add to homescreen")
+                onTriggered: {
+                    DesktopFileGenerator.createDesktopFile(currentWebView.title,
+                                                           currentWebView.url,
+                                                           currentWebView.icon)
+                }
+            },
+            Kirigami.Action {
                 enabled: currentWebView.canGoBack
                 icon.name: "go-previous"
                 text: i18n("Go previous")

@@ -32,6 +32,7 @@
 #include "tabsmodel.h"
 #include "urlutils.h"
 #include "useragent.h"
+#include "desktopfilegenerator.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -85,6 +86,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Browser Manager
     qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return static_cast<QObject *>(BrowserManager::instance());
+    });
+
+    qmlRegisterSingletonType<DesktopFileGenerator>("org.kde.mobile.angelfish", 1, 0, "DesktopFileGenerator", [](QQmlEngine *engine, QJSEngine *) -> QObject * {
+        return static_cast<QObject *>(new DesktopFileGenerator(engine));
     });
 
     // Load QML

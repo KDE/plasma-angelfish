@@ -70,7 +70,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (parser.positionalArguments().isEmpty()) {
         return 1;
     }
-    
+
     const QString fileName = parser.positionalArguments().first();
     KDesktopFile desktopFile(fileName);
     if (desktopFile.readUrl().isEmpty()) {
@@ -86,7 +86,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
                           i18n("Copyright 2020 Angelfish developers"));
     QApplication::setWindowIcon(QIcon::fromTheme(desktopFile.readIcon()));
     aboutData.addAuthor(i18n("Marco Martin"), QString(), "mart@kde.org");
- 
+
     KAboutData::setApplicationData(aboutData);
 
     // Exported types
