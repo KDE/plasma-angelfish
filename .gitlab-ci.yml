@@ -1,0 +1,13 @@
+include:
+  - https://invent.kde.org/sysadmin/ci-tooling/raw/master/invent/binary-flatpak.yml
+
+variables:
+  BUNDLE: org.kde.mobile.angelfish.flatpak
+
+flatpak:
+  extends: .flatpak
+  variables:
+    MANIFEST_PATH: org.kde.mobile.angelfish.json
+    APP_ID: org.kde.mobile.angelfish
+    FLATPAK_MODULE: angelfish
+
