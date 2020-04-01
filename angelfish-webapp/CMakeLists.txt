@@ -1,5 +1,3 @@
-find_package(KF5 REQUIRED COMPONENTS CoreAddons)
-
 set(angelfish_webapp_SRCS
     main.cpp
     ../src/browsermanager.cpp
