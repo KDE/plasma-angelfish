@@ -28,6 +28,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QProcess>
 
 #include <KConfigCore/KDesktopFile>
 #include <KConfigCore/KConfigGroup>
@@ -55,6 +56,11 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
     desktopEntry.writeEntry(QStringLiteral("Icon"), filename);
 
     desktopFile.sync();
+
+    // Refresh homescreen entries on Plasma Mobile
+    auto *buildsycoca = new QProcess();
+    buildsycoca->setProgram(QStringLiteral("kbuildsycoca5"));
+    buildsycoca->startDetached();
 }
 
 void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName)
