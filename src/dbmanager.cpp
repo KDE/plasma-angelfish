@@ -48,7 +48,7 @@ DBManager::DBManager(QObject *parent)
         throw std::runtime_error("Database directory does not exist and cannot be created: " + dbpath.toStdString());
     }
 
-    QSqlDatabase database = QSqlDatabase::addDatabase(QLatin1String("QSQLITE"));
+    QSqlDatabase database = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"));
     database.setDatabaseName(dbname);
     if (!database.open()) {
         qCritical() << "Failed to open database" << dbname;
@@ -66,7 +66,7 @@ DBManager::DBManager(QObject *parent)
 
 int DBManager::version()
 {
-    QSqlQuery query(QLatin1String("PRAGMA user_version"));
+    QSqlQuery query(QStringLiteral("PRAGMA user_version"));
     if (query.next()) {
         bool ok;
         int value = query.value(0).toInt(&ok);

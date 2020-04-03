@@ -36,9 +36,7 @@ BrowserManager::BrowserManager(QObject *parent)
     connect(m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
 }
 
-BrowserManager::~BrowserManager()
-{
-}
+BrowserManager::~BrowserManager() = default;
 
 void BrowserManager::addBookmark(const QVariantMap &bookmarkdata)
 {

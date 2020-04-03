@@ -127,7 +127,7 @@ void TabsModel::setCurrentTab(int index)
         return;
 
     m_currentTab = index;
-    currentTabChanged();
+    emit currentTabChanged();
     saveTabs();
 }
 
@@ -157,7 +157,8 @@ bool TabsModel::loadTabs()
 
         const auto tabsStorage = QJsonDocument::fromJson(inputFile.readAll()).object();
         m_tabs.clear();
-        for (const auto tab : tabsStorage.value(QLatin1String("tabs")).toArray()) {
+        const auto tabs = tabsStorage.value(QLatin1String("tabs")).toArray();
+        for (const auto tab : tabs) {
             m_tabs.append(TabState::fromJson(tab.toObject()));
         }
 
@@ -170,7 +171,7 @@ bool TabsModel::loadTabs()
             createEmptyTab();
         }
 
-        endResetModel();
+        emit endResetModel();
         currentTabChanged();
 
         return true;
@@ -225,7 +226,7 @@ bool TabsModel::isMobileDefault() const
 void TabsModel::setIsMobileDefault(bool def)
 {
     m_isMobileDefault = def;
-    isMobileDefaultChanged();
+    emit isMobileDefaultChanged();
 
     // used in initialization of the tab
     if (m_tabs.count() == 1) {
@@ -241,7 +242,7 @@ bool TabsModel::privateMode() const
 void TabsModel::setPrivateMode(bool privateMode)
 {
     m_privateMode = privateMode;
-    privateModeChanged();
+    emit privateModeChanged();
 }
 
 /**
@@ -267,7 +268,7 @@ void TabsModel::newTab(const QString &url)
 
     // Switch to last tab
     m_currentTab = m_tabs.count() - 1;
-    currentTabChanged();
+    emit currentTabChanged();
     saveTabs();
 }
 
@@ -309,7 +310,7 @@ void TabsModel::closeTab(int index)
     m_tabs.removeAt(index);
     endRemoveRows();
 
-    currentTabChanged();
+    emit currentTabChanged();
     saveTabs();
 }
 
@@ -322,7 +323,7 @@ void TabsModel::setIsMobile(int index, bool isMobile)
     m_tabs[index].setIsMobile(isMobile);
 
     QModelIndex mindex = createIndex(index, index);
-    dataChanged(mindex, mindex, {RoleNames::IsMobileRole});
+    emit dataChanged(mindex, mindex, {RoleNames::IsMobileRole});
     saveTabs();
 }
 
@@ -335,7 +336,7 @@ void TabsModel::setUrl(int index, const QString &url)
     m_tabs[index].setUrl(url);
 
     QModelIndex mindex = createIndex(index, index);
-    dataChanged(mindex, mindex, {RoleNames::UrlRole});
+    emit dataChanged(mindex, mindex, {RoleNames::UrlRole});
     saveTabs();
 }
 

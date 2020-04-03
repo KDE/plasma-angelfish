@@ -59,7 +59,7 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
 
 void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName)
 {
-    auto *provider = static_cast<QQuickImageProvider *>(m_engine->imageProvider(QStringLiteral("favicon")));
+    auto *provider = dynamic_cast<QQuickImageProvider *>(m_engine->imageProvider(QStringLiteral("favicon")));
 
     QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     QString providerIconName = url.mid(prefix_favicon.size());
@@ -102,7 +102,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
 
 QString DesktopFileGenerator::webappCommand()
 {
-    if (!QStandardPaths::locate(QStandardPaths::RuntimeLocation, QLatin1String("flatpak-info")).isEmpty()) {
+    if (!QStandardPaths::locate(QStandardPaths::RuntimeLocation, QStringLiteral("flatpak-info")).isEmpty()) {
         return QStringLiteral("flatpak run "
                               "--command=angelfish-webapp "
                               "--filesystem=%1 "

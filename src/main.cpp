@@ -69,7 +69,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // initial url command line parameter
     QString initialUrl;
     if (!parser.positionalArguments().isEmpty())
-        initialUrl = QUrl::fromUserInput(parser.positionalArguments().first()).toString();
+        initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");

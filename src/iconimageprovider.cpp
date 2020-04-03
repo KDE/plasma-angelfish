@@ -58,7 +58,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     }
 
     // new uri for image
-    QString url = QStringLiteral("image://%1/%2").arg(providerId()).arg(iconSource.mid(prefix_favicon.size()));
+    QString url = QStringLiteral("image://%1/%2").arg(providerId(), iconSource.mid(prefix_favicon.size()));
 
     // check if we have that image already
     QSqlQuery query_check;
@@ -79,7 +79,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     query_check.finish();
 
     // Store new icon
-    QQuickImageProvider *provider = static_cast<QQuickImageProvider *>(s_engine->imageProvider(QStringLiteral("favicon")));
+    QQuickImageProvider *provider = dynamic_cast<QQuickImageProvider *>(s_engine->imageProvider(QStringLiteral("favicon")));
     if (provider == nullptr) {
         qWarning() << Q_FUNC_INFO << "Failed to load image provider" << url;
         return iconSource; // as something is wrong
@@ -132,7 +132,7 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
 {
     QSqlQuery query;
     query.prepare(QStringLiteral("SELECT icon FROM icons WHERE url LIKE :url LIMIT 1"));
-    query.bindValue(QStringLiteral(":url"), QStringLiteral("image://%1/%2%").arg(providerId()).arg(id));
+    query.bindValue(QStringLiteral(":url"), QStringLiteral("image://%1/%2%").arg(providerId(), id));
     if (!query.exec()) {
         qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
         qWarning() << query.lastQuery();

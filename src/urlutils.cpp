@@ -34,9 +34,7 @@ UrlUtils::UrlUtils(QObject *parent)
 {
 }
 
-UrlUtils::~UrlUtils()
-{
-}
+UrlUtils::~UrlUtils() = default;
 
 QString UrlUtils::urlFromUserInput(const QString &input)
 {

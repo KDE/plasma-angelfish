@@ -71,14 +71,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return 1;
     }
 
-    const QString fileName = parser.positionalArguments().first();
+    const QString fileName = parser.positionalArguments().constFirst();
     KDesktopFile desktopFile(fileName);
     if (desktopFile.readUrl().isEmpty()) {
         return 2;
     }
     const QString initialUrl = QUrl::fromUserInput(desktopFile.readUrl()).toString();
 
-    const QString appName = desktopFile.readName().toLower().replace(QLatin1Char(' '), QLatin1Char('-')) + QLatin1String("-angelfish-webapp");
+    const QString appName = desktopFile.readName().toLower().replace(QLatin1Char(' '), QLatin1Char('-')) + QStringLiteral("-angelfish-webapp");
     KAboutData aboutData(appName.toLower(), desktopFile.readName(),
                           QStringLiteral("0.1"),
                           i18n("Angelfish Web App runtime"),
