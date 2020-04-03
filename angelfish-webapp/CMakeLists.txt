@@ -14,6 +14,7 @@ set(angelfish_webapp_SRCS
 
 add_executable(angelfish-webapp ${angelfish_webapp_SRCS} ${RESOURCES} ${WEBAPP_RESOURCES})
 target_include_directories(angelfish-webapp PRIVATE ../src/)
+target_compile_definitions(angelfish-webapp PRIVATE -DQT_NO_CAST_FROM_ASCII)
 target_link_libraries(angelfish-webapp
     Qt5::Core
     Qt5::Qml

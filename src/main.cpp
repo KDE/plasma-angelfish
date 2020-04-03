@@ -46,9 +46,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     QApplication app(argc, argv);
-    QCoreApplication::setOrganizationName("KDE");
-    QCoreApplication::setOrganizationDomain("mobile.kde.org");
-    QCoreApplication::setApplicationName("angelfish");
+    QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
+    QCoreApplication::setOrganizationDomain(QStringLiteral("mobile.kde.org"));
+    QCoreApplication::setApplicationName(QStringLiteral("angelfish"));
 
 #if QT_VERSION <= QT_VERSION_CHECK(5, 14, 0)
     QtWebEngine::initialize();
@@ -56,7 +56,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Command line parser
     QCommandLineParser parser;
-    parser.addPositionalArgument("url", i18n("URL to open"), "[url]");
+    parser.addPositionalArgument(QStringLiteral("url"), i18n("URL to open"), QStringLiteral("[url]"));
     parser.addHelpOption();
     parser.process(app);
 

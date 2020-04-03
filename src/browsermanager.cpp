@@ -78,20 +78,20 @@ void BrowserManager::setHomepage(const QString &homepage)
 {
     if (this->homepage() == homepage)
         return;
-    m_settings->setValue("browser/homepage", homepage);
+    m_settings->setValue(QStringLiteral("browser/homepage"), homepage);
     emit homepageChanged();
 }
 
 QString BrowserManager::homepage()
 {
-    return m_settings->value("browser/homepage", "https://start.duckduckgo.com").toString();
+    return m_settings->value(QStringLiteral("browser/homepage"), QStringLiteral("https://start.duckduckgo.com")).toString();
 }
 
 void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
 {
     if (this->searchBaseUrl() == searchBaseUrl)
         return;
-    m_settings->setValue("browser/searchBaseUrl", searchBaseUrl);
+    m_settings->setValue(QStringLiteral("browser/searchBaseUrl"), searchBaseUrl);
     emit searchBaseUrlChanged();
 }
 
@@ -112,7 +112,7 @@ QSettings *BrowserManager::settings() const
 
 QString BrowserManager::searchBaseUrl()
 {
-    return m_settings->value("browser/searchBaseUrl", "https://start.duckduckgo.com/?q=").toString();
+    return m_settings->value(QStringLiteral("browser/searchBaseUrl"), QStringLiteral("https://start.duckduckgo.com/?q=")).toString();
 }
 
 BrowserManager *BrowserManager::instance()

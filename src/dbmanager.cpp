@@ -155,12 +155,12 @@ void DBManager::trimIcons()
 
 void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
 {
-    QString url = pagedata.value("url").toString();
-    QString title = pagedata.value("title").toString();
-    QString icon = pagedata.value("icon").toString();
+    QString url = pagedata.value(QStringLiteral("url")).toString();
+    QString title = pagedata.value(QStringLiteral("title")).toString();
+    QString icon = pagedata.value(QStringLiteral("icon")).toString();
     qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
 
-    if (url.isEmpty() || url == "about:blank")
+    if (url.isEmpty() || url == QStringLiteral("about:blank"))
         return;
 
     QSqlQuery query;

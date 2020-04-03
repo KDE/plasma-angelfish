@@ -45,7 +45,7 @@ IconImageProvider::IconImageProvider(QQmlApplicationEngine *engine)
 
 QString IconImageProvider::providerId()
 {
-    return "angelfish-favicon";
+    return QStringLiteral("angelfish-favicon");
 }
 
 QString IconImageProvider::storeImage(const QString &iconSource)
@@ -79,7 +79,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     query_check.finish();
 
     // Store new icon
-    QQuickImageProvider *provider = static_cast<QQuickImageProvider *>(s_engine->imageProvider("favicon"));
+    QQuickImageProvider *provider = static_cast<QQuickImageProvider *>(s_engine->imageProvider(QStringLiteral("favicon")));
     if (provider == nullptr) {
         qWarning() << Q_FUNC_INFO << "Failed to load image provider" << url;
         return iconSource; // as something is wrong

@@ -14,6 +14,7 @@ set(angelfish_SRCS
 qt5_add_resources(RESOURCES resources.qrc)
 
 add_executable(angelfish ${angelfish_SRCS} ${RESOURCES})
+target_compile_definitions(angelfish PRIVATE -DQT_NO_CAST_FROM_ASCII)
 target_link_libraries(angelfish
     Qt5::Core
     Qt5::Qml

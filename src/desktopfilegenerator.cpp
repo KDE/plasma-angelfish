@@ -42,7 +42,7 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
 {
     QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
     QString filename = name.toLower();
-    filename.replace(" ", "_");
+    filename.replace(QStringLiteral(" "), QStringLiteral("_"));
     QString path = QStringLiteral("%1/%2.desktop").arg(location, filename);
     KConfig desktopFile(path, KConfig::SimpleConfig);
 
@@ -59,7 +59,7 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
 
 void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName)
 {
-    auto *provider = static_cast<QQuickImageProvider *>(m_engine->imageProvider("favicon"));
+    auto *provider = static_cast<QQuickImageProvider *>(m_engine->imageProvider(QStringLiteral("favicon")));
 
     QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     QString providerIconName = url.mid(prefix_favicon.size());
@@ -68,11 +68,11 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
     QSize szObtained;
 
     QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-            + "/icons/hicolor/16x16/apps/";
+            + QStringLiteral("/icons/hicolor/16x16/apps/");
 
     QDir().mkpath(iconLocation);
 
-    auto imageFile = new QFile(iconLocation + fileName + ".png");
+    auto imageFile = new QFile(iconLocation + fileName + QStringLiteral(".png"));
 
     if (!imageFile->open(QIODevice::WriteOnly)) {
         qDebug() << Q_FUNC_INFO << "Failed to open image file";

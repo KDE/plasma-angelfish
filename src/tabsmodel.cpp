@@ -189,7 +189,7 @@ bool TabsModel::saveTabs() const
         QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/");
 
         QFile outputFile(outputDir + QStringLiteral("tabs.json"));
-        if (!QDir(outputDir).mkpath(".")) {
+        if (!QDir(outputDir).mkpath(QStringLiteral("."))) {
             qDebug() << "Destdir doesn't exist and I can't create it: " << outputDir;
             return false;
         }

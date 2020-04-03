@@ -57,7 +57,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Command line parser
     QCommandLineParser parser;
-    parser.addPositionalArgument("desktopfile", i18n("desktop file to open"), "[file]");
+    parser.addPositionalArgument(QStringLiteral("desktopfile"), i18n("desktop file to open"), QStringLiteral("[file]"));
     parser.addHelpOption();
     parser.process(app);
 
@@ -85,7 +85,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
                           KAboutLicense::GPL,
                           i18n("Copyright 2020 Angelfish developers"));
     QApplication::setWindowIcon(QIcon::fromTheme(desktopFile.readIcon()));
-    aboutData.addAuthor(i18n("Marco Martin"), QString(), "mart@kde.org");
+    aboutData.addAuthor(i18n("Marco Martin"), QString(), QStringLiteral("mart@kde.org"));
 
     KAboutData::setApplicationData(aboutData);
 
