@@ -194,7 +194,7 @@ Kirigami.ApplicationWindow {
             height: Math.round(Kirigami.Units.gridUnit / 6)
             z: navigation.z + 1
             anchors {
-                bottom: navigation.top
+                bottom: findInPage.active ? findInPage.top : navigation.top
                 bottomMargin: -Math.round(height / 2)
                 left: tabs.left
                 right: tabs.right
@@ -224,12 +224,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "edit-find"
                 shortcut: "Ctrl+F"
-                onTriggered: {
-                    if (!sheetLoader.item || !sheetLoader.item.sheetOpen) {
-                        sheetLoader.setSource("FindInPageSheet.qml")
-                        sheetLoader.item.open()
-                    }
-                }
+                onTriggered: findInPage.activate()
                 text: i18n("Find in page")
             },
             Kirigami.Action {
@@ -306,11 +301,27 @@ Kirigami.ApplicationWindow {
             }
         ]
 
+        // Find bar
+        FindInPageBar {
+            id: findInPage
+
+            Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
+
+            layer.enabled: active
+            layer.effect: DropShadow {
+                verticalOffset: - 1
+                color: Kirigami.Theme.disabledTextColor
+                samples: 10
+                spread: 0.1
+                cached: true // element is static
+            }
+        }
+
         // Bottom navigation bar
         Navigation {
             id: navigation
-            navigationShown: visible && rootPage.navigationAutoShow && webBrowser.visibility !== Window.FullScreen
-            visible: webBrowser.visibility !== Window.FullScreen
+            navigationShown: visible && rootPage.navigationAutoShow
+            visible: webBrowser.visibility !== Window.FullScreen && !findInPage.active
 
             Kirigami.Theme.colorSet: rootPage.privateMode ? Kirigami.Theme.Complementary : Kirigami.Theme.Window
 
@@ -323,12 +334,6 @@ Kirigami.ApplicationWindow {
                 cached: true // element is static
             }
 
-            anchors {
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
-            }
-
             onActivateUrlEntry: urlEntry.open()
         }
 
@@ -336,16 +341,16 @@ Kirigami.ApplicationWindow {
             id: urlEntry
         }
 
-        // Thin line above navigation
+        // Thin line above navigation or find
         Rectangle {
             height: webBrowser.borderWidth
             color: webBrowser.borderColor
             anchors {
                 left: parent.left
-                bottom: navigation.top
+                bottom: findInPage.active ? findInPage.top : navigation.top
                 right: parent.right
             }
-            visible: navigation.navigationShown
+            visible: navigation.navigationShown || findInPage.active
         }
 
         // dealing with hiding and showing navigation bar

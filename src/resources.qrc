@@ -21,7 +21,7 @@
         <file alias="NewTabQuestion.qml">contents/ui/NewTabQuestion.qml</file>
         <file alias="DownloadQuestion.qml">contents/ui/DownloadQuestion.qml</file>
         <file alias="PermissionQuestion.qml">contents/ui/PermissionQuestion.qml</file>
-        <file alias="FindInPageSheet.qml">contents/ui/FindInPageSheet.qml</file>
+        <file alias="FindInPageBar.qml">contents/ui/FindInPageBar.qml</file>
         <file alias="JavaScriptDialogSheet.qml">contents/ui/JavaScriptDialogSheet.qml</file>
     </qresource>
 </RCC>

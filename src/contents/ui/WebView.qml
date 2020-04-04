@@ -23,7 +23,7 @@ import QtQuick 2.3
 import QtQuick.Controls 2.4 as Controls
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.3
-import QtWebEngine 1.7
+import QtWebEngine 1.10
 
 import org.kde.kirigami 2.4 as Kirigami
 import org.kde.mobile.angelfish 1.0
@@ -57,6 +57,9 @@ WebEngineView {
     // as a base for user interaction. It reflects
     // last request (successful or failed)
     property url requestedUrl: url
+
+    property int findInPageResultIndex
+    property int findInPageResultCount
 
     UserAgentGenerator {
         id: userAgent
@@ -260,6 +263,11 @@ WebEngineView {
         sheetLoader.item.open()
     }
 
+    onFindTextFinished: {
+        findInPageResultIndex = result.activeMatch;
+        findInPageResultCount = result.numberOfMatches;
+    }
+
     onVisibleChanged: {
         // set user agent to the current displayed tab
         // this ensures that we follow mobile preference
@@ -273,6 +281,14 @@ WebEngineView {
                 reload();
             }
         }
+    }
+
+    function findInPageBack(text) {
+        findText(text, WebEngineView.FindBackward);
+    }
+
+    function findInPageForward(text) {
+        findText(text);
     }
 
     function stopLoading() {

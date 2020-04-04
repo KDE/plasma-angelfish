@@ -232,11 +232,13 @@ Item {
             AnchorChanges {
                 target: navigation
                 anchors.bottom: undefined
-                anchors.top: parent.bottom
+                anchors.top: navigation.parent.bottom
             }
         }
     ]
     transitions: Transition {
-        AnchorAnimation { duration: Kirigami.Units.longDuration; }
+        AnchorAnimation {
+            duration: navigation.visible ? Kirigami.Units.longDuration : 0
+        }
     }
 }
