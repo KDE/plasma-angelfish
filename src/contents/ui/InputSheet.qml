@@ -40,11 +40,11 @@ Kirigami.OverlaySheet {
         accepted()
     }
 
-    ColumnLayout {
-        Kirigami.Heading {
-            text: title
-        }
+    header: Kirigami.Heading {
+        text: title
+    }
 
+    ColumnLayout {
         Controls.Label {
             Layout.fillWidth: true
             text: inputSheet.description

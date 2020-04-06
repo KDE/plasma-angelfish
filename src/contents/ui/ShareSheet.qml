@@ -31,6 +31,10 @@ Kirigami.OverlaySheet {
     property url url
     property string title
 
+    header: Kirigami.Heading {
+        text: i18n("Share page")
+    }
+
     Purpose.AlternativesView {
         id: view
         pluginType: "ShareUrl"

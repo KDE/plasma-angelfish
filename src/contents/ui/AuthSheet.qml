@@ -9,16 +9,16 @@ Kirigami.OverlaySheet {
     id: authSheet
     property AuthenticationDialogRequest request
 
-    Kirigami.FormLayout {
+    header: Kirigami.Heading {
+        elide: Text.ElideRight
+        wrapMode: Text.WordWrap
         Layout.fillWidth: true
 
-        Kirigami.Heading {
-            elide: Text.ElideRight
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
+        text: i18n("Authentication required")
+    }
 
-            text: i18n("Authentication required")
-        }
+    Kirigami.FormLayout {
+        Layout.fillWidth: true
 
         Controls.TextField {
             id: usernameField
