@@ -22,6 +22,7 @@
   <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
   <name xml:lang="pt-BR">Navegador Web Angelfish</name>
+  <name xml:lang="ru">Веб-браузер Angelfish</name>
   <name xml:lang="sk">Prehliadač Angelfish</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
   <name xml:lang="uk">Браузер Angelfish</name>
@@ -39,6 +40,7 @@
   <summary xml:lang="nl">Webbrowser voor mobiele apparaten</summary>
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web para dispositivos móveis</summary>
+  <summary xml:lang="ru">Веб-браузер для мобильных устройств</summary>
   <summary xml:lang="sv">Webbläsare för mobila apparater</summary>
   <summary xml:lang="uk">Браузер для мобільних пристроїв</summary>
   <summary xml:lang="x-test">xxWebbrowser for mobile devicesxx</summary>
@@ -85,6 +87,7 @@
     <p xml:lang="nl">Angelfish is een moderne mobiele webbrowser</p>
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
     <p xml:lang="pt-BR">O Angelfish é um navegador Web móvel modem</p>
+    <p xml:lang="ru">Angelfish — это современный веб-браузер для мобильных устройств</p>
     <p xml:lang="sv">Angelfish är en modern mobilwebbläsare</p>
     <p xml:lang="uk">Angelfish — сучасний браузер для мобільних пристроїв</p>
     <p xml:lang="x-test">xxAngelfish is a modern mobile webbrowserxx</p>
@@ -108,6 +111,7 @@
     <p xml:lang="pl">Obsługuje zwyczajne funkcje przeglądarki, takie jak</p>
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
     <p xml:lang="pt-BR">Tem suporte a funcionalidades típicas de navegação, como</p>
+    <p xml:lang="ru">Он поддерживает типичные функции веб-браузеров, такие как</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
     <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
     <p xml:lang="x-test">xxIt supports typical browser features, such asxx</p>
@@ -135,6 +139,7 @@
       <li xml:lang="pl">zakładki</li>
       <li xml:lang="pt">favoritos</li>
       <li xml:lang="pt-BR">favoritos</li>
+      <li xml:lang="ru">закладки</li>
       <li xml:lang="sk">zalozky</li>
       <li xml:lang="sv">bokmärken</li>
       <li xml:lang="uk">закладки</li>
@@ -162,6 +167,7 @@
       <li xml:lang="pl">historia</li>
       <li xml:lang="pt">histórico</li>
       <li xml:lang="pt-BR">histórico</li>
+      <li xml:lang="ru">журнал</li>
       <li xml:lang="sk">História</li>
       <li xml:lang="sv">historik</li>
       <li xml:lang="uk">журнал</li>
@@ -179,6 +185,7 @@
       <li xml:lang="nl">tabs</li>
       <li xml:lang="pt">páginas</li>
       <li xml:lang="pt-BR">abas</li>
+      <li xml:lang="ru">вкладки</li>
       <li xml:lang="sv">flikar</li>
       <li xml:lang="uk">вкладки</li>
       <li xml:lang="x-test">xxtabsxx</li>
@@ -200,6 +207,7 @@
       <caption xml:lang="nl">Homepagina</caption>
       <caption xml:lang="pt">Página Web</caption>
       <caption xml:lang="pt-BR">Site</caption>
+      <caption xml:lang="ru">Домашняя страница</caption>
       <caption xml:lang="sv">Hemsida</caption>
       <caption xml:lang="uk">Домашня сторінка</caption>
       <caption xml:lang="x-test">xxHomepagexx</caption>
@@ -220,6 +228,7 @@
       <caption xml:lang="nl">Menuopties</caption>
       <caption xml:lang="pt">Acções do Menu</caption>
       <caption xml:lang="pt-BR">Menu de ações</caption>
+      <caption xml:lang="ru">Действия меню</caption>
       <caption xml:lang="sv">Menyalternativ</caption>
       <caption xml:lang="uk">Пункти меню</caption>
       <caption xml:lang="x-test">xxMenu Actionsxx</caption>
@@ -240,6 +249,7 @@
       <caption xml:lang="nl">Tabs</caption>
       <caption xml:lang="pt">Páginas</caption>
       <caption xml:lang="pt-BR">Abas</caption>
+      <caption xml:lang="ru">Вкладки</caption>
       <caption xml:lang="sv">Flikar</caption>
       <caption xml:lang="uk">Вкладки</caption>
       <caption xml:lang="x-test">xxTabsxx</caption>
