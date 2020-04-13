@@ -3,6 +3,7 @@
         <file alias="Bookmarks.qml">contents/ui/Bookmarks.qml</file>
         <file alias="ErrorHandler.qml">contents/ui/ErrorHandler.qml</file>
         <file alias="History.qml">contents/ui/History.qml</file>
+        <file alias="HistorySheet.qml">contents/ui/HistorySheet.qml</file>
         <file alias="ListWebView.qml">contents/ui/ListWebView.qml</file>
         <file alias="Navigation.qml">contents/ui/Navigation.qml</file>
         <file alias="Settings.qml">contents/ui/Settings.qml</file>

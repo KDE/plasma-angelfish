@@ -115,6 +115,10 @@ Item {
             Kirigami.Theme.inherit: true
 
             onClicked: currentWebView.goBack()
+            onPressAndHold: {
+                historySheet.backHistory = true;
+                historySheet.open();
+            }
         }
 
         Controls.ToolButton {
@@ -129,6 +133,10 @@ Item {
             Kirigami.Theme.inherit: true
 
             onClicked: currentWebView.goForward()
+            onPressAndHold: {
+                historySheet.backHistory = false;
+                historySheet.open();
+            }
         }
 
         Controls.ToolButton {

@@ -341,6 +341,10 @@ Kirigami.ApplicationWindow {
             id: urlEntry
         }
 
+        HistorySheet {
+            id: historySheet
+        }
+
         // Thin line above navigation or find
         Rectangle {
             height: webBrowser.borderWidth

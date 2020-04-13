@@ -64,7 +64,7 @@ Kirigami.SwipeListItem {
 
             // title
             Controls.Label {
-                text: title ? title.replace(regex, highlightedText) : ""
+                text: title ? (highlightText ? title.replace(regex, highlightedText) : title) : ""
                 elide: Qt.ElideRight
                 maximumLineCount: 1
                 Layout.fillWidth: true
@@ -72,7 +72,7 @@ Kirigami.SwipeListItem {
 
             // url
             Controls.Label {
-                text: url ? url.replace(regex, highlightedText) : ""
+                text: url ? (highlightText ? url.replace(regex, highlightedText) : url) : ""
                 opacity: 0.6
                 elide: Qt.ElideRight
                 maximumLineCount: 1

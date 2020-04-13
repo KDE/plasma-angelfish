@@ -133,7 +133,10 @@ Controls.Drawer {
 
             delegate: UrlDelegate {
                 showRemove: false
-                onClicked: overlay.close()
+                onClicked: {
+                    currentWebView.url = url;
+                    overlay.close();
+                }
                 highlightText: urlFilter.filter
                 width: parent.width
             }

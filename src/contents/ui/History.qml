@@ -66,7 +66,10 @@ Kirigami.ScrollablePage {
 
         UrlDelegate {
             highlightText: list.model.filter
-            onClicked: pageStack.pop()
+            onClicked: {
+                currentWebView.url = url;
+                pageStack.pop();
+            }
             onRemoved: BrowserManager.removeFromHistory(url);
         }
     }
