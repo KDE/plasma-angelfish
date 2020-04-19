@@ -29,6 +29,14 @@ import org.kde.mobile.angelfish 1.0
 QtObject {
     id: settings
 
+    // All the settings that are initialized using functions
+    // leading to property bindings, should be unbound after
+    // component construction in Component.onCompleted. Otherwise,
+    // it can lead to the conflicts between loading of the
+    // settings from configuration file and bindings. Example
+    // issue at
+    //   https://invent.kde.org/kde/plasma-angelfish/-/issues/27
+
     // WebView
     property bool webAutoLoadImages: true
     property bool webJavascriptEnabled: true
@@ -66,5 +74,13 @@ QtObject {
     property QtSettings.Settings _settingsSearch: QtSettings.Settings {
         category: "SearchEngine"
         property alias customUrl: settings.searchCustomUrl
+    }
+
+    Component.onCompleted: {
+        // break bindings to avoid conflicts with
+        // loading of the settings
+        navBarBack = navBarBack;
+        navBarForward = navBarForward;
+        navBarReload = navBarReload;
     }
 }
