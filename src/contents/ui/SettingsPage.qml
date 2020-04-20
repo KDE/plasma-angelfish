@@ -69,32 +69,6 @@ Kirigami.ScrollablePage {
             implicitHeight: Kirigami.Units.gridUnit * 2.5
         }
 
-//        InputSheet {
-//            id: homePagePopup
-//            title: i18n("Homepage")
-//            description: i18n("Website that should be loaded on startup")
-//            placeholderText: BrowserManager.homepage
-//            onAccepted: {
-//                if (homePagePopup.text !== "")
-//                    BrowserManager.homepage = UrlUtils.urlFromUserInput(homePagePopup.text)
-//            }
-//        }
-
-//        Kirigami.Separator {
-//            Layout.fillWidth: true
-//        }
-
-//        Controls.ItemDelegate {
-//            text: i18n("Homepage")
-//            Layout.fillWidth: true
-//            onClicked: {
-//                homePagePopup.open()
-//            }
-//            leftPadding: Kirigami.Units.gridUnit
-//            rightPadding: Kirigami.Units.gridUnit
-//            implicitHeight: Kirigami.Units.gridUnit * 2.5
-//        }
-
         Kirigami.Separator {
             Layout.fillWidth: true
         }
