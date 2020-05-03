@@ -158,7 +158,7 @@ bool TabsModel::loadTabs()
         const auto tabsStorage = QJsonDocument::fromJson(inputFile.readAll()).object();
         m_tabs.clear();
         const auto tabs = tabsStorage.value(QLatin1String("tabs")).toArray();
-        for (const auto tab : tabs) {
+        for (const auto &tab : tabs) {
             m_tabs.append(TabState::fromJson(tab.toObject()));
         }
 
@@ -171,8 +171,8 @@ bool TabsModel::loadTabs()
             createEmptyTab();
         }
 
-        emit endResetModel();
-        currentTabChanged();
+        endResetModel();
+        emit currentTabChanged();
 
         return true;
     }
