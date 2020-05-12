@@ -1,5 +1,5 @@
 import org.kde.kirigami 2.4 as Kirigami
-import QtWebEngine 1.5
+import QtWebEngine 1.9
 
 Kirigami.InlineMessage {
     property int permission
@@ -7,14 +7,29 @@ Kirigami.InlineMessage {
 
     id: permissionQuestion
     text: {
-        if (permission === WebEngineView.Geolocation)
+        switch(permission) {
+        case WebEngineView.Geolocation:
             i18n("Do you want to allow the website to access the geo location?")
-        else if (permission === WebEngineView.MediaAudioCapture)
+            break
+        case WebEngineView.MediaAudioCapture:
             i18n("Do you want to allow the website to access the microphone?")
-        else if (permission === WebEngineView.MediaVideoCapture)
+            break
+        case WebEngineView.MediaVideoCapture:
             i18n("Do you want to allow the website to access the camera?")
-        else if (permission === WebEngineView.MediaAudioVideoCapture)
+            break
+        case WebEngineView.MediaAudioVideoCapture:
             i18n("Do you want to allow the website to access the camera and the microphone?")
+            break
+        case WebEngineView.DesktopVideoCapture:
+            i18n("Do you want to allow the website to share your screen?")
+            break
+        case WebEngineView.DesktopAudioVideoCapture:
+            i18n("Do you want to allow the website to share the sound output?")
+            break
+        case WebEngineView.Notifications:
+            i18n("Do you want to allow the website to send you notifications?")
+            break
+        }
     }
     showCloseButton: false
 
