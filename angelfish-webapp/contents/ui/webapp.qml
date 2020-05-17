@@ -45,6 +45,10 @@ Kirigami.ApplicationWindow {
 
     pageStack.globalToolBar.showNavigationButtons: false
 
+    // We only have one web view in a web app, but we still need this for
+    // compatibility with the angelfish components
+    property alias currentWebView: webView
+
     // Main Page
     pageStack.initialPage: Kirigami.Page {
         id: rootPage
