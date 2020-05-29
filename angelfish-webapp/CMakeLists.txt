@@ -6,6 +6,7 @@ set(angelfish_webapp_SRCS
     ../src/iconimageprovider.cpp
     ../src/sqlquerymodel.cpp
     ../src/urlutils.cpp
+    ../src/urlobserver.cpp
     ../src/useragent.cpp
     ../src/tabsmodel.cpp
     webapp-resources.qrc

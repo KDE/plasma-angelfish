@@ -219,6 +219,11 @@ Kirigami.ApplicationWindow {
             id: sheetLoader
         }
 
+        UrlObserver {
+            id: urlObserver
+            url: currentWebView.url
+        }
+
         // The menu at the bottom right
         contextualActions: [
             Kirigami.Action {
@@ -270,15 +275,21 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
+                id: bookmarkAction
+                checkable: true
+                checked: urlObserver.bookmarked
                 icon.name: "bookmarks"
-                text: i18n("Add bookmark")
+                text: checked ? i18n("Bookmarked") : i18n("Bookmark")
                 onTriggered: {
-                    print("Adding bookmark");
-                    var request = new Object;// FIXME
-                    request.url = currentWebView.url;
-                    request.title = currentWebView.title;
-                    request.icon = currentWebView.icon;
-                    BrowserManager.addBookmark(request);
+                    if (checked) {
+                        var request = new Object;// FIXME
+                        request.url = currentWebView.url;
+                        request.title = currentWebView.title;
+                        request.icon = currentWebView.icon;
+                        BrowserManager.addBookmark(request);
+                    } else {
+                        BrowserManager.removeBookmark(currentWebView.url);
+                    }
                 }
             },
             Kirigami.Action {

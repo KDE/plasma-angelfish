@@ -7,6 +7,7 @@ set(angelfish_SRCS
     sqlquerymodel.cpp
     urlutils.cpp
     useragent.cpp
+    urlobserver.cpp
     tabsmodel.cpp
     desktopfilegenerator.cpp
 )

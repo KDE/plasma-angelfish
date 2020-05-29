@@ -30,6 +30,7 @@
 #include "browsermanager.h"
 #include "iconimageprovider.h"
 #include "tabsmodel.h"
+#include "urlobserver.h"
 #include "urlutils.h"
 #include "useragent.h"
 #include "desktopfilegenerator.h"
@@ -73,6 +74,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
+    qmlRegisterType<UrlObserver>("org.kde.mobile.angelfish", 1, 0, "UrlObserver");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
     qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
 

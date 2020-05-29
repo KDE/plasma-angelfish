@@ -50,6 +50,11 @@ void BrowserManager::removeBookmark(const QString &url)
     m_dbmanager->removeBookmark(url);
 }
 
+bool BrowserManager::isBookmarked(const QString &url) const
+{
+    return m_dbmanager->isBookmarked(url);
+}
+
 void BrowserManager::addToHistory(const QVariantMap &pagedata)
 {
     // qDebug() << "Add History";

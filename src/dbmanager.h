@@ -44,6 +44,7 @@ signals:
 public:
     void addBookmark(const QVariantMap &bookmarkdata);
     void removeBookmark(const QString &url);
+    bool isBookmarked(const QString &url) const;
 
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);
@@ -74,6 +75,7 @@ private:
     void removeRecord(const QString &table, const QString &url);
     void updateIconRecord(const QString &table, const QString &url, const QString &iconSource);
     void setLastVisitedRecord(const QString &table, const QString &url);
+    bool hasRecord(const QString &table, const QString &url) const;
 };
 
 #endif // DBMANAGER_H

@@ -189,6 +189,23 @@ void DBManager::removeRecord(const QString &table, const QString &url)
     emit databaseTableChanged(table);
 }
 
+bool DBManager::hasRecord(const QString &table, const QString &url) const
+{
+    QSqlQuery query;
+    query.prepare(QStringLiteral("SELECT 1 FROM %1 WHERE url = :url").arg(table));
+    query.bindValue(QStringLiteral(":url"), url);
+    if (!query.exec()) {
+        qWarning() << Q_FUNC_INFO << "Failed to execute SQL statement";
+        qWarning() << query.lastQuery();
+        qWarning() << query.lastError();
+        return false;
+    }
+    while (query.next()) {
+        return true;
+    }
+    return false;
+}
+
 void DBManager::updateIconRecord(const QString &table, const QString &url, const QString &iconSource)
 {
     if (url.isEmpty())
@@ -226,6 +243,11 @@ void DBManager::addBookmark(const QVariantMap &bookmarkdata)
 void DBManager::removeBookmark(const QString &url)
 {
     removeRecord(QStringLiteral("bookmarks"), url);
+}
+
+bool DBManager::isBookmarked(const QString &url) const
+{
+    return hasRecord(QStringLiteral("bookmarks"), url);
 }
 
 void DBManager::addToHistory(const QVariantMap &pagedata)
