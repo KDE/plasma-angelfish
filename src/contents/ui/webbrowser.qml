@@ -245,10 +245,16 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 icon.name: "list-add"
                 text: i18n("Add to homescreen")
-                onTriggered: {
-                    DesktopFileGenerator.createDesktopFile(currentWebView.title,
-                                                           currentWebView.url,
-                                                           currentWebView.icon)
+                checkable: true
+                checked: DesktopFileGenerator.desktopFileExists(currentWebView.title)
+                onCheckedChanged: {
+                    if (checked) {
+                        DesktopFileGenerator.createDesktopFile(currentWebView.title,
+                                                               currentWebView.url,
+                                                               currentWebView.icon)
+                    } else {
+                        DesktopFileGenerator.removeDesktopFile(currentWebView.title)
+                    }
                 }
             },
             Kirigami.Action {

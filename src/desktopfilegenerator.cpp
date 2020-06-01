@@ -41,12 +41,9 @@ DesktopFileGenerator::DesktopFileGenerator(QQmlEngine *engine, QObject *parent)
 
 void DesktopFileGenerator::createDesktopFile(const QString &name, const QString &url, const QString &icon)
 {
-    QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
-    QString filename = name.toLower();
-    filename.replace(QStringLiteral(" "), QStringLiteral("_"));
-    filename.replace(QStringLiteral("'"), QStringLiteral(""));
-    filename.replace(QStringLiteral("\""), QStringLiteral(""));
-    QString path = QStringLiteral("%1/%2.desktop").arg(location, filename);
+    const QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+    const QString filename = generateFileName(name);
+    const QString path = QStringLiteral("%1/%2.desktop").arg(location, filename);
     KConfig desktopFile(path, KConfig::SimpleConfig);
 
     storeIcon(icon, filename);
@@ -65,17 +62,33 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
     buildsycoca.startDetached();
 }
 
+bool DesktopFileGenerator::desktopFileExists(const QString &name)
+{
+    const QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+    const QString filename = generateFileName(name);
+
+    auto exists = QFile::exists(QStringLiteral("%1/%2.desktop").arg(location, filename));
+    return exists;
+}
+
+bool DesktopFileGenerator::removeDesktopFile(const QString &name)
+{
+    const QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+    const QString filename = generateFileName(name);
+    return QFile::remove(QStringLiteral("%1/%2.desktop").arg(location, filename));
+}
+
 void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName)
 {
     auto *provider = dynamic_cast<QQuickImageProvider *>(m_engine->imageProvider(QStringLiteral("favicon")));
 
-    QLatin1String prefix_favicon = QLatin1String("image://favicon/");
-    QString providerIconName = url.mid(prefix_favicon.size());
+    const QLatin1String prefix_favicon = QLatin1String("image://favicon/");
+    const QString providerIconName = url.mid(prefix_favicon.size());
 
-    QSize szRequested;
+    const QSize szRequested;
     QSize szObtained;
 
-    QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+    const QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
             + QStringLiteral("/icons/hicolor/16x16/apps/");
 
     QDir().mkpath(iconLocation);
@@ -106,6 +119,15 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
     default:
         qDebug() << "Failed to save unhandled image type";
     }
+}
+
+QString DesktopFileGenerator::generateFileName(const QString &name)
+{
+    QString filename = name.toLower();
+    filename.replace(QStringLiteral(" "), QStringLiteral("_"));
+    filename.replace(QStringLiteral("'"), QStringLiteral(""));
+    filename.replace(QStringLiteral("\""), QStringLiteral(""));
+    return filename;
 }
 
 QString DesktopFileGenerator::webappCommand()
