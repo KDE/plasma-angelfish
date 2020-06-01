@@ -44,6 +44,8 @@ void DesktopFileGenerator::createDesktopFile(const QString &name, const QString 
     QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
     QString filename = name.toLower();
     filename.replace(QStringLiteral(" "), QStringLiteral("_"));
+    filename.replace(QStringLiteral("'"), QStringLiteral(""));
+    filename.replace(QStringLiteral("\""), QStringLiteral(""));
     QString path = QStringLiteral("%1/%2.desktop").arg(location, filename);
     KConfig desktopFile(path, KConfig::SimpleConfig);
 
@@ -78,7 +80,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
 
     QDir().mkpath(iconLocation);
 
-    auto imageFile = new QFile(iconLocation + fileName + QStringLiteral(".png"));
+    const auto imageFile = new QFile(iconLocation + fileName + QStringLiteral(".png"));
 
     if (!imageFile->open(QIODevice::WriteOnly)) {
         qDebug() << Q_FUNC_INFO << "Failed to open image file";
