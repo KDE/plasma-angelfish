@@ -28,7 +28,6 @@
   <name xml:lang="sk">Prehliadač Angelfish</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
   <name xml:lang="uk">Браузер Angelfish</name>
-  <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
   <name xml:lang="zh-TW">Angelfish 網頁瀏覽器</name>
   <summary>Webbrowser for mobile devices</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
@@ -49,7 +48,6 @@
   <summary xml:lang="ru">Веб-браузер для мобильных устройств</summary>
   <summary xml:lang="sv">Webbläsare för mobila apparater</summary>
   <summary xml:lang="uk">Браузер для мобільних пристроїв</summary>
-  <summary xml:lang="x-test">xxWebbrowser for mobile devicesxx</summary>
   <summary xml:lang="zh-TW">適用於行動裝置的網頁瀏覽器</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
@@ -80,7 +78,6 @@
   <developer_name xml:lang="sk">KDE komunita</developer_name>
   <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
   <developer_name xml:lang="uk">Спільнота KDE</developer_name>
-  <developer_name xml:lang="x-test">xxKDE Communityxx</developer_name>
   <developer_name xml:lang="zh-TW">KDE 社群</developer_name>
   <description>
     <p>Angelfish is a modern mobile webbrowser</p>
@@ -102,7 +99,6 @@
     <p xml:lang="ru">Angelfish — это современный веб-браузер для мобильных устройств</p>
     <p xml:lang="sv">Angelfish är en modern mobilwebbläsare</p>
     <p xml:lang="uk">Angelfish — сучасний браузер для мобільних пристроїв</p>
-    <p xml:lang="x-test">xxAngelfish is a modern mobile webbrowserxx</p>
     <p xml:lang="zh-TW">Angelfish 是款現代化的行動網頁瀏覽器</p>
     <p>It supports typical browser features, such as</p>
     <p xml:lang="ca">Permet les funcionalitats típiques de navegació, com</p>
@@ -129,7 +125,6 @@
     <p xml:lang="ru">Он поддерживает типичные функции веб-браузеров, такие как</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
     <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
-    <p xml:lang="x-test">xxIt supports typical browser features, such asxx</p>
     <p xml:lang="zh-TW">此瀏覽器支援一般瀏覽器會有的功能，例如</p>
     <ul>
       <li>bookmarks</li>
@@ -159,7 +154,6 @@
       <li xml:lang="sk">zalozky</li>
       <li xml:lang="sv">bokmärken</li>
       <li xml:lang="uk">закладки</li>
-      <li xml:lang="x-test">xxbookmarksxx</li>
       <li xml:lang="zh-TW">書籤</li>
       <li>history</li>
       <li xml:lang="ca">historial</li>
@@ -188,7 +182,6 @@
       <li xml:lang="sk">História</li>
       <li xml:lang="sv">historik</li>
       <li xml:lang="uk">журнал</li>
-      <li xml:lang="x-test">xxhistoryxx</li>
       <li xml:lang="zh-TW">歷史記錄</li>
       <li>tabs</li>
       <li xml:lang="ca">pestanyes</li>
@@ -209,7 +202,6 @@
       <li xml:lang="ru">вкладки</li>
       <li xml:lang="sv">flikar</li>
       <li xml:lang="uk">вкладки</li>
-      <li xml:lang="x-test">xxtabsxx</li>
       <li xml:lang="zh-TW">分頁</li>
     </ul>
   </description>
@@ -234,7 +226,6 @@
       <caption xml:lang="ru">Домашняя страница</caption>
       <caption xml:lang="sv">Hemsida</caption>
       <caption xml:lang="uk">Домашня сторінка</caption>
-      <caption xml:lang="x-test">xxHomepagexx</caption>
       <caption xml:lang="zh-TW">首頁</caption>
       <image type="source">https://cdn.kde.org/screenshots/plasma-angelfish/homepage.png</image>
     </screenshot>
@@ -258,7 +249,6 @@
       <caption xml:lang="ru">Действия меню</caption>
       <caption xml:lang="sv">Menyalternativ</caption>
       <caption xml:lang="uk">Пункти меню</caption>
-      <caption xml:lang="x-test">xxMenu Actionsxx</caption>
       <caption xml:lang="zh-TW">選單動作</caption>
       <image type="source">https://cdn.kde.org/screenshots/plasma-angelfish/actions.png</image>
     </screenshot>
@@ -282,7 +272,6 @@
       <caption xml:lang="ru">Вкладки</caption>
       <caption xml:lang="sv">Flikar</caption>
       <caption xml:lang="uk">Вкладки</caption>
-      <caption xml:lang="x-test">xxTabsxx</caption>
       <caption xml:lang="zh-TW">分頁</caption>
       <image type="source">https://cdn.kde.org/screenshots/plasma-angelfish/tabs.png</image>
     </screenshot>
