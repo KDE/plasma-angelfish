@@ -26,6 +26,7 @@
   <name xml:lang="pt-BR">Navegador Web Angelfish</name>
   <name xml:lang="ru">Веб-браузер Angelfish</name>
   <name xml:lang="sk">Prehliadač Angelfish</name>
+  <name xml:lang="sl">Angelfish spletni brskalnik</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
   <name xml:lang="uk">Браузер Angelfish</name>
   <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="ru">Веб-браузер для мобильных устройств</summary>
+  <summary xml:lang="sl">Spletni brskalnik za mobilne naprave</summary>
   <summary xml:lang="sv">Webbläsare för mobila apparater</summary>
   <summary xml:lang="uk">Браузер для мобільних пристроїв</summary>
   <summary xml:lang="x-test">xxWebbrowser for mobile devicesxx</summary>
@@ -78,6 +80,7 @@
   <developer_name xml:lang="pt-BR">KDE Community</developer_name>
   <developer_name xml:lang="ru">Сообщество KDE</developer_name>
   <developer_name xml:lang="sk">KDE komunita</developer_name>
+  <developer_name xml:lang="sl">Skupnost KDE</developer_name>
   <developer_name xml:lang="sv">KDE-gemenskapen</developer_name>
   <developer_name xml:lang="uk">Спільнота KDE</developer_name>
   <developer_name xml:lang="x-test">xxKDE Communityxx</developer_name>
@@ -100,6 +103,7 @@
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
     <p xml:lang="pt-BR">O Angelfish é um navegador Web móvel modem</p>
     <p xml:lang="ru">Angelfish — это современный веб-браузер для мобильных устройств</p>
+    <p xml:lang="sl">Angelfish je sodobni mobilni spletni brskalnik</p>
     <p xml:lang="sv">Angelfish är en modern mobilwebbläsare</p>
     <p xml:lang="uk">Angelfish — сучасний браузер для мобільних пристроїв</p>
     <p xml:lang="x-test">xxAngelfish is a modern mobile webbrowserxx</p>
@@ -127,6 +131,7 @@
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
     <p xml:lang="pt-BR">Tem suporte a funcionalidades típicas de navegação, como</p>
     <p xml:lang="ru">Он поддерживает типичные функции веб-браузеров, такие как</p>
+    <p xml:lang="sl">Podpira tipične možnosti brskalnikov, kot so</p>
     <p xml:lang="sv">Den stöder typiska webbläsarfunktioner, såsom</p>
     <p xml:lang="uk">Передбачено типові можливості браузера, зокрема</p>
     <p xml:lang="x-test">xxIt supports typical browser features, such asxx</p>
@@ -157,6 +162,7 @@
       <li xml:lang="pt-BR">favoritos</li>
       <li xml:lang="ru">закладки</li>
       <li xml:lang="sk">zalozky</li>
+      <li xml:lang="sl">zaznamki</li>
       <li xml:lang="sv">bokmärken</li>
       <li xml:lang="uk">закладки</li>
       <li xml:lang="x-test">xxbookmarksxx</li>
@@ -186,6 +192,7 @@
       <li xml:lang="pt-BR">histórico</li>
       <li xml:lang="ru">журнал</li>
       <li xml:lang="sk">História</li>
+      <li xml:lang="sl">zgodovino brskanja</li>
       <li xml:lang="sv">historik</li>
       <li xml:lang="uk">журнал</li>
       <li xml:lang="x-test">xxhistoryxx</li>
@@ -207,6 +214,7 @@
       <li xml:lang="pt">páginas</li>
       <li xml:lang="pt-BR">abas</li>
       <li xml:lang="ru">вкладки</li>
+      <li xml:lang="sl">zavihke</li>
       <li xml:lang="sv">flikar</li>
       <li xml:lang="uk">вкладки</li>
       <li xml:lang="x-test">xxtabsxx</li>
@@ -232,6 +240,7 @@
       <caption xml:lang="pt">Página Web</caption>
       <caption xml:lang="pt-BR">Site</caption>
       <caption xml:lang="ru">Домашняя страница</caption>
+      <caption xml:lang="sl">Domača stran</caption>
       <caption xml:lang="sv">Hemsida</caption>
       <caption xml:lang="uk">Домашня сторінка</caption>
       <caption xml:lang="x-test">xxHomepagexx</caption>
@@ -256,6 +265,7 @@
       <caption xml:lang="pt">Acções do Menu</caption>
       <caption xml:lang="pt-BR">Menu de ações</caption>
       <caption xml:lang="ru">Действия меню</caption>
+      <caption xml:lang="sl">Dejavnosti menija</caption>
       <caption xml:lang="sv">Menyalternativ</caption>
       <caption xml:lang="uk">Пункти меню</caption>
       <caption xml:lang="x-test">xxMenu Actionsxx</caption>
@@ -280,6 +290,7 @@
       <caption xml:lang="pt">Páginas</caption>
       <caption xml:lang="pt-BR">Abas</caption>
       <caption xml:lang="ru">Вкладки</caption>
+      <caption xml:lang="sl">Zavihki</caption>
       <caption xml:lang="sv">Flikar</caption>
       <caption xml:lang="uk">Вкладки</caption>
       <caption xml:lang="x-test">xxTabsxx</caption>
