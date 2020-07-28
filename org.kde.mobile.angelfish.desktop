@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Angelfish
+Name[az]=Angelfish
 Name[ca]=Angelfish
 Name[ca@valencia]=Angelfish
 Name[cs]=Angelfish
@@ -26,6 +27,7 @@ Name[uk]=Angelfish
 Name[x-test]=xxAngelfishxx
 Name[zh_TW]=Angelfish
 Comment=Mobile web browser
+Comment[az]=Mobil veb_bələdçi
 Comment[ca]=Navegador web mòbil
 Comment[ca@valencia]=Navegador web mòbil
 Comment[cs]=Mobilní webový prohlížeč
@@ -55,6 +57,7 @@ Comment[uk]=Браузер для мобільних пристроїв
 Comment[x-test]=xxMobile web browserxx
 Comment[zh_TW]=行動網頁瀏覽器
 GenericName=Web Browser
+GenericName[az]=Veb Bələdçi
 GenericName[ca]=Navegador web
 GenericName[ca@valencia]=Navegador web
 GenericName[cs]=Webový prohlížeč
