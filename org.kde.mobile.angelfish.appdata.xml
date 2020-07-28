@@ -2,6 +2,7 @@
 <component type="desktop-application">
   <id>org.kde.mobile.angelfish</id>
   <name>Angelfish Webbrowser</name>
+  <name xml:lang="az">Angelfish Veb_Bələdçisi</name>
   <name xml:lang="ca">Navegador web Angelfish</name>
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
   <name xml:lang="cs">Webový prohlížeč Angelfish</name>
@@ -32,6 +33,7 @@
   <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
   <name xml:lang="zh-TW">Angelfish 網頁瀏覽器</name>
   <summary>Webbrowser for mobile devices</summary>
+  <summary xml:lang="az">Mobil qurğular üçün Veb_Bələdçi</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="cs">Webový prohlížeč pro mobilní zařízení</summary>
@@ -58,6 +60,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <developer_name>KDE Community</developer_name>
+  <developer_name xml:lang="az">KDE İcması</developer_name>
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
   <developer_name xml:lang="cs">Komunita KDE</developer_name>
@@ -89,6 +92,7 @@
   <developer_name xml:lang="zh-TW">KDE 社群</developer_name>
   <description>
     <p>Angelfish is a modern mobile webbrowser</p>
+    <p xml:lang="az">Angelfish müasir mobil veb_bələdçidir</p>
     <p xml:lang="ca">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="cs">Angelfish je moderní mobilní webový prohlížeč</p>
@@ -113,6 +117,7 @@
     <p xml:lang="x-test">xxAngelfish is a modern mobile webbrowserxx</p>
     <p xml:lang="zh-TW">Angelfish 是款現代化的行動網頁瀏覽器</p>
     <p>It supports typical browser features, such as</p>
+    <p xml:lang="az">O, veb bələdçilərə xas aşağıda göstərilən bir çox xüsusiyyətləri dəstəkləyir</p>
     <p xml:lang="ca">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="ca-valencia">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="cs">Podporuje typické vlastnosti prohlížeče jako</p>
@@ -142,6 +147,7 @@
     <p xml:lang="zh-TW">此瀏覽器支援一般瀏覽器會有的功能，例如</p>
     <ul>
       <li>bookmarks</li>
+      <li xml:lang="az">əlfəcinlər</li>
       <li xml:lang="ca">adreces d'interès</li>
       <li xml:lang="ca-valencia">adreces d'interés</li>
       <li xml:lang="cs">záložky</li>
@@ -172,6 +178,7 @@
       <li xml:lang="x-test">xxbookmarksxx</li>
       <li xml:lang="zh-TW">書籤</li>
       <li>history</li>
+      <li xml:lang="az">tarixçə</li>
       <li xml:lang="ca">historial</li>
       <li xml:lang="ca-valencia">historial</li>
       <li xml:lang="cs">historie</li>
@@ -202,6 +209,7 @@
       <li xml:lang="x-test">xxhistoryxx</li>
       <li xml:lang="zh-TW">歷史記錄</li>
       <li>tabs</li>
+      <li xml:lang="az">vərəqlər</li>
       <li xml:lang="ca">pestanyes</li>
       <li xml:lang="ca-valencia">pestanyes</li>
       <li xml:lang="cs">karty</li>
@@ -230,6 +238,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Homepage</caption>
+      <caption xml:lang="az">Ev səhifəsi</caption>
       <caption xml:lang="ca">Pàgina inicial</caption>
       <caption xml:lang="ca-valencia">Pàgina inicial</caption>
       <caption xml:lang="cs">Domovská stránka</caption>
@@ -257,6 +266,7 @@
     </screenshot>
     <screenshot>
       <caption>Menu Actions</caption>
+      <caption xml:lang="az">Menyu fəaliyyətləri</caption>
       <caption xml:lang="ca">Accions de menú</caption>
       <caption xml:lang="ca-valencia">Accions de menú</caption>
       <caption xml:lang="cs">Činnosti nabídky</caption>
@@ -284,6 +294,7 @@
     </screenshot>
     <screenshot>
       <caption>Tabs</caption>
+      <caption xml:lang="az">Vərəqlər</caption>
       <caption xml:lang="ca">Pestanyes</caption>
       <caption xml:lang="ca-valencia">Pestanyes</caption>
       <caption xml:lang="cs">Karty</caption>
