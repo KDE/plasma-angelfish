@@ -6,7 +6,6 @@
         <file alias="HistorySheet.qml">contents/ui/HistorySheet.qml</file>
         <file alias="ListWebView.qml">contents/ui/ListWebView.qml</file>
         <file alias="Navigation.qml">contents/ui/Navigation.qml</file>
-        <file alias="Settings.qml">contents/ui/Settings.qml</file>
         <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
         <file alias="SettingsNavigationBarPage.qml">contents/ui/SettingsNavigationBarPage.qml</file>
         <file alias="SettingsSearchEnginePage.qml">contents/ui/SettingsSearchEnginePage.qml</file>

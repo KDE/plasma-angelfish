@@ -34,6 +34,7 @@
 #include "urlutils.h"
 #include "useragent.h"
 #include "desktopfilegenerator.h"
+#include "angelfishsettings.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -90,8 +91,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return static_cast<QObject *>(BrowserManager::instance());
     });
 
+    // Angelfish-webapp generator
     qmlRegisterSingletonType<DesktopFileGenerator>("org.kde.mobile.angelfish", 1, 0, "DesktopFileGenerator", [](QQmlEngine *engine, QJSEngine *) -> QObject * {
         return static_cast<QObject *>(new DesktopFileGenerator(engine));
+    });
+
+    qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
+
+    QObject::connect(QApplication::instance(), &QCoreApplication::aboutToQuit, QApplication::instance(), [] {
+        AngelfishSettings::self()->save();
     });
 
     // Load QML

@@ -34,9 +34,6 @@ Kirigami.ApplicationWindow {
     id: webBrowser
     title: webView.title
 
-    // Pointer to browser settings
-    property Settings settings: settings
-
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
     property color borderColor: Kirigami.Theme.highlightColor;
 
@@ -134,10 +131,6 @@ Kirigami.ApplicationWindow {
         property alias y: webBrowser.y
         property alias width: webBrowser.width
         property alias height: webBrowser.height
-    }
-
-    Settings {
-        id: settings
     }
 
     function popSubPages() {

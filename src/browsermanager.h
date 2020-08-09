@@ -85,8 +85,6 @@ private:
 
     DBManager *m_dbmanager;
 
-    QSettings *m_settings;
-
     QString m_initialUrl;
 
     static BrowserManager *s_instance;

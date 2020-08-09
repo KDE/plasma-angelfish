@@ -1,0 +1,8 @@
+File=angelfishsettings.kcfg
+ClassName=AngelfishSettings
+Mutators=true
+DefaultValueGetters=true
+GenerateProperties=true
+ParentInConstructor=true
+Singleton=true
+Notifiers=true

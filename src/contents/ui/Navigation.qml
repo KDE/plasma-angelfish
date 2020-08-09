@@ -58,7 +58,7 @@ Item {
         Controls.ToolButton {
             id: mainMenuButton
             icon.name: rootPage.privateMode ? "view-private" : "open-menu-symbolic"
-            visible: webBrowser.landscape || settings.navBarMainMenu
+            visible: webBrowser.landscape || Settings.navBarMainMenu
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
@@ -69,7 +69,7 @@ Item {
         }
 
         Controls.ToolButton {
-            visible: webBrowser.landscape || settings.navBarTabs
+            visible: webBrowser.landscape || Settings.navBarTabs
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
@@ -109,7 +109,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoBack && settings.navBarBack
+            visible: currentWebView.canGoBack && Settings.navBarBack
             icon.name: "go-previous"
 
             Kirigami.Theme.inherit: true
@@ -127,7 +127,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: currentWebView.canGoForward && settings.navBarForward
+            visible: currentWebView.canGoForward && Settings.navBarForward
             icon.name: "go-next"
 
             Kirigami.Theme.inherit: true
@@ -177,7 +177,10 @@ Item {
                     if (labelItem.scheme === "http" || labelItem.scheme === "https") {
                         var h = UrlUtils.urlHostPort(currentWebView.requestedUrl);
                         var p = UrlUtils.urlPath(currentWebView.requestedUrl);
-                        if (p === "/") p = ""
+
+                        if (p === "/")
+                            p = ""
+
                         return '%1<font size="2">%2</font>'.arg(h).arg(p);
                     }
                     return currentWebView.requestedUrl;
@@ -197,7 +200,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: settings.navBarReload
+            visible: Settings.navBarReload
             icon.name: currentWebView.loading ? "process-stop" : "view-refresh"
 
             Kirigami.Theme.inherit: true
@@ -215,7 +218,7 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            visible: webBrowser.landscape || settings.navBarContextMenu
+            visible: webBrowser.landscape || Settings.navBarContextMenu
             icon.name: "overflow-menu"
 
             Kirigami.Theme.inherit: true

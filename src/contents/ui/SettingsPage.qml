@@ -48,8 +48,8 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Enable JavaScript")
             Layout.fillWidth: true
-            checked: settings.webJavascriptEnabled
-            onCheckedChanged: settings.webJavascriptEnabled = checked
+            checked: Settings.webJavaScriptEnabled
+            onClicked: Settings.webJavaScriptEnabled = checked
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5
@@ -62,8 +62,8 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Load images")
             Layout.fillWidth: true
-            checked: settings.webAutoLoadImages
-            onCheckedChanged: settings.webAutoLoadImages = checked
+            checked: Settings.webAutoLoadImages
+            onClicked: Settings.webAutoLoadImages = checked
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: Kirigami.Units.gridUnit * 2.5

@@ -47,9 +47,6 @@ Kirigami.ApplicationWindow {
     // them according to the current mode.
     property ListWebView tabs: rootPage.privateMode ? privateTabs : regularTabs
 
-    // Pointer to browser settings
-    property Settings settings: settings
-
     // Used to determine if the window is in landscape mode
     property bool landscape: width > height
 
@@ -428,10 +425,6 @@ Kirigami.ApplicationWindow {
         property alias y: webBrowser.y
         property alias width: webBrowser.width
         property alias height: webBrowser.height
-    }
-
-    Settings {
-        id: settings
     }
 
     Component.onCompleted: rootPage.initialized = true

@@ -24,6 +24,7 @@
 
 #include "browsermanager.h"
 #include "urlutils.h"
+#include "angelfishsettings.h"
 
 class UserAgentTest : public QObject
 {
@@ -69,7 +70,6 @@ private Q_SLOTS:
 
         QCOMPARE(UrlUtils::urlFromUserInput(incompleteUrl), completeUrl);
     }
-
 private:
     BrowserManager *m_browserManager;
 };

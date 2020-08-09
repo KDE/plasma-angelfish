@@ -54,10 +54,10 @@ Kirigami.ScrollablePage {
             id: searchEnginePopup
             title: i18n("Search Engine")
             description: i18n("Base URL of your preferred search engine")
-            text: settings.searchCustomUrl
+            text: Settings.searchCustomUrl
             onAccepted: {
                 var t = UrlUtils.urlFromUserInput(searchEnginePopup.text);
-                settings.searchCustomUrl = t;
+                Settings.searchCustomUrl = t;
                 baseUrl = t;
                 searchEngines.setProperty(searchEngines.count - 1, "url", t);
             }
@@ -161,6 +161,6 @@ Kirigami.ScrollablePage {
     }
 
     Component.onCompleted: {
-        searchEngines.append({ "title": list.customName, "url": settings.searchCustomUrl });
+        searchEngines.append({ "title": list.customName, "url": Settings.searchCustomUrl });
     }
 }

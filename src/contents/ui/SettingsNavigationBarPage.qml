@@ -67,11 +67,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Main menu in portrait")
             Layout.fillWidth: true
-            checked: settings.navBarMainMenu
+            checked: Settings.navBarMainMenu
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarMainMenu = checked
+            onCheckedChanged: Settings.navBarMainMenu = checked
         }
 
         Kirigami.Separator {
@@ -81,11 +81,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Tabs in portrait")
             Layout.fillWidth: true
-            checked: settings.navBarTabs
+            checked: Settings.navBarTabs
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarTabs = checked
+            onCheckedChanged: Settings.navBarTabs = checked
         }
 
         Kirigami.Separator {
@@ -95,11 +95,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Context menu in portrait")
             Layout.fillWidth: true
-            checked: settings.navBarContextMenu
+            checked: Settings.navBarContextMenu
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarContextMenu = checked
+            onCheckedChanged: Settings.navBarContextMenu = checked
         }
 
         Kirigami.Separator {
@@ -109,11 +109,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Go back")
             Layout.fillWidth: true
-            checked: settings.navBarBack
+            checked: Settings.navBarBack
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarBack = checked
+            onCheckedChanged: Settings.navBarBack = checked
         }
 
         Kirigami.Separator {
@@ -123,11 +123,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Go forward")
             Layout.fillWidth: true
-            checked: settings.navBarForward
+            checked: Settings.navBarForward
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarForward = checked
+            onCheckedChanged: Settings.navBarForward = checked
         }
 
         Kirigami.Separator {
@@ -137,11 +137,11 @@ Kirigami.ScrollablePage {
         Controls.SwitchDelegate {
             text: i18n("Reload/Stop")
             Layout.fillWidth: true
-            checked: settings.navBarReload
+            checked: Settings.navBarReload
             leftPadding: Kirigami.Units.gridUnit
             rightPadding: Kirigami.Units.gridUnit
             implicitHeight: parent.itemHeight
-            onCheckedChanged: settings.navBarReload = checked
+            onCheckedChanged: Settings.navBarReload = checked
         }
 
         Kirigami.Separator {

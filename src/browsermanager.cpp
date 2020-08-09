@@ -26,12 +26,13 @@
 #include <QSettings>
 #include <QUrl>
 
+#include "angelfishsettings.h"
+
 BrowserManager *BrowserManager::s_instance = nullptr;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent)
     , m_dbmanager(new DBManager)
-    , m_settings(new QSettings(this))
 {
     connect(m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
 }
@@ -81,20 +82,22 @@ void BrowserManager::setHomepage(const QString &homepage)
 {
     if (this->homepage() == homepage)
         return;
-    m_settings->setValue(QStringLiteral("browser/homepage"), homepage);
+
+    AngelfishSettings::self()->setHomepage(homepage);
     emit homepageChanged();
 }
 
 QString BrowserManager::homepage()
 {
-    return m_settings->value(QStringLiteral("browser/homepage"), QStringLiteral("https://start.duckduckgo.com")).toString();
+    return AngelfishSettings::self()->homepage();
 }
 
 void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
 {
     if (this->searchBaseUrl() == searchBaseUrl)
         return;
-    m_settings->setValue(QStringLiteral("browser/searchBaseUrl"), searchBaseUrl);
+
+    AngelfishSettings::self()->setSearchBaseUrl(searchBaseUrl);
     emit searchBaseUrlChanged();
 }
 
@@ -108,14 +111,9 @@ void BrowserManager::setInitialUrl(const QString &initialUrl)
     m_initialUrl = initialUrl;
 }
 
-QSettings *BrowserManager::settings() const
-{
-    return m_settings;
-}
-
 QString BrowserManager::searchBaseUrl()
 {
-    return m_settings->value(QStringLiteral("browser/searchBaseUrl"), QStringLiteral("https://start.duckduckgo.com/?q=")).toString();
+    return AngelfishSettings::self()->searchBaseUrl();
 }
 
 BrowserManager *BrowserManager::instance()

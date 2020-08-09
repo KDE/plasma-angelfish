@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+    <kcfgfile name="angelfishrc" />
+    <include>"settingshelper.h"</include>
+    <group name="General">
+    <!-- Search Engine -->
+        <entry key="searchCustomUrl" type="string"></entry>
+    </group>
+    <group name="Browser">
+        <entry key="homepage" type="string">
+            <default>QStringLiteral("https://start.duckduckgo.com")</default>
+        </entry>
+        <entry key="searchBaseUrl" type="string">
+            <default>QStringLiteral("https://start.duckduckgo.com/?q=")</default>
+        </entry>
+    </group>
+    <!-- Remember states -->
+    <group name="WebView">
+        <entry key="webAutoLoadImages" type="bool">
+            <default>true</default>
+        </entry>
+        <entry key="webJavaScriptEnabled" type="bool">
+            <default>true</default>
+        </entry>
+    </group>
+    <group name="NavigationBar">
+        <entry key="navBarMainMenu" type="bool">
+            <default>true</default>
+        </entry>
+        <entry key="navBarTabs" type="bool">
+            <default>true</default>
+        </entry>
+        <entry key="navBarBack" type="bool">
+            <default>!SettingsHelper::instance()->isMobile()</default>
+        </entry>
+        <entry key="navBarForward" type="bool">
+            <default>!SettingsHelper::instance()->isMobile()</default>
+        </entry>
+        <entry key="navBarReload" type="bool">
+            <default>!SettingsHelper::instance()->isMobile()</default>
+        </entry>
+        <entry key="navBarContextMenu" type="bool"></entry>
+    </group>
+</kcfg>
