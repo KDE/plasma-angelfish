@@ -100,7 +100,7 @@ Controls.Drawer {
                     if (text.match(RegexWebUrl.re_weburl)) {
                         currentWebView.url = UrlUtils.urlFromUserInput(text);
                     } else {
-                        currentWebView.url = UrlUtils.urlFromUserInput(BrowserManager.searchBaseUrl + text);
+                        currentWebView.url = UrlUtils.urlFromUserInput(Settings.searchBaseUrl + text);
                     }
                     overlay.close();
                 }

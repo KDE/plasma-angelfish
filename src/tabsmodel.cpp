@@ -27,6 +27,7 @@
 #include <QUrl>
 
 #include "browsermanager.h"
+#include "angelfishsettings.h"
 
 TabsModel::TabsModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -98,7 +99,7 @@ void TabsModel::loadInitialTabs()
     if (!m_privateMode) {
         if (BrowserManager::instance()->initialUrl().isEmpty()) {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
-                setUrl(0, BrowserManager::instance()->homepage());
+                setUrl(0, AngelfishSettings::self()->homepage());
         } else {
             if (m_tabs.first().url() == QStringLiteral("about:blank"))
                 setUrl(0, BrowserManager::instance()->initialUrl());

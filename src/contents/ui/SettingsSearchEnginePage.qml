@@ -41,7 +41,7 @@ Kirigami.ScrollablePage {
         color: Kirigami.Theme.backgroundColor
     }
 
-    property string baseUrl: BrowserManager.searchBaseUrl
+    property string baseUrl: Settings.searchBaseUrl
 
     ColumnLayout {
         id: list
@@ -157,7 +157,7 @@ Kirigami.ScrollablePage {
 
     onBaseUrlChanged: {
         var t = UrlUtils.urlFromUserInput(baseUrl);
-        BrowserManager.searchBaseUrl = t;
+        Settings.searchBaseUrl = t;
     }
 
     Component.onCompleted: {

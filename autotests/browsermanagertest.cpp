@@ -47,22 +47,6 @@ private Q_SLOTS:
         delete m_browserManager;
     }
 
-    void homepage()
-    {
-        const QString newHomepage = QStringLiteral("https://kde.org");
-
-        m_browserManager->setHomepage(newHomepage);
-        QCOMPARE(m_browserManager->homepage(), newHomepage);
-    }
-
-    void searchEngine()
-    {
-        const QString newSearchEngineUrl = QStringLiteral("https://search.angelfish.kde?q=");
-
-        m_browserManager->setSearchBaseUrl(newSearchEngineUrl);
-        QCOMPARE(m_browserManager->searchBaseUrl(), newSearchEngineUrl);
-    }
-
     void urlFromUserInput()
     {
         const QString incompleteUrl = QStringLiteral("kde.org");

@@ -5,8 +5,8 @@
                           http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
     <kcfgfile name="angelfishrc" />
     <include>"settingshelper.h"</include>
-    <group name="General">
-    <!-- Search Engine -->
+    <group name="SettingsPage">
+        <!-- The custom search engine that can be added to the list of engines -->
         <entry key="searchCustomUrl" type="string"></entry>
     </group>
     <group name="Browser">

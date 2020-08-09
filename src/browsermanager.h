@@ -38,9 +38,6 @@ class BrowserManager : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString homepage READ homepage WRITE setHomepage NOTIFY homepageChanged)
-    Q_PROPERTY(QString searchBaseUrl READ searchBaseUrl WRITE setSearchBaseUrl NOTIFY searchBaseUrlChanged)
-
     Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
 
 public:
@@ -48,19 +45,12 @@ public:
 
     static BrowserManager *instance();
 
-    QString homepage();
-    QString searchBaseUrl();
-
-    QSettings *settings() const;
-
     QString initialUrl() const;
     void setInitialUrl(const QString &initialUrl);
 
 signals:
     void updated();
 
-    void homepageChanged();
-    void searchBaseUrlChanged();
     void initialUrlChanged();
 
     void databaseTableChanged(QString table);
@@ -75,9 +65,6 @@ public slots:
 
     void updateLastVisited(const QString &url);
     void updateIcon(const QString &url, const QString &iconSource);
-
-    void setHomepage(const QString &homepage);
-    void setSearchBaseUrl(const QString &searchBaseUrl);
 
 private:
     // BrowserManager should only be createdd by calling the instance() function

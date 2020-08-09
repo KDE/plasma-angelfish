@@ -78,29 +78,6 @@ void BrowserManager::updateIcon(const QString &url, const QString &iconSource)
     m_dbmanager->updateIcon(url, iconSource);
 }
 
-void BrowserManager::setHomepage(const QString &homepage)
-{
-    if (this->homepage() == homepage)
-        return;
-
-    AngelfishSettings::self()->setHomepage(homepage);
-    emit homepageChanged();
-}
-
-QString BrowserManager::homepage()
-{
-    return AngelfishSettings::self()->homepage();
-}
-
-void BrowserManager::setSearchBaseUrl(const QString &searchBaseUrl)
-{
-    if (this->searchBaseUrl() == searchBaseUrl)
-        return;
-
-    AngelfishSettings::self()->setSearchBaseUrl(searchBaseUrl);
-    emit searchBaseUrlChanged();
-}
-
 QString BrowserManager::initialUrl() const
 {
     return m_initialUrl;
@@ -109,11 +86,6 @@ QString BrowserManager::initialUrl() const
 void BrowserManager::setInitialUrl(const QString &initialUrl)
 {
     m_initialUrl = initialUrl;
-}
-
-QString BrowserManager::searchBaseUrl()
-{
-    return AngelfishSettings::self()->searchBaseUrl();
 }
 
 BrowserManager *BrowserManager::instance()
