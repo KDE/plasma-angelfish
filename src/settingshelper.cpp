@@ -32,6 +32,8 @@ SettingsHelper *SettingsHelper::instance()
 }
 
 SettingsHelper::SettingsHelper()
+    : m_isMobile(qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")
+                 ? QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))
+                 : false)
 {
-    m_isMobile = qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE") ? QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE")) : false;
 }

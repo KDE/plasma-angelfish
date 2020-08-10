@@ -23,12 +23,11 @@ import QtQuick 2.1
 import QtWebEngine 1.6
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
-import Qt.labs.settings 1.0 as QtSettings
+import QtQuick.Layouts 1.2
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mobile.angelfish 1.0
 
-import QtQuick.Layouts 1.2
+import org.kde.mobile.angelfish 1.0
 
 Kirigami.ApplicationWindow {
     id: webBrowser
@@ -56,8 +55,10 @@ Kirigami.ApplicationWindow {
     property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
     property color borderColor: Kirigami.Theme.highlightColor;
 
-    width: Kirigami.Units.gridUnit * 20
-    height: Kirigami.Units.gridUnit * 30
+    x: Settings.windowX
+    y: Settings.windowY
+    width: Settings.windowWidth
+    height: Settings.windowHeight
 
     pageStack.globalToolBar.showNavigationButtons: {
         if (pageStack.depth <= 1)
@@ -419,15 +420,15 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    QtSettings.Settings {
-        // kept separate to simplify definition of aliases
-        property alias x: webBrowser.x
-        property alias y: webBrowser.y
-        property alias width: webBrowser.width
-        property alias height: webBrowser.height
-    }
+    // Store window dimensions
+    Component.onCompleted: {
+        rootPage.initialized = true
 
-    Component.onCompleted: rootPage.initialized = true
+        Settings.windowX = Qt.binding(function() {return webBrowser.x})
+        Settings.windowY = Qt.binding(function() {return webBrowser.y})
+        Settings.windowWidth = Qt.binding(function() {return webBrowser.width})
+        Settings.windowHeight = Qt.binding(function() {return webBrowser.height})
+    }
 
     function popSubPages() {
         while (webBrowser.pageStack.depth > 1)

@@ -7,7 +7,7 @@
     <include>"settingshelper.h"</include>
     <group name="SettingsPage">
         <!-- The custom search engine that can be added to the list of engines -->
-        <entry key="searchCustomUrl" type="string"></entry>
+        <entry key="searchCustomUrl" type="string" />
     </group>
     <group name="Browser">
         <entry key="homepage" type="string">
@@ -43,5 +43,15 @@
             <default>!SettingsHelper::instance()->isMobile()</default>
         </entry>
         <entry key="navBarContextMenu" type="bool"></entry>
+    </group>
+    <group name="Window">
+        <entry key="windowX" type="int" />
+        <entry key="windowY" type="int" />
+        <entry key="windowWidth" type="int">
+            <default>300</default>
+        </entry>
+        <entry key="windowHeight" type="int">
+            <default>450</default>
+        </entry>
     </group>
 </kcfg>

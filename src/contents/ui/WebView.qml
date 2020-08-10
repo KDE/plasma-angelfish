@@ -99,7 +99,7 @@ WebEngineView {
 
     settings {
         autoLoadImages: Settings.webAutoLoadImages
-        javascriptEnabled: Settings.webJavascriptEnabled
+        javascriptEnabled: Settings.webJavaScriptEnabled
         // Disable builtin error pages in favor of our own
         errorPageEnabled: false
         // Load larger touch icons
