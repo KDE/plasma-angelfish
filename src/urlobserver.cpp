@@ -45,7 +45,7 @@ bool UrlObserver::bookmarked() const
     return m_bookmarked;
 }
 
-void UrlObserver::onDatabaseTableChanged(QString table)
+void UrlObserver::onDatabaseTableChanged(const QString &table)
 {
     if (table != QStringLiteral("bookmarks"))
         return;

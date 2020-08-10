@@ -41,7 +41,7 @@ public:
 
 private:
     QString m_url;
-    bool m_isMobile;
+    bool m_isMobile = true;
 };
 
 class TabsModel : public QAbstractListModel

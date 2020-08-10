@@ -5,6 +5,7 @@
 
 UserAgent::UserAgent(QObject *parent)
     : QObject(parent)
+    , m_isMobile(true)
 {
 }
 

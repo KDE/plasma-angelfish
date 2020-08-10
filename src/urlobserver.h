@@ -44,7 +44,7 @@ signals:
     void bookmarkedChanged(bool bookmarked);
 
 private:
-    void onDatabaseTableChanged(QString table);
+    void onDatabaseTableChanged(const QString &table);
     void updateBookmarked();
 
 private:
