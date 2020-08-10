@@ -173,10 +173,12 @@ WebEngineView {
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!privateMode) {
-                var request = new Object;// FIXME
-                request.url = currentWebView.url;
-                request.title = currentWebView.title;
-                request.icon = currentWebView.icon;
+                var request = {
+                    url: currentWebView.url,
+                    title: currentWebView.title,
+                    icon: currentWebView.icon
+                }
+
                 BrowserManager.addToHistory(request);
                 BrowserManager.updateLastVisited(currentWebView.url);
             }
@@ -200,13 +202,12 @@ WebEngineView {
 
     Component.onCompleted: {
         print("WebView completed.");
-        var settings = webEngineView.settings;
-        print("Settings: " + settings);
+        print("Settings: " + webEngineView.settings);
     }
 
     onIconChanged: {
-            if (icon && !privateMode)
-                BrowserManager.updateIcon(url, icon)
+        if (icon && !privateMode)
+            BrowserManager.updateIcon(url, icon)
     }
 
     onNewViewRequested: {

@@ -179,8 +179,7 @@ WebEngineView {
 
     Component.onCompleted: {
         print("WebView completed.");
-        var settings = webEngineView.settings;
-        print("Settings: " + settings);
+        print("Settings: " + webEngineView.settings);
     }
 
     onIconChanged: {

@@ -286,10 +286,11 @@ Kirigami.ApplicationWindow {
                 text: checked ? i18n("Bookmarked") : i18n("Bookmark")
                 onTriggered: {
                     if (checked) {
-                        var request = new Object;// FIXME
-                        request.url = currentWebView.url;
-                        request.title = currentWebView.title;
-                        request.icon = currentWebView.icon;
+                        var request = {
+                            url: currentWebView.url,
+                            title: currentWebView.title,
+                            icon: currentWebView.icon
+                        }
                         BrowserManager.addBookmark(request);
                     } else {
                         BrowserManager.removeBookmark(currentWebView.url);
@@ -335,6 +336,13 @@ Kirigami.ApplicationWindow {
         // Bottom navigation bar
         Navigation {
             id: navigation
+
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+
             navigationShown: visible && rootPage.navigationAutoShow
             visible: webBrowser.visibility !== Window.FullScreen && !findInPage.active
 

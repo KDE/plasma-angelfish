@@ -30,11 +30,6 @@ import org.kde.mobile.angelfish 1.0
 Item {
     id: navigation
 
-    anchors {
-        bottom: parent.bottom
-        left: parent.left
-        right: parent.right
-    }
     height: expandedHeight
 
     property bool navigationShown: true

@@ -156,8 +156,7 @@ Kirigami.ScrollablePage {
     }
 
     onBaseUrlChanged: {
-        var t = UrlUtils.urlFromUserInput(baseUrl);
-        Settings.searchBaseUrl = t;
+        Settings.searchBaseUrl = UrlUtils.urlFromUserInput(baseUrl);
     }
 
     Component.onCompleted: {
