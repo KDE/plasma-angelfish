@@ -40,6 +40,8 @@ private Q_SLOTS:
         QCOMPARE(AngelfishSettings::defaultNavBarBackValue(), false);
         QCOMPARE(AngelfishSettings::defaultNavBarForwardValue(), false);
         QCOMPARE(AngelfishSettings::defaultNavBarReloadValue(), false);
+        delete SettingsHelper::instance();
+        SettingsHelper::s_instance = nullptr;
         qputenv("QT_QUICK_CONTROLS_MOBILE", "false");
         QCOMPARE(SettingsHelper::instance()->isMobile(), false);
         QCOMPARE(AngelfishSettings::defaultNavBarBackValue(), true);

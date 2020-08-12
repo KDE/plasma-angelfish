@@ -26,10 +26,10 @@ public:
         return m_isMobile;
     }
 
+    static SettingsHelper *s_instance;
+
 private:
     SettingsHelper();
 
     bool m_isMobile;
-
-    static SettingsHelper *s_instance;
 };
