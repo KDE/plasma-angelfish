@@ -245,7 +245,7 @@ Kirigami.ApplicationWindow {
                 text: i18n("Add to homescreen")
                 checkable: true
                 checked: DesktopFileGenerator.desktopFileExists(currentWebView.title)
-                onCheckedChanged: {
+                onTriggered: {
                     if (checked) {
                         DesktopFileGenerator.createDesktopFile(currentWebView.title,
                                                                currentWebView.url,
