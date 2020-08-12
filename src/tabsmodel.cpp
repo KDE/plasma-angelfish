@@ -226,12 +226,14 @@ bool TabsModel::isMobileDefault() const
 
 void TabsModel::setIsMobileDefault(bool def)
 {
-    m_isMobileDefault = def;
-    emit isMobileDefaultChanged();
+    if (m_isMobileDefault != def) {
+        m_isMobileDefault = def;
+        emit isMobileDefaultChanged();
 
-    // used in initialization of the tab
-    if (m_tabs.count() == 1) {
-        setIsMobile(0, def);
+        // used in initialization of the tab
+        if (m_tabs.count() == 1) {
+            setIsMobile(0, def);
+        }
     }
 }
 
