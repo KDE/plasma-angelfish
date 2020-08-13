@@ -6,6 +6,7 @@
   <name xml:lang="ca">Navegador web Angelfish</name>
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
   <name xml:lang="cs">Webový prohlížeč Angelfish</name>
+  <name xml:lang="da">Angelfish webbrowser</name>
   <name xml:lang="de">Angelfish-Webbrowser</name>
   <name xml:lang="el">Angelfish περιηγητής ιστού</name>
   <name xml:lang="en-GB">Angelfish Webbrowser</name>
@@ -37,6 +38,7 @@
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="cs">Webový prohlížeč pro mobilní zařízení</summary>
+  <summary xml:lang="da">Webbrowser til mobile enheder</summary>
   <summary xml:lang="en-GB">Web browser for mobile devices</summary>
   <summary xml:lang="es">Navegador web para dispositivos móviles</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
@@ -64,6 +66,7 @@
   <developer_name xml:lang="ca">La comunitat KDE</developer_name>
   <developer_name xml:lang="ca-valencia">La comunitat KDE</developer_name>
   <developer_name xml:lang="cs">Komunita KDE</developer_name>
+  <developer_name xml:lang="da">KDE-fællesskabet</developer_name>
   <developer_name xml:lang="de">KDE-Gemeinschaft</developer_name>
   <developer_name xml:lang="el">Κοινότητα του KDE</developer_name>
   <developer_name xml:lang="en-GB">KDE Community</developer_name>
@@ -96,6 +99,7 @@
     <p xml:lang="ca">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="cs">Angelfish je moderní mobilní webový prohlížeč</p>
+    <p xml:lang="da">Angelfish er en moderne mobil-webbrowser</p>
     <p xml:lang="en-GB">Angelfish is a modern mobile web browser</p>
     <p xml:lang="es">Angelfish es un moderno navegador web móvil</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
@@ -121,6 +125,7 @@
     <p xml:lang="ca">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="ca-valencia">Permet les funcionalitats típiques de navegació, com</p>
     <p xml:lang="cs">Podporuje typické vlastnosti prohlížeče jako</p>
+    <p xml:lang="da">Den understøtter almindelige browserfunktioner såsom</p>
     <p xml:lang="de">Es unterstützt die typischen Funktionen von Browsern wie</p>
     <p xml:lang="el">Υποστηρίζει τις τυπικές λειτουργίες ενός περιηγητή, όπως</p>
     <p xml:lang="en-GB">It supports typical browser features, such as</p>
@@ -151,6 +156,7 @@
       <li xml:lang="ca">adreces d'interès</li>
       <li xml:lang="ca-valencia">adreces d'interés</li>
       <li xml:lang="cs">záložky</li>
+      <li xml:lang="da">bogmærker</li>
       <li xml:lang="de">Lesezeichen</li>
       <li xml:lang="el">σελιδοδείκτες</li>
       <li xml:lang="en-GB">bookmarks</li>
@@ -182,6 +188,7 @@
       <li xml:lang="ca">historial</li>
       <li xml:lang="ca-valencia">historial</li>
       <li xml:lang="cs">historie</li>
+      <li xml:lang="da">historik</li>
       <li xml:lang="de">Verlauf</li>
       <li xml:lang="el">ιστορικό</li>
       <li xml:lang="en-GB">history</li>
@@ -213,6 +220,7 @@
       <li xml:lang="ca">pestanyes</li>
       <li xml:lang="ca-valencia">pestanyes</li>
       <li xml:lang="cs">karty</li>
+      <li xml:lang="da">faneblade</li>
       <li xml:lang="en-GB">tabs</li>
       <li xml:lang="es">pestañas</li>
       <li xml:lang="et">kaardid</li>
@@ -242,6 +250,7 @@
       <caption xml:lang="ca">Pàgina inicial</caption>
       <caption xml:lang="ca-valencia">Pàgina inicial</caption>
       <caption xml:lang="cs">Domovská stránka</caption>
+      <caption xml:lang="da">Startside</caption>
       <caption xml:lang="en-GB">Homepage</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
@@ -270,6 +279,7 @@
       <caption xml:lang="ca">Accions de menú</caption>
       <caption xml:lang="ca-valencia">Accions de menú</caption>
       <caption xml:lang="cs">Činnosti nabídky</caption>
+      <caption xml:lang="da">Menuhandlinger</caption>
       <caption xml:lang="en-GB">Menu Actions</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
@@ -298,6 +308,7 @@
       <caption xml:lang="ca">Pestanyes</caption>
       <caption xml:lang="ca-valencia">Pestanyes</caption>
       <caption xml:lang="cs">Karty</caption>
+      <caption xml:lang="da">Faneblade</caption>
       <caption xml:lang="en-GB">Tabs</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
