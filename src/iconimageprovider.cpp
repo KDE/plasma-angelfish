@@ -50,7 +50,7 @@ QString IconImageProvider::providerId()
 
 QString IconImageProvider::storeImage(const QString &iconSource)
 {
-    QLatin1String prefix_favicon = QLatin1String("image://favicon/");
+    const QLatin1String prefix_favicon = QLatin1String("image://favicon/");
     if (!iconSource.startsWith(prefix_favicon)) {
         // don't know what to do with it, return as it is
         qWarning() << Q_FUNC_INFO << "Don't know how to store image" << iconSource;
@@ -58,7 +58,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     }
 
     // new uri for image
-    QString url = QStringLiteral("image://%1/%2").arg(providerId(), iconSource.mid(prefix_favicon.size()));
+    const QString url = QStringLiteral("image://%1/%2").arg(providerId(), iconSource.mid(prefix_favicon.size()));
 
     // check if we have that image already
     QSqlQuery query_check;
@@ -80,7 +80,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
 
     // Store new icon
     QQuickImageProvider *provider = dynamic_cast<QQuickImageProvider *>(s_engine->imageProvider(QStringLiteral("favicon")));
-    if (provider == nullptr) {
+    if (!provider) {
         qWarning() << Q_FUNC_INFO << "Failed to load image provider" << url;
         return iconSource; // as something is wrong
     }
@@ -89,12 +89,11 @@ QString IconImageProvider::storeImage(const QString &iconSource)
     QBuffer buffer(&data);
     buffer.open(QIODevice::WriteOnly);
 
-    QSize szRequested;
-    QSize szObtained;
-    QString providerIconName = iconSource.mid(prefix_favicon.size());
+    const QSize szRequested;
+    const QString providerIconName = iconSource.mid(prefix_favicon.size());
     switch (provider->imageType()) {
     case QQmlImageProviderBase::Image: {
-        QImage image = provider->requestImage(providerIconName, &szObtained, szRequested);
+        const QImage image = provider->requestImage(providerIconName, nullptr, szRequested);
         if (!image.save(&buffer, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
             return iconSource; // as something is wrong
@@ -102,7 +101,7 @@ QString IconImageProvider::storeImage(const QString &iconSource)
         break;
     }
     case QQmlImageProviderBase::Pixmap: {
-        QPixmap image = provider->requestPixmap(providerIconName, &szObtained, szRequested);
+        const QPixmap image = provider->requestPixmap(providerIconName, nullptr, szRequested);
         if (!image.save(&buffer, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
             return iconSource; // as something is wrong

@@ -32,7 +32,7 @@ BrowserManager *BrowserManager::s_instance = nullptr;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent)
-    , m_dbmanager(new DBManager)
+    , m_dbmanager(new DBManager(this))
 {
     connect(m_dbmanager, &DBManager::databaseTableChanged, this, &BrowserManager::databaseTableChanged);
 }

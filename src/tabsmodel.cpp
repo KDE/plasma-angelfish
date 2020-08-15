@@ -145,7 +145,7 @@ bool TabsModel::loadTabs()
 {
     if (!m_privateMode) {
         beginResetModel();
-        QString input = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/tabs.json");
+        const QString input = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/tabs.json");
 
         QFile inputFile(input);
         if (!inputFile.exists()) {
@@ -325,7 +325,7 @@ void TabsModel::setIsMobile(int index, bool isMobile)
 
     m_tabs[index].setIsMobile(isMobile);
 
-    QModelIndex mindex = createIndex(index, index);
+    const QModelIndex mindex = createIndex(index, index);
     emit dataChanged(mindex, mindex, {RoleNames::IsMobileRole});
     saveTabs();
 }
@@ -338,7 +338,7 @@ void TabsModel::setUrl(int index, const QString &url)
 
     m_tabs[index].setUrl(url);
 
-    QModelIndex mindex = createIndex(index, index);
+    const QModelIndex mindex = createIndex(index, index);
     emit dataChanged(mindex, mindex, {RoleNames::UrlRole});
     saveTabs();
 }

@@ -86,7 +86,6 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
     const QString providerIconName = url.mid(prefix_favicon.size());
 
     const QSize szRequested;
-    QSize szObtained;
 
     const QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
             + QStringLiteral("/icons/hicolor/16x16/apps/");
@@ -101,7 +100,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
 
     switch (provider->imageType()) {
     case QQmlImageProviderBase::Image: {
-        QImage image = provider->requestImage(providerIconName, &szObtained, szRequested);
+        const QImage image = provider->requestImage(providerIconName, nullptr, szRequested);
         if (!image.save(imageFile, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
             return;
@@ -109,7 +108,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
         break;
     }
     case QQmlImageProviderBase::Pixmap: {
-        QPixmap image = provider->requestPixmap(providerIconName, &szObtained, szRequested);
+        const QPixmap image = provider->requestPixmap(providerIconName, nullptr, szRequested);
         if (!image.save(imageFile, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
             return;

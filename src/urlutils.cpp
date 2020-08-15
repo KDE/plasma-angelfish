@@ -48,9 +48,9 @@ QString UrlUtils::urlScheme(const QString &url)
 
 QString UrlUtils::urlHostPort(const QString &url)
 {
-    QUrl u(url);
+    const QUrl u(url);
     QString r = u.host();
-    QStringList common = { QLatin1String("www."),
+    const QStringList common = { QLatin1String("www."),
                            QLatin1String("m."),
                            QLatin1String("mobile.") };
     for (const auto &i: common) {
@@ -60,9 +60,11 @@ QString UrlUtils::urlHostPort(const QString &url)
         }
     }
 
-    int p = u.port(-1);
+    const int p = u.port(-1);
+
     if (p > 0)
         r = QStringLiteral("%1:%2").arg(r).arg(p);
+
     return r;
 }
 

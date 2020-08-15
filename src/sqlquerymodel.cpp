@@ -51,8 +51,8 @@ void SqlQueryModel::generateRoleNames()
 QVariant SqlQueryModel::data(const QModelIndex &index, int role) const
 {
     if (role > Qt::UserRole) {
-        int columnIdx = role - Qt::UserRole - 1;
-        QModelIndex modelIndex = this->index(index.row(), columnIdx);
+        const int columnIdx = role - Qt::UserRole - 1;
+        const QModelIndex modelIndex = this->index(index.row(), columnIdx);
         return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
     }
     return {};

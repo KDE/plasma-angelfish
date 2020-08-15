@@ -40,10 +40,10 @@ constexpr int MAX_BROWSER_HISTORY_SIZE = 3000;
 DBManager::DBManager(QObject *parent)
     : QObject(parent)
 {
-    QString dbpath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    QString dbname = dbpath + QStringLiteral("/angelfish.sqlite");
+    const QString dbpath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    const QString dbname = dbpath + QStringLiteral("/angelfish.sqlite");
 
-    if(!QDir().mkpath(dbpath)) {
+    if (!QDir().mkpath(dbpath)) {
         qCritical() << "Database directory does not exist and cannot be created: " << dbpath;
         throw std::runtime_error("Database directory does not exist and cannot be created: " + dbpath.toStdString());
     }
@@ -125,12 +125,12 @@ bool DBManager::migrate()
 bool DBManager::migrateTo1()
 {
     // Starting from empty database, let's create the tables.
-    QString bookmarks = QStringLiteral("CREATE TABLE bookmarks (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
-    QString history = QStringLiteral("CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
-    QString icons = QStringLiteral("CREATE TABLE icons (url TEXT UNIQUE, icon BLOB)");
-    QString idx_bookmarks = QStringLiteral("CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)");
-    QString idx_history = QStringLiteral("CREATE UNIQUE INDEX idx_history_url ON history(url)");
-    QString idx_icons = QStringLiteral("CREATE UNIQUE INDEX idx_icons_url ON icons(url)");
+    const QString bookmarks = QStringLiteral("CREATE TABLE bookmarks (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
+    const QString history = QStringLiteral("CREATE TABLE history (url TEXT UNIQUE, title TEXT, icon TEXT, lastVisited INT)");
+    const QString icons = QStringLiteral("CREATE TABLE icons (url TEXT UNIQUE, icon BLOB)");
+    const QString idx_bookmarks = QStringLiteral("CREATE UNIQUE INDEX idx_bookmarks_url ON bookmarks(url)");
+    const QString idx_history = QStringLiteral("CREATE UNIQUE INDEX idx_history_url ON history(url)");
+    const QString idx_icons = QStringLiteral("CREATE UNIQUE INDEX idx_icons_url ON icons(url)");
     if (!execute(bookmarks) || !execute(idx_bookmarks) || !execute(history) || !execute(idx_history) || !execute(icons) || !execute(idx_icons))
         return false;
 
@@ -155,10 +155,10 @@ void DBManager::trimIcons()
 
 void DBManager::addRecord(const QString &table, const QVariantMap &pagedata)
 {
-    QString url = pagedata.value(QStringLiteral("url")).toString();
-    QString title = pagedata.value(QStringLiteral("title")).toString();
-    QString icon = pagedata.value(QStringLiteral("icon")).toString();
-    qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
+    const QString url = pagedata.value(QStringLiteral("url")).toString();
+    const QString title = pagedata.value(QStringLiteral("title")).toString();
+    const QString icon = pagedata.value(QStringLiteral("icon")).toString();
+    const qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
 
     if (url.isEmpty() || url == QStringLiteral("about:blank"))
         return;

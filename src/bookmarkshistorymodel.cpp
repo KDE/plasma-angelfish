@@ -85,20 +85,25 @@ void BookmarksHistoryModel::setQuery()
         return;
 
     QString command;
-    QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
-    QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
-    bool include_history = m_history && !(m_bookmarks && m_filter.isEmpty());
+    const QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
+    const QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
+    const bool includeHistory = m_history && !(m_bookmarks && m_filter.isEmpty());
+
     if (m_bookmarks)
         command = b.arg(1).arg(QLatin1String("bookmarks")) + filter;
-    if (m_bookmarks && include_history)
+
+    if (m_bookmarks && includeHistory)
         command += QLatin1String("\n UNION \n");
-    if (include_history)
+
+    if (includeHistory)
         command += b.arg(0).arg(QLatin1String("history")) + filter;
+
     command += QLatin1String("\n ORDER BY bookmarked DESC, lastVisitedDelta ASC");
-    if (include_history)
+
+    if (includeHistory)
         command += QStringLiteral("\n LIMIT %1").arg(QUERY_LIMIT);
 
-    qint64 ref = QDateTime::currentSecsSinceEpoch();
+    const qint64 ref = QDateTime::currentSecsSinceEpoch();
     QSqlQuery query;
     if (!query.prepare(command)) {
         qWarning() << Q_FUNC_INFO << "Failed to prepare SQL statement";
@@ -109,6 +114,7 @@ void BookmarksHistoryModel::setQuery()
 
     if (!m_filter.isEmpty())
         query.bindValue(QStringLiteral(":filter"), m_filter);
+
     query.bindValue(QStringLiteral(":now"), ref);
 
     if (!query.exec()) {
