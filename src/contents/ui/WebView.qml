@@ -105,7 +105,7 @@ WebEngineView {
         // Load larger touch icons
         touchIconsEnabled: true
         // Disable scrollbars on mobile
-        showScrollBars: !Kirigami.Settings.isMobile
+        showScrollBars: false
     }
 
     // Custom context menu

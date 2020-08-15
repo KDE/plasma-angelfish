@@ -24,6 +24,7 @@ import QtWebEngine 1.6
 import QtQuick.Window 2.3
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.2
+import QtQuick.Controls 2.2 as Controls
 
 import org.kde.kirigami 2.7 as Kirigami
 
@@ -38,7 +39,7 @@ Kirigami.ApplicationWindow {
      * Browser-level functionality should use this to refer to the current
      * view, rather than looking up views in the mode, as far as possible.
      */
-    property Item currentWebView: tabs.currentItem
+    property WebView currentWebView: tabs.currentItem
 
     // Pointer to the currently active list of tabs.
     //
@@ -158,6 +159,17 @@ Kirigami.ApplicationWindow {
             anchors.fill: parent
             activeTabs: rootPage.initialized && rootPage.privateMode
             privateTabsMode: true
+        }
+
+        Controls.ScrollBar {
+            visible: true
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            position: currentWebView.scrollPosition.y / currentWebView.contentsSize.height
+            orientation: Qt.Vertical
+            size: currentWebView.height / currentWebView.contentsSize.height
+            interactive: false
         }
 
         ErrorHandler {
