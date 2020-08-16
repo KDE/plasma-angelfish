@@ -28,109 +28,36 @@ import QtWebEngine 1.7
 import org.kde.kirigami 2.4 as Kirigami
 import org.kde.mobile.angelfish 1.0
 
-
-WebEngineView {
+WebView {
     id: webEngineView
 
-    property string errorCode: ""
-    property string errorString: ""
-
-    property bool privateMode: false
-
-    property alias userAgent: userAgent
-
-    // loadingActive property is set to true when loading is started
-    // and turned to false only after succesful or failed loading. It
-    // is possible to set it to false by calling stopLoading method.
-    //
-    // The property was introduced as it triggers visibility of the webEngineView
-    // in the other parts of the code. When using loading that is linked
-    // to visibility, stop/start loading was observed in some conditions. It looked as if
-    // there is an internal optimization of webengine in the case of parallel
-    // loading of several pages that could use visibility as one of the decision
-    // making parameters.
-    property bool loadingActive: false
-
-    property bool reloadOnVisible: true
-
-    // URL that was requested and should be used
-    // as a base for user interaction. It reflects
-    // last request (successful or failed)
-    property url requestedUrl: url
-
-    UserAgentGenerator {
-        id: userAgent
-        onUserAgentChanged: webEngineView.reload()
-        isMobile: Kirigami.Settings.isMobile
-    }
-
-    profile {
-        offTheRecord: privateMode
-
-        httpUserAgent: userAgent.userAgent
-
-        onDownloadRequested: {
-            // if we don't accept the request right away, it will be deleted
-            download.accept()
-            // therefore just stop the download again as quickly as possible,
-            // and ask the user for confirmation
-            download.pause()
-
-            questionLoader.setSource("DownloadQuestion.qml")
-            questionLoader.item.download = download
-            questionLoader.item.visible = true
-        }
-
-        onDownloadFinished: {
-            if (download.state === WebEngineDownloadItem.DownloadCompleted) {
-                showPassiveNotification(i18n("Download finished"))
-            }
-            else if (download.state === WebEngineDownloadItem.DownloadInterrupted) {
-                showPassiveNotification(i18n("Download failed"))
-                console.log("Download interrupt reason: " + download.interruptReason)
-            }
-            else if (download.state === WebEngineDownloadItem.DownloadCancelled) {
-                console.log("Download cancelled by the user")
-            }
-        }
-    }
-
-    settings {
-        // Disable builtin error pages in favor of our own
-        errorPageEnabled: false
-        // Load larger touch icons
-        touchIconsEnabled: true
-        // Disable scrollbars on mobile
-        showScrollBars: !Kirigami.Settings.isMobile
-    }
-
     // Custom context menu
-    Controls.Menu {
+    contextMenu: Controls.Menu {
         property ContextMenuRequest request
         id: contextMenu
 
         Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
             text: i18n("Copy")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Copy)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
             text: i18n("Cut")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Cut)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
             text: i18n("Paste")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
         }
         Controls.MenuItem {
-            enabled: contextMenu.request != null && contextMenu.request.selectedText
+            enabled: contextMenu.request && contextMenu.request.selectedText
             text: contextMenu.request && contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
             onTriggered: Qt.openUrlExternally(UrlUtils.urlFromUserInput(Settings.searchBaseUrl + contextMenu.request.selectedText));
         }
         Controls.MenuItem {
-            enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
+            enabled: contextMenu.request && contextMenu.request.linkUrl !== ""
             text: i18n("Copy Url")
             onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
         }
@@ -140,106 +67,11 @@ WebEngineView {
         }
     }
 
-    focus: true
-    onLoadingChanged: {
-        //print("Loading: " + loading);
-        print("    url: " + loadRequest.url)
-        //print("   icon: " + webEngineView.icon)
-        //print("  title: " + webEngineView.title)
-
-        /* Handle
-        *  - WebEngineView::LoadStartedStatus,
-        *  - WebEngineView::LoadStoppedStatus,
-        *  - WebEngineView::LoadSucceededStatus and
-        *  - WebEngineView::LoadFailedStatus
-        */
-        var ec = "";
-        var es = "";
-        if (loadRequest.status === WebEngineView.LoadStartedStatus) {
-            loadingActive = true;
-        }
-        if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
-            loadingActive = false;
-        }
-        if (loadRequest.status === WebEngineView.LoadFailedStatus) {
-            print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
-            print("Load failed url: " + loadRequest.url + " " + url);
-            ec = loadRequest.errorCode;
-            es = loadRequest.errorString;
-            loadingActive = false;
-
-            // update requested URL only after its clear that it fails.
-            // Otherwise, its updated as a part of url property update.
-            if (requestedUrl !== loadRequest.url)
-                requestedUrl = loadRequest.url;
-        }
-        errorCode = ec;
-        errorString = es;
-    }
-
-    Component.onCompleted: {
-        print("WebView completed.");
-        print("Settings: " + webEngineView.settings);
-    }
-
-    onIconChanged: {
-            if (icon && !privateMode)
-                BrowserManager.updateIcon(url, icon)
-    }
-
     onNewViewRequested: {
         if (UrlUtils.urlHost(request.requestedUrl) === UrlUtils.urlHost( BrowserManager.initialUrl)) {
             url = request.requestedUrl;
         } else {
             Qt.openUrlExternally(request.requestedUrl);
         }
-    }
-
-    onUrlChanged: {
-        if (requestedUrl !== url) {
-            requestedUrl = url;
-        }
-    }
-
-    onFullScreenRequested: {
-        request.accept()
-        if (webBrowser.visibility !== Window.FullScreen)
-            webBrowser.showFullScreen()
-        else
-            webBrowser.showNormal()
-    }
-
-    onContextMenuRequested: {
-        request.accepted = true // Make sure QtWebEngine doesn't show its own context menu.
-        contextMenu.request = request
-        contextMenu.x = request.x
-        contextMenu.y = request.y
-        contextMenu.open()
-    }
-
-    onAuthenticationDialogRequested: {
-        request.accepted = true
-        sheetLoader.setSource("AuthSheet.qml")
-        sheetLoader.item.request = request
-        sheetLoader.item.open()
-    }
-
-    onFeaturePermissionRequested: {
-        questionLoader.setSource("PermissionQuestion.qml")
-        questionLoader.item.permission = feature
-        questionLoader.item.origin = securityOrigin
-        questionLoader.item.visible = true
-    }
-
-    onJavaScriptDialogRequested: {
-        request.accepted = true
-        sheetLoader.setSource("JavaScriptDialogSheet.qml")
-        sheetLoader.item.request = request
-        sheetLoader.item.open()
-    }
-
-    function stopLoading() {
-        loadingActive = false;
-        stop();
     }
 }

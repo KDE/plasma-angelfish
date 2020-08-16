@@ -61,6 +61,51 @@ WebEngineView {
     property int findInPageResultIndex
     property int findInPageResultCount
 
+    // Menu that can be overriden from subclasses
+    property Controls.Menu contextMenu: Controls.Menu {
+        property ContextMenuRequest request
+
+        Controls.MenuItem {
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
+            text: i18n("Copy")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Copy)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
+            text: i18n("Cut")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Cut)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request && (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
+            text: i18n("Paste")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request && contextMenu.request.selectedText
+            text: contextMenu.request && contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
+            onTriggered: tabsModel.newTab(UrlUtils.urlFromUserInput(Settings.searchBaseUrl + contextMenu.request.selectedText));
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request && contextMenu.request.linkUrl !== ""
+            text: i18n("Copy Url")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
+        }
+        Controls.MenuItem {
+            text: i18n("View source")
+            onTriggered: tabsModel.newTab("view-source:" + webEngineView.url)
+        }
+        Controls.MenuItem {
+            text: i18n("Download")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.DownloadLinkToDisk)
+        }
+        Controls.MenuItem {
+            enabled: contextMenu.request && contextMenu.request.linkUrl !== ""
+            text: i18n("Open in new Tab")
+            onTriggered: webEngineView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
+        }
+    }
+
+
     UserAgentGenerator {
         id: userAgent
         onUserAgentChanged: webEngineView.reload()
@@ -106,51 +151,6 @@ WebEngineView {
         touchIconsEnabled: true
         // Disable scrollbars on mobile
         showScrollBars: false
-    }
-
-    // Custom context menu
-    Controls.Menu {
-        property ContextMenuRequest request
-        id: contextMenu
-
-        Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCopy) != 0
-            text: i18n("Copy")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.Copy)
-        }
-        Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanCut) != 0
-            text: i18n("Cut")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.Cut)
-        }
-        Controls.MenuItem {
-            enabled: contextMenu.request != null && (contextMenu.request.editFlags & ContextMenuRequest.CanPaste) != 0
-            text: i18n("Paste")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.Paste)
-        }
-        Controls.MenuItem {
-            enabled: contextMenu.request != null && contextMenu.request.selectedText
-            text: contextMenu.request && contextMenu.request.selectedText ? i18n("Search online for '%1'", contextMenu.request.selectedText) : i18n("Search online")
-            onTriggered: tabsModel.newTab(UrlUtils.urlFromUserInput(Settings.searchBaseUrl + contextMenu.request.selectedText));
-        }
-        Controls.MenuItem {
-            enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
-            text: i18n("Copy Url")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.CopyLinkToClipboard)
-        }
-        Controls.MenuItem {
-            text: i18n("View source")
-            onTriggered: tabsModel.newTab("view-source:" + webEngineView.url)
-        }
-        Controls.MenuItem {
-            text: i18n("Download")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.DownloadLinkToDisk)
-        }
-        Controls.MenuItem {
-            enabled: contextMenu.request !== null && contextMenu.request.linkUrl !== ""
-            text: i18n("Open in new Tab")
-            onTriggered: webEngineView.triggerWebAction(WebEngineView.OpenLinkInNewTab)
-        }
     }
 
     focus: true

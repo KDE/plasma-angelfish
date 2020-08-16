@@ -34,6 +34,7 @@
 #include "tabsmodel.h"
 #include "urlutils.h"
 #include "useragent.h"
+#include "angelfishsettings.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -72,7 +73,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 
     const QString fileName = parser.positionalArguments().constFirst();
-    KDesktopFile desktopFile(fileName);
+    const KDesktopFile desktopFile(fileName);
     if (desktopFile.readUrl().isEmpty()) {
         return 2;
     }
@@ -105,6 +106,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return static_cast<QObject *>(BrowserManager::instance());
     });
+
+    // Settings are read from WebView which we use as super class for WebAppView
+    qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
 
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webapp.qml")));
