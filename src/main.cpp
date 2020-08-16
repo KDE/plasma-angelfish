@@ -26,6 +26,7 @@
 #include <KLocalizedContext>
 #include <KLocalizedString>
 #include <KDBusService>
+#include <KWindowSystem>
 
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
@@ -73,15 +74,27 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
         if (!parser.positionalArguments().isEmpty()) {
             const QString initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
-            const auto *webbrowserWindow = engine.rootObjects().first();
+            auto *webbrowserWindow = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
             if (!webbrowserWindow) {
                 qWarning() << "No webbrowser window is open, can't open the url";
                 return;
             }
-            // Can be normal or private web view, whatever is open right now;
-            const auto *currentListWebView = webbrowserWindow->property("tabs").value<QObject *>();
-            auto *currentTabsModel = currentListWebView->property("tabsModel").value<TabsModel *>();
-            currentTabsModel->newTab(initialUrl);
+            const auto *pageStack = webbrowserWindow->property("pageStack").value<QObject *>();
+            const auto *initialPage = pageStack->property("initialPage").value<QObject *>();
+
+            // This should be initialPage->findChild<TabsModel *>(QStringLiteral("regularTabsObject")), for some reason
+            // it doesn't find our tabsModel.
+            const auto children = initialPage->children();
+            auto *regularTabs = *std::find_if(children.cbegin(), children.cend(), [](const QObject *child) {
+                return child->objectName() == QStringLiteral("regularTabsObject");
+            });
+
+            auto *tabsModel = regularTabs->property("tabsModel").value<TabsModel *>();
+            // Open new tab with requested url
+            tabsModel->newTab(initialUrl);
+
+            // Move window to the front
+            KWindowSystem::raiseWindow(webbrowserWindow->winId());
         }
     });
 

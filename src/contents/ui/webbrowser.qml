@@ -150,6 +150,7 @@ Kirigami.ApplicationWindow {
 
         ListWebView {
             id: regularTabs
+            objectName: "regularTabsObject"
             anchors.fill: parent
             activeTabs: rootPage.initialized && !rootPage.privateMode
         }
