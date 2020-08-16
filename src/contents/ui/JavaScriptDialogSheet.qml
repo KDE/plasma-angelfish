@@ -25,11 +25,22 @@ Kirigami.OverlaySheet {
         Component {
             id: confirm
 
-            Controls.Button {
-                text: i18n("Confirm")
-                onClicked: {
-                    dialogSheet.request.dialogAccept()
-                    dialogSheet.close()
+            RowLayout {
+                Controls.Button {
+                    Layout.fillWidth: true
+                    text: i18n("Confirm")
+                    onClicked: {
+                        dialogSheet.request.dialogAccept()
+                        dialogSheet.close()
+                    }
+                }
+                Controls.Button {
+                    Layout.fillWidth: true
+                    text: i18n("Cancel")
+                    onClicked: {
+                        dialogSheet.request.dialogReject()
+                        dialogSheet.close()
+                    }
                 }
             }
         }
