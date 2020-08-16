@@ -31,6 +31,7 @@ target_link_libraries(angelfish
     KF5::I18n
     KF5::ConfigCore
     KF5::ConfigGui
+    KF5::DBusAddons
 )
 
 install(TARGETS angelfish ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

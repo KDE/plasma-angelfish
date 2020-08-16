@@ -25,6 +25,7 @@
 
 #include <KLocalizedContext>
 #include <KLocalizedString>
+#include <KDBusService>
 
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
@@ -64,14 +65,35 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // QML loading
     QQmlApplicationEngine engine;
+
+    // Open links in the already running window when e.g clicked on in another application.
+    KDBusService service(KDBusService::Unique, &app);
+    QObject::connect(&service, &KDBusService::activateRequested, &app, [&parser, &engine](const QStringList &arguments) {
+        parser.parse(arguments);
+
+        if (!parser.positionalArguments().isEmpty()) {
+            const QString initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
+            const auto *webbrowserWindow = engine.rootObjects().first();
+            if (!webbrowserWindow) {
+                qWarning() << "No webbrowser window is open, can't open the url";
+                return;
+            }
+            // Can be normal or private web view, whatever is open right now;
+            const auto *currentListWebView = webbrowserWindow->property("tabs").value<QObject *>();
+            auto *currentTabsModel = currentListWebView->property("tabsModel").value<TabsModel *>();
+            currentTabsModel->newTab(initialUrl);
+        }
+    });
+
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider(&engine));
 
     // initial url command line parameter
-    QString initialUrl;
-    if (!parser.positionalArguments().isEmpty())
-        initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
+    if (!parser.positionalArguments().isEmpty()) {
+        const QString initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
+        BrowserManager::instance()->setInitialUrl(initialUrl);
+    }
 
     // Exported types
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
@@ -83,8 +105,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return static_cast<QObject *>(new UrlUtils());
     });
-
-    BrowserManager::instance()->setInitialUrl(initialUrl);
 
     // Browser Manager
     qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {

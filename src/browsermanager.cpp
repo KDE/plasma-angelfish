@@ -86,6 +86,7 @@ QString BrowserManager::initialUrl() const
 void BrowserManager::setInitialUrl(const QString &initialUrl)
 {
     m_initialUrl = initialUrl;
+    Q_EMIT initialUrlChanged();
 }
 
 BrowserManager *BrowserManager::instance()
