@@ -17,7 +17,8 @@
         "--device=dri",
         "--filesystem=xdg-data",
         "--filesystem=xdg-download",
-        "--talk-name=org.freedesktop.Notifications"
+        "--talk-name=org.freedesktop.Notifications",
+        "--own-name=org.kde.mobile.angelfish"
     ],
     "separate-locales": false,
     "add-extensions": {
