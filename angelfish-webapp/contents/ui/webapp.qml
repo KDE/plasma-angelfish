@@ -32,19 +32,12 @@ import QtQuick.Layouts 1.2
 
 Kirigami.ApplicationWindow {
     id: webBrowser
-    title: webView.title
+    title: currentWebView.title
 
-    property int borderWidth: Math.round(Kirigami.Units.gridUnit / 18);
-    property color borderColor: Kirigami.Theme.highlightColor;
-
-    width: Kirigami.Units.gridUnit * 20
-    height: Kirigami.Units.gridUnit * 30
+    minimumWidth: Kirigami.Units.gridUnit * 20
+    minimumHeight: Kirigami.Units.gridUnit * 30
 
     pageStack.globalToolBar.showNavigationButtons: false
-
-    // We only have one web view in a web app, but we still need this for
-    // compatibility with the angelfish components
-    property alias currentWebView: webView
 
     // Main Page
     pageStack.initialPage: Kirigami.Page {
@@ -59,19 +52,20 @@ Kirigami.ApplicationWindow {
         Kirigami.ColumnView.preventStealing: true
 
         WebAppView {
-            id: webView
+            // ID for compatibility with angelfish components
+            id: currentWebView
             anchors.fill: parent
             url: BrowserManager.initialUrl
         }
         ErrorHandler {
             id: errorHandler
 
-            errorString: webView.errorString
-            errorCode: webView.errorCode
+            errorString: currentWebView.errorString
+            errorCode: currentWebView.errorCode
 
             anchors.fill: parent
-            visible: webView.errorCode !== ""
-            onRefreshRequested: webView.reload()
+            visible: currentWebView.errorCode !== ""
+            onRefreshRequested: currentWebView.reload()
         }
 
         Loader {
@@ -95,13 +89,13 @@ Kirigami.ApplicationWindow {
                 right: webBrowser.right
             }
 
-            opacity: webView.loading ? 1 : 0
+            opacity: currentWebView.loading ? 1 : 0
             Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad; } }
 
             Rectangle {
                 color: Kirigami.Theme.highlightColor
 
-                width: Math.round((webView.loadProgress / 100) * parent.width)
+                width: Math.round((currentWebView.loadProgress / 100) * parent.width)
                 anchors {
                     top: parent.top
                     left: parent.left
@@ -113,28 +107,5 @@ Kirigami.ApplicationWindow {
         Loader {
             id: sheetLoader
         }
-    }
-
-    Connections {
-        target: webBrowser.pageStack
-        onCurrentIndexChanged: {
-            // drop all sub pages as soon as the browser window is the
-            // focussed one
-            if (webBrowser.pageStack.currentIndex === 0)
-                popSubPages();
-        }
-    }
-
-    QtSettings.Settings {
-        // kept separate to simplify definition of aliases
-        property alias x: webBrowser.x
-        property alias y: webBrowser.y
-        property alias width: webBrowser.width
-        property alias height: webBrowser.height
-    }
-
-    function popSubPages() {
-        while (webBrowser.pageStack.depth > 1)
-            webBrowser.pageStack.pop();
     }
 }
