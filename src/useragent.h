@@ -23,7 +23,7 @@ signals:
     void userAgentChanged();
 
 private:
-    int m_isMobile;
+    bool m_isMobile;
 };
 
 #endif // USERAGENT_H
