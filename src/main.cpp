@@ -28,6 +28,8 @@
 #include <KDBusService>
 #include <KWindowSystem>
 
+#include <signal.h>
+
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
 #include "iconimageprovider.h"
@@ -134,6 +136,28 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QObject::connect(QApplication::instance(), &QCoreApplication::aboutToQuit, QApplication::instance(), [] {
         AngelfishSettings::self()->save();
     });
+
+    // Setup Unix signal handlers
+    auto unixExitHandler = [](int /*sig*/) -> void {
+        QCoreApplication::quit();
+    };
+
+    QVector<int> quitSignals({SIGQUIT, SIGINT, SIGTERM, SIGHUP});
+
+    sigset_t blockingMask;
+    sigemptyset(&blockingMask);
+    for (auto sig : quitSignals) {
+        sigaddset(&blockingMask, sig);
+    }
+
+    struct sigaction sa;
+    sa.sa_handler = unixExitHandler;
+    sa.sa_mask    = blockingMask;
+    sa.sa_flags   = 0;
+
+    for (auto sig : quitSignals) {
+        sigaction(sig, &sa, nullptr);
+    }
 
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
