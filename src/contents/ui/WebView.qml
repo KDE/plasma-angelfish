@@ -53,6 +53,10 @@ WebEngineView {
 
     property bool reloadOnVisible: true
 
+    property bool reloadOnMatchingAgents: false
+
+    property bool agentsMatch: profile.httpUserAgent === userAgent.userAgent
+
     // URL that was requested and should be used
     // as a base for user interaction. It reflects
     // last request (successful or failed)
@@ -125,7 +129,7 @@ WebEngineView {
     focus: true
     onLoadingChanged: {
         //print("Loading: " + loading);
-        print("    url: " + loadRequest.url)
+        print("    url: " + loadRequest.url + " " + loadRequest.status)
         //print("   icon: " + webEngineView.icon)
         //print("  title: " + webEngineView.title)
 
@@ -138,7 +142,13 @@ WebEngineView {
         var ec = "";
         var es = "";
         if (loadRequest.status === WebEngineView.LoadStartedStatus) {
-            loadingActive = true;
+            if (profile.httpUserAgent !== userAgent.userAgent) {
+                //print("Mismatch of user agents, will load later " + loadRequest.url);
+                reloadOnMatchingAgents = true;
+                stopLoading();
+            } else {
+                loadingActive = true;
+            }
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!privateMode) {
@@ -239,17 +249,16 @@ WebEngineView {
     }
 
     onVisibleChanged: {
-        // set user agent to the current displayed tab
-        // this ensures that we follow mobile preference
-        // of the current webview. also update the current
-        // snapshot image with short delay to be sure that
-        // all kirigami pages have moved into place
-        if (visible) {
-            profile.httpUserAgent = Qt.binding(function() { return userAgent.userAgent; });
-            if (reloadOnVisible) {
-                reloadOnVisible = false;
-                reload();
-            }
+        if (visible && reloadOnVisible) {
+            reloadOnVisible = false;
+            reload();
+        }
+    }
+
+    onAgentsMatchChanged: {
+        if (agentsMatch && reloadOnMatchingAgents) {
+            reloadOnMatchingAgents = false;
+            reload();
         }
     }
 
