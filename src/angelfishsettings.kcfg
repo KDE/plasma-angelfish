@@ -19,6 +19,9 @@
     </group>
     <!-- Remember states -->
     <group name="WebView">
+        <entry key="profile" type="string">
+            <default>QStringLiteral("DefaultProfile")</default>
+        </entry>
         <entry key="webAutoLoadImages" type="bool">
             <default>true</default>
         </entry>
