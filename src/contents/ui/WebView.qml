@@ -51,10 +51,21 @@ WebEngineView {
     // making parameters.
     property bool loadingActive: false
 
+    // reloadOnVisible property ensures that the view has been always
+    // loaded at least once while it is visible. When the view is loaded
+    // while visible is set to false, there, what appears to be Chromium
+    // optimizations that can disturb the loading.
     property bool reloadOnVisible: true
 
+    // Profiles of WebViews are shared among all views of the same type (regular or
+    // private). However, within each group of tabs, we can have some tabs that are
+    // using mobile or desktop user agent. To avoid loading a page with the wrong
+    // user agent, the agent is checked in the beginning of the loading at onLoadingChanged
+    // handler. If the user agent is wrong, loading is stopped and reloadOnMatchingAgents
+    // property is set to true. As soon as the agent is correct, the page is loaded.
     property bool reloadOnMatchingAgents: false
 
+    // Used to follow whether agents match
     property bool agentsMatch: profile.httpUserAgent === userAgent.userAgent
 
     // URL that was requested and should be used
@@ -250,6 +261,7 @@ WebEngineView {
 
     onVisibleChanged: {
         if (visible && reloadOnVisible) {
+            // see description of reloadOnVisible above for reasoning
             reloadOnVisible = false;
             reload();
         }
@@ -257,6 +269,7 @@ WebEngineView {
 
     onAgentsMatchChanged: {
         if (agentsMatch && reloadOnMatchingAgents) {
+            // see description of reloadOnMatchingAgents above for reasoning
             reloadOnMatchingAgents = false;
             reload();
         }
