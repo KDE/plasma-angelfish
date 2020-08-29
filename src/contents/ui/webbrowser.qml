@@ -230,6 +230,16 @@ Kirigami.ApplicationWindow {
             id: sheetLoader
         }
 
+        // Unload the ShareSheet again after it closed
+        Connections {
+            target: sheetLoader.item
+            function onSheetOpenChanged() {
+                if (!sheetLoader.item.sheetOpen) {
+                    sheetLoader.source = ""
+                }
+            }
+        }
+
         UrlObserver {
             id: urlObserver
             url: currentWebView.url
