@@ -90,6 +90,6 @@ private:
     UserAgent *m_userAgent;
 };
 
-QTEST_MAIN(UserAgentTest);
+QTEST_GUILESS_MAIN(UserAgentTest);
 
 #include "useragenttest.moc"

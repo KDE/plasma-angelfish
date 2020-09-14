@@ -137,6 +137,6 @@ private:
     TabsModel *m_tabsModel;
 };
 
-QTEST_MAIN(TabsModelTest);
+QTEST_GUILESS_MAIN(TabsModelTest);
 
 #include "tabsmodeltest.moc"

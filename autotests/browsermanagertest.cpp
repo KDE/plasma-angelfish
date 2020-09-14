@@ -58,6 +58,6 @@ private:
     BrowserManager *m_browserManager;
 };
 
-QTEST_MAIN(UserAgentTest);
+QTEST_GUILESS_MAIN(UserAgentTest);
 
 #include "browsermanagertest.moc"

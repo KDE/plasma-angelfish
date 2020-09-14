@@ -97,6 +97,6 @@ private:
     DBManager *m_dbmanager;
 };
 
-QTEST_MAIN(TabsModelTest);
+QTEST_GUILESS_MAIN(TabsModelTest);
 
 #include "dbmanagertest.moc"
