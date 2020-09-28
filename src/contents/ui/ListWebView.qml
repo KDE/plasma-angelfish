@@ -40,35 +40,12 @@ Repeater {
 
     property alias tabsModel: tabsModel
 
-    property WebEngineProfile profile: WebEngineProfile {
+    property WebEngineProfile profile: AngelfishWebProfile {
         httpUserAgent: tabs.currentItem.userAgent.userAgent
         offTheRecord: tabs.privateTabsMode
         storageName: tabs.privateTabsMode ? "Private" : Settings.profile
 
-        onDownloadRequested: {
-            // if we don't accept the request right away, it will be deleted
-            download.accept()
-            // therefore just stop the download again as quickly as possible,
-            // and ask the user for confirmation
-            download.pause()
-
-            questionLoader.setSource("DownloadQuestion.qml")
-            questionLoader.item.download = download
-            questionLoader.item.visible = true
-        }
-
-        onDownloadFinished: {
-            if (download.state === WebEngineDownloadItem.DownloadCompleted) {
-                showPassiveNotification(i18n("Download finished"))
-            }
-            else if (download.state === WebEngineDownloadItem.DownloadInterrupted) {
-                showPassiveNotification(i18n("Download failed"))
-                console.log("Download interrupt reason: " + download.interruptReason)
-            }
-            else if (download.state === WebEngineDownloadItem.DownloadCancelled) {
-                console.log("Download cancelled by the user")
-            }
-        }
+        questionLoader: questionLoader
     }
 
     model: TabsModel {
