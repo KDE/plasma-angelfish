@@ -76,7 +76,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
         if (!parser.positionalArguments().isEmpty()) {
             const QString initialUrl = QUrl::fromUserInput(parser.positionalArguments().constFirst()).toString();
-            auto *webbrowserWindow = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
+            const auto *webbrowserWindow = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
             if (!webbrowserWindow) {
                 qWarning() << "No webbrowser window is open, can't open the url";
                 return;
@@ -87,7 +87,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
             // This should be initialPage->findChild<TabsModel *>(QStringLiteral("regularTabsObject")), for some reason
             // it doesn't find our tabsModel.
             const auto children = initialPage->children();
-            auto *regularTabs = *std::find_if(children.cbegin(), children.cend(), [](const QObject *child) {
+            const auto *regularTabs = *std::find_if(children.cbegin(), children.cend(), [](const QObject *child) {
                 return child->objectName() == QStringLiteral("regularTabsObject");
             });
 
@@ -138,15 +138,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     });
 
     // Setup Unix signal handlers
-    auto unixExitHandler = [](int /*sig*/) -> void {
+    const auto unixExitHandler = [](int /*sig*/) -> void {
         QCoreApplication::quit();
     };
 
-    QVector<int> quitSignals({SIGQUIT, SIGINT, SIGTERM, SIGHUP});
+    const QVector<int> quitSignals({SIGQUIT, SIGINT, SIGTERM, SIGHUP});
 
     sigset_t blockingMask;
     sigemptyset(&blockingMask);
-    for (auto sig : quitSignals) {
+    for (const auto sig : quitSignals) {
         sigaddset(&blockingMask, sig);
     }
 
