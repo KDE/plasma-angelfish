@@ -170,13 +170,13 @@ Item {
 
                 text: {
                     if (labelItem.scheme === "http" || labelItem.scheme === "https") {
-                        var h = UrlUtils.urlHostPort(currentWebView.requestedUrl);
-                        var p = UrlUtils.urlPath(currentWebView.requestedUrl);
+                        const host = UrlUtils.urlHostPort(currentWebView.requestedUrl);
+                        var path = UrlUtils.urlPath(currentWebView.requestedUrl);
 
-                        if (p === "/")
-                            p = ""
+                        if (path === "/")
+                            path = ""
 
-                        return '%1<font size="2">%2</font>'.arg(h).arg(p);
+                        return '%1<font size="2">%2</font>'.arg(host).arg(path);
                     }
                     return currentWebView.requestedUrl;
                 }

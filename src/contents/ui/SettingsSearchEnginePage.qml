@@ -56,10 +56,10 @@ Kirigami.ScrollablePage {
             description: i18n("Base URL of your preferred search engine")
             text: Settings.searchCustomUrl
             onAccepted: {
-                var t = UrlUtils.urlFromUserInput(searchEnginePopup.text);
-                Settings.searchCustomUrl = t;
-                baseUrl = t;
-                searchEngines.setProperty(searchEngines.count - 1, "url", t);
+                const url = UrlUtils.urlFromUserInput(searchEnginePopup.text);
+                Settings.searchCustomUrl = url;
+                baseUrl = url;
+                searchEngines.setProperty(searchEngines.count - 1, "url", url);
             }
         }
 

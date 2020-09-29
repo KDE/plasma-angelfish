@@ -17,16 +17,18 @@ WebEngineProfile {
         questionLoader.item.visible = true
     }
 
-    onDownloadFinished: {
-        if (download.state === WebEngineDownloadItem.DownloadCompleted) {
+    onDownloadFinished: (download) => {
+        switch (download.state) {
+        case WebEngineDownloadItem.DownloadCompleted:
             showPassiveNotification(i18n("Download finished"))
-        }
-        else if (download.state === WebEngineDownloadItem.DownloadInterrupted) {
+            break;
+        case WebEngineDownloadItem.DownloadInterrupted:
             showPassiveNotification(i18n("Download failed"))
             console.log("Download interrupt reason: " + download.interruptReason)
-        }
-        else if (download.state === WebEngineDownloadItem.DownloadCancelled) {
+            break;
+        case WebEngineDownloadItem.DownloadCancelled:
             console.log("Download cancelled by the user")
+            break;
         }
     }
 }

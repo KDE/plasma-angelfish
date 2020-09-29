@@ -53,9 +53,10 @@ Kirigami.ScrollablePage {
 
     property int  itemHeight: Kirigami.Units.gridUnit * 6
     property int  itemWidth: {
-        if (!landscapeMode) return width;
+        if (!landscapeMode)
+            return width;
         // using grid width to take into account its scrollbar
-        var n = Math.floor((grid.width - Kirigami.Units.largeSpacing) / (landscapeMinWidth + Kirigami.Units.largeSpacing));
+        const n = Math.floor((grid.width - Kirigami.Units.largeSpacing) / (landscapeMinWidth + Kirigami.Units.largeSpacing));
         return Math.floor(grid.width / n) - Kirigami.Units.largeSpacing;
     }
     property int  landscapeMinWidth: Kirigami.Units.gridUnit * 12

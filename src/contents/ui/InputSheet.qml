@@ -68,7 +68,8 @@ Kirigami.OverlaySheet {
     }
 
     onSheetOpenChanged: {
-        if (sheetOpen)
+        if (sheetOpen) {
             sheetTextField.forceActiveFocus()
+        }
     }
 }

@@ -163,7 +163,7 @@ WebEngineView {
         }
         if (loadRequest.status === WebEngineView.LoadSucceededStatus) {
             if (!privateMode) {
-                var request = {
+                const request = {
                     url: currentWebView.url,
                     title: currentWebView.title,
                     icon: currentWebView.icon
