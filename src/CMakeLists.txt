@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2020 2020 Jonah Brüchert <jbb@kaidan.im>
+# SPDX-FileCopyrightText: 2020 2020 Rinigus <rinigus.git@gmail.com>
+#
+# SPDX-License-Identifier: LGPL-2.0-or-later
+
 set(angelfish_SRCS
     main.cpp
     browsermanager.cpp

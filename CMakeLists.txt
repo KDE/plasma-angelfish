@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2020 2014-2015 Sebastian Kügler <sebas@kde.org>
+# SPDX-FileCopyrightText: 2020 2020 Jonah Brüchert <jbb@kaidan.im>
+#
+# SPDX-License-Identifier: LGPL-2.0-or-later
+
 project(angelfish)
 
 cmake_minimum_required(VERSION 2.8.12)

@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2020 2020 Jonah Brüchert <jbb@kaidan.im>
+# SPDX-FileCopyrightText: 2020 2020 Rinigus <rinigus.git@gmail.com>
+#
+# SPDX-License-Identifier: LGPL-2.0-or-later
+
 include(ECMAddTests)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Test Sql Gui Quick)
