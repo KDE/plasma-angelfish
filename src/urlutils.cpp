@@ -68,12 +68,17 @@ QString UrlUtils::urlHostPort(const QString &url)
     return r;
 }
 
-QString UrlUtils::urlPath(const QString &url)
-{
-    return QUrl::fromUserInput(url).path();
-}
-
 QString UrlUtils::urlHost(const QString &url)
 {
     return QUrl::fromUserInput(url).host();
+}
+
+QString UrlUtils::htmlFormattedUrl(const QString &url)
+{
+    const QUrl parsedUrl = QUrl::fromUserInput(url);
+
+    const QString path = parsedUrl.path();
+    return QStringLiteral(R"(%1<font size="2">%2</font>)")
+            .arg(parsedUrl.host())
+            .arg(path == QStringLiteral("/") ? QString() : path);
 }

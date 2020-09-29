@@ -40,8 +40,8 @@ public:
     Q_INVOKABLE static QString urlFromUserInput(const QString &input);
     Q_INVOKABLE static QString urlScheme(const QString &url);
     Q_INVOKABLE static QString urlHostPort(const QString &url);
-    Q_INVOKABLE static QString urlPath(const QString &url);
     Q_INVOKABLE static QString urlHost(const QString &url);
+    Q_INVOKABLE static QString htmlFormattedUrl(const QString &url);
 };
 
 #endif // URLUTILS_H
