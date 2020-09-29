@@ -148,6 +148,8 @@ Kirigami.ApplicationWindow {
         // for navigation bar management (webapp and others)
         property bool navigationAutoShow: true
 
+        property alias questionLoader: questionLoader
+
         ListWebView {
             id: regularTabs
             objectName: "regularTabsObject"

@@ -45,7 +45,7 @@ Repeater {
         offTheRecord: tabs.privateTabsMode
         storageName: tabs.privateTabsMode ? "Private" : Settings.profile
 
-        questionLoader: questionLoader
+        questionLoader: rootPage.questionLoader
     }
 
     model: TabsModel {
