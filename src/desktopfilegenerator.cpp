@@ -92,16 +92,16 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
 
     QDir().mkpath(iconLocation);
 
-    const auto imageFile = new QFile(iconLocation + fileName + QStringLiteral(".png"));
+    QFile imageFile(iconLocation + fileName + QStringLiteral(".png"));
 
-    if (!imageFile->open(QIODevice::WriteOnly)) {
+    if (!imageFile.open(QIODevice::WriteOnly)) {
         qDebug() << Q_FUNC_INFO << "Failed to open image file";
     }
 
     switch (provider->imageType()) {
     case QQmlImageProviderBase::Image: {
         const QImage image = provider->requestImage(providerIconName, nullptr, szRequested);
-        if (!image.save(imageFile, "PNG")) {
+        if (!image.save(&imageFile, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save image" << url;
             return;
         }
@@ -109,7 +109,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
     }
     case QQmlImageProviderBase::Pixmap: {
         const QPixmap image = provider->requestPixmap(providerIconName, nullptr, szRequested);
-        if (!image.save(imageFile, "PNG")) {
+        if (!image.save(&imageFile, "PNG")) {
             qWarning() << Q_FUNC_INFO << "Failed to save pixmap" << url;
             return;
         }
