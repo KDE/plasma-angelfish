@@ -20,16 +20,5 @@
 
 class SettingsHelper {
 public:
-    static SettingsHelper *instance();
-
-    inline bool isMobile() const {
-        return m_isMobile;
-    }
-
-    static SettingsHelper *s_instance;
-
-private:
-    SettingsHelper();
-
-    bool m_isMobile;
+    static bool isMobile();
 };

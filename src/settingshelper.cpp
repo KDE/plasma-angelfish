@@ -18,22 +18,14 @@
 
 #include <QtGlobal>
 #include <QByteArrayList>
+#include <QDebug>
 
 #include "settingshelper.h"
 
-SettingsHelper *SettingsHelper::s_instance = nullptr;
-
-SettingsHelper *SettingsHelper::instance()
+bool SettingsHelper::isMobile()
 {
-    if (!s_instance)
-        s_instance = new SettingsHelper();
-
-    return s_instance;
-}
-
-SettingsHelper::SettingsHelper()
-    : m_isMobile(qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")
-                 ? QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))
-                 : false)
-{
+    static bool mobile = qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")
+                             ? QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))
+                             : false;
+    return mobile;
 }

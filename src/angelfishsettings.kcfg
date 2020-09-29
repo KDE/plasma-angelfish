@@ -37,13 +37,13 @@
             <default>true</default>
         </entry>
         <entry key="navBarBack" type="bool">
-            <default>!SettingsHelper::instance()->isMobile()</default>
+            <default>!SettingsHelper::isMobile()</default>
         </entry>
         <entry key="navBarForward" type="bool">
-            <default>!SettingsHelper::instance()->isMobile()</default>
+            <default>!SettingsHelper::isMobile()</default>
         </entry>
         <entry key="navBarReload" type="bool">
-            <default>!SettingsHelper::instance()->isMobile()</default>
+            <default>!SettingsHelper::isMobile()</default>
         </entry>
         <entry key="navBarContextMenu" type="bool"></entry>
     </group>
