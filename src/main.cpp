@@ -162,6 +162,20 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webbrowser.qml")));
 
+    const auto *window = qobject_cast<QQuickWindow *>(engine.rootObjects().first());
+    QObject::connect(window, &QQuickWindow::widthChanged, AngelfishSettings::self(), [window] {
+        AngelfishSettings::setWindowWidth(window->width());
+    });
+    QObject::connect(window, &QQuickWindow::heightChanged, AngelfishSettings::self(), [window] {
+        AngelfishSettings::setWindowHeight(window->height());
+    });
+    QObject::connect(window, &QQuickWindow::xChanged, AngelfishSettings::self(), [window] {
+        AngelfishSettings::setWindowX(window->x());
+    });
+    QObject::connect(window, &QQuickWindow::yChanged, AngelfishSettings::self(), [window] {
+        AngelfishSettings::setWindowY(window->y());
+    });
+
     // Error handling
     if (engine.rootObjects().isEmpty()) {
         return -1;

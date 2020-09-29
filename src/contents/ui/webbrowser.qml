@@ -454,11 +454,6 @@ Kirigami.ApplicationWindow {
     // Store window dimensions
     Component.onCompleted: {
         rootPage.initialized = true
-
-        Settings.windowX = Qt.binding(function() {return webBrowser.x})
-        Settings.windowY = Qt.binding(function() {return webBrowser.y})
-        Settings.windowWidth = Qt.binding(function() {return webBrowser.width})
-        Settings.windowHeight = Qt.binding(function() {return webBrowser.height})
     }
 
     function popSubPages() {
