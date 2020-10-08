@@ -39,6 +39,7 @@
   <summary xml:lang="ca-valencia">Navegador web per a dispositius mòbils</summary>
   <summary xml:lang="cs">Webový prohlížeč pro mobilní zařízení</summary>
   <summary xml:lang="da">Webbrowser til mobile enheder</summary>
+  <summary xml:lang="el">Πειηγητής ιστού για κινητά</summary>
   <summary xml:lang="en-GB">Web browser for mobile devices</summary>
   <summary xml:lang="es">Navegador web para dispositivos móviles</summary>
   <summary xml:lang="et">Mobiilseadmete veebilehitseja</summary>
@@ -100,6 +101,7 @@
     <p xml:lang="ca-valencia">L'Angelfish és un navegador web modern per a mòbils</p>
     <p xml:lang="cs">Angelfish je moderní mobilní webový prohlížeč</p>
     <p xml:lang="da">Angelfish er en moderne mobil-webbrowser</p>
+    <p xml:lang="el">Το Angelfish είναι ένας σύγχρονος περιηγητής ιστού για κινητά</p>
     <p xml:lang="en-GB">Angelfish is a modern mobile web browser</p>
     <p xml:lang="es">Angelfish es un moderno navegador web móvil</p>
     <p xml:lang="et">Angelfish on tänapäevane mobiilne veebilehitseja</p>
@@ -221,6 +223,7 @@
       <li xml:lang="ca-valencia">pestanyes</li>
       <li xml:lang="cs">karty</li>
       <li xml:lang="da">faneblade</li>
+      <li xml:lang="el">καρτέλες</li>
       <li xml:lang="en-GB">tabs</li>
       <li xml:lang="es">pestañas</li>
       <li xml:lang="et">kaardid</li>
@@ -251,6 +254,7 @@
       <caption xml:lang="ca-valencia">Pàgina inicial</caption>
       <caption xml:lang="cs">Domovská stránka</caption>
       <caption xml:lang="da">Startside</caption>
+      <caption xml:lang="el">Προσωπική σελίδα</caption>
       <caption xml:lang="en-GB">Homepage</caption>
       <caption xml:lang="es">Página de inicio</caption>
       <caption xml:lang="et">Kodulehekülg</caption>
@@ -280,6 +284,7 @@
       <caption xml:lang="ca-valencia">Accions de menú</caption>
       <caption xml:lang="cs">Činnosti nabídky</caption>
       <caption xml:lang="da">Menuhandlinger</caption>
+      <caption xml:lang="el">Ενέργειες μενού</caption>
       <caption xml:lang="en-GB">Menu Actions</caption>
       <caption xml:lang="es">Acciones del menú</caption>
       <caption xml:lang="et">Menüütoimingud</caption>
@@ -309,6 +314,7 @@
       <caption xml:lang="ca-valencia">Pestanyes</caption>
       <caption xml:lang="cs">Karty</caption>
       <caption xml:lang="da">Faneblade</caption>
+      <caption xml:lang="el">Καρτέλες</caption>
       <caption xml:lang="en-GB">Tabs</caption>
       <caption xml:lang="es">Pestañas</caption>
       <caption xml:lang="et">Kaardid</caption>
