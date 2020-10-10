@@ -34,6 +34,8 @@ WebView {
     profile: AngelfishWebProfile {
         httpUserAgent: userAgent.userAgent
         questionLoader: questionLoader
+        offTheRecord: false
+        storageName: "angelfish-webapp"
     }
 
     // Custom context menu
