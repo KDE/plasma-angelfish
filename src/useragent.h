@@ -11,6 +11,7 @@
 #define USERAGENT_H
 
 #include <QObject>
+class QQuickWebEngineProfile;
 
 class UserAgent : public QObject
 {
@@ -32,6 +33,14 @@ signals:
     void userAgentChanged();
 
 private:
+    QString extractValueFromAgent(const std::string &key);
+
+    const QQuickWebEngineProfile *m_defaultProfile;
+    const QString m_chromeVersion;
+    const QString m_appleWebKitVersion;
+    const QString m_webEngineVersion;
+    const QString m_safariVersion;
+
     bool m_isMobile;
 };
 
