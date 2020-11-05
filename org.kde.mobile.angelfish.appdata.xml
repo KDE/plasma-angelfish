@@ -47,6 +47,7 @@
   <summary xml:lang="fi">Verkkoselain mobiililaitteille</summary>
   <summary xml:lang="fr">Navigateur web pour les appareils mobiles</summary>
   <summary xml:lang="gl">Navegador web para dispositivos móbiles</summary>
+  <summary xml:lang="ia">Webbrowser (Navigator de web) per dispositivos mobile</summary>
   <summary xml:lang="it">Browser web per dispositivi mobili</summary>
   <summary xml:lang="ko">모바일 장치용 웹 브라우저</summary>
   <summary xml:lang="lt">Saityno naršyklė mobiliesiems įrenginiams</summary>
@@ -109,6 +110,7 @@
     <p xml:lang="fi">Angelfish on nykyaikainen mobiiliverkkoselain</p>
     <p xml:lang="fr">Angelfish est un navigateur web mobile moderne</p>
     <p xml:lang="gl">Angelfish é un navegador web móbil moderno</p>
+    <p xml:lang="ia">Angelfish es un moderne Webbrowser (navigator web) de mobile</p>
     <p xml:lang="it">Angelfish è un browser web moderno per dispositivi mobili</p>
     <p xml:lang="ko">Angelfish는 현대적인 모바일 웹 브라우저입니다</p>
     <p xml:lang="lt">Angelfish yra šiuolaikinė mobilioji saityno naršyklė</p>
@@ -137,6 +139,7 @@
     <p xml:lang="fi">Tukee tavallisia selainominaisuuksia kuten</p>
     <p xml:lang="fr">Il prend en charge les fonctionnalités classiques des navigateurs :</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
+    <p xml:lang="ia">Il supporta typic characteristicas de navigator, tal como</p>
     <p xml:lang="id">Ini mendukung fitur-fitur browser biasanya, sepertihalnya</p>
     <p xml:lang="it">Supporta le funzionalità tipiche del browser, quali</p>
     <p xml:lang="ko">다음과 같은 웹 브라우저 기능을 제공합니다</p>
@@ -231,6 +234,7 @@
       <li xml:lang="fi">välilehdet</li>
       <li xml:lang="fr">onglets</li>
       <li xml:lang="gl">separadores</li>
+      <li xml:lang="ia">schedas</li>
       <li xml:lang="it">schede</li>
       <li xml:lang="ko">탭</li>
       <li xml:lang="lt">korteles</li>
@@ -262,6 +266,7 @@
       <caption xml:lang="fi">Kotisivu</caption>
       <caption xml:lang="fr">Page d'accueil</caption>
       <caption xml:lang="gl">Páxina inicial</caption>
+      <caption xml:lang="ia">Pagina Domo o Principal</caption>
       <caption xml:lang="it">Pagina iniziale</caption>
       <caption xml:lang="ko">홈 페이지</caption>
       <caption xml:lang="lt">Pagrindinis puslapis</caption>
@@ -292,6 +297,7 @@
       <caption xml:lang="fi">Valikkotoimenpiteet</caption>
       <caption xml:lang="fr">Actions de menu</caption>
       <caption xml:lang="gl">Accións de menú</caption>
+      <caption xml:lang="ia">Actiones de menu</caption>
       <caption xml:lang="it">Menu Azioni</caption>
       <caption xml:lang="ko">메뉴 동작</caption>
       <caption xml:lang="lt">Meniu veiksmai</caption>
@@ -322,6 +328,7 @@
       <caption xml:lang="fi">Välilehdet</caption>
       <caption xml:lang="fr">Onglets</caption>
       <caption xml:lang="gl">Separadores</caption>
+      <caption xml:lang="ia">Schedas</caption>
       <caption xml:lang="it">Schede</caption>
       <caption xml:lang="ko">탭</caption>
       <caption xml:lang="lt">Kortelės</caption>
