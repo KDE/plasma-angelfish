@@ -32,7 +32,7 @@ class BookmarksHistoryModel : public SqlQueryModel
     Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
 
 public:
-    BookmarksHistoryModel();
+    BookmarksHistoryModel(QObject *parent = nullptr);
 
     bool active() const
     {

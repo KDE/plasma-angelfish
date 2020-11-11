@@ -16,7 +16,8 @@
 
 constexpr int QUERY_LIMIT = 1000;
 
-BookmarksHistoryModel::BookmarksHistoryModel()
+BookmarksHistoryModel::BookmarksHistoryModel(QObject *parent)
+    : SqlQueryModel(parent)
 {
     connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged, this, &BookmarksHistoryModel::onDatabaseChanged);
 }

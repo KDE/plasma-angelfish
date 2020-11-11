@@ -35,6 +35,8 @@ public:
     QString initialUrl() const;
     void setInitialUrl(const QString &initialUrl);
 
+    bool isBookmarked(const QString &url) const;
+
 signals:
     void updated();
 
@@ -45,7 +47,6 @@ signals:
 public slots:
     void addBookmark(const QVariantMap &bookmarkdata);
     void removeBookmark(const QString &url);
-    bool isBookmarked(const QString &url) const;
 
     void addToHistory(const QVariantMap &pagedata);
     void removeFromHistory(const QString &url);

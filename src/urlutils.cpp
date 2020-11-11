@@ -66,6 +66,6 @@ QString UrlUtils::htmlFormattedUrl(const QString &url)
 
     const QString path = parsedUrl.path();
     return QStringLiteral(R"(%1<font size="2">%2</font>)")
-            .arg(parsedUrl.host())
-            .arg(path == QStringLiteral("/") ? QString() : path);
+            .arg(parsedUrl.host(),
+                 path == QStringLiteral("/") ? QString() : path);
 }
