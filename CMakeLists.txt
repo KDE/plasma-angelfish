@@ -48,6 +48,7 @@ add_definitions(-DQT_NO_FOREACH)
 kde_enable_exceptions()
 
 ################# build and install #################
+add_subdirectory(lib)
 add_subdirectory(src)
 if (BUILD_TESTING)
     add_subdirectory(autotests)
