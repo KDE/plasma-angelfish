@@ -18,11 +18,6 @@ ecm_add_test(dbmanagertest.cpp ../src/dbmanager.cpp ../src/iconimageprovider.cpp
              LINK_LIBRARIES Qt5::Test Qt5::Sql Qt5::Quick KF5::ConfigGui
 )
 
-ecm_add_test(useragenttest.cpp ../src/useragent.cpp
-             TEST_NAME useragenttest
-             LINK_LIBRARIES Qt5::Test Qt5::WebEngine
-)
-
 ecm_add_test(browsermanagertest.cpp ../src/browsermanager.cpp ../src/dbmanager.cpp ../src/iconimageprovider.cpp ../src/urlutils.cpp
              ${SETTINGS_SHARED_SRCS}
              TEST_NAME browsermanagertest
