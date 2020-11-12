@@ -54,7 +54,7 @@ void UserAgent::setIsMobile(bool value)
 QString UserAgent::extractValueFromAgent(const std::string &key)
 {
     const std::string defaultUserAgent = m_defaultProfile->httpUserAgent().toStdString();
-    const unsigned long index = defaultUserAgent.find(key) + key.length() + 1;
-    const unsigned long endIndex = defaultUserAgent.find(' ', index);
+    const std::string::size_type index = defaultUserAgent.find(key) + key.length() + 1;
+    const std::string::size_type endIndex = defaultUserAgent.find(' ', index);
     return QString::fromStdString(defaultUserAgent.substr(index, endIndex - index));
 }

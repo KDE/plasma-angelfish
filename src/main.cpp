@@ -133,7 +133,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         QCoreApplication::quit();
     };
 
-    const QVector<int> quitSignals({SIGQUIT, SIGINT, SIGTERM, SIGHUP});
+    const int quitSignals[] = {SIGQUIT, SIGINT, SIGTERM, SIGHUP};
 
     sigset_t blockingMask;
     sigemptyset(&blockingMask);

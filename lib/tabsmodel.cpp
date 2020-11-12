@@ -176,7 +176,7 @@ bool TabsModel::saveTabs() const
 {
     // only save if not in private mode
     if (!m_privateMode && !m_tabsReadOnly) {
-        QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/");
+        const QString outputDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/angelfish/");
 
         QFile outputFile(outputDir + QStringLiteral("tabs.json"));
         if (!QDir(outputDir).mkpath(QStringLiteral("."))) {
@@ -187,19 +187,18 @@ bool TabsModel::saveTabs() const
             qDebug() << "Failed to write tabs to disk";
         }
 
-        auto document = QJsonDocument();
-        auto tabsStorage = QJsonObject();
         QJsonArray tabsArray;
-        for (const auto &tab : m_tabs) {
-            tabsArray.append(tab.toJson());
-        }
+        std::transform(m_tabs.cbegin(), m_tabs.cend(), std::back_inserter(tabsArray), [](const TabState &tab){
+            return tab.toJson();
+        });
+
         qDebug() << "Wrote to file" << outputFile.fileName() << "(" << tabsArray.count() << "urls"
                  << ")";
 
-        tabsStorage.insert(QLatin1String("tabs"), tabsArray);
-        tabsStorage.insert(QLatin1String("currentTab"), m_currentTab);
-
-        document.setObject(tabsStorage);
+        const QJsonDocument document({
+            {QLatin1String("tabs"), tabsArray},
+            {QLatin1String("currentTab"), m_currentTab}
+        });
 
         outputFile.write(document.toJson());
         return true;
@@ -372,8 +371,8 @@ bool TabState::operator==(const TabState &other) const
 
 QJsonObject TabState::toJson() const
 {
-    QJsonObject obj;
-    obj.insert(QStringLiteral("url"), m_url);
-    obj.insert(QStringLiteral("isMobile"), m_isMobile);
-    return obj;
+    return {
+        {QStringLiteral("url"), m_url},
+        {QStringLiteral("isMobile"), m_isMobile}
+    };
 }

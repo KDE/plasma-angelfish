@@ -127,7 +127,7 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
     }
 
     if (query.next()) {
-        QImage image = QImage::fromData(query.value(0).toByteArray());
+        const QImage image = QImage::fromData(query.value(0).toByteArray());
         if (size) {
             size->setHeight(image.height());
             size->setWidth(image.width());

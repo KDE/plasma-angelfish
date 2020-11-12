@@ -36,11 +36,12 @@ QString UrlUtils::urlScheme(const QString &url)
 QString UrlUtils::urlHostPort(const QString &url)
 {
     const QUrl u(url);
-    QString r = u.host();
-    const QStringList common = { QLatin1String("www."),
+    static QStringList common = { QLatin1String("www."),
                            QLatin1String("m."),
                            QLatin1String("mobile.") };
-    for (const auto &i: common) {
+
+    QString r = u.host();
+    for (const auto &i : common) {
         if (r.startsWith(i) && r.length() > i.length()) {
             r.remove(0, i.length());
             break; // strip prefix only once

@@ -212,7 +212,7 @@ void DBManager::setLastVisitedRecord(const QString &table, const QString &url)
     if (url.isEmpty())
         return;
 
-    qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
+    const qint64 lastVisited = QDateTime::currentSecsSinceEpoch();
     QSqlQuery query;
     query.prepare(QStringLiteral("UPDATE %1 SET lastVisited = :lv WHERE url = :url").arg(table));
     query.bindValue(QStringLiteral(":url"), url);
@@ -255,7 +255,7 @@ void DBManager::updateLastVisited(const QString &url)
 
 void DBManager::updateIcon(const QString &url, const QString &iconSource)
 {
-    QString updatedSource = IconImageProvider::storeImage(iconSource);
+    const QString updatedSource = IconImageProvider::storeImage(iconSource);
     updateIconRecord(QStringLiteral("bookmarks"), url, updatedSource);
     updateIconRecord(QStringLiteral("history"), url, updatedSource);
 }

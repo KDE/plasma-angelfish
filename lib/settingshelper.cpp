@@ -5,15 +5,21 @@
  */
 
 #include <QtGlobal>
-#include <QByteArrayList>
-#include <QDebug>
+#include <QByteArray>
 
 #include "settingshelper.h"
 
+inline bool parseQuickControlsMobile() {
+    if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")) {
+        const QByteArray str = qgetenv("QT_QUICK_CONTROLS_MOBILE");
+        return str == "1" || str == "true";
+    }
+
+    return false;
+}
+
 bool SettingsHelper::isMobile()
 {
-    static bool mobile = qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")
-                             ? QByteArrayList{"1", "true"}.contains(qgetenv("QT_QUICK_CONTROLS_MOBILE"))
-                             : false;
+    static bool mobile = parseQuickControlsMobile();
     return mobile;
 }

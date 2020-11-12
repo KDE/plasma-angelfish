@@ -36,14 +36,14 @@ void UrlObserver::onDatabaseTableChanged(const QString &table)
 {
     if (table != QStringLiteral("bookmarks"))
         return;
+
     updateBookmarked();
 }
 
 void UrlObserver::updateBookmarked()
 {
-    bool b = BrowserManager::instance()->isBookmarked(m_url);
-    if (b != m_bookmarked) {
-        m_bookmarked = b;
+    if (const bool isBookmarked = BrowserManager::instance()->isBookmarked(m_url); isBookmarked != m_bookmarked) {
+        m_bookmarked = isBookmarked;
         emit bookmarkedChanged(m_bookmarked);
     }
 }
