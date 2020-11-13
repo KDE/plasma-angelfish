@@ -23,3 +23,5 @@ target_link_libraries(AngelfishCore PUBLIC
     KF5::ConfigCore
     KF5::ConfigGui
 )
+
+install(FILES angelfishsettings.kcfg DESTINATION ${KCFG_INSTALL_DIR})

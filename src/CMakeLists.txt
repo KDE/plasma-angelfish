@@ -30,4 +30,3 @@ target_link_libraries(angelfish
 )
 
 install(TARGETS angelfish ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES angelfishsettings.kcfg DESTINATION ${KCFG_INSTALL_DIR})
