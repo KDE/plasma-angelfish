@@ -8,9 +8,7 @@ set(angelfish_SRCS
     desktopfilegenerator.cpp
 )
 
-qt5_add_resources(RESOURCES resources.qrc)
-
-add_executable(angelfish ${angelfish_SRCS} ${RESOURCES})
+add_executable(angelfish ${angelfish_SRCS})
 
 target_include_directories(angelfish PRIVATE)
 target_compile_definitions(angelfish PRIVATE -DQT_NO_CAST_FROM_ASCII)

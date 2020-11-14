@@ -99,6 +99,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     // Settings are read from WebView which we use as super class for WebAppView
     qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
 
+    Q_INIT_RESOURCE(resources);
+
     // Load QML
     engine.load(QUrl(QStringLiteral("qrc:///webapp.qml")));
 
