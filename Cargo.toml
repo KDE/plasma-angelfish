@@ -1,0 +1,8 @@
+[workspace]
+members = [
+	"src/rs/adblock/"
+]
+
+[profile.release]
+lto = true
+panic = 'abort'

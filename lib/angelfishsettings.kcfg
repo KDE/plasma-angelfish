@@ -62,4 +62,38 @@ SPDX-License-Identifier: LGPL-2.0-or-later
             <default>450</default>
         </entry>
     </group>
+    <!-- Store adblock lists -->
+    <group name="Adblock">
+        <entry key="adblockEnabled" type="bool">
+            <default>true</default>
+        </entry>
+        <entry key="adblockFilterUrls" type="urlList">
+            <default>
+                {
+                    QStringLiteral("https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt"),
+                    QStringLiteral("https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt"),
+                    QStringLiteral("https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt"),
+                    QStringLiteral("https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt"),
+                    QStringLiteral("https://easylist.to/easylist/easyprivacy.txt"),
+                    QStringLiteral("https://easylist.to/easylist/easylist.txt"),
+                    QStringLiteral("https://filters.adtidy.org/extension/ublock/filters/14.txt"),
+                    QStringLiteral("https://easylist-downloads.adblockplus.org/antiadblockfilters.txt")
+                }
+            </default>
+        </entry>
+        <entry key="adblockFilterNames" type="stringList">
+            <default>
+                {
+                    QStringLiteral("uBlock filters"),
+                    QStringLiteral("uBlock filters – Privacy"),
+                    QStringLiteral("uBlock filters – Resource abuse"),
+                    QStringLiteral("uBlock filters – Unbreak"),
+                    QStringLiteral("EasyPrivacy"),
+                    QStringLiteral("Easylist"),
+                    QStringLiteral("AdGuard Annoyances"),
+                    QStringLiteral("Adblock Warning Removal List")
+                }
+            </default>
+        </entry>
+    </group>
 </kcfg>

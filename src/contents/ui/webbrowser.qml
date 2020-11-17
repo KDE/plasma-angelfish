@@ -101,6 +101,18 @@ Kirigami.ApplicationWindow {
                     popSubPages();
                     pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
                 }
+            },
+            Kirigami.Action {
+                visible: AdblockUrlInterceptor.adblockSupported
+                enabled: AdblockUrlInterceptor.adblockSupported
+                id: adblockAction
+                icon.name: "cards-block"
+                text: i18n("Enable Adblock")
+                checkable: true
+                checked: AdblockUrlInterceptor.enabled
+                onCheckedChanged: {
+                    AdblockUrlInterceptor.enabled = adblockAction.checked
+                }
             }
         ]
     }
@@ -181,6 +193,12 @@ Kirigami.ApplicationWindow {
 
         Loader {
             id: questionLoader
+
+            Component.onCompleted: {
+                if (AdblockUrlInterceptor.adblockSupported && AdblockUrlInterceptor.downloadNeeded) {
+                    questionLoader.setSource("AdblockFilterDownloadQuestion.qml")
+                }
+            }
 
             anchors.bottom: navigation.top
             anchors.left: parent.left

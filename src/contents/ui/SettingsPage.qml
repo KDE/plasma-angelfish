@@ -86,6 +86,19 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
         }
 
+        Controls.ItemDelegate {
+            text: i18n("Adblock filter lists")
+            Layout.fillWidth: true
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
+            implicitHeight: Kirigami.Units.gridUnit * 2.5
+            onClicked: pageStack.push(Qt.resolvedUrl("SettingsAdblock.qml"))
+        }
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
+
         Item {
             Layout.fillHeight: true
         }

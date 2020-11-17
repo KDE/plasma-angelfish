@@ -28,6 +28,9 @@
 #include "useragent.h"
 #include "desktopfilegenerator.h"
 #include "angelfishsettings.h"
+#include "adblockurlinterceptor.h"
+#include "adblockfilterlistsmodel.h"
+#include "adblockfilterlistsmanager.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -89,6 +92,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         }
     });
 
+    // register as early possible so it has time to load, constructor doesn't block
+    qmlRegisterSingletonInstance<AdblockUrlInterceptor>("org.kde.mobile.angelfish", 1, 0, "AdblockUrlInterceptor", &AdblockUrlInterceptor::instance());
+
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     engine.addImageProvider(IconImageProvider::providerId(), new IconImageProvider(&engine));
@@ -121,7 +127,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     });
 
     qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
-
+    qmlRegisterType<AdblockFilterListsModel>("org.kde.mobile.angelfish", 1, 0, "AdblockFilterListsModel");
     Q_INIT_RESOURCE(resources);
 
     QObject::connect(QApplication::instance(), &QCoreApplication::aboutToQuit, QApplication::instance(), [] {

@@ -24,5 +24,7 @@
         <file alias="FindInPageBar.qml">contents/ui/FindInPageBar.qml</file>
         <file alias="JavaScriptDialogSheet.qml">contents/ui/JavaScriptDialogSheet.qml</file>
         <file alias="AngelfishWebProfile.qml">contents/ui/AngelfishWebProfile.qml</file>
+        <file alias="SettingsAdblock.qml">contents/ui/SettingsAdblock.qml</file>
+        <file alias="AdblockFilterDownloadQuestion.qml">contents/ui/AdblockFilterDownloadQuestion.qml</file>
     </qresource>
 </RCC>

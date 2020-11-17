@@ -10,9 +10,17 @@
 import QtWebEngine 1.7
 import QtQuick 2.7
 
+import org.kde.mobile.angelfish 1.0
+
 WebEngineProfile {
     // TODO Qt 5.15 make required
     property Loader questionLoader
+
+    Component.onCompleted: {
+        if (AdblockUrlInterceptor != undefined) {
+            AdblockUrlInterceptor.manageProfile(this)
+        }
+    }
 
     onDownloadRequested: (download) => {
         // if we don't accept the request right away, it will be deleted

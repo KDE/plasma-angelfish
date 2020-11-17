@@ -45,6 +45,12 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2 Purpose I18n C
 # Necessary to support QtWebEngine installed in a different prefix than the rest of Qt (e.g flatpak)
 find_package(Qt5WebEngine REQUIRED)
 
+# For adblocker
+find_package(Corrosion)
+set_package_properties(Corrosion PROPERTIES
+    PURPOSE "Required to build the builtin adblocker"
+)
+
 ################# Definitions to pass to the compiler #################
 
 add_definitions(-DQT_NO_FOREACH)

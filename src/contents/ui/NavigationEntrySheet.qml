@@ -125,7 +125,7 @@ Controls.Drawer {
                     overlay.close();
                 }
                 highlightText: urlFilter.filter
-                width: parent.width
+                width: parent && parent.width
             }
 
             model: BookmarksHistoryModel {
