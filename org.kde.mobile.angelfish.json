@@ -31,14 +31,57 @@
     "cleanup-commands": [
         "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
     ],
-
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "env": {
+            "RUST_BACKTRACE": "1",
+            "CARGO_NET_OFFLINE": "true",
+            "RUSTFLAGS": "--remap-path-prefix =../"
+        }
+    },
     "modules": [
+        {
+            "name": "corrosion",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [ "-DCORROSION_BUILD_TESTS=OFF" ],
+            "build-options": {
+                "env": {
+                    "CARGO_HOME": "/run/build/corrosion/cargo"
+                }
+            },
+            "cleanup": [
+                "/app"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/AndrewGaspar/corrosion",
+                    "commit": "3fa054420ff9e8ecb6e6c2552713c6b86fce3e43"
+                },
+                "flatpak/corrosion-generated-sources.json"
+            ]
+        },
         {
             "name": "angelfish",
             "buildsystem": "cmake-ninja",
-            "config-opts": ["-DBUILD_TESTING=OFF"],
+            "config-opts": ["-DBUILD_TESTING=OFF", "-DCMAKE_BUILD_TYPE=Release"],
             "builddir": true,
-            "sources": [ { "type": "dir", "path": ".", "skip": [".git"] } ]
+            "build-options": {
+                "env": {
+                    "CARGO_HOME": "/run/build/angelfish/cargo"
+                }
+            },
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": ".",
+                    "skip": [".git"]
+                },
+                "generated-sources.json"
+            ]
         }
     ]
 }
