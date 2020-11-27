@@ -9,7 +9,7 @@ add_library(AngelfishCore STATIC
     useragent.cpp
     tabsmodel.cpp
     settingshelper.cpp
-    ../src/resources.qrc
+    resources.qrc
 )
 
 kconfig_add_kcfg_files(AngelfishCore GENERATE_MOC angelfishsettings.kcfgc)

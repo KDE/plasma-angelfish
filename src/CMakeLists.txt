@@ -9,6 +9,7 @@ set(angelfish_SRCS
     adblockfilterlistsmodel.cpp
     adblockfilterlistsmanager.cpp
     adblockurlinterceptor.cpp
+    angelfish.qrc
 )
 
 add_executable(angelfish ${angelfish_SRCS})

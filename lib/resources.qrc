@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="ErrorHandler.qml">contents/ui/ErrorHandler.qml</file>
+        <file alias="ListWebView.qml">contents/ui/ListWebView.qml</file>
+        <file alias="WebView.qml">contents/ui/WebView.qml</file>
+        <file alias="AuthSheet.qml">contents/ui/AuthSheet.qml</file>
+        <file alias="DownloadQuestion.qml">contents/ui/DownloadQuestion.qml</file>
+        <file alias="PermissionQuestion.qml">contents/ui/PermissionQuestion.qml</file>
+        <file alias="JavaScriptDialogSheet.qml">contents/ui/JavaScriptDialogSheet.qml</file>
+        <file alias="AngelfishWebProfile.qml">contents/ui/AngelfishWebProfile.qml</file>
+    </qresource>
+</RCC>

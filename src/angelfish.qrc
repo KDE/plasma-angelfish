@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="FindInPageBar.qml">contents/ui/FindInPageBar.qml</file>
+        <file alias="regex-weburl.js">regex-weburl/regex-weburl.js</file>
+        <file alias="ShareSheet.qml">contents/ui/ShareSheet.qml</file>
+        <file alias="AdblockFilterDownloadQuestion.qml">contents/ui/AdblockFilterDownloadQuestion.qml</file>
+        <file alias="SettingsAdblock.qml">contents/ui/SettingsAdblock.qml</file>
+        <file alias="SettingsPage.qml">contents/ui/SettingsPage.qml</file>
+        <file alias="SettingsNavigationBarPage.qml">contents/ui/SettingsNavigationBarPage.qml</file>
+        <file alias="SettingsSearchEnginePage.qml">contents/ui/SettingsSearchEnginePage.qml</file>
+        <file alias="Navigation.qml">contents/ui/Navigation.qml</file>
+        <file alias="webbrowser.qml">contents/ui/webbrowser.qml</file>
+        <file alias="NavigationEntrySheet.qml">contents/ui/NavigationEntrySheet.qml</file>
+        <file alias="NewTabQuestion.qml">contents/ui/NewTabQuestion.qml</file>
+        <file alias="Tabs.qml">contents/ui/Tabs.qml</file>
+        <file alias="History.qml">contents/ui/History.qml</file>
+        <file alias="HistorySheet.qml">contents/ui/HistorySheet.qml</file>
+        <file alias="InputSheet.qml">contents/ui/InputSheet.qml</file>
+        <file alias="UrlDelegate.qml">contents/ui/UrlDelegate.qml</file>
+        <file alias="Bookmarks.qml">contents/ui/Bookmarks.qml</file>
+    </qresource>
+</RCC>
