@@ -12,8 +12,8 @@ use std::ptr;
 use std::fs::read_to_string;
 use std::fs::{self};
 
-use crate::domainresolver::DomainResolver;
 use crate::adblock_debug;
+use crate::domainresolver::DomainResolver;
 
 #[repr(C)]
 pub struct Adblock {
