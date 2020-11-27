@@ -49,6 +49,8 @@ find_package(Qt5WebEngine REQUIRED)
 find_package(Corrosion)
 set_package_properties(Corrosion PROPERTIES
     PURPOSE "Required to build the builtin adblocker"
+    DESCRIPTION "CMake scripts to seamlessly build and link to targets using cargo"
+    URL https://github.com/AndrewGaspar/corrosion
 )
 
 ################# Definitions to pass to the compiler #################
