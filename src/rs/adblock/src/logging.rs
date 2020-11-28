@@ -7,7 +7,7 @@ extern "C" {
     fn q_cdebug_adblock(message: *const c_char);
 }
 
-pub fn adblock_debug(message: String) {
+pub fn adblock_debug(message: &str) {
     if let Ok(cstring) = CString::new(message) {
         unsafe {
             let ptr = cstring.into_raw();
@@ -19,7 +19,10 @@ pub fn adblock_debug(message: String) {
 
 #[macro_export]
 macro_rules! adblock_debug {
+    ($arg:literal) => ({
+        $crate::logging::adblock_debug($arg);
+    });
     ($($arg:tt)*) => ({
-        $crate::logging::adblock_debug(format!($($arg)*));
-    })
+        $crate::logging::adblock_debug(&format!($($arg)*));
+    });
 }
