@@ -17,7 +17,7 @@ WebEngineProfile {
     property Loader questionLoader
 
     Component.onCompleted: {
-        if (AdblockUrlInterceptor != undefined) {
+        if (typeof AdblockUrlInterceptor !== "undefined") {
             AdblockUrlInterceptor.manageProfile(this)
         }
     }
