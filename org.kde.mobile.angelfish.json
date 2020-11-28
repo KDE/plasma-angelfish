@@ -1,10 +1,10 @@
 {
     "id": "org.kde.mobile.angelfish",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.14",
+    "runtime-version": "5.15",
     "sdk": "org.kde.Sdk",
     "base": "io.qt.qtwebengine.BaseApp",
-    "base-version": "5.14",
+    "base-version": "5.15",
     "command": "angelfish",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
@@ -25,7 +25,7 @@
         "org.freedesktop.Platform.ffmpeg-full": {
             "directory": "lib/ffmpeg",
             "add-ld-path": ".",
-            "version": "19.08"
+            "version": "20.08"
         }
     },
     "cleanup-commands": [
