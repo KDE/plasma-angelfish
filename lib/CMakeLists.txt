@@ -10,6 +10,7 @@ add_library(AngelfishCore STATIC
     tabsmodel.cpp
     settingshelper.cpp
     angelfishwebprofile.cpp
+    downloadmanager.cpp
     resources.qrc
 )
 

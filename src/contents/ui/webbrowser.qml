@@ -95,6 +95,14 @@ Kirigami.ApplicationWindow {
                 text: i18n("History")
             },
             Kirigami.Action {
+                icon.name: "download"
+                text: i18n("Downloads")
+                onTriggered: {
+                    popSubPages();
+                    pageStack.push(Qt.resolvedUrl("Downloads.qml"))
+                }
+            },
+            Kirigami.Action {
                 icon.name: "configure"
                 text: i18n("Settings")
                 onTriggered: {

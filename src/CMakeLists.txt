@@ -9,6 +9,7 @@ set(angelfish_SRCS
     adblockfilterlistsmodel.cpp
     adblockfilterlistsmanager.cpp
     adblockurlinterceptor.cpp
+    downloadsmodel.cpp
     angelfish.qrc
 )
 

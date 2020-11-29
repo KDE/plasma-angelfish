@@ -8,12 +8,6 @@
 #include <QQuickWebEngineProfile>
 #include <QWebEngineUrlRequestInterceptor>
 
-// HACK, because QQuickWebEngineDownloadItem is not public API yet
-// Teach the compiler that QQuickWebEngineDownloadItem is a QObject subclass,
-// Because it can't know due to the forward declaration
-class QQuickWebEngineDownloadItem : public QObject {
-};
-
 class AngelfishWebProfile : public QQuickWebEngineProfile
 {
     Q_OBJECT

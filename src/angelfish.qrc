@@ -18,5 +18,6 @@
         <file alias="InputSheet.qml">contents/ui/InputSheet.qml</file>
         <file alias="UrlDelegate.qml">contents/ui/UrlDelegate.qml</file>
         <file alias="Bookmarks.qml">contents/ui/Bookmarks.qml</file>
+        <file alias="Downloads.qml">contents/ui/Downloads.qml</file>
     </qresource>
 </RCC>

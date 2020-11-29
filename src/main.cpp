@@ -32,6 +32,7 @@
 #include "adblockfilterlistsmodel.h"
 #include "adblockfilterlistsmanager.h"
 #include "angelfishwebprofile.h"
+#include "downloadsmodel.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
