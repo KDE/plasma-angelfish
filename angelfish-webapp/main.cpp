@@ -24,6 +24,7 @@
 #include "urlutils.h"
 #include "useragent.h"
 #include "angelfishsettings.h"
+#include "angelfishwebprofile.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -83,6 +84,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
     qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
     qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
+    qmlRegisterType<AngelfishWebProfile>("org.kde.mobile.angelfish", 1, 0, "AngelfishWebProfile");
 
     // URL utils
     qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {

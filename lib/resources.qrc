@@ -7,6 +7,5 @@
         <file alias="DownloadQuestion.qml">contents/ui/DownloadQuestion.qml</file>
         <file alias="PermissionQuestion.qml">contents/ui/PermissionQuestion.qml</file>
         <file alias="JavaScriptDialogSheet.qml">contents/ui/JavaScriptDialogSheet.qml</file>
-        <file alias="AngelfishWebProfile.qml">contents/ui/AngelfishWebProfile.qml</file>
     </qresource>
 </RCC>

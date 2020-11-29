@@ -33,6 +33,7 @@ Repeater {
         storageName: tabs.privateTabsMode ? "Private" : Settings.profile
 
         questionLoader: rootPage.questionLoader
+        urlInterceptor: typeof AdblockUrlInterceptor !== "undefined" && AdblockUrlInterceptor
     }
 
     model: TabsModel {

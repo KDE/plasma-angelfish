@@ -9,6 +9,7 @@ add_library(AngelfishCore STATIC
     useragent.cpp
     tabsmodel.cpp
     settingshelper.cpp
+    angelfishwebprofile.cpp
     resources.qrc
 )
 
@@ -22,6 +23,7 @@ target_link_libraries(AngelfishCore PUBLIC
     Qt5::WebEngine
     KF5::ConfigCore
     KF5::ConfigGui
+    KF5::I18n
 )
 
 install(FILES angelfishsettings.kcfg DESTINATION ${KCFG_INSTALL_DIR})
