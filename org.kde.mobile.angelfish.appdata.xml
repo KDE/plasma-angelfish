@@ -16,6 +16,7 @@
   <name xml:lang="fi">Angelfish-verkkoselain</name>
   <name xml:lang="fr">Navigateur web Angelfish</name>
   <name xml:lang="gl">Navegador web Angelfish</name>
+  <name xml:lang="hu">Angelfish webböngésző</name>
   <name xml:lang="ia">Angelfish Webbrowser (navigator web)</name>
   <name xml:lang="id">Angelfish Webbrowser</name>
   <name xml:lang="it">Browser web Angelfish</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="fi">Verkkoselain mobiililaitteille</summary>
   <summary xml:lang="fr">Navigateur web pour les appareils mobiles</summary>
   <summary xml:lang="gl">Navegador web para dispositivos móbiles</summary>
+  <summary xml:lang="hu">Webböngésző mobileszközökre</summary>
   <summary xml:lang="ia">Webbrowser (Navigator de web) per dispositivos mobile</summary>
   <summary xml:lang="it">Browser web per dispositivi mobili</summary>
   <summary xml:lang="ko">모바일 장치용 웹 브라우저</summary>
@@ -78,6 +80,7 @@
   <developer_name xml:lang="fi">KDE-yhteisö</developer_name>
   <developer_name xml:lang="fr">La communauté KDE</developer_name>
   <developer_name xml:lang="gl">Comunidade KDE</developer_name>
+  <developer_name xml:lang="hu">A KDE Közösség</developer_name>
   <developer_name xml:lang="ia">Communitate de KDE</developer_name>
   <developer_name xml:lang="id">Komunitas KDE</developer_name>
   <developer_name xml:lang="it">Comunità KDE</developer_name>
@@ -110,6 +113,7 @@
     <p xml:lang="fi">Angelfish on nykyaikainen mobiiliverkkoselain</p>
     <p xml:lang="fr">Angelfish est un navigateur web mobile moderne</p>
     <p xml:lang="gl">Angelfish é un navegador web móbil moderno</p>
+    <p xml:lang="hu">Az Angelfish egy modern mobilos webböngésző</p>
     <p xml:lang="ia">Angelfish es un moderne Webbrowser (navigator web) de mobile</p>
     <p xml:lang="it">Angelfish è un browser web moderno per dispositivi mobili</p>
     <p xml:lang="ko">Angelfish는 현대적인 모바일 웹 브라우저입니다</p>
@@ -139,6 +143,7 @@
     <p xml:lang="fi">Tukee tavallisia selainominaisuuksia kuten</p>
     <p xml:lang="fr">Il prend en charge les fonctionnalités classiques des navigateurs :</p>
     <p xml:lang="gl">Goza das funcionalidades habituais dos navegadores, como</p>
+    <p xml:lang="hu">Támogatja a megszokott szolgáltatásokat, úgy mint</p>
     <p xml:lang="ia">Il supporta typic characteristicas de navigator, tal como</p>
     <p xml:lang="id">Ini mendukung fitur-fitur browser biasanya, sepertihalnya</p>
     <p xml:lang="it">Supporta le funzionalità tipiche del browser, quali</p>
@@ -171,6 +176,7 @@
       <li xml:lang="fi">kirjanmerkit</li>
       <li xml:lang="fr">signets</li>
       <li xml:lang="gl">marcadores</li>
+      <li xml:lang="hu">könyvjelzők</li>
       <li xml:lang="ia">Marcatores de libro</li>
       <li xml:lang="id">markah</li>
       <li xml:lang="it">segnalibri</li>
@@ -203,6 +209,7 @@
       <li xml:lang="fi">historia</li>
       <li xml:lang="fr">historique</li>
       <li xml:lang="gl">historial</li>
+      <li xml:lang="hu">előzmények</li>
       <li xml:lang="ia">Chronologia</li>
       <li xml:lang="id">histori</li>
       <li xml:lang="it">cronologia</li>
@@ -234,6 +241,7 @@
       <li xml:lang="fi">välilehdet</li>
       <li xml:lang="fr">onglets</li>
       <li xml:lang="gl">separadores</li>
+      <li xml:lang="hu">lapok</li>
       <li xml:lang="ia">schedas</li>
       <li xml:lang="it">schede</li>
       <li xml:lang="ko">탭</li>
@@ -266,6 +274,7 @@
       <caption xml:lang="fi">Kotisivu</caption>
       <caption xml:lang="fr">Page d'accueil</caption>
       <caption xml:lang="gl">Páxina inicial</caption>
+      <caption xml:lang="hu">Kezdőlap</caption>
       <caption xml:lang="ia">Pagina Domo o Principal</caption>
       <caption xml:lang="it">Pagina iniziale</caption>
       <caption xml:lang="ko">홈 페이지</caption>
@@ -297,6 +306,7 @@
       <caption xml:lang="fi">Valikkotoimenpiteet</caption>
       <caption xml:lang="fr">Actions de menu</caption>
       <caption xml:lang="gl">Accións de menú</caption>
+      <caption xml:lang="hu">Menüműveletek</caption>
       <caption xml:lang="ia">Actiones de menu</caption>
       <caption xml:lang="it">Menu Azioni</caption>
       <caption xml:lang="ko">메뉴 동작</caption>
@@ -328,6 +338,7 @@
       <caption xml:lang="fi">Välilehdet</caption>
       <caption xml:lang="fr">Onglets</caption>
       <caption xml:lang="gl">Separadores</caption>
+      <caption xml:lang="hu">Lapok</caption>
       <caption xml:lang="ia">Schedas</caption>
       <caption xml:lang="it">Schede</caption>
       <caption xml:lang="ko">탭</caption>
