@@ -6,7 +6,6 @@
 
 #include <QUrl>
 #include <QVariant>
-#include <QDebug>
 
 void QQuickWebEngineDownloadItem::accept()
 {

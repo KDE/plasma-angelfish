@@ -8,6 +8,8 @@
 #include <QQuickWebEngineProfile>
 #include <QWebEngineUrlRequestInterceptor>
 
+class QWebEngineNotification;
+
 class AngelfishWebProfile : public QQuickWebEngineProfile
 {
     Q_OBJECT
@@ -21,6 +23,7 @@ public:
 private:
     void handleDownload(QQuickWebEngineDownloadItem *downloadItem);
     void handleDownloadFinished(QQuickWebEngineDownloadItem *downloadItem);
+    void showNotification(QWebEngineNotification *webNotification);
 
     QObject *m_questionLoader;
     Q_SIGNAL void questionLoaderChanged();

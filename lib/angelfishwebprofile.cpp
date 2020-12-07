@@ -8,6 +8,9 @@
 #include <KLocalizedString>
 #include <QGuiApplication>
 #include <QQuickWindow>
+#include <QWebEngineNotification>
+
+#include <KNotification>
 
 #include "downloadmanager.h"
 
@@ -18,6 +21,7 @@ AngelfishWebProfile::AngelfishWebProfile(QObject *parent)
 {
     connect(this, &QQuickWebEngineProfile::downloadRequested, this, &AngelfishWebProfile::handleDownload);
     connect(this, &QQuickWebEngineProfile::downloadFinished, this, &AngelfishWebProfile::handleDownloadFinished);
+    connect(this, &QQuickWebEngineProfile::presentNotification, this, &AngelfishWebProfile::showNotification);
 }
 
 void AngelfishWebProfile::handleDownload(QQuickWebEngineDownloadItem *downloadItem)
@@ -68,6 +72,19 @@ void AngelfishWebProfile::handleDownloadFinished(QQuickWebEngineDownloadItem *do
     default:
         break;
     }
+}
+
+void AngelfishWebProfile::showNotification(QWebEngineNotification *webNotification)
+{
+    KNotification *notification = new KNotification(QStringLiteral("web-notification"), {}, this);
+    notification->setTitle(webNotification->title());
+    notification->setText(webNotification->message());
+    notification->setPixmap(QPixmap::fromImage(webNotification->icon()));
+
+    connect(notification, &KNotification::closed, webNotification, &QWebEngineNotification::close);
+    connect(notification, &KNotification::defaultActivated, webNotification, &QWebEngineNotification::click);
+
+    notification->sendEvent();
 }
 
 QWebEngineUrlRequestInterceptor *AngelfishWebProfile::urlInterceptor() const

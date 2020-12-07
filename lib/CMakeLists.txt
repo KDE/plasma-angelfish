@@ -25,6 +25,7 @@ target_link_libraries(AngelfishCore PUBLIC
     KF5::ConfigCore
     KF5::ConfigGui
     KF5::I18n
+    KF5::Notifications
 )
 
 install(FILES angelfishsettings.kcfg DESTINATION ${KCFG_INSTALL_DIR})

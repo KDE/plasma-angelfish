@@ -1,0 +1,9 @@
+[Global]
+IconName=org.kde.mobile.angelfish
+DesktopEntry=org.kde.mobile.angelfish
+Comment=Webbrowser
+Name=Angelfish
+
+[Event/web-notification]
+Name=Website Notification
+Action=Popup
