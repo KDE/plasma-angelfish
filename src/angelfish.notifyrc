@@ -2,6 +2,12 @@
 IconName=org.kde.mobile.angelfish
 DesktopEntry=org.kde.mobile.angelfish
 Comment=Webbrowser
+Comment[ca]=Navegador web
+Comment[es]=Navegador web
+Comment[nl]=Webbrowser
+Comment[sv]=Webbläsare
+Comment[uk]=Браузер
+Comment[x-test]=xxWebbrowserxx
 Name=Angelfish
 Name[az]=Angelfish
 Name[ca]=Angelfish
@@ -35,4 +41,10 @@ Name[zh_TW]=Angelfish
 
 [Event/web-notification]
 Name=Website Notification
+Name[ca]=Notificació de lloc web
+Name[es]=Notificación de sitio web
+Name[nl]=Websitemelding
+Name[sv]=Webbplatsunderrättelse
+Name[uk]=Сповіщення від сайта
+Name[x-test]=xxWebsite Notificationxx
 Action=Popup
