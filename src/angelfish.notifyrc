@@ -9,6 +9,7 @@ Comment[hu]=Webböngésző
 Comment[nl]=Webbrowser
 Comment[nn]=Nettlesar
 Comment[pt]=Navegador Web
+Comment[pt_BR]=Navegador Web
 Comment[sl]=Spletni brskalnik
 Comment[sv]=Webbläsare
 Comment[uk]=Браузер
@@ -46,6 +47,7 @@ Name[zh_TW]=Angelfish
 
 [Event/web-notification]
 Name=Website Notification
+Name[az]=Veb sayt bildirişləri
 Name[ca]=Notificació de lloc web
 Name[ca@valencia]=Notificació de lloc web
 Name[es]=Notificación de sitio web
@@ -53,6 +55,7 @@ Name[hu]=Weboldal értesítések
 Name[nl]=Websitemelding
 Name[nn]=Nettstad-varsling
 Name[pt]=Notificação da Página Web
+Name[pt_BR]=Notificação do site
 Name[sl]=Obvestilo spletišča
 Name[sv]=Webbplatsunderrättelse
 Name[uk]=Сповіщення від сайта
