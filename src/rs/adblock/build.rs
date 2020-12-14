@@ -2,14 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-extern crate cbindgen;
-
-use std::env;
+extern crate cxx_build;
 
 fn main() {
-    let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
-
-    cbindgen::generate(&crate_dir)
-        .unwrap()
-        .write_to_file("bindings.h");
+    cxx_build::bridge("src/adblock.rs").compile("angelfish-adblock")
 }

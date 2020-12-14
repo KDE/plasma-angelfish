@@ -12,8 +12,6 @@
 #include "adblockfilterlistsmanager.h"
 
 #ifdef BUILD_ADBLOCK
-class Engine;
-#include "rs/adblock/bindings.h"
 #include "angelfishsettings.h"
 #endif
 
@@ -27,21 +25,22 @@ AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
 #ifdef BUILD_ADBLOCK
     // parsing the block lists takes some time, try to do it asynchronously
     // if it is not ready when it's needed, reading the future will block
-    , m_adblockInitFuture(std::async(std::launch::async, [this]() -> Adblock *{
+    , m_adblockInitFuture(std::async(std::launch::async, [this]() -> rust::Box<Adblock> {
           const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
           const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
 
-          auto *adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
+          auto adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
           Q_EMIT adblockInitialized();
           return adb;
       }))
-    , m_adblock(nullptr)
+    , m_adblock(std::nullopt)
     , m_enabled(AngelfishSettings::adblockEnabled())
 #endif
 {
 #ifdef BUILD_ADBLOCK
     connect(this, &AdblockUrlInterceptor::adblockInitialized, this, [this] {
         if (m_adblockInitFuture.valid()) {
+            qDebug() << "Adblock ready";
             m_adblock = m_adblockInitFuture.get();
         }
     });
@@ -50,9 +49,6 @@ AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
 
 AdblockUrlInterceptor::~AdblockUrlInterceptor()
 {
-#ifdef BUILD_ADBLOCK
-    free_adblock(m_adblock);
-#endif
 }
 
 #ifdef BUILD_ADBLOCK
@@ -89,15 +85,14 @@ void AdblockUrlInterceptor::resetAdblock()
 {
 #ifdef BUILD_ADBLOCK
     if (m_adblock) {
-        free_adblock(m_adblock);
-        m_adblock = nullptr;
+        m_adblock = std::nullopt;
     }
-    m_adblockInitFuture = std::async(std::launch::async, [this]() -> Adblock * {
+    m_adblockInitFuture = std::async(std::launch::async, [this]() -> rust::Box<Adblock> {
         const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
         const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
 
-        auto *adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
-        qDebug() << "adblocker" << adb;
+        auto adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
+        qDebug() << "adblocker" << &adb;
         Q_EMIT adblockInitialized();
         return adb;
     });
@@ -155,15 +150,14 @@ void AdblockUrlInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 
     const std::string url = info.requestUrl().toString().toStdString();
     const std::string firstPartyUrl = info.firstPartyUrl().toString().toStdString();
-    AdblockResult *result = should_block(m_adblock, url.c_str(), firstPartyUrl.c_str(), resource_type_to_string(info.resourceType()));
+    auto result = (*m_adblock)->should_block(url, firstPartyUrl, resource_type_to_string(info.resourceType()));
 
-    if (result->redirect != nullptr) {
-        info.redirect(QUrl(QString::fromUtf8(result->redirect)));
+    const auto redirect = result->redirect();
+    if (redirect.begin() != redirect.end()) {
+        info.redirect(QUrl(QString::fromStdString({redirect.begin(), redirect.end()})));
     } else {
-        info.block(result->matched);
+        info.block(result->matched());
     }
-
-    free_adblock_result(result);
 #else
     Q_UNUSED(info);
 #endif

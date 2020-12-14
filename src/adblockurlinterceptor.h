@@ -7,7 +7,11 @@
 #include <QWebEngineUrlRequestInterceptor>
 class QWebEngineUrlRequestInfo;
 class QQuickWebEngineProfile;
-class Adblock;
+
+#ifdef BUILD_ADBLOCK
+#include <adblock.rs.h>
+#include <optional>
+#endif
 
 #include <future>
 
@@ -59,8 +63,8 @@ private:
     ~AdblockUrlInterceptor();
 
 #ifdef BUILD_ADBLOCK
-    std::future<Adblock *> m_adblockInitFuture;
-    Adblock *m_adblock;
+    std::future<rust::Box<Adblock>> m_adblockInitFuture;
+    std::optional<rust::Box<Adblock>> m_adblock;
     bool m_enabled;
 #endif
 };

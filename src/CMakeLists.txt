@@ -28,6 +28,9 @@ if (Corrosion_FOUND)
     corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/adblock/Cargo.toml)
     target_link_libraries(angelfish PRIVATE angelfish-adblock)
     target_compile_definitions(angelfish PRIVATE -DBUILD_ADBLOCK)
+
+    target_include_directories(angelfish PRIVATE
+        ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/angelfish-adblock/src/)
 else()
     message("warning: Corrosion not found, not building adblocker")
 endif()
