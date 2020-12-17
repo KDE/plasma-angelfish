@@ -64,7 +64,7 @@ void AngelfishWebProfile::handleDownloadFinished(QQuickWebEngineDownloadItem *do
     case QQuickWebEngineDownloadItem::DownloadInterrupted:
         qDebug() << "Download failed";
         passiveNotification(i18n("Download failed"));
-        qDebug() << "Download interrupt reason:" << downloadItem->property("interruptReason");
+        qDebug() << "Download interrupt reason:" << downloadItem->interruptReasonString();
         break;
     case QQuickWebEngineDownloadItem::DownloadCancelled:
         qDebug() << "Download cancelled by the user";

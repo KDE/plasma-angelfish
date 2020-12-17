@@ -47,6 +47,11 @@ QQuickWebEngineDownloadItem::State QQuickWebEngineDownloadItem::state()
     return static_cast<State>(property("state").value<int>());
 }
 
+QString QQuickWebEngineDownloadItem::interruptReasonString()
+{
+    return property("interruptReasonString").toString();
+}
+
 DownloadManager::DownloadManager()
 {
 }

@@ -30,6 +30,7 @@ public:
     QUrl url();
     QString mimeType();
     State state();
+    QString interruptReasonString();
 };
 
 class DownloadManager
