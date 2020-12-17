@@ -146,10 +146,11 @@ bool TabsModel::loadTabs()
 
         const auto tabsStorage = QJsonDocument::fromJson(inputFile.readAll()).object();
         m_tabs.clear();
+
         const auto tabs = tabsStorage.value(QLatin1String("tabs")).toArray();
-        for (const auto &tab : tabs) {
-            m_tabs.append(TabState::fromJson(tab.toObject()));
-        }
+        std::transform(tabs.begin(), tabs.end(), std::back_inserter(m_tabs), [](const QJsonValue &tab) {
+            return TabState::fromJson(tab.toObject());
+        });
 
         qDebug() << "loaded from file:" << m_tabs.count() << input;
 
