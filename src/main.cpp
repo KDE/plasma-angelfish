@@ -12,27 +12,27 @@
 #include <QtQml>
 #include <QtWebEngine>
 
+#include <KDBusService>
 #include <KLocalizedContext>
 #include <KLocalizedString>
-#include <KDBusService>
 #include <KWindowSystem>
 
 #include <signal.h>
 
+#include "adblockfilterlistsmanager.h"
+#include "adblockfilterlistsmodel.h"
+#include "adblockurlinterceptor.h"
+#include "angelfishsettings.h"
+#include "angelfishwebprofile.h"
 #include "bookmarkshistorymodel.h"
 #include "browsermanager.h"
+#include "desktopfilegenerator.h"
+#include "downloadsmodel.h"
 #include "iconimageprovider.h"
 #include "tabsmodel.h"
 #include "urlobserver.h"
 #include "urlutils.h"
 #include "useragent.h"
-#include "desktopfilegenerator.h"
-#include "angelfishsettings.h"
-#include "adblockurlinterceptor.h"
-#include "adblockfilterlistsmodel.h"
-#include "adblockfilterlistsmanager.h"
-#include "angelfishwebprofile.h"
-#include "downloadsmodel.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
@@ -154,8 +154,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     struct sigaction sa;
     sa.sa_handler = unixExitHandler;
-    sa.sa_mask    = blockingMask;
-    sa.sa_flags   = 0;
+    sa.sa_mask = blockingMask;
+    sa.sa_flags = 0;
 
     for (auto sig : quitSignals) {
         sigaction(sig, &sa, nullptr);

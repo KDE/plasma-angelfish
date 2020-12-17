@@ -4,16 +4,15 @@
 
 #include "downloadsmodel.h"
 
-#include <QUrl>
-#include <QMimeType>
 #include <QMimeDatabase>
+#include <QMimeType>
+#include <QUrl>
 
 #include "downloadmanager.h"
 
 DownloadsModel::DownloadsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-
 }
 
 QVariant DownloadsModel::data(const QModelIndex &index, int role) const
@@ -43,12 +42,7 @@ int DownloadsModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> DownloadsModel::roleNames() const
 {
-    return {
-        {UrlRole, "url"},
-        {FileNameRole, "fileName"},
-        {DownloadRole, "download"},
-        {MimeTypeIconRole, "mimeTypeIcon"}
-    };
+    return {{UrlRole, "url"}, {FileNameRole, "fileName"}, {DownloadRole, "download"}, {MimeTypeIconRole, "mimeTypeIcon"}};
 }
 
 void DownloadsModel::removeDownload(const int index)

@@ -6,8 +6,8 @@
 
 #include <QDir>
 #include <QFile>
-#include <QStandardPaths>
 #include <QNetworkReply>
+#include <QStandardPaths>
 
 #include "angelfishsettings.h"
 
@@ -70,7 +70,8 @@ void AdblockFilterListsManager::handleListFetched(QNetworkReply *reply)
     } else {
         QFile file(filterListPath() + reply->url().fileName());
         if (!file.open(QIODevice::WriteOnly)) {
-            qDebug() << "Failed to open" << file.fileName() << "for writing." << "Filter list not updated";
+            qDebug() << "Failed to open" << file.fileName() << "for writing."
+                     << "Filter list not updated";
             return;
         }
         file.write(reply->readAll()); // TODO don't read everything into memory maybe
@@ -90,8 +91,8 @@ QVector<AdblockFilterListsManager::FilterList> AdblockFilterListsManager::loadFr
     // Otherwise list is corrupted, but we will still not crash in release mode
     Q_ASSERT(filterNames.size() == filterUrls.size());
 
-    while(namesIt != filterNames.end() && urlsIt != filterUrls.end()) {
-        out.push_back(FilterList{*namesIt, *urlsIt});
+    while (namesIt != filterNames.end() && urlsIt != filterUrls.end()) {
+        out.push_back(FilterList {*namesIt, *urlsIt});
 
         namesIt++;
         urlsIt++;
@@ -121,7 +122,7 @@ const QVector<AdblockFilterListsManager::FilterList> &AdblockFilterListsManager:
 
 void AdblockFilterListsManager::addFilterList(const QString &name, const QUrl &url)
 {
-    m_filterLists.push_back(FilterList{name, url});
+    m_filterLists.push_back(FilterList {name, url});
     writeToConfig(m_filterLists);
 }
 

@@ -20,18 +20,20 @@ class AngelfishWebProfile : public QQuickWebEngineProfile
 public:
     explicit AngelfishWebProfile(QObject *parent = nullptr);
 
+    Q_SIGNAL void questionLoaderChanged();
+    Q_SIGNAL void urlInterceptorChanged();
+
+    QWebEngineUrlRequestInterceptor *urlInterceptor() const;
+    void setUrlInterceptor(QWebEngineUrlRequestInterceptor *urlRequestInterceptor);
+
 private:
     void handleDownload(QQuickWebEngineDownloadItem *downloadItem);
     void handleDownloadFinished(QQuickWebEngineDownloadItem *downloadItem);
     void showNotification(QWebEngineNotification *webNotification);
 
     QObject *m_questionLoader;
-    Q_SIGNAL void questionLoaderChanged();
 
     // A valid property needs a read function, and there is no getter in QQuickWebEngineProfile
     // so store a pointer ourselves
     QWebEngineUrlRequestInterceptor *m_urlInterceptor;
-    QWebEngineUrlRequestInterceptor *urlInterceptor() const;
-    void setUrlInterceptor(QWebEngineUrlRequestInterceptor *urlRequestInterceptor);
-    Q_SIGNAL void urlInterceptorChanged();
 };

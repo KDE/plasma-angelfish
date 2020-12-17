@@ -41,7 +41,8 @@ public:
 
     Q_SIGNAL void enabledChanged();
 
-    constexpr static bool adblockSupported() {
+    constexpr static bool adblockSupported()
+    {
 #ifdef BUILD_ADBLOCK
         return true;
 #endif

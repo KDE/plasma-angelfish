@@ -6,19 +6,18 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #include "desktopfilegenerator.h"
 
-#include <QStandardPaths>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QProcess>
 #include <QQmlEngine>
 #include <QQuickImageProvider>
-#include <QFile>
-#include <QDir>
-#include <QDebug>
-#include <QProcess>
+#include <QStandardPaths>
 
-#include <KConfigCore/KDesktopFile>
 #include <KConfigCore/KConfigGroup>
+#include <KConfigCore/KDesktopFile>
 
 DesktopFileGenerator::DesktopFileGenerator(QQmlEngine *engine, QObject *parent)
     : QObject(parent)
@@ -74,8 +73,7 @@ void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName
 
     const QSize szRequested;
 
-    const QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-            + QStringLiteral("/icons/hicolor/16x16/apps/");
+    const QString iconLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/icons/hicolor/16x16/apps/");
 
     QDir().mkpath(iconLocation);
 
@@ -119,11 +117,12 @@ QString DesktopFileGenerator::generateFileName(const QString &name)
 QString DesktopFileGenerator::webappCommand()
 {
     if (!QStandardPaths::locate(QStandardPaths::RuntimeLocation, QStringLiteral("flatpak-info")).isEmpty()) {
-        return QStringLiteral("flatpak run "
-                              "--command=angelfish-webapp "
-                              "--filesystem=%1 "
-                              "org.kde.mobile.angelfish")
-                .arg(QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
+        return QStringLiteral(
+                   "flatpak run "
+                   "--command=angelfish-webapp "
+                   "--filesystem=%1 "
+                   "org.kde.mobile.angelfish")
+            .arg(QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
     }
 
     return QStringLiteral("angelfish-webapp");

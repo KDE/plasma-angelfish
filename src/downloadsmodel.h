@@ -10,12 +10,7 @@ class DownloadsModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    enum Role {
-        UrlRole,
-        FileNameRole,
-        DownloadRole,
-        MimeTypeIconRole
-    };
+    enum Role { UrlRole, FileNameRole, DownloadRole, MimeTypeIconRole };
 
 public:
     explicit DownloadsModel(QObject *parent = nullptr);

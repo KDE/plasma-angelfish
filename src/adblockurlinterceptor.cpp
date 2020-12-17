@@ -4,9 +4,9 @@
 
 #include "adblockurlinterceptor.h"
 
-#include <QQuickWebEngineProfile>
 #include <QDebug>
 #include <QDir>
+#include <QQuickWebEngineProfile>
 #include <QStandardPaths>
 
 #include "adblockfilterlistsmanager.h"
@@ -25,14 +25,15 @@ AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
 #ifdef BUILD_ADBLOCK
     // parsing the block lists takes some time, try to do it asynchronously
     // if it is not ready when it's needed, reading the future will block
-    , m_adblockInitFuture(std::async(std::launch::async, [this]() -> rust::Box<Adblock> {
-          const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
-          const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
+    , m_adblockInitFuture(std::async(std::launch::async,
+                                     [this]() -> rust::Box<Adblock> {
+                                         const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
+                                         const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
 
-          auto adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
-          Q_EMIT adblockInitialized();
-          return adb;
-      }))
+                                         auto adb = new_adblock(filterListsPath.c_str(), publicSuffixList.c_str());
+                                         Q_EMIT adblockInitialized();
+                                         return adb;
+                                     }))
     , m_adblock(std::nullopt)
     , m_enabled(AngelfishSettings::adblockEnabled())
 #endif
@@ -98,7 +99,7 @@ inline const char *resource_type_to_string(const QWebEngineUrlRequestInfo::Resou
 {
     // Strings from https://docs.rs/crate/adblock/0.3.3/source/src/request.rs
     using Type = QWebEngineUrlRequestInfo::ResourceType;
-    switch(type) {
+    switch (type) {
     case Type::ResourceTypeMainFrame:
         return "main_frame";
     case Type::ResourceTypeSubFrame:

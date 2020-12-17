@@ -5,21 +5,19 @@
 #include "adblockfilterlistsmodel.h"
 
 #include "adblockfilterlistsmanager.h"
-#include "angelfishsettings.h"
 #include "adblockurlinterceptor.h"
+#include "angelfishsettings.h"
 
 AdblockFilterListsModel::AdblockFilterListsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    connect(&m_manager, &AdblockFilterListsManager::refreshFinished,
-            this, &AdblockFilterListsModel::refreshFinished);
-    connect(&m_manager, &AdblockFilterListsManager::refreshFinished,
-            this, &AdblockFilterListsModel::resetAdblock);
+    connect(&m_manager, &AdblockFilterListsManager::refreshFinished, this, &AdblockFilterListsModel::refreshFinished);
+    connect(&m_manager, &AdblockFilterListsManager::refreshFinished, this, &AdblockFilterListsModel::resetAdblock);
 }
 
 QVariant AdblockFilterListsModel::data(const QModelIndex &index, int role) const
 {
-    switch(role) {
+    switch (role) {
     case Qt::DisplayRole:
         return m_manager.filterLists().at(index.row()).name;
     case Role::Url:
@@ -31,15 +29,13 @@ QVariant AdblockFilterListsModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> AdblockFilterListsModel::roleNames() const
 {
-    return {
-        {Qt::DisplayRole, "displayName"},
-        {Role::Url, "url"}
-    };
+    return {{Qt::DisplayRole, "displayName"}, {Role::Url, "url"}};
 }
 
 int AdblockFilterListsModel::rowCount(const QModelIndex &parent) const
 {
-    return parent.isValid() ? 0 : m_manager.filterLists().size();;
+    return parent.isValid() ? 0 : m_manager.filterLists().size();
+    ;
 }
 
 void AdblockFilterListsModel::addFilterList(const QString &name, const QUrl &url)
@@ -66,4 +62,3 @@ void AdblockFilterListsModel::resetAdblock()
 {
     AdblockUrlInterceptor::instance().resetAdblock();
 }
-
