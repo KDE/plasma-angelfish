@@ -7,9 +7,6 @@
 #include "browsermanager.h"
 
 #include <QDebug>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QSettings>
 #include <QUrl>
 
