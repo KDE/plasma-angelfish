@@ -27,11 +27,6 @@ class AdblockUrlInterceptor : public QWebEngineUrlRequestInterceptor
 
 public:
     static AdblockUrlInterceptor &instance();
-    ///
-    /// \brief manageProfile sets up a QQuickWebEngineProfile to use the adblock
-    /// \param profile
-    ///
-    Q_INVOKABLE void manageProfile(QQuickWebEngineProfile *profile);
 
     void interceptRequest(QWebEngineUrlRequestInfo &info) override;
 

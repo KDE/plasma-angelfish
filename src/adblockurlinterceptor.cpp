@@ -71,11 +71,6 @@ AdblockUrlInterceptor &AdblockUrlInterceptor::instance()
     return instance;
 }
 
-void AdblockUrlInterceptor::manageProfile(QQuickWebEngineProfile *profile)
-{
-    profile->setUrlRequestInterceptor(this);
-}
-
 bool AdblockUrlInterceptor::downloadNeeded() const
 {
     return QDir(AdblockFilterListsManager::filterListPath()).isEmpty();
