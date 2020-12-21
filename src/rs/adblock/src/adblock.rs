@@ -70,7 +70,7 @@ fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
             }
 
             let blocker = Engine::from_filter_set(filter_set, true);
-            return Box::new(Adblock { blocker: blocker });
+            return Box::new(Adblock { blocker });
         }
     }
     Box::new(Adblock {
