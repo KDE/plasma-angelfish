@@ -30,6 +30,10 @@ QVariant DownloadsModel::data(const QModelIndex &index, int role) const
         static auto mimeDB = QMimeDatabase();
         return mimeDB.mimeTypeForName(downloads.at(index.row())->mimeType()).iconName();
     }
+    case Role::DownloadedFilePathRole: {
+        QQuickWebEngineDownloadItem *download = downloads.at(index.row());
+        return QUrl(QStringLiteral("file://") + download->downloadDirectory() + QStringLiteral("/") + download->downloadFileName());
+    }
     }
 
     return {};
@@ -42,7 +46,13 @@ int DownloadsModel::rowCount(const QModelIndex &parent) const
 
 QHash<int, QByteArray> DownloadsModel::roleNames() const
 {
-    return {{UrlRole, "url"}, {FileNameRole, "fileName"}, {DownloadRole, "download"}, {MimeTypeIconRole, "mimeTypeIcon"}};
+    return {
+        {UrlRole, "url"},
+        {FileNameRole, "fileName"},
+        {DownloadRole, "download"},
+        {MimeTypeIconRole, "mimeTypeIcon"},
+        {DownloadedFilePathRole, "downloadedFilePath"},
+    };
 }
 
 void DownloadsModel::removeDownload(const int index)

@@ -15,6 +15,7 @@ class DownloadsModel : public QAbstractListModel
         FileNameRole,
         DownloadRole,
         MimeTypeIconRole,
+        DownloadedFilePathRole,
     };
 
 public:

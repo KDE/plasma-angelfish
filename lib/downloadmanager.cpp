@@ -27,6 +27,11 @@ void QQuickWebEngineDownloadItem::resume()
     QMetaObject::invokeMethod(this, "resume");
 }
 
+QString QQuickWebEngineDownloadItem::downloadDirectory()
+{
+    return property("downloadDirectory").value<QString>();
+}
+
 QString QQuickWebEngineDownloadItem::downloadFileName()
 {
     return property("downloadFileName").value<QString>();

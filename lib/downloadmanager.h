@@ -26,6 +26,7 @@ public:
     void pause();
     void resume();
 
+    QString downloadDirectory();
     QString downloadFileName();
     QUrl url();
     QString mimeType();
