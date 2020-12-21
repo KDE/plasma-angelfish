@@ -104,9 +104,9 @@ dependencies = [
 
 [[package]]
 name = "cxx"
-version = "1.0.18"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c76e80fb6d39f044d141223d7b56c468beaab53e7698a45cc535b780c2382b3c"
+checksum = "a9615c89d0b2177de13e42c16baf3e5a5f6614af361ee7cd001e03b0abc2d9ca"
 dependencies = [
  "cc",
  "cxxbridge-flags",
@@ -116,9 +116,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-build"
-version = "1.0.18"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc91f445eea425a6eb563ba98802a9a33adfbea9ef3b61226b9d98aa9c3636de"
+checksum = "86c9c014bf0071eb6e251484c463b34a00df0447a6105bc2277e9dd34c2a9a2f"
 dependencies = [
  "cc",
  "codespan-reporting",
@@ -131,15 +131,15 @@ dependencies = [
 
 [[package]]
 name = "cxxbridge-flags"
-version = "1.0.18"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f3bfe71a2767344b8ca945162df2445ed5a0a8244992723b9c68dd98a98ab32"
+checksum = "6b8c8eb327a5cd189223cfdd5fc6ee8a2270097fcdaf8ea813c22f4c3542ade0"
 
 [[package]]
 name = "cxxbridge-macro"
-version = "1.0.18"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b6a66e61d3db394b82ffa7e7849732d57e38e1bc25509527a5d30bfc2c39b5e6"
+checksum = "35002f70d61f451bbd172868be7016074e971b542ad79e5b189c7a1a4c12e02e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -297,9 +297,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.7"
+version = "1.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa563d17ecb180e500da1cfd2b028310ac758de548efdd203e18f283af693f37"
+checksum = "991431c3519a3f36861882da93630ce66b52918dcf1b8e2fd66b397fc96f28df"
 dependencies = [
  "proc-macro2",
 ]
@@ -377,9 +377,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.54"
+version = "1.0.55"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a2af957a63d6bd42255c359c93d9bfdb97076bd3b820897ce55ffbfbf107f44"
+checksum = "a571a711dddd09019ccc628e1b17fe87c59b09d513c06c026877aa708334f37a"
 dependencies = [
  "proc-macro2",
  "quote",
