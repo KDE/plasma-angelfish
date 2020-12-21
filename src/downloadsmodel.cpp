@@ -4,6 +4,7 @@
 
 #include "downloadsmodel.h"
 
+#include <QDir>
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QUrl>
@@ -32,7 +33,7 @@ QVariant DownloadsModel::data(const QModelIndex &index, int role) const
     }
     case Role::DownloadedFilePathRole: {
         QQuickWebEngineDownloadItem *download = downloads.at(index.row());
-        return QUrl(QStringLiteral("file://") + download->downloadDirectory() + QStringLiteral("/") + download->downloadFileName());
+        return QUrl(QStringLiteral("file://") + download->downloadDirectory() + QDir::separator() + download->downloadFileName());
     }
     }
 
