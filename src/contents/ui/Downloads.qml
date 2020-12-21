@@ -26,6 +26,7 @@ Kirigami.ScrollablePage {
             text: i18n("No running downloads")
         }
         delegate: Kirigami.SwipeListItem {
+            onClicked: Qt.openUrlExternally(model.url)
             actions: [
                 Kirigami.Action {
                     text: i18n("Cancel")

@@ -294,6 +294,13 @@ Kirigami.ApplicationWindow {
                 }
             },
             Kirigami.Action {
+                icon.name: "application-x-object"
+                text: i18n("Open in app")
+                onTriggered: {
+                    Qt.openUrlExternally(currentWebView.url)
+                }
+            },
+            Kirigami.Action {
                 enabled: currentWebView.canGoBack
                 icon.name: "go-previous"
                 text: i18n("Go previous")
