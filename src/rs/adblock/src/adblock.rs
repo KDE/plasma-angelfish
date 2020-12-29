@@ -50,13 +50,10 @@ fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
             Err(_resolver) => adblock_debug!("resolver already set, can't replace"),
         }
 
-        // Try to decode dir path
         let mut filter_set = FilterSet::new(true);
 
         // iterate directory
-        let dir_entries = fs::read_dir(list_dir);
-
-        if let Ok(entries) = dir_entries {
+        if let Ok(entries) = fs::read_dir(list_dir) {
             for entry in entries {
                 if let Ok(e) = entry {
                     if let Ok(ft) = e.file_type() {
