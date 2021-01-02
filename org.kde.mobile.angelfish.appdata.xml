@@ -24,6 +24,7 @@
   <name xml:lang="lt">Angelfish saityno naršyklė</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
   <name xml:lang="nn">Angelfish nettlesar</name>
+  <name xml:lang="pa">ਐਂਗਲਫਿਸ਼ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ</name>
   <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
   <name xml:lang="pt-BR">Navegador Web Angelfish</name>
@@ -55,6 +56,7 @@
   <summary xml:lang="lt">Saityno naršyklė mobiliesiems įrenginiams</summary>
   <summary xml:lang="nl">Webbrowser voor mobiele apparaten</summary>
   <summary xml:lang="nn">Nettlesar for mobile einingar</summary>
+  <summary xml:lang="pa">ਮੋਬਾਈਲ ਡਿਵਾਈਸਾਂ ਲਈ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ</summary>
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="ru">Веб-браузер для мобильных устройств</summary>
@@ -88,6 +90,7 @@
   <developer_name xml:lang="lt">KDE bendruomenė</developer_name>
   <developer_name xml:lang="nl">KDE-gemeenschap</developer_name>
   <developer_name xml:lang="nn">KDE-fellesskapet</developer_name>
+  <developer_name xml:lang="pa">ਕੇਡੀਈ ਕਮਿਊਨਟੀ</developer_name>
   <developer_name xml:lang="pl">Społeczność KDE</developer_name>
   <developer_name xml:lang="pt">Comunidade do KDE</developer_name>
   <developer_name xml:lang="pt-BR">KDE Community</developer_name>
@@ -120,6 +123,7 @@
     <p xml:lang="lt">Angelfish yra šiuolaikinė mobilioji saityno naršyklė</p>
     <p xml:lang="nl">Angelfish is een moderne mobiele webbrowser</p>
     <p xml:lang="nn">Angelfish er ein moderne nettlesar for mobiltelefonar.</p>
+    <p xml:lang="pa">ਐਂਗਲਫਿਸ਼ ਨਵੇਂ ਜ਼ਮਾਨੇ ਦਾ ਮੋਬਾਈਲ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ ਹੈ</p>
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
     <p xml:lang="pt-BR">O Angelfish é um navegador Web móvel modem</p>
     <p xml:lang="ru">Angelfish — это современный веб-браузер для мобильных устройств</p>
@@ -151,6 +155,7 @@
     <p xml:lang="lt">Ji palaiko tipines naršyklės ypatybes, tokias kaip</p>
     <p xml:lang="nl">Het ondersteunt typische browserfuncties, zoals</p>
     <p xml:lang="nn">Han støttar vanlege nettlesarfunksjonar:</p>
+    <p xml:lang="pa">ਇਹ ਸਧਾਰਨ ਬਰਾਊਜ਼ਰ ਫੀਚਰਾਂ ਲਈ ਸਹਾਇਕ ਹੈ ਜਿਵੇਂ ਕਿ</p>
     <p xml:lang="pl">Obsługuje zwyczajne funkcje przeglądarki, takie jak</p>
     <p xml:lang="pt">Suporta as funcionalidades típicas de navegação, como</p>
     <p xml:lang="pt-BR">Tem suporte a funcionalidades típicas de navegação, como</p>
@@ -184,6 +189,7 @@
       <li xml:lang="lt">žymeles</li>
       <li xml:lang="nl">bladwijzers</li>
       <li xml:lang="nn">bokmerke</li>
+      <li xml:lang="pa">ਬੁੱਕਮਾਰਕ</li>
       <li xml:lang="pl">zakładki</li>
       <li xml:lang="pt">favoritos</li>
       <li xml:lang="pt-BR">favoritos</li>
@@ -217,6 +223,7 @@
       <li xml:lang="lt">istoriją</li>
       <li xml:lang="nl">geschiedenis</li>
       <li xml:lang="nn">besøkslogg</li>
+      <li xml:lang="pa">ਅਤੀਤ</li>
       <li xml:lang="pl">historia</li>
       <li xml:lang="pt">histórico</li>
       <li xml:lang="pt-BR">histórico</li>
@@ -248,6 +255,7 @@
       <li xml:lang="lt">korteles</li>
       <li xml:lang="nl">tabs</li>
       <li xml:lang="nn">faner</li>
+      <li xml:lang="pa">ਟੈਬਾਂ</li>
       <li xml:lang="pt">páginas</li>
       <li xml:lang="pt-BR">abas</li>
       <li xml:lang="ru">вкладки</li>
@@ -281,6 +289,7 @@
       <caption xml:lang="lt">Pagrindinis puslapis</caption>
       <caption xml:lang="nl">Homepagina</caption>
       <caption xml:lang="nn">Heimeside</caption>
+      <caption xml:lang="pa">ਮੁੱਖ ਸਫ਼ਾ</caption>
       <caption xml:lang="pt">Página Web</caption>
       <caption xml:lang="pt-BR">Site</caption>
       <caption xml:lang="ru">Домашняя страница</caption>
@@ -313,6 +322,7 @@
       <caption xml:lang="lt">Meniu veiksmai</caption>
       <caption xml:lang="nl">Menuopties</caption>
       <caption xml:lang="nn">Menyhandlingar</caption>
+      <caption xml:lang="pa">ਮੇਨੂ ਕਾਰਵਾਈਆਂ</caption>
       <caption xml:lang="pt">Acções do Menu</caption>
       <caption xml:lang="pt-BR">Menu de ações</caption>
       <caption xml:lang="ru">Действия меню</caption>
@@ -345,6 +355,7 @@
       <caption xml:lang="lt">Kortelės</caption>
       <caption xml:lang="nl">Tabbladen</caption>
       <caption xml:lang="nn">Faner</caption>
+      <caption xml:lang="pa">ਟੈਬਾਂ</caption>
       <caption xml:lang="pt">Páginas</caption>
       <caption xml:lang="pt-BR">Abas</caption>
       <caption xml:lang="ru">Вкладки</caption>
