@@ -2,6 +2,7 @@
 IconName=org.kde.mobile.angelfish
 DesktopEntry=org.kde.mobile.angelfish
 Comment=Webbrowser
+Comment[az]=Veb Bələdçi
 Comment[ca]=Navegador web
 Comment[ca@valencia]=Navegador web
 Comment[en_GB]=Web browser
