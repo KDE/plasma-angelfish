@@ -79,9 +79,9 @@ impl Adblock {
     /// returns a boxed AdblockResult object with information on whether
     /// the request should be blocked or redirected.
     fn should_block(&self, url: &str, source_url: &str, request_type: &str) -> Box<AdblockResult> {
-        let blocker = &self.blocker;
-
-        let blocker_result = blocker.check_network_urls(url, source_url, request_type);
+        let blocker_result = self
+            .blocker
+            .check_network_urls(url, source_url, request_type);
         adblock_debug!("Blocker input: {}, {}, {}", url, source_url, request_type);
         adblock_debug!("Blocker result: {:?}", blocker_result);
 
