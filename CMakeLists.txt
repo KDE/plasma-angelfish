@@ -72,5 +72,5 @@ install(FILES org.kde.mobile.angelfish.svg DESTINATION ${KDE_INSTALL_FULL_ICONDI
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES src/*.cpp src/*.h)
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES src/*.cpp src/*.h lib/*.cpp lib/*.h angelfish-webapp/*.cpp angelfish-webapp/*.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})

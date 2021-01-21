@@ -11,6 +11,7 @@ add_library(AngelfishCore STATIC
     settingshelper.cpp
     angelfishwebprofile.cpp
     downloadmanager.cpp
+    qquickwebenginedownloaditem.cpp
     resources.qrc
 )
 

@@ -4,15 +4,16 @@
 
 #include "angelfishwebprofile.h"
 
-#include <QQuickItem>
 #include <KLocalizedString>
 #include <QGuiApplication>
+#include <QQuickItem>
 #include <QQuickWindow>
 #include <QWebEngineNotification>
 
 #include <KNotification>
 
 #include "downloadmanager.h"
+#include "qquickwebenginedownloaditem.h"
 
 AngelfishWebProfile::AngelfishWebProfile(QObject *parent)
     : QQuickWebEngineProfile(parent)
@@ -49,11 +50,7 @@ void AngelfishWebProfile::handleDownloadFinished(QQuickWebEngineDownloadItem *do
 {
     QQuickWindow *window = static_cast<QQuickItem *>(m_questionLoader)->window();
     const auto passiveNotification = [window](const QString &text) {
-        QMetaObject::invokeMethod(window, "showPassiveNotification",
-                                  Q_ARG(QVariant, text),
-                                  Q_ARG(QVariant, {}),
-                                  Q_ARG(QVariant, {}),
-                                  Q_ARG(QVariant, {}));
+        QMetaObject::invokeMethod(window, "showPassiveNotification", Q_ARG(QVariant, text), Q_ARG(QVariant, {}), Q_ARG(QVariant, {}), Q_ARG(QVariant, {}));
     };
 
     switch (downloadItem->state()) {

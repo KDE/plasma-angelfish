@@ -9,10 +9,10 @@
 #include "urlobserver.h"
 #include "browsermanager.h"
 
-UrlObserver::UrlObserver(QObject *parent) : QObject(parent)
+UrlObserver::UrlObserver(QObject *parent)
+    : QObject(parent)
 {
-    connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged,
-            this, &UrlObserver::onDatabaseTableChanged);
+    connect(BrowserManager::instance(), &BrowserManager::databaseTableChanged, this, &UrlObserver::onDatabaseTableChanged);
 }
 
 QString UrlObserver::url() const

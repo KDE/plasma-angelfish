@@ -10,6 +10,7 @@
 #include <QUrl>
 
 #include "downloadmanager.h"
+#include "qquickwebenginedownloaditem.h"
 
 DownloadsModel::DownloadsModel(QObject *parent)
     : QAbstractListModel(parent)

@@ -14,8 +14,8 @@
 #include <QStandardPaths>
 #include <QUrl>
 
-#include "browsermanager.h"
 #include "angelfishsettings.h"
+#include "browsermanager.h"
 
 TabsModel::TabsModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -32,7 +32,10 @@ TabsModel::TabsModel(QObject *parent)
 
 QHash<int, QByteArray> TabsModel::roleNames() const
 {
-    return {{RoleNames::UrlRole, QByteArrayLiteral("pageurl")}, {RoleNames::IsMobileRole, QByteArrayLiteral("isMobile")}};
+    return {
+        {RoleNames::UrlRole, QByteArrayLiteral("pageurl")},
+        {RoleNames::IsMobileRole, QByteArrayLiteral("isMobile")},
+    };
 }
 
 QVariant TabsModel::data(const QModelIndex &index, int role) const
@@ -189,7 +192,7 @@ bool TabsModel::saveTabs() const
         }
 
         QJsonArray tabsArray;
-        std::transform(m_tabs.cbegin(), m_tabs.cend(), std::back_inserter(tabsArray), [](const TabState &tab){
+        std::transform(m_tabs.cbegin(), m_tabs.cend(), std::back_inserter(tabsArray), [](const TabState &tab) {
             return tab.toJson();
         });
 
@@ -198,7 +201,7 @@ bool TabsModel::saveTabs() const
 
         const QJsonDocument document({
             {QLatin1String("tabs"), tabsArray},
-            {QLatin1String("currentTab"), m_currentTab}
+            {QLatin1String("currentTab"), m_currentTab},
         });
 
         outputFile.write(document.toJson());
@@ -374,6 +377,6 @@ QJsonObject TabState::toJson() const
 {
     return {
         {QStringLiteral("url"), m_url},
-        {QStringLiteral("isMobile"), m_isMobile}
+        {QStringLiteral("isMobile"), m_isMobile},
     };
 }

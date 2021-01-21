@@ -12,12 +12,12 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QStandardPaths>
 #include <QVariant>
-#include <QDir>
 
 #include <exception>
 

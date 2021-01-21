@@ -6,9 +6,9 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QLoggingCategory>
 #include <QQuickWebEngineProfile>
 #include <QStandardPaths>
-#include <QLoggingCategory>
 
 #include "adblockfilterlistsmanager.h"
 

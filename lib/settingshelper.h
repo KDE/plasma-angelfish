@@ -6,7 +6,8 @@
 
 #pragma once
 
-class SettingsHelper {
+class SettingsHelper
+{
 public:
     static bool isMobile();
 };

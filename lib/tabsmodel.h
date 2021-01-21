@@ -77,7 +77,7 @@ protected:
 
 private:
     int m_currentTab = 0;
-    QVector<TabState> m_tabs {};
+    QVector<TabState> m_tabs{};
     bool m_privateMode = false;
     bool m_tabsReadOnly = false;
     bool m_isMobileDefault = false;
