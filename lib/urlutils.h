@@ -22,7 +22,6 @@ class UrlUtils : public QObject
 
 public:
     UrlUtils(QObject *parent = nullptr);
-    ~UrlUtils() override;
 
     Q_INVOKABLE static QString urlFromUserInput(const QString &input);
     Q_INVOKABLE static QString urlScheme(const QString &url);

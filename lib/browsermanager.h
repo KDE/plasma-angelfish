@@ -28,8 +28,6 @@ class BrowserManager : public QObject
     Q_PROPERTY(QString initialUrl READ initialUrl WRITE setInitialUrl NOTIFY initialUrlChanged)
 
 public:
-    ~BrowserManager() override;
-
     static BrowserManager *instance();
 
     QString initialUrl() const;

@@ -21,8 +21,6 @@ UrlUtils::UrlUtils(QObject *parent)
 {
 }
 
-UrlUtils::~UrlUtils() = default;
-
 QString UrlUtils::urlFromUserInput(const QString &input)
 {
     return QUrl::fromUserInput(input).toString();
