@@ -15,26 +15,6 @@ struct Adblock {
     blocker: Engine,
 }
 
-struct AdblockResult {
-    matched: bool,
-    important: bool,
-    redirect: String,
-}
-
-impl AdblockResult {
-    fn matched(&self) -> bool {
-        self.matched
-    }
-
-    fn important(&self) -> bool {
-        self.important
-    }
-
-    fn redirect(&self) -> &str {
-        &self.redirect
-    }
-}
-
 /// creates a new adblock object, and returns a pointer to it.
 /// If the passed list_dir is invalid, returns a default initialized Engine
 fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
@@ -78,26 +58,31 @@ fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
 impl Adblock {
     /// returns a boxed AdblockResult object with information on whether
     /// the request should be blocked or redirected.
-    fn should_block(&self, url: &str, source_url: &str, request_type: &str) -> Box<AdblockResult> {
+    fn should_block(&self, url: &str, source_url: &str, request_type: &str) -> ffi::AdblockResult {
         let blocker_result = self
             .blocker
             .check_network_urls(url, source_url, request_type);
         adblock_debug!("Blocker input: {}, {}, {}", url, source_url, request_type);
         adblock_debug!("Blocker result: {:?}", blocker_result);
 
-        Box::from(AdblockResult {
+        ffi::AdblockResult {
             matched: blocker_result.matched,
             important: blocker_result.important,
             redirect: blocker_result.redirect.unwrap_or_default(),
-        })
+        }
     }
 }
 
 #[cxx::bridge]
 mod ffi {
+    struct AdblockResult {
+        matched: bool,
+        important: bool,
+        redirect: String,
+    }
+
     extern "Rust" {
         type Adblock;
-        type AdblockResult;
 
         fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock>;
         fn should_block(
@@ -105,9 +90,6 @@ mod ffi {
             url: &str,
             source_url: &str,
             request_type: &str,
-        ) -> Box<AdblockResult>;
-        fn matched(self: &AdblockResult) -> bool;
-        fn important(self: &AdblockResult) -> bool;
-        fn redirect(self: &AdblockResult) -> &str;
+        ) -> AdblockResult;
     }
 }
