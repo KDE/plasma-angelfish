@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QQuickWebEngineProfile>
 #include <QStandardPaths>
+#include <QLoggingCategory>
 
 #include "adblockfilterlistsmanager.h"
 
@@ -15,9 +16,6 @@
 #include "angelfishsettings.h"
 #endif
 
-#include <future>
-
-#include <QLoggingCategory>
 Q_LOGGING_CATEGORY(AdblockCategory, "org.kde.mobile.angelfish.adblock", QtWarningMsg);
 
 AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
@@ -145,7 +143,7 @@ void AdblockUrlInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 
     const std::string url = info.requestUrl().toString().toStdString();
     const std::string firstPartyUrl = info.firstPartyUrl().toString().toStdString();
-    auto result = (*m_adblock)->should_block(std::move(url), std::move(firstPartyUrl), resource_type_to_string(info.resourceType()));
+    auto result = m_adblock.value()->should_block(std::move(url), std::move(firstPartyUrl), resource_type_to_string(info.resourceType()));
 
     const auto redirect = std::move(result.redirect);
     if (redirect.begin() != redirect.end()) {

@@ -92,7 +92,7 @@ QVector<AdblockFilterListsManager::FilterList> AdblockFilterListsManager::loadFr
     Q_ASSERT(filterNames.size() == filterUrls.size());
 
     while (namesIt != filterNames.end() && urlsIt != filterUrls.end()) {
-        out.push_back(FilterList {*namesIt, *urlsIt});
+        out.push_back(FilterList{*namesIt, *urlsIt});
 
         namesIt++;
         urlsIt++;
@@ -122,7 +122,7 @@ const QVector<AdblockFilterListsManager::FilterList> &AdblockFilterListsManager:
 
 void AdblockFilterListsManager::addFilterList(const QString &name, const QUrl &url)
 {
-    m_filterLists.push_back(FilterList {name, url});
+    m_filterLists.push_back(FilterList{name, url});
     writeToConfig(m_filterLists);
 }
 

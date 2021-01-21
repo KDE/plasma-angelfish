@@ -35,7 +35,6 @@ QHash<int, QByteArray> AdblockFilterListsModel::roleNames() const
 int AdblockFilterListsModel::rowCount(const QModelIndex &parent) const
 {
     return parent.isValid() ? 0 : m_manager.filterLists().size();
-    ;
 }
 
 void AdblockFilterListsModel::addFilterList(const QString &name, const QUrl &url)
