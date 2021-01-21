@@ -2,14 +2,14 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+use std::fs;
 use std::fs::read_to_string;
-use std::fs::{self};
 
-use crate::domainresolver::DomainResolver;
+use adblock::engine::Engine;
 use adblock::lists::{FilterFormat, FilterSet};
 
 use crate::adblock_debug;
-use adblock::engine::Engine;
+use crate::domainresolver::DomainResolver;
 
 struct Adblock {
     blocker: Engine,
