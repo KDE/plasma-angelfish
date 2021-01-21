@@ -34,9 +34,11 @@ QString UrlUtils::urlScheme(const QString &url)
 QString UrlUtils::urlHostPort(const QString &url)
 {
     const QUrl u(url);
-    static QStringList common = { QLatin1String("www."),
-                           QLatin1String("m."),
-                           QLatin1String("mobile.") };
+    static std::array<QStringView, 3> common = {
+        QStringView(u"www."),
+        QStringView(u"m."),
+        QStringView(u"mobile."),
+    };
 
     QString r = u.host();
     for (const auto &i : common) {
@@ -49,7 +51,7 @@ QString UrlUtils::urlHostPort(const QString &url)
     const int p = u.port(-1);
 
     if (p > 0)
-        r = QStringLiteral("%1:%2").arg(r).arg(p);
+        r = QStringView(u"%1:%2").arg(r).arg(p);
 
     return r;
 }
@@ -64,7 +66,5 @@ QString UrlUtils::htmlFormattedUrl(const QString &url)
     const QUrl parsedUrl = QUrl::fromUserInput(url);
 
     const QString path = parsedUrl.path();
-    return QStringLiteral(R"(%1<font size="2">%2</font>)")
-            .arg(parsedUrl.host(),
-                 path == QStringLiteral("/") ? QString() : path);
+    return QStringView(uR"(%1<font size="2">%2</font>)").arg(parsedUrl.host(), path == QStringView(u"/") ? QString() : path);
 }

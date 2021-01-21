@@ -11,7 +11,7 @@
 
 #include "angelfishsettings.h"
 
-static const QString PUBLIC_SUFFIX_LIST_URL = QStringLiteral("https://raw.githubusercontent.com/publicsuffix/list/master/public_suffix_list.dat");
+constexpr QStringView PUBLIC_SUFFIX_LIST_URL = u"https://raw.githubusercontent.com/publicsuffix/list/master/public_suffix_list.dat";
 
 AdblockFilterListsManager::AdblockFilterListsManager(QObject *parent)
     : QObject(parent)
@@ -29,7 +29,7 @@ void AdblockFilterListsManager::refreshLists()
     }
 
     m_runningRequests++;
-    m_networkManager.get(QNetworkRequest(PUBLIC_SUFFIX_LIST_URL));
+    m_networkManager.get(QNetworkRequest(PUBLIC_SUFFIX_LIST_URL.toString()));
 }
 
 QString AdblockFilterListsManager::filterListPath()
@@ -60,7 +60,7 @@ void AdblockFilterListsManager::handleListFetched(QNetworkReply *reply)
         Q_EMIT refreshFinished();
     }
 
-    if (reply->url() == PUBLIC_SUFFIX_LIST_URL) {
+    if (reply->url() == PUBLIC_SUFFIX_LIST_URL.toString()) {
         QFile file(publicSuffixListPath());
         if (!file.open(QIODevice::WriteOnly)) {
             qDebug() << "Failed to open" << file.fileName() << "for writing";

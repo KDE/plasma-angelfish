@@ -61,15 +61,15 @@ bool DesktopFileGenerator::removeDesktopFile(const QString &name)
 {
     const QString location = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
     const QString filename = generateFileName(name);
-    return QFile::remove(QStringLiteral("%1/%2.desktop").arg(location, filename));
+    return QFile::remove(QStringLiteral("%1/%2.desktop").arg(std::move(location), std::move(filename)));
 }
 
 void DesktopFileGenerator::storeIcon(const QString &url, const QString &fileName)
 {
     auto *provider = dynamic_cast<QQuickImageProvider *>(m_engine->imageProvider(QStringLiteral("favicon")));
 
-    const QLatin1String prefix_favicon = QLatin1String("image://favicon/");
-    const QString providerIconName = url.mid(prefix_favicon.size());
+    const QStringView prefixFavicon = QStringView(u"image://favicon/");
+    const QString providerIconName = url.mid(prefixFavicon.size());
 
     const QSize szRequested;
 

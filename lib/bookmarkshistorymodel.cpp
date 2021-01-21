@@ -73,23 +73,29 @@ void BookmarksHistoryModel::setQuery()
         return;
 
     QString command;
-    const QString b = QStringLiteral("SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
-    const QLatin1String filter = m_filter.isEmpty() ? QLatin1String() : QLatin1String("WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
+    constexpr auto b = QStringView(u"SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
+    const QStringView filter = m_filter.isEmpty() ? QStringView() : QStringView(u"WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
     const bool includeHistory = m_history && !(m_bookmarks && m_filter.isEmpty());
 
-    if (m_bookmarks)
-        command = b.arg(1).arg(QLatin1String("bookmarks")) + filter;
+    if (m_bookmarks) {
+        command = b.arg(1).arg(QStringView(u"bookmarks"));
+        command += filter;
+    }
 
-    if (m_bookmarks && includeHistory)
-        command += QLatin1String("\n UNION \n");
+    if (m_bookmarks && includeHistory) {
+        command += QStringView(u"\n UNION \n");
+    }
 
-    if (includeHistory)
-        command += b.arg(0).arg(QLatin1String("history")) + filter;
+    if (includeHistory) {
+        command += b.arg(0).arg(QStringView(u"history"));
+        command += filter;
+    }
 
-    command += QLatin1String("\n ORDER BY bookmarked DESC, lastVisitedDelta ASC");
+    command += QStringView(u"\n ORDER BY bookmarked DESC, lastVisitedDelta ASC");
 
-    if (includeHistory)
-        command += QStringLiteral("\n LIMIT %1").arg(QUERY_LIMIT);
+    if (includeHistory) {
+        command += QStringView(u"\n LIMIT %1").arg(QUERY_LIMIT);
+    }
 
     const qint64 ref = QDateTime::currentSecsSinceEpoch();
     QSqlQuery query;
