@@ -34,6 +34,8 @@
 #include "urlutils.h"
 #include "useragent.h"
 
+constexpr auto APPLICATION_ID = "org.kde.mobile.angelfish";
+
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -95,7 +97,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     });
 
     // register as early possible so it has time to load, constructor doesn't block
-    qmlRegisterSingletonInstance<AdblockUrlInterceptor>("org.kde.mobile.angelfish", 1, 0, "AdblockUrlInterceptor", &AdblockUrlInterceptor::instance());
+    qmlRegisterSingletonInstance<AdblockUrlInterceptor>(APPLICATION_ID, 1, 0, "AdblockUrlInterceptor", &AdblockUrlInterceptor::instance());
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
@@ -108,28 +110,28 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 
     // Exported types
-    qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
-    qmlRegisterType<UrlObserver>("org.kde.mobile.angelfish", 1, 0, "UrlObserver");
-    qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
-    qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
-    qmlRegisterType<AngelfishWebProfile>("org.kde.mobile.angelfish", 1, 0, "AngelfishWebProfile");
-    qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
-    qmlRegisterType<AdblockFilterListsModel>("org.kde.mobile.angelfish", 1, 0, "AdblockFilterListsModel");
-    qmlRegisterType<DownloadsModel>("org.kde.mobile.angelfish", 1, 0, "DownloadsModel");
-    qmlRegisterAnonymousType<QWebEngineUrlRequestInterceptor>("org.kde.mobile.angelfish", 1);
+    qmlRegisterType<BookmarksHistoryModel>(APPLICATION_ID, 1, 0, "BookmarksHistoryModel");
+    qmlRegisterType<UrlObserver>(APPLICATION_ID, 1, 0, "UrlObserver");
+    qmlRegisterType<UserAgent>(APPLICATION_ID, 1, 0, "UserAgentGenerator");
+    qmlRegisterType<TabsModel>(APPLICATION_ID, 1, 0, "TabsModel");
+    qmlRegisterType<AngelfishWebProfile>(APPLICATION_ID, 1, 0, "AngelfishWebProfile");
+    qmlRegisterSingletonInstance<AngelfishSettings>(APPLICATION_ID, 1, 0, "Settings", AngelfishSettings::self());
+    qmlRegisterType<AdblockFilterListsModel>(APPLICATION_ID, 1, 0, "AdblockFilterListsModel");
+    qmlRegisterType<DownloadsModel>(APPLICATION_ID, 1, 0, "DownloadsModel");
+    qmlRegisterAnonymousType<QWebEngineUrlRequestInterceptor>(APPLICATION_ID, 1);
 
     // URL utils
-    qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<UrlUtils>(APPLICATION_ID, 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return new UrlUtils();
     });
 
     // Browser Manager
-    qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<BrowserManager>(APPLICATION_ID, 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return BrowserManager::instance();
     });
 
     // Angelfish-webapp generator
-    qmlRegisterSingletonType<DesktopFileGenerator>("org.kde.mobile.angelfish", 1, 0, "DesktopFileGenerator", [](QQmlEngine *engine, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<DesktopFileGenerator>(APPLICATION_ID, 1, 0, "DesktopFileGenerator", [](QQmlEngine *engine, QJSEngine *) -> QObject * {
         return new DesktopFileGenerator(engine);
     });
 

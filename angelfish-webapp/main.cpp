@@ -26,6 +26,8 @@
 #include "urlutils.h"
 #include "useragent.h"
 
+constexpr auto APPLICATION_ID = "org.kde.mobile.angelfish";
+
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -82,25 +84,25 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     KAboutData::setApplicationData(aboutData);
 
     // Exported types
-    qmlRegisterType<BookmarksHistoryModel>("org.kde.mobile.angelfish", 1, 0, "BookmarksHistoryModel");
-    qmlRegisterType<UserAgent>("org.kde.mobile.angelfish", 1, 0, "UserAgentGenerator");
-    qmlRegisterType<TabsModel>("org.kde.mobile.angelfish", 1, 0, "TabsModel");
-    qmlRegisterType<AngelfishWebProfile>("org.kde.mobile.angelfish", 1, 0, "AngelfishWebProfile");
+    qmlRegisterType<BookmarksHistoryModel>(APPLICATION_ID, 1, 0, "BookmarksHistoryModel");
+    qmlRegisterType<UserAgent>(APPLICATION_ID, 1, 0, "UserAgentGenerator");
+    qmlRegisterType<TabsModel>(APPLICATION_ID, 1, 0, "TabsModel");
+    qmlRegisterType<AngelfishWebProfile>(APPLICATION_ID, 1, 0, "AngelfishWebProfile");
 
     // URL utils
-    qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<UrlUtils>(APPLICATION_ID, 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return new UrlUtils();
     });
 
     BrowserManager::instance()->setInitialUrl(initialUrl);
 
     // Browser Manager
-    qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<BrowserManager>(APPLICATION_ID, 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return BrowserManager::instance();
     });
 
     // Settings are read from WebView which we use as super class for WebAppView
-    qmlRegisterSingletonInstance<AngelfishSettings>("org.kde.mobile.angelfish", 1, 0, "Settings", AngelfishSettings::self());
+    qmlRegisterSingletonInstance<AngelfishSettings>(APPLICATION_ID, 1, 0, "Settings", AngelfishSettings::self());
 
     Q_INIT_RESOURCE(resources);
 
