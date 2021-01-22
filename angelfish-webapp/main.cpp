@@ -89,14 +89,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // URL utils
     qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(new UrlUtils());
+        return new UrlUtils();
     });
 
     BrowserManager::instance()->setInitialUrl(initialUrl);
 
     // Browser Manager
     qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(BrowserManager::instance());
+        return BrowserManager::instance();
     });
 
     // Settings are read from WebView which we use as super class for WebAppView

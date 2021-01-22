@@ -120,17 +120,17 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     // URL utils
     qmlRegisterSingletonType<UrlUtils>("org.kde.mobile.angelfish", 1, 0, "UrlUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(new UrlUtils());
+        return new UrlUtils();
     });
 
     // Browser Manager
     qmlRegisterSingletonType<BrowserManager>("org.kde.mobile.angelfish", 1, 0, "BrowserManager", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(BrowserManager::instance());
+        return BrowserManager::instance();
     });
 
     // Angelfish-webapp generator
     qmlRegisterSingletonType<DesktopFileGenerator>("org.kde.mobile.angelfish", 1, 0, "DesktopFileGenerator", [](QQmlEngine *engine, QJSEngine *) -> QObject * {
-        return static_cast<QObject *>(new DesktopFileGenerator(engine));
+        return new DesktopFileGenerator(engine);
     });
 
     Q_INIT_RESOURCE(resources);
