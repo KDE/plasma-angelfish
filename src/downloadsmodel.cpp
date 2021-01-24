@@ -33,7 +33,7 @@ QVariant DownloadsModel::data(const QModelIndex &index, int role) const
         return mimeDB.mimeTypeForName(downloads.at(index.row())->mimeType()).iconName();
     }
     case Role::DownloadedFilePathRole: {
-        QQuickWebEngineDownloadItem *download = downloads.at(index.row());
+        const QQuickWebEngineDownloadItem *download = downloads.at(index.row());
         return QUrl(QStringLiteral("file://") + download->downloadDirectory() + QDir::separator() + download->downloadFileName());
     }
     }

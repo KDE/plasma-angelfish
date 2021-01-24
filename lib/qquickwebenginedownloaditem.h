@@ -23,10 +23,10 @@ public:
     void pause();
     void resume();
 
-    QString downloadDirectory();
-    QString downloadFileName();
-    QUrl url();
-    QString mimeType();
-    State state();
-    QString interruptReasonString();
+    QString downloadDirectory() const;
+    QString downloadFileName() const;
+    QUrl url() const;
+    QString mimeType() const;
+    State state() const;
+    QString interruptReasonString() const;
 };
