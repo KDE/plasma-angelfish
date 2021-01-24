@@ -57,7 +57,7 @@ public:
 private:
     explicit AdblockUrlInterceptor(QObject *parent = nullptr);
 #ifdef BUILD_ADBLOCK
-    static rust::Box<Adblock> createAdblock();
+    rust::Box<Adblock> createAdblock();
 
     std::future<rust::Box<Adblock>> m_adblockInitFuture;
     std::optional<rust::Box<Adblock>> m_adblock;
