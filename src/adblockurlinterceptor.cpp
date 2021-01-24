@@ -23,15 +23,7 @@ AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
 #ifdef BUILD_ADBLOCK
     // parsing the block lists takes some time, try to do it asynchronously
     // if it is not ready when it's needed, reading the future will block
-    , m_adblockInitFuture(std::async(std::launch::async,
-                                     [this]() -> rust::Box<Adblock> {
-                                         const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
-                                         const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
-
-                                         auto adb = new_adblock(std::move(filterListsPath), std::move(publicSuffixList));
-                                         Q_EMIT adblockInitialized();
-                                         return adb;
-                                     }))
+    , m_adblockInitFuture(std::async(std::launch::async, [this] { return createAdblock(); }))
     , m_adblock(std::nullopt)
     , m_enabled(AngelfishSettings::adblockEnabled())
 #endif
@@ -46,11 +38,17 @@ AdblockUrlInterceptor::AdblockUrlInterceptor(QObject *parent)
 #endif
 }
 
-AdblockUrlInterceptor::~AdblockUrlInterceptor()
+#ifdef BUILD_ADBLOCK
+rust::Box<Adblock> AdblockUrlInterceptor::createAdblock()
 {
+    const std::string filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
+    const std::string publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
+
+    auto adb = new_adblock(std::move(filterListsPath), std::move(publicSuffixList));
+    Q_EMIT adblockInitialized();
+    return adb;
 }
 
-#ifdef BUILD_ADBLOCK
 bool AdblockUrlInterceptor::enabled() const
 {
     return m_enabled;
@@ -81,18 +79,11 @@ void AdblockUrlInterceptor::resetAdblock()
     if (m_adblock) {
         m_adblock = std::nullopt;
     }
-    m_adblockInitFuture = std::async(std::launch::async, [this]() -> rust::Box<Adblock> {
-        const auto filterListsPath = AdblockFilterListsManager::filterListPath().toStdString();
-        const auto publicSuffixList = AdblockFilterListsManager::publicSuffixListPath().toStdString();
-
-        auto adb = new_adblock(std::move(filterListsPath), std::move(publicSuffixList));
-        Q_EMIT adblockInitialized();
-        return adb;
-    });
+    m_adblockInitFuture = std::async(std::launch::async, [this] { return createAdblock(); });
 #endif
 }
 
-inline const char *resource_type_to_string(const QWebEngineUrlRequestInfo::ResourceType type)
+inline std::string resourceTypeToString(const QWebEngineUrlRequestInfo::ResourceType type)
 {
     // Strings from https://docs.rs/crate/adblock/0.3.3/source/src/request.rs
     using Type = QWebEngineUrlRequestInfo::ResourceType;
@@ -143,7 +134,7 @@ void AdblockUrlInterceptor::interceptRequest(QWebEngineUrlRequestInfo &info)
 
     const std::string url = info.requestUrl().toString().toStdString();
     const std::string firstPartyUrl = info.firstPartyUrl().toString().toStdString();
-    auto result = m_adblock.value()->should_block(std::move(url), std::move(firstPartyUrl), resource_type_to_string(info.resourceType()));
+    const AdblockResult result = m_adblock.value()->should_block(std::move(url), std::move(firstPartyUrl), resourceTypeToString(info.resourceType()));
 
     const auto redirect = std::move(result.redirect);
     if (redirect.begin() != redirect.end()) {

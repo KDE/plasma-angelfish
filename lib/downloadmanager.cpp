@@ -5,7 +5,6 @@
 #include "downloadmanager.h"
 
 #include <QUrl>
-#include <QVariant>
 
 #include "qquickwebenginedownloaditem.h"
 
