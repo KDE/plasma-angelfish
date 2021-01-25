@@ -11,8 +11,6 @@ class QQuickWebEngineDownloadItem;
 class DownloadManager
 {
 public:
-    DownloadManager();
-
     static DownloadManager &instance();
 
     Q_INVOKABLE void addDownload(QQuickWebEngineDownloadItem *download);
@@ -20,5 +18,7 @@ public:
     const QVector<QQuickWebEngineDownloadItem *> &downloads();
 
 private:
+    DownloadManager();
+
     QVector<QQuickWebEngineDownloadItem *> m_downloads;
 };
