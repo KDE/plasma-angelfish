@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
   <id>org.kde.mobile.angelfish</id>
-  <name>Angelfish Webbrowser</name>
+  <name>Angelfish Web Browser</name>
   <name xml:lang="az">Angelfish Veb_Bələdçisi</name>
   <name xml:lang="ca">Navegador web Angelfish</name>
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
