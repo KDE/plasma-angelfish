@@ -71,16 +71,13 @@ impl Adblock {
             };
         }
 
-        ffi::AdblockResult {
-            matched: false,
-            important: false,
-            redirect: String::new(),
-        }
+        ffi::AdblockResult::default()
     }
 }
 
 #[cxx::bridge]
 mod ffi {
+    #[derive(Default)]
     struct AdblockResult {
         matched: bool,
         important: bool,
