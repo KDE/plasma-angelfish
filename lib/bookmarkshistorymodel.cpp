@@ -73,7 +73,7 @@ void BookmarksHistoryModel::setQuery()
         return;
 
     QString command;
-    constexpr auto b = QStringView(u"SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
+    const auto b = QStringLiteral(u"SELECT rowid AS id, url, title, icon, :now - lastVisited AS lastVisitedDelta, %1 AS bookmarked FROM %2 ");
     const QStringView filter = m_filter.isEmpty() ? QStringView() : QStringView(u"WHERE url LIKE '%' || :filter || '%' OR title LIKE '%' || :filter || '%'");
     const bool includeHistory = m_history && !(m_bookmarks && m_filter.isEmpty());
 
@@ -94,7 +94,7 @@ void BookmarksHistoryModel::setQuery()
     command += QStringView(u"\n ORDER BY bookmarked DESC, lastVisitedDelta ASC");
 
     if (includeHistory) {
-        command += QStringView(u"\n LIMIT %1").arg(QUERY_LIMIT);
+        command += QStringLiteral(u"\n LIMIT %1").arg(QUERY_LIMIT);
     }
 
     const qint64 ref = QDateTime::currentSecsSinceEpoch();
