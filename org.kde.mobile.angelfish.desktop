@@ -97,7 +97,6 @@ GenericName[sv]=Webbläsare
 GenericName[uk]=Браузер
 GenericName[x-test]=xxWeb Browserxx
 GenericName[zh_TW]=網頁瀏覽器
-Encoding=UTF-8
 Icon=org.kde.mobile.angelfish
 Exec=angelfish %u
 Type=Application
