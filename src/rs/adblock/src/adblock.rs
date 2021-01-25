@@ -12,11 +12,11 @@ use crate::adblock_debug;
 use crate::domainresolver::DomainResolver;
 
 struct Adblock {
-    blocker: Engine,
+    blocker: Option<Engine>,
 }
 
 /// creates a new adblock object, and returns a pointer to it.
-/// If the passed list_dir is invalid, returns a default initialized Engine
+/// If the passed list_dir is invalid, the Adblock will not contain an engine.
 fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
     adblock_debug!("## Creating new adblock instance");
     // Create domain resolver
@@ -47,28 +47,34 @@ fn new_adblock(list_dir: &str, suffix_file: &str) -> Box<Adblock> {
             }
 
             let blocker = Engine::from_filter_set(filter_set, true);
-            return Box::new(Adblock { blocker });
+            return Box::new(Adblock {
+                blocker: Some(blocker),
+            });
         }
     }
-    Box::new(Adblock {
-        blocker: Engine::default(),
-    })
+    Box::new(Adblock { blocker: None })
 }
 
 impl Adblock {
     /// returns a boxed AdblockResult object with information on whether
     /// the request should be blocked or redirected.
     fn should_block(&self, url: &str, source_url: &str, request_type: &str) -> ffi::AdblockResult {
-        let blocker_result = self
-            .blocker
-            .check_network_urls(url, source_url, request_type);
-        adblock_debug!("Blocker input: {}, {}, {}", url, source_url, request_type);
-        adblock_debug!("Blocker result: {:?}", blocker_result);
+        if let Some(engine) = &self.blocker {
+            let blocker_result = engine.check_network_urls(url, source_url, request_type);
+            adblock_debug!("Blocker input: {}, {}, {}", url, source_url, request_type);
+            adblock_debug!("Blocker result: {:?}", blocker_result);
+
+            return ffi::AdblockResult {
+                matched: blocker_result.matched,
+                important: blocker_result.important,
+                redirect: blocker_result.redirect.unwrap_or_default(),
+            };
+        }
 
         ffi::AdblockResult {
-            matched: blocker_result.matched,
-            important: blocker_result.important,
-            redirect: blocker_result.redirect.unwrap_or_default(),
+            matched: false,
+            important: false,
+            redirect: String::new(),
         }
     }
 }
