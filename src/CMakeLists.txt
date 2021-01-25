@@ -31,8 +31,6 @@ if (Corrosion_FOUND)
 
     target_include_directories(angelfish PRIVATE
         ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/angelfish-adblock/src/)
-else()
-    message("warning: Corrosion not found, not building adblocker")
 endif()
 
 target_include_directories(angelfish PRIVATE)
