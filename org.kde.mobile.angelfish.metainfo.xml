@@ -2,39 +2,10 @@
 <component type="desktop-application">
   <id>org.kde.mobile.angelfish</id>
   <name>Angelfish Web Browser</name>
-  <name xml:lang="az">Angelfish Veb_Bələdçisi</name>
-  <name xml:lang="ca">Navegador web Angelfish</name>
-  <name xml:lang="ca-valencia">Navegador web Angelfish</name>
-  <name xml:lang="cs">Webový prohlížeč Angelfish</name>
-  <name xml:lang="da">Angelfish webbrowser</name>
-  <name xml:lang="de">Angelfish-Webbrowser</name>
-  <name xml:lang="el">Angelfish περιηγητής ιστού</name>
-  <name xml:lang="en-GB">Angelfish Webbrowser</name>
-  <name xml:lang="es">Navegador web Angelfish</name>
-  <name xml:lang="et">Angelfishi veebilehitseja</name>
-  <name xml:lang="eu">Angelfish web-arakatzailea</name>
-  <name xml:lang="fi">Angelfish-verkkoselain</name>
-  <name xml:lang="fr">Navigateur web Angelfish</name>
-  <name xml:lang="gl">Navegador web Angelfish</name>
-  <name xml:lang="hu">Angelfish webböngésző</name>
-  <name xml:lang="ia">Angelfish Webbrowser (navigator web)</name>
-  <name xml:lang="id">Angelfish Webbrowser</name>
-  <name xml:lang="it">Browser web Angelfish</name>
-  <name xml:lang="ko">Angelfish 웹 브라우저</name>
-  <name xml:lang="lt">Angelfish saityno naršyklė</name>
-  <name xml:lang="nl">Webbrowser Angelfish</name>
-  <name xml:lang="nn">Angelfish nettlesar</name>
-  <name xml:lang="pa">ਐਂਗਲਫਿਸ਼ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ</name>
-  <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
-  <name xml:lang="pt">Navegador Web Angelfish</name>
-  <name xml:lang="pt-BR">Navegador Web Angelfish</name>
-  <name xml:lang="ru">Веб-браузер Angelfish</name>
-  <name xml:lang="sk">Prehliadač Angelfish</name>
-  <name xml:lang="sl">Angelfish spletni brskalnik</name>
+  <name xml:lang="az">Angelfish Veb Bələdçisi</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
-  <name xml:lang="uk">Браузер Angelfish</name>
-  <name xml:lang="x-test">xxAngelfish Webbrowserxx</name>
-  <name xml:lang="zh-TW">Angelfish 網頁瀏覽器</name>
+  <name xml:lang="uk">Веббраузер Angelfish</name>
+  <name xml:lang="x-test">xxAngelfish Web Browserxx</name>
   <summary>Webbrowser for mobile devices</summary>
   <summary xml:lang="az">Mobil qurğular üçün Veb_Bələdçi</summary>
   <summary xml:lang="ca">Navegador web per a dispositius mòbils</summary>
