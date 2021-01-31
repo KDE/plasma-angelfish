@@ -7,6 +7,8 @@
   <name xml:lang="ca-valencia">Navegador web Angelfish</name>
   <name xml:lang="es">Navegador web Angelfish</name>
   <name xml:lang="nl">Webbrowser Angelfish</name>
+  <name xml:lang="pa">ਐਂਗਲਫਿਸ਼ ਵੈੱਬ ਬਰਾਊਜ਼ਰ</name>
+  <name xml:lang="pl">Przeglądarka sieciowa Angelfish</name>
   <name xml:lang="pt">Navegador Web Angelfish</name>
   <name xml:lang="sk">Webový prehliadač Angelfish</name>
   <name xml:lang="sv">Angelfish webbläsare</name>
@@ -35,6 +37,7 @@
   <summary xml:lang="nl">Webbrowser voor mobiele apparaten</summary>
   <summary xml:lang="nn">Nettlesar for mobile einingar</summary>
   <summary xml:lang="pa">ਮੋਬਾਈਲ ਡਿਵਾਈਸਾਂ ਲਈ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ</summary>
+  <summary xml:lang="pl">Przeglądarka sieciowa przystosowana do urządzeń przenośnych</summary>
   <summary xml:lang="pt">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="pt-BR">Navegador Web para dispositivos móveis</summary>
   <summary xml:lang="ru">Веб-браузер для мобильных устройств</summary>
@@ -104,6 +107,7 @@
     <p xml:lang="nl">Angelfish is een moderne mobiele webbrowser</p>
     <p xml:lang="nn">Angelfish er ein moderne nettlesar for mobiltelefonar.</p>
     <p xml:lang="pa">ਐਂਗਲਫਿਸ਼ ਨਵੇਂ ਜ਼ਮਾਨੇ ਦਾ ਮੋਬਾਈਲ ਵੈੱਬ-ਬਰਾਊਜ਼ਰ ਹੈ</p>
+    <p xml:lang="pl">Angelfish to nowoczesna, przenośna przeglądarka sieciowa</p>
     <p xml:lang="pt">O Angelfish é um navegador Web móvel moderno</p>
     <p xml:lang="pt-BR">O Angelfish é um navegador Web móvel modem</p>
     <p xml:lang="ru">Angelfish — это современный веб-браузер для мобильных устройств</p>
@@ -239,6 +243,7 @@
       <li xml:lang="nl">tabs</li>
       <li xml:lang="nn">faner</li>
       <li xml:lang="pa">ਟੈਬਾਂ</li>
+      <li xml:lang="pl">karty</li>
       <li xml:lang="pt">páginas</li>
       <li xml:lang="pt-BR">abas</li>
       <li xml:lang="ru">вкладки</li>
@@ -275,6 +280,7 @@
       <caption xml:lang="nl">Homepagina</caption>
       <caption xml:lang="nn">Heimeside</caption>
       <caption xml:lang="pa">ਮੁੱਖ ਸਫ਼ਾ</caption>
+      <caption xml:lang="pl">Strona domowa</caption>
       <caption xml:lang="pt">Página Web</caption>
       <caption xml:lang="pt-BR">Site</caption>
       <caption xml:lang="ru">Домашняя страница</caption>
@@ -310,6 +316,7 @@
       <caption xml:lang="nl">Menuopties</caption>
       <caption xml:lang="nn">Menyhandlingar</caption>
       <caption xml:lang="pa">ਮੇਨੂ ਕਾਰਵਾਈਆਂ</caption>
+      <caption xml:lang="pl">Działania menu</caption>
       <caption xml:lang="pt">Acções do Menu</caption>
       <caption xml:lang="pt-BR">Menu de ações</caption>
       <caption xml:lang="ru">Действия меню</caption>
@@ -345,6 +352,7 @@
       <caption xml:lang="nl">Tabbladen</caption>
       <caption xml:lang="nn">Faner</caption>
       <caption xml:lang="pa">ਟੈਬਾਂ</caption>
+      <caption xml:lang="pl">Karty</caption>
       <caption xml:lang="pt">Páginas</caption>
       <caption xml:lang="pt-BR">Abas</caption>
       <caption xml:lang="ru">Вкладки</caption>
