@@ -51,7 +51,7 @@ QString UrlUtils::urlHostPort(const QString &url)
     const int p = u.port(-1);
 
     if (p > 0)
-        r = QStringView(u"%1:%2").arg(r).arg(p);
+        r = QStringLiteral(u"%1:%2").arg(r).arg(p);
 
     return r;
 }
