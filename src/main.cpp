@@ -51,6 +51,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName(QStringLiteral("KDE"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("mobile.kde.org"));
     QCoreApplication::setApplicationName(QStringLiteral("angelfish"));
+    KLocalizedString::setApplicationDomain("angelfish");
 
 #if QT_VERSION <= QT_VERSION_CHECK(5, 14, 0)
     QtWebEngine::initialize();

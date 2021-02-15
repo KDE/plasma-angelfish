@@ -33,6 +33,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
 
+    KLocalizedString::setApplicationDomain("angelfish");
+
     // Setup QtWebEngine
     qputenv("QTWEBENGINE_DIALOG_SET", "QtQuickControls2");
 #if QT_VERSION > QT_VERSION_CHECK(5, 14, 0)
