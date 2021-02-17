@@ -41,10 +41,8 @@ Repeater {
         isMobileDefault: Kirigami.Settings.isMobile
         privateMode: privateTabsMode
         Component.onCompleted: {
-            tabsModel.loadInitialTabs();
-            loadTabsModel();
+            url = model.pageurl
         }
-        signal loadTabsModel()
     }
 
     delegate: WebView {
@@ -80,13 +78,6 @@ Repeater {
             target: webView.userAgent
             function onUserAgentChanged() {
                 tabsModel.setIsMobile(index, webView.userAgent.isMobile);
-            }
-        }
-
-        Connections {
-            target: tabs.model
-            function onLoadTabsModel() {
-                url = model.pageurl
             }
         }
     }

@@ -28,6 +28,8 @@ TabsModel::TabsModel(QObject *parent)
     m_tabsReadOnly = true;
     // Make sure model always contains at least one tab
     createEmptyTab();
+
+    loadInitialTabs();
 }
 
 QHash<int, QByteArray> TabsModel::roleNames() const
