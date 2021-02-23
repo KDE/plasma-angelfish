@@ -104,4 +104,4 @@ Type=Application
 X-DocPath=angelfish/index.html
 Categories=Qt;KDE;Network;WebBrowser;
 Terminal=false
-MimeType=text/html;
+MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
